@@ -7,61 +7,26 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>锁 on EndlessRiver</title>
-    <link>/zh/tags/%E9%94%81/</link>
+    <link>wangy325.github.io/zh/tags/%E9%94%81/</link>
     <description>Recent content in 锁 on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <managingEditor>wangy325@qq.com (wangy325)</managingEditor>
     <webMaster>wangy325@qq.com (wangy325)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/zh/tags/%E9%94%81/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="wangy325.github.io/zh/tags/%E9%94%81/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
-        <title>MySQL锁的简单使用</title>
-        <link>/zh/posts/java/sql/%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/</link>
-        <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
-        <author>wangy325@qq.com (wangy325)</author>
-        <atom:modified>Wed, 21 Apr 2021 23:37:34 +0800</atom:modified>
-        <guid>/zh/posts/java/sql/%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/</guid>
-        <description>&lt;p&gt;对于MySQL数据库而言，事务的隔离级别在不同程度上保证了数据一致性。这能够满足大部分的业务需求，但是，仍然有那么一小戳事情，仅仅依靠事务不能完美解决。&lt;/p&gt;
-&lt;p&gt;我们知道，事务能读取到事务开始前就存在的数据，如果事务A需要对某条数据data1进行修改，在事务A还没有提交之前，事务B虽然不能读取到事务A对data1的修改（read committed隔离级别以上），但是能够读取data1原始的数据快照，并且能够再读取到的数据基础上对其进行修改（在事务A提交之后）。&lt;/p&gt;</description>
-        
-        <dc:creator>wangy325</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>锁</category>
-            
-          
-            
-              <category>事务</category>
-            
-          
-        
-        
-          
-            
-              <category>MySQL</category>
-            
-          
-        
-        
-      </item>
-      
-      <item>
         <title>Java并发系列之2——资源访问受限</title>
-        <link>/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</link>
+        <link>wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</link>
         <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Fri, 17 Jun 2022 14:24:34 +0800</atom:modified>
-        <guid>/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</guid>
+        <guid>wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</guid>
         <description>&lt;p&gt;在&lt;a href=&#34;../1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1&#34;&gt;上一篇文章&lt;/a&gt;中，虽然创建了多线程，并且线程之间出现了一些&lt;strong&gt;不可预测&lt;/strong&gt;的CPU调度，但是由于线程之间是&lt;strong&gt;相互隔离&lt;/strong&gt;的——&lt;strong&gt;线程没有访问共同的资源&lt;/strong&gt;，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;实际上，上篇文章通过&lt;code&gt;join()&lt;/code&gt;方法演示了一种安全访问共享资源的方法。&lt;/p&gt;

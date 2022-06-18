@@ -7,44 +7,26 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Categories on EndlessRiver</title>
-    <link>/zh/categories/</link>
+    <link>wangy325.github.io/zh/categories/</link>
     <description>Recent content in Categories on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <managingEditor>wangy325@qq.com (wangy325)</managingEditor>
     <webMaster>wangy325@qq.com (wangy325)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 04 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="/zh/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="wangy325.github.io/zh/categories/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>SpringBoot</title>
-        <link>/zh/categories/springboot/</link>
-        <pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate>
+        <link>wangy325.github.io/zh/categories/springboot/</link>
+        <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/springboot/</guid>
-        <description></description>
-        
-        <dc:creator>wangy325</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>MySQL</title>
-        <link>/zh/categories/mysql/</link>
-        <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
-        <author>wangy325@qq.com (wangy325)</author>
-        
-        <guid>/zh/categories/mysql/</guid>
+        <guid>wangy325.github.io/zh/categories/springboot/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -58,11 +40,11 @@
       
       <item>
         <title>log</title>
-        <link>/zh/categories/log/</link>
+        <link>wangy325.github.io/zh/categories/log/</link>
         <pubDate>Wed, 10 Feb 2021 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/log/</guid>
+        <guid>wangy325.github.io/zh/categories/log/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -76,11 +58,11 @@
       
       <item>
         <title>Java8</title>
-        <link>/zh/categories/java8/</link>
+        <link>wangy325.github.io/zh/categories/java8/</link>
         <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/java8/</guid>
+        <guid>wangy325.github.io/zh/categories/java8/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -94,11 +76,11 @@
       
       <item>
         <title>随笔</title>
-        <link>/zh/categories/%E9%9A%8F%E7%AC%94/</link>
+        <link>wangy325.github.io/zh/categories/%E9%9A%8F%E7%AC%94/</link>
         <pubDate>Thu, 31 Dec 2020 20:57:00 +0800</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/%E9%9A%8F%E7%AC%94/</guid>
+        <guid>wangy325.github.io/zh/categories/%E9%9A%8F%E7%AC%94/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -112,11 +94,11 @@
       
       <item>
         <title>java</title>
-        <link>/zh/categories/java/</link>
+        <link>wangy325.github.io/zh/categories/java/</link>
         <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/java/</guid>
+        <guid>wangy325.github.io/zh/categories/java/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -130,11 +112,29 @@
       
       <item>
         <title>JVM</title>
-        <link>/zh/categories/jvm/</link>
+        <link>wangy325.github.io/zh/categories/jvm/</link>
         <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/jvm/</guid>
+        <guid>wangy325.github.io/zh/categories/jvm/</guid>
+        <description></description>
+        
+        <dc:creator>wangy325</dc:creator>
+        
+        
+        
+        
+        
+        
+      </item>
+      
+      <item>
+        <title>MySQL</title>
+        <link>wangy325.github.io/zh/categories/mysql/</link>
+        <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+        <author>wangy325@qq.com (wangy325)</author>
+        
+        <guid>wangy325.github.io/zh/categories/mysql/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -148,11 +148,11 @@
       
       <item>
         <title>redis</title>
-        <link>/zh/categories/redis/</link>
+        <link>wangy325.github.io/zh/categories/redis/</link>
         <pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/redis/</guid>
+        <guid>wangy325.github.io/zh/categories/redis/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -166,11 +166,11 @@
       
       <item>
         <title>并发</title>
-        <link>/zh/categories/%E5%B9%B6%E5%8F%91/</link>
+        <link>wangy325.github.io/zh/categories/%E5%B9%B6%E5%8F%91/</link>
         <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/%E5%B9%B6%E5%8F%91/</guid>
+        <guid>wangy325.github.io/zh/categories/%E5%B9%B6%E5%8F%91/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -184,29 +184,11 @@
       
       <item>
         <title>fdfs</title>
-        <link>/zh/categories/fdfs/</link>
+        <link>wangy325.github.io/zh/categories/fdfs/</link>
         <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/fdfs/</guid>
-        <description></description>
-        
-        <dc:creator>wangy325</dc:creator>
-        
-        
-        
-        
-        
-        
-      </item>
-      
-      <item>
-        <title>JavaScript</title>
-        <link>/zh/categories/javascript/</link>
-        <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-        <author>wangy325@qq.com (wangy325)</author>
-        
-        <guid>/zh/categories/javascript/</guid>
+        <guid>wangy325.github.io/zh/categories/fdfs/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -220,11 +202,11 @@
       
       <item>
         <title>cron</title>
-        <link>/zh/categories/cron/</link>
+        <link>wangy325.github.io/zh/categories/cron/</link>
         <pubDate>Thu, 13 Dec 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/cron/</guid>
+        <guid>wangy325.github.io/zh/categories/cron/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -238,11 +220,11 @@
       
       <item>
         <title>设计模式</title>
-        <link>/zh/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+        <link>wangy325.github.io/zh/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
         <pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+        <guid>wangy325.github.io/zh/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -256,11 +238,11 @@
       
       <item>
         <title>mybatis</title>
-        <link>/zh/categories/mybatis/</link>
+        <link>wangy325.github.io/zh/categories/mybatis/</link>
         <pubDate>Fri, 21 Sep 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/mybatis/</guid>
+        <guid>wangy325.github.io/zh/categories/mybatis/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -274,11 +256,11 @@
       
       <item>
         <title>git</title>
-        <link>/zh/categories/git/</link>
+        <link>wangy325.github.io/zh/categories/git/</link>
         <pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         
-        <guid>/zh/categories/git/</guid>
+        <guid>wangy325.github.io/zh/categories/git/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>

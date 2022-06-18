@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>index on EndlessRiver</title>
-    <link>/zh/tags/index/</link>
+    <link>wangy325.github.io/zh/tags/index/</link>
     <description>Recent content in index on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -15,17 +15,17 @@
     <webMaster>wangy325@qq.com (wangy325)</webMaster>
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     
-        <atom:link href="/zh/tags/index/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="wangy325.github.io/zh/tags/index/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>文章列表</title>
-        <link>/zh/posts/</link>
+        <link>wangy325.github.io/zh/posts/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Thu, 08 Apr 2021 22:37:47 +0800</atom:modified>
-        <guid>/zh/posts/</guid>
+        <guid>wangy325.github.io/zh/posts/</guid>
         <description></description>
         
         <dc:creator>Hugo Authors</dc:creator>
