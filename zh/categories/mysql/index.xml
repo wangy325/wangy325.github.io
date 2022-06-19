@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>MySQL on EndlessRiver</title>
-    <link>wangy325.github.io/zh/categories/mysql/</link>
+    <link>https://wangy325.github.io/zh/categories/mysql/</link>
     <description>Recent content in MySQL on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -16,17 +16,17 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="wangy325.github.io/zh/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://wangy325.github.io/zh/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>mysql事务与隔离级别</title>
-        <link>wangy325.github.io/zh/posts/java/sql/mysql%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</link>
+        <link>https://wangy325.github.io/zh/posts/java/sql/mysql%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</link>
         <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Wed, 16 Jun 2021 20:20:36 +0800</atom:modified>
-        <guid>wangy325.github.io/zh/posts/java/sql/mysql%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</guid>
+        <guid>https://wangy325.github.io/zh/posts/java/sql/mysql%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</guid>
         <description>&lt;!--
 ~~mysql事务属于老生常谈的内容了，并不指望这一篇文章将其搞透，本篇文章只是将mysql事务的外衣扒了，让其看起来不再那么神秘与华丽。有时候，新手总是对“事务”这两个字怀有莫名的恐惧感，因为其藏在mysql内部，偷偷地工作着，就好像你没有凝视深渊，而深渊却在凝视你。~~
 --&gt;
@@ -69,11 +69,11 @@
       
       <item>
         <title>在centOS上安装并配置mysql数据库</title>
-        <link>wangy325.github.io/zh/posts/java/sql/%E5%9C%A8centos%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <link>https://wangy325.github.io/zh/posts/java/sql/%E5%9C%A8centos%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
         <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Thu, 17 Jun 2021 18:45:00 +0800</atom:modified>
-        <guid>wangy325.github.io/zh/posts/java/sql/%E5%9C%A8centos%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+        <guid>https://wangy325.github.io/zh/posts/java/sql/%E5%9C%A8centos%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
         <description>&lt;p&gt;文章介绍了在centOS7上安装mysql数据库服务的配置及简单优化过程。在服务器上安装mysql服务网络上能够找到的资源很多了，因此本文没有作详细介绍，本文的重点在于后续的优化配置方面。&lt;/p&gt;</description>
         
         <dc:creator>wangy325</dc:creator>
@@ -93,11 +93,11 @@
       
       <item>
         <title>一个简单的sql优化示例</title>
-        <link>wangy325.github.io/zh/posts/java/sql/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84sql%E4%BC%98%E5%8C%96%E7%9A%84%E4%BE%8B%E5%AD%90/</link>
+        <link>https://wangy325.github.io/zh/posts/java/sql/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84sql%E4%BC%98%E5%8C%96%E7%9A%84%E4%BE%8B%E5%AD%90/</link>
         <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Thu, 08 Apr 2021 22:37:47 +0800</atom:modified>
-        <guid>wangy325.github.io/zh/posts/java/sql/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84sql%E4%BC%98%E5%8C%96%E7%9A%84%E4%BE%8B%E5%AD%90/</guid>
+        <guid>https://wangy325.github.io/zh/posts/java/sql/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84sql%E4%BC%98%E5%8C%96%E7%9A%84%E4%BE%8B%E5%AD%90/</guid>
         <description></description>
         
         <dc:creator>wangy325</dc:creator>
@@ -121,11 +121,11 @@
       
       <item>
         <title>MySQL中的几个字符串处理函数</title>
-        <link>wangy325.github.io/zh/posts/java/sql/mysql%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</link>
+        <link>https://wangy325.github.io/zh/posts/java/sql/mysql%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</link>
         <pubDate>Fri, 21 Sep 2018 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Thu, 08 Apr 2021 22:37:47 +0800</atom:modified>
-        <guid>wangy325.github.io/zh/posts/java/sql/mysql%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</guid>
+        <guid>https://wangy325.github.io/zh/posts/java/sql/mysql%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</guid>
         <description>&lt;p&gt;本文介绍了mysql的几个方便的字符串处理函数，通常用于简单的查询结果处理。适用在mapper.xml的语句标签中对数据库字段数据进行简单的处理。&lt;/p&gt;</description>
         
         <dc:creator>wangy325</dc:creator>

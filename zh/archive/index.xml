@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>文章归档 on EndlessRiver</title>
-    <link>wangy325.github.io/zh/archive/</link>
+    <link>https://wangy325.github.io/zh/archive/</link>
     <description>Recent content in 文章归档 on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -16,7 +16,7 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 19 Oct 2019 11:44:14 +0900</lastBuildDate>
     
-        <atom:link href="wangy325.github.io/zh/archive/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://wangy325.github.io/zh/archive/index.xml" rel="self" type="application/rss+xml" />
     
 
       

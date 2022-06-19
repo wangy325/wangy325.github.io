@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>synchronized on EndlessRiver</title>
-    <link>wangy325.github.io/zh/tags/synchronized/</link>
+    <link>https://wangy325.github.io/zh/tags/synchronized/</link>
     <description>Recent content in synchronized on EndlessRiver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
@@ -16,17 +16,17 @@
     <copyright>&amp;copy;{year}, All Rights Reserved</copyright>
     <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="wangy325.github.io/zh/tags/synchronized/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://wangy325.github.io/zh/tags/synchronized/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Java并发系列之2——资源访问受限</title>
-        <link>wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</link>
+        <link>https://wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</link>
         <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
         <author>wangy325@qq.com (wangy325)</author>
         <atom:modified>Fri, 17 Jun 2022 14:24:34 +0800</atom:modified>
-        <guid>wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</guid>
+        <guid>https://wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/</guid>
         <description>&lt;p&gt;在&lt;a href=&#34;../1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1&#34;&gt;上一篇文章&lt;/a&gt;中，虽然创建了多线程，并且线程之间出现了一些&lt;strong&gt;不可预测&lt;/strong&gt;的CPU调度，但是由于线程之间是&lt;strong&gt;相互隔离&lt;/strong&gt;的——&lt;strong&gt;线程没有访问共同的资源&lt;/strong&gt;，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;实际上，上篇文章通过&lt;code&gt;join()&lt;/code&gt;方法演示了一种安全访问共享资源的方法。&lt;/p&gt;

@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>wangy325.github.io/en/zh/</loc>
+    <loc>https://wangy325.github.io/en/zh/</loc>
     <lastmod>2021-04-14T23:12:21+08:00</lastmod>
   </url><url>
-    <loc>wangy325.github.io/en/categories/</loc>
+    <loc>https://wangy325.github.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="wangy325.github.io/zh/categories/"
+                href="https://wangy325.github.io/zh/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="wangy325.github.io/en/categories/"
+                href="https://wangy325.github.io/en/categories/"
                 />
   </url><url>
-    <loc>wangy325.github.io/en/</loc>
+    <loc>https://wangy325.github.io/en/</loc>
     <lastmod>2021-04-14T23:12:21+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="wangy325.github.io/zh/"
+                href="https://wangy325.github.io/zh/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="wangy325.github.io/en/"
+                href="https://wangy325.github.io/en/"
                 />
   </url><url>
-    <loc>wangy325.github.io/en/series/</loc>
+    <loc>https://wangy325.github.io/en/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="wangy325.github.io/zh/series/"
+                href="https://wangy325.github.io/zh/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="wangy325.github.io/en/series/"
+                href="https://wangy325.github.io/en/series/"
                 />
   </url><url>
-    <loc>wangy325.github.io/en/tags/</loc>
+    <loc>https://wangy325.github.io/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="wangy325.github.io/zh/tags/"
+                href="https://wangy325.github.io/zh/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="wangy325.github.io/en/tags/"
+                href="https://wangy325.github.io/en/tags/"
                 />
   </url>
 </urlset>
