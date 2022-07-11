@@ -15,7 +15,7 @@
 <meta name=description content="本文结合源码，分析了Java并发框架中用于执行计划任务的执行器(ScheduledThreadPoolExecutor)的运行机制。是执行器的姊妹篇。">
 <meta name=keywords content="线程池,执行器">
 <meta name=created content="2020-11-10T00:00:00+0000">
-<meta name=modified content="2022-07-11T09:13:00+0000">
+<meta name=modified content="2022-07-11T09:22:18+0000">
 <meta property="article:published_time" content="2020-11-10T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之8——计划执行任务","datePublished":"2020-11-10T00:00:00Z","dateModified":"2022-07-11T09:13:00Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/","description":"本文结合源码，分析了Java并发框架中用于执行计划任务的执行器(ScheduledThreadPoolExecutor)的运行机制。是执行器的姊妹篇。","keywords":["线程池","执行器"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之8——计划执行任务","datePublished":"2020-11-10T00:00:00Z","dateModified":"2022-07-11T09:22:18Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/","description":"本文结合源码，分析了Java并发框架中用于执行计划任务的执行器(ScheduledThreadPoolExecutor)的运行机制。是执行器的姊妹篇。","keywords":["线程池","执行器"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -205,7 +205,7 @@ kimbie
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <p>除了ThreadPoolExecutor之外，Java执行器（Executor）框架还提供了可以在指定延迟之后执行一次或周期执行任务的接口<code>ScheduledExecutorService</code>，较<a href=https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html>java.util.Timer</a>而言，它是更好的选择</p>
-<p>与<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-%E7%BA%BF%E7%A8%8B%E6%B1%A0>线程池</a>不同的是，用于计划执行的<code>ScheduledThreadPoolExecutor</code>使用<code>ScheduledFutureTask</code>作为任务，使用<code>DelayedWorkQueue</code>作为任务队列，以实现计划（周期）执行的目的</p>
+<p>与<a href=../7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-%E7%BA%BF%E7%A8%8B%E6%B1%A0>线程池</a>不同的是，用于计划执行的<code>ScheduledThreadPoolExecutor</code>使用<code>ScheduledFutureTask</code>作为任务，使用<code>DelayedWorkQueue</code>作为任务队列，以实现计划（周期）执行的目的</p>
 <p><img src=/img/scheduledFutureTask.png alt=xx></p>
 <p style=text-align:center;font-size:.9rem;font-style:italic>ScheduledThreadPoolExecutor继承关系图</p>
 <p>从<code>ScheduledThreadPoolExecutor</code>的继承关系图可以看到，其是<code>ThreadPoolExecutor</code>的导出类，其提交任务和执行任务以及关闭线程池的逻辑应和线程池相差无几，其重点差别在于<strong>任务对象以及任务队列</strong>的封装上，后文将会详述<code>ScheduledThreadPoolExecutor</code>的任务计划执行以及周期执行机制</p>
@@ -953,8 +953,8 @@ Thread[pool-1-thread-2,5,main] 1
 </span><span class=cm>*/</span><span class=c1>//:~
 </span></code></pre></td></tr></table>
 </div>
-</div><p>在上例中，我们保证当前提交的任务在执行完成之后再进行下一次提交，那么下一次的任务应该新建线程执行才对。但实际的情况并非如此，执行上个任务的线程仍然有机会继续执行接下来提交的任务，这是由于任务的执行以及线程的销毁都是耗时操作，可能在线程销毁（执行CP1）之前新的任务已经添加到队列中了。除此之外，在所有任务执行完成之后，我们获取了线程池中同时执行任务的最大线程数，按照逻辑，这个值应该始终是1，实际的运行过程中却是一个不确定的数。这让人费解，新线程的创建前提是<code>workerCount==0</code>，即表明了池中是没有正在运行的线程，不过，可以猜测池中出现2个线程的过程大概出现在线程1即将销毁，执行<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-2-3-%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1>processWorkerExit</a>方法之前，将要销毁的worker还未从set中移除，而此时addworker读取到的size > 1，于是出现了largestPoolSie>1的情形</p>
-<p>如果取消上例中的休眠注释，就能规避上述的各种不确定情况，足够时长的休眠可以保证执行任务的线程执行任务并销毁</p>
+</div><p>在上例中，我们保证当前提交的任务在执行完成之后再进行下一次提交，那么下一次的任务应该新建线程执行才对。但实际的情况并非如此，执行上个任务的线程仍然有机会继续执行接下来提交的任务，这是由于任务的执行以及线程的销毁都是耗时操作，可能在线程销毁（执行CP1）之前新的任务已经添加到队列中了。除此之外，在所有任务执行完成之后，我们获取了线程池中同时执行任务的最大线程数，按照逻辑，这个值应该始终是1，实际的运行过程中却是一个不确定的数。这让人费解，新线程的创建前提是<code>workerCount==0</code>，即表明了池中是没有正在运行的线程，不过，可以猜测池中出现2个线程的过程大概出现在线程1即将销毁，执行<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-2-3-%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1>processWorkerExit</a>方法之前，将要销毁的worker还未从set中移除，而此时addworker读取到的size > 1，于是出现了largestPoolSie>1的情形。</p>
+<p>如果取消上例中的休眠注释，就能规避上述的各种不确定情况，足够时长的休眠可以保证执行任务的线程执行任务并销毁。</p>
 <h2 id=42-任务入队>4.2 任务入队</h2>
 <p>由于任务提交之后一定是先放入任务队列的，而基于<code>DelayedWorkQueue</code>的任务队列和普通的阻塞队列有些区别。任务队列通过调用<code>offer(Runnable x)</code>方法将任务放入队列中，只有在获取锁的情况下才能调用</p>
 <div class=highlight><div class=chroma>
@@ -1023,10 +1023,10 @@ Thread[pool-1-thread-2,5,main] 1
 </div>
 </div><p>由于使用无界队列实现，<code>DelayedWorkQueue</code>任务入队的阻塞不会阻塞；但如果入队时队列为空，那么意味着：</p>
 <ol>
-<li>首个任务入队</li>
-<li>所有任务都已经出队</li>
+<li>首个任务入队；</li>
+<li>所有任务都已经出队；</li>
 </ol>
-<p>成功入队之后，将会唤醒一个阻塞的线程(可能没有阻塞的线程)去获取任务执行</p>
+<p>成功入队之后，将会唤醒一个阻塞的线程(可能没有阻塞的线程)去获取任务执行。</p>
 <h2 id=43-执行任务>4.3 执行任务</h2>
 <p>与<code>ThreadPoolExecutor</code>不同的是，<code>ScheduledThreadPoolExecutor</code>所有任务都是先添加到任务队列中的，并且任务队列是<em>delay queue</em>，从<em>delay queue</em>中取出任务比简单的阻塞队列稍显复杂。不过其执行任务的基本逻辑和<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-2-3-%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1><code>ThreadPoolExecutor</code>的任务执行过程</a>是一致的</p>
 <p>而关于任务周期执行的机制，前文在阐述<a href=#3-run>ScheduledFutureTask</a>的<code>run()</code>方法时，已经提及，</p>
@@ -1364,10 +1364,10 @@ Thread[pool-1-thread-2,5,main] 1
 </span><span class=cm>*/</span><span class=c1>//:~
 </span></code></pre></td></tr></table>
 </div>
-</div><p>上例中，可以看到提交了2个任务，只有一个任务执行。首先提交的任务随即被取消了，第一次获取队列大小时，执行完一个任务，但是队列不为空，被取消的任务还在队列中，在线程池shutdown之后，任务随即被移除。如果使用<code>service.setRemoveOnCancelPolicy(true)</code>替换示例中的设置，那么两次获取的队列大小都是0</p>
-<p>这样的设计有一个好处，如果刻意取消一个任务，<strong>特定条件下可以避免重复的销毁和创建工作线程</strong>。在前面的讨论中，我们知道，核心线程空闲时是不会被销毁的，它会在任务队列上阻塞；但是非核心线程就不同了，如果队列为空，非核心线程会在<a href=#cp1>CP1</a>处结束运行，但是如果取消一个任务，并且任务没有从队列中移除的话，那么这个非核心线程就不会被销毁</p>
+</div><p>上例中，可以看到提交了2个任务，只有一个任务执行。首先提交的任务随即被取消了，第一次获取队列大小时，执行完一个任务，但是队列不为空，被取消的任务还在队列中，在线程池shutdown之后，任务随即被移除。如果使用<code>service.setRemoveOnCancelPolicy(true)</code>替换示例中的设置，那么两次获取的队列大小都是0。</p>
+<p>这样的设计有一个好处，如果刻意取消一个任务，<strong>特定条件下可以避免重复的销毁和创建工作线程</strong>。在前面的讨论中，我们知道，核心线程空闲时是不会被销毁的，它会在任务队列上阻塞；但是非核心线程就不同了，如果队列为空，非核心线程会在<a href=#cp1>CP1</a>处结束运行，但是如果取消一个任务，并且任务没有从队列中移除的话，那么这个非核心线程就不会被销毁。</p>
 <h1 id=6-关闭线程池>6 关闭线程池</h1>
-<p>除了继承<code>ThreadPoolExecutor</code>的<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-3-%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%9C%B0%E5%85%B3%E9%97%AD%E7%BA%BF%E7%A8%8B%E6%B1%A0>线程池关闭</a>的逻辑之外，<code>ScheduledThreadPoolExecutor</code>关闭线程池和其基类还有些许差异，主要是其通过实现<code>onShutdown</code>方法，实现了新的关闭策略</p>
+<p>除了继承<code>ThreadPoolExecutor</code>的<a href=../%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/#3-3-%E5%A6%82%E4%BD%95%E5%90%88%E7%90%86%E5%9C%B0%E5%85%B3%E9%97%AD%E7%BA%BF%E7%A8%8B%E6%B1%A0>线程池关闭</a>的逻辑之外，<code>ScheduledThreadPoolExecutor</code>关闭线程池和其基类还有些许差异，主要是其通过实现<code>onShutdown</code>方法，实现了新的关闭策略。</p>
 <h2 id=61-onshutdown方法>6.1 onShutDown方法</h2>
 <p>调用<code>shutdown</code>和<code>shutdownNow</code>方法的基本逻辑和基类一致，不过<code>shutdown</code>过程中的<code>onShutdown</code>方法引入了新的关闭策略</p>
 <p>关闭策略由2个布尔值域控制，分别是</p>

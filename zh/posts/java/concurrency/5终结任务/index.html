@@ -15,7 +15,7 @@
 <meta name=description content="本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。">
 <meta name=keywords content="中断任务">
 <meta name=created content="2020-10-23T00:00:00+0000">
-<meta name=modified content="2022-07-11T09:13:00+0000">
+<meta name=modified content="2022-07-11T09:22:18+0000">
 <meta property="article:published_time" content="2020-10-23T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之5——终结任务","datePublished":"2020-10-23T00:00:00Z","dateModified":"2022-07-11T09:13:00Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/","description":"本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。","keywords":["中断任务"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之5——终结任务","datePublished":"2020-10-23T00:00:00Z","dateModified":"2022-07-11T09:22:18Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/","description":"本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。","keywords":["中断任务"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -208,7 +208,7 @@ kimbie
 <p>在设计多个线程协同工作的任务时，需要判断<strong>任务终结的条件</strong>，以便合适地终结任务，这点尤为重要。</p>
 <p>在本节中主要讨论在多线程协同工作的情况下，如何合适的终结任务。</p>
 <h1 id=响应中断>响应中断</h1>
-<p>在讨论<a href=../2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/#8%E5%86%8D%E8%AE%BAobject%E8%B6%85%E7%B1%BB>Object超类</a>的时候，我们曾通过“录音-播放”模型简单阐述线程之间的协同工作，在那个示例中，方便起见，我们通过<code>System.exit(0);</code>来粗暴地结束程序的运行。这种方式在并发编程实践中是不被允许的。</p>
+<p>在讨论<a href=../2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/#8-%E5%86%8D%E8%AE%BAobject%E8%B6%85%E7%B1%BB>Object超类</a>的时候，我们曾通过“录音-播放”模型简单阐述线程之间的协同工作，在那个示例中，方便起见，我们通过<code>System.exit(0);</code>来粗暴地结束程序的运行。这种方式在并发编程实践中是不被允许的。</p>
 <p>接下来的示例中，我们再次以线程之间的协同工作为切点，讨论如何“合理地”终结任务的运行。</p>
 <p>下例模拟汽车的“打蜡-抛光”过程，抛光必须在打蜡完成之后，同样的，打蜡之前汽车必须是抛光过的。</p>
 <div class=highlight><div class=chroma>
@@ -937,10 +937,10 @@ Exiting via while() test
 <hr>
 <ol>
 <li id=fn:1 role=doc-endnote>
-<p>TIJ第四版第21章并发（694页）在描述线程的状态时，将调用休眠/等待之后线程的状态称为阻塞。为避免混淆，本文采用<a href=https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html>Thread.State</a>中关于线程的描述，并认为其不应该被称为阻塞状态&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>TIJ第四版第21章并发（694页）在描述线程的状态时，将调用休眠/等待之后线程的状态称为阻塞。为避免混淆，本文采用<a href=https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html>Thread.State</a>中关于线程的描述，并认为其不应该被称为阻塞状态。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:2 role=doc-endnote>
-<p>本博客约定此状态（等待锁）的线程才处于阻塞状态&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>本博客约定此状态（等待锁）的线程才处于阻塞状态。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
