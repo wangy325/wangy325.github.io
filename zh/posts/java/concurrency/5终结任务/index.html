@@ -15,7 +15,7 @@
 <meta name=description content="本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。">
 <meta name=keywords content="中断任务">
 <meta name=created content="2020-10-23T00:00:00+0000">
-<meta name=modified content="2022-08-26T06:22:06+0000">
+<meta name=modified content="2022-10-16T17:16:58+0000">
 <meta property="article:published_time" content="2020-10-23T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之5——终结任务","datePublished":"2020-10-23T00:00:00Z","dateModified":"2022-08-26T06:22:06Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/","description":"本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。","keywords":["中断任务"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之5——终结任务","datePublished":"2020-10-23T00:00:00Z","dateModified":"2022-10-16T17:16:58Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/","description":"本文讨论了在多线程协同工作的情况下，合理终结任务的惯用法。","keywords":["中断任务"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -190,7 +190,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2020年10月23日 </time>
-&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年08月26日 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年10月16日 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;7&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;wangy325</span>
 <span class=single__info>

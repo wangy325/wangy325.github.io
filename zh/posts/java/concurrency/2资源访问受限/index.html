@@ -15,7 +15,7 @@
 <meta name=description content="本文介绍了“共享资源”的概念，并发条件下的共享资源变得异常敏感，稍不注意就可能引发资源一致性等其他安全问题。Java引入了多种策略来应对这种情况，著名的就是同步关键字和锁，还有诸如volatile关键字，原子类以及线程本地存储等手段。">
 <meta name=keywords content="锁,synchronized,volatile">
 <meta name=created content="2020-05-20T00:00:00+0000">
-<meta name=modified content="2022-08-26T06:22:06+0000">
+<meta name=modified content="2022-10-16T17:16:58+0000">
 <meta property="article:published_time" content="2020-05-20T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之2——资源访问受限","datePublished":"2020-05-20T00:00:00Z","dateModified":"2022-08-26T06:22:06Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/","description":"本文介绍了“共享资源”的概念，并发条件下的共享资源变得异常敏感，稍不注意就可能引发资源一致性等其他安全问题。Java引入了多种策略来应对这种情况，著名的就是同步关键字和锁，还有诸如volatile关键字，原子类以及线程本地存储等手段。","keywords":["锁","synchronized","volatile"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之2——资源访问受限","datePublished":"2020-05-20T00:00:00Z","dateModified":"2022-10-16T17:16:58Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/","description":"本文介绍了“共享资源”的概念，并发条件下的共享资源变得异常敏感，稍不注意就可能引发资源一致性等其他安全问题。Java引入了多种策略来应对这种情况，著名的就是同步关键字和锁，还有诸如volatile关键字，原子类以及线程本地存储等手段。","keywords":["锁","synchronized","volatile"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -190,7 +190,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2020年05月20日 </time>
-&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年08月26日 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年10月16日 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;26&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;wangy325</span>
 <span class=single__info>
