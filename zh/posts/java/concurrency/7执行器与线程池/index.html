@@ -15,7 +15,7 @@
 <meta name=description content="本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。">
 <meta name=keywords content="执行器,线程池">
 <meta name=created content="2020-11-03T00:00:00+0000">
-<meta name=modified content="2022-10-16T17:16:58+0000">
+<meta name=modified content="2022-12-05T07:11:15+0000">
 <meta property="article:published_time" content="2020-11-03T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之7——执行器与线程池","datePublished":"2020-11-03T00:00:00Z","dateModified":"2022-10-16T17:16:58Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/","description":"本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。","keywords":["执行器","线程池"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之7——执行器与线程池","datePublished":"2020-11-03T00:00:00Z","dateModified":"2022-12-05T07:11:15Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/","description":"本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。","keywords":["执行器","线程池"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -190,7 +190,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2020年11月03日 </time>
-&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年10月16日 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年12月05日 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;35&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;wangy325</span>
 <span class=single__info>

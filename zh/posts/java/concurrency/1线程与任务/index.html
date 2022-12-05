@@ -15,7 +15,7 @@
 <meta name=description content="本文介绍了Java并发的基础概念——线程，包括线程的创建，生命周期，以及Thread类的一些常用方法如让步(yield)、加入(join)等，顺便介绍了如何使用UncaughtExceptionHandler处理线程中抛出的异常。">
 <meta name=keywords content="线程">
 <meta name=created content="2020-05-15T00:00:00+0000">
-<meta name=modified content="2022-10-16T17:16:58+0000">
+<meta name=modified content="2022-12-05T07:11:15+0000">
 <meta property="article:published_time" content="2020-05-15T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之1——线程与任务","datePublished":"2020-05-15T00:00:00Z","dateModified":"2022-10-16T17:16:58Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/","description":"本文介绍了Java并发的基础概念——线程，包括线程的创建，生命周期，以及Thread类的一些常用方法如让步(yield)、加入(join)等，顺便介绍了如何使用UncaughtExceptionHandler处理线程中抛出的异常。","keywords":["线程"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之1——线程与任务","datePublished":"2020-05-15T00:00:00Z","dateModified":"2022-12-05T07:11:15Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/","description":"本文介绍了Java并发的基础概念——线程，包括线程的创建，生命周期，以及Thread类的一些常用方法如让步(yield)、加入(join)等，顺便介绍了如何使用UncaughtExceptionHandler处理线程中抛出的异常。","keywords":["线程"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -190,7 +190,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2020年05月15日 </time>
-&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年10月16日 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年12月05日 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;14&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;wangy325</span>
 <span class=single__info>
@@ -203,7 +203,7 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<p>并发的本质是多个线程同时处理任务<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，不同于进程，线程之间的资源是共享的，当程序不够严谨时，使用多线程就可能带来问题，这是要反复讨论并发的原因之一。</p>
+<p>并发的本质是多个线程同时处理任务<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，不同于进程，线程可以访问同一个资源（临界资源），当程序不够健壮时，使用多线程就可能带来问题，这是要反复讨论并发的原因之一。</p>
 <p>在Java中，必须明白一点：线程由Thread类启动，但Thread类并不执行任何操作，<strong>它只是驱动赋予它的任务</strong>。因此将<strong>线程与任务</strong>的概念区分开，有利于理解并发。</p>
 <p>实际上，开发过程中线程与任务（的联系）被隔离的更加明显，往往不需要显式地声明线程，然后将任务（声明任务是必须的）分配给线程，并由线程负责驱动（ <em>allocate task to thread to execute</em> ），这一过程通常由<strong>线程池</strong>完成 。</p>
 <h2 id=1-任务>1 任务</h2>
@@ -286,8 +286,14 @@ kimbie
 <p><code>Thread.yield()</code>是Java的线程调度机制之一，它声明“当前线程可以让出CPU时间，其他线程需要运行的就去运行吧”，遗憾的是<strong>它仅仅是一个建议</strong>，其他线程不一定真的会获取CPU时间并运行。</p>
 <p>因此，从Runnable导出的类，除了必须声明run()方法之外，其不会产生任何的线程能力，<strong>要实现线程行为，必须显式地将其分配给线程</strong>。</p>
 <blockquote>
+<ol>
+<li>
 <p><code>new LiftOff().run()</code>可以直接调用，但这并不会开启一个单独线程，而是在当前线程中顺序执行的。</p>
+</li>
+<li>
 <p>可以将<code>Runnable </code>接口理解为必需声明的任务。</p>
+</li>
+</ol>
 </blockquote>
 <h2 id=2-线程>2 线程</h2>
 <p>Thread即线程。将Runnable转为 <em>工作任务</em> 的<strong>传统方法</strong>就是将其提交给Thread类构造器：</p>
@@ -367,11 +373,11 @@ kimbie
 </tr>
 <tr>
 <td>WAITING</td>
-<td>当线程等待另一个线程通知调度器一个条件时，它自己进入等待状态。如调用<code>Object.wait()</code>和<code>Thread.join()</code>方法时，或等待Lock或Condition时。</td>
+<td>当线程等待另一个线程通知调度器一个条件时，它自己进入等待状态。如调用<code>Object.wait()</code>、<code>Thread.join()</code>、<code>Thread.sleep()</code>方法时，或等待Lock/Condition时。这个状态下的线程响应中断。</td>
 </tr>
 <tr>
 <td>TIMED_WAITING</td>
-<td>带有超时参数的方法调用时会让线程进入计时等待。</td>
+<td>带有超时参数的方法调用时会让线程进入超时等待。这个状态下的线程响应中断。</td>
 </tr>
 <tr>
 <td>TERMINATED</td>
@@ -379,17 +385,22 @@ kimbie
 </tr>
 </tbody>
 </table>
+<center>
+<p><img src=/img/juc/thread_status.png alt></p>
+<p><em>线程的状态转换示意图<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup></em></p>
+</center>
 <h2 id=4-线程的中断状态>4 线程的中断状态</h2>
-<p>当<code>run()</code>方法正常返回或遇到异常时，线程终止运行，除此之外，无法<strong>强制终止</strong>线程<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>。</p>
-<p>但是，线程有一个中断状态（ <em>interrupted state</em> ），调用<code>interrup()</code>方法时，线程的中断状态将被设置（ <em>interrupt status will be set</em> ）。</p>
-<p><strong><span id=ie><del>线程的中断状态和线程的阻塞是互斥的</del></span></strong><sup><del>笼统地描述为线程中断和阻塞互斥是不合适的</del></sup></p>
+<p>当<code>run()</code>方法正常返回或遇到异常时，线程终止运行，除此之外，无法<strong>强制终止</strong>线程<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>。</p>
+<p>但是，线程有一个中断状态（ <em>interrupted state</em> ），调用<code>Thread.interrup()</code>方法时，线程的中断状态将被设置（ <em>interrupt status will be set</em> ）。</p>
 <ul>
-<li>若线程被 <code>wait()</code>、<code>join()</code>、<code>sleep()</code>及其重载方法阻塞<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>，调用<code>interrupt()</code>方法将抛出<em>InterruptedException</em>，并且线程<strong>不会设置</strong>中断状态。</li>
+<li>
+<p>若线程调用 <code>wait()</code>、<code>join()</code>、<code>sleep()</code>、<code>park()</code>等及其重载方法进入等待，在此线程上调用<code>interrupt()</code>方法将抛出<strong>中断异常</strong>（<em>InterruptedException</em>），并且线程<strong>不会设置</strong>中断状态。</p>
+</li>
+<li>
+<p>若线程先调用<code>intercerupt()</code>设置中断状态，再调用<code>wait()</code>、<code>join()</code>、<code>sleep()</code>、<code>park()</code>及其重载方法，同样会抛出<strong>中断异常</strong> ，线程的<strong>中断状态会被清除</strong>。</p>
+</li>
 </ul>
-<ul>
-<li>若在线程的中断状态下调用<code>wait()</code>、<code>join()</code>、<code>sleep()</code>及其重载方法使线程阻塞，被调用的方法同样会抛出 <em>InterruptedException</em> ，线程的<strong>中断状态会被清除</strong>。</li>
-</ul>
-<p>下例演示了中断和休眠的关系：</p>
+<p><span id=IE>下例</span>演示了中断和休眠的关系：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -625,7 +636,9 @@ kimbie
 </span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，<strong>当线程休眠时，调用interrupted()方法也会抛出异常，并且清除中断状态</strong>。</p>
+<blockquote>
 <p>使用<code>isInterrupted()</code>和<code>interrupted()</code>方法都可以获取线程的中断状态，二者的区别在于<code>isInterrupted()</code>方法不会清除线程的中断状态（ <em>interrupted status of the thread is unaffected</em> ）；但<code>interrupted()</code>方法会清除线程的中断状态，且该方法是<strong>静态方法</strong>。</p>
+</blockquote>
 <h2 id=5-线程优先级>5 线程优先级</h2>
 <p>线程的<strong>优先级</strong>将线程的重要性传递给调度器，尽管CPU处理线程的顺序是不确定的，但是调度器<strong>倾向于</strong>优先让优先级高的线程执行<sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>。</p>
 <p>Java语言中，每个线程都有一个<strong>优先级</strong>，默认情况下，一个线程的优先级继承自其父线程。</p>
@@ -851,7 +864,7 @@ kimbie
 <h2 id=8-线程休眠>8 线程休眠</h2>
 <p>通常调用<code>sleep()</code>可以使线程中止一段时间，此时线程让出CPU时间给其他线程使用。</p>
 <p>Java SE 5 之后，可以使用 TimeUnit来执行这个行为<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>。</p>
-<p>对sleep()的调用可能引发<a href=#ie>中断异常</a>（ <em>Interrupted Exception</em> ）。</p>
+<p>对sleep()的调用可能引发<a href=#IE>中断异常</a>（ <em>Interrupted Exception</em> ）。</p>
 <blockquote>
 <p>需要说明的是，不同于<code>Object.wait()</code>，在使用同步时，线程的休眠并不会释放锁。</p>
 </blockquote>
@@ -1514,22 +1527,22 @@ kimbie
 <p>此例中，只有一个主线程去创建LiftOff线程，如果有多个主线程去创建LiftOff线程，那么可能就会出现重复id的LiftOff实例。&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:4 role=doc-endnote>
-<p>早期版本中，可以使用stop()方法终止线程，这个方法已经过时了。&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p><a href=https://www.cnblogs.com/waterystone/p/4920007.html>Java Thread详解 </a>&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:5 role=doc-endnote>
-<p>若以线程的活动来判断，这些方法会“阻塞”线程，从线程的生命周期来看，并不完全是这样。线程的I/O阻塞和中断的关系将在后文中讨论。&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>早期版本中，可以使用stop()方法终止线程，这个方法已经过时了。&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:6 role=doc-endnote>
-<p>和yield()方法一样，倾向性并不是绝对的。&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>和<code>yield()</code>方法一样，倾向性并不是绝对的。&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:7 role=doc-endnote>
-<p>一般看来，任务越耗时，其被CPU调度剥夺运行权的几率越大。&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>一般来说，任务越耗时，其被CPU调度剥夺运行权的几率越大。&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:8 role=doc-endnote>
 <p>上文已多处使用此方法。&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:9 role=doc-endnote>
-<p>阿里云编码规范就不推荐显式创建线程。&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>阿里云编码规范不推荐显式创建线程。&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
