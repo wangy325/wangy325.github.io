@@ -15,7 +15,7 @@
 <meta name=description content="本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。">
 <meta name=keywords content="执行器,线程池">
 <meta name=created content="2020-11-03T00:00:00+0000">
-<meta name=modified content="2022-12-09T03:43:41+0000">
+<meta name=modified content="2024-06-12T10:20:19+0000">
 <meta property="article:published_time" content="2020-11-03T00:00:00+0000">
 <meta name=author content="wangy325">
 <meta property="article:author" content="https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/@wangy325">
@@ -47,7 +47,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之7——执行器与线程池","datePublished":"2020-11-03T00:00:00Z","dateModified":"2022-12-09T03:43:41Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/","description":"本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。","keywords":["执行器","线程池"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"Java并发系列之7——执行器与线程池","datePublished":"2020-11-03T00:00:00Z","dateModified":"2024-06-12T10:20:19Z","url":"https://wangy325.github.io/zh/posts/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/","description":"本文详细介绍了Java并发框架中的执行器和线程池，是线程池系列的第一篇。","keywords":["执行器","线程池"],"author":{"@type":"Person","name":"wangy325"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://wangy325.github.io"},"publisher":{"@type":"Organization","name":"EndlessRiver","url":"https://wangy325.github.io"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__light>
@@ -190,7 +190,7 @@ kimbie
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2020年11月03日 </time>
-&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2022年12月09日 </time>
+&nbsp;&#183;&nbsp; <time class=single__info title=更新日期> 📝&nbsp;2024年06月12日 </time>
 &nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;35&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;wangy325</span>
 <span class=single__info>
@@ -204,7 +204,7 @@ kimbie
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
-<p>Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，<code>Executors</code>提供了一些非常方便的静态方法，可以根据需要创建不同的<code>ExecutorService</code>，然后调用其<code>execute(Runnable)</code>或<code>submit(Callable&lt;T>)</code>方法。在多线程的条件下，执行器还有一个非常明显的优势，它使用线程池管理线程，避免了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。</p>
+<p>Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，<code>Executors</code>提供了一些非常方便的静态方法，可以根据需要创建不同的<code>ExecutorService</code>，然后调用其<code>execute(Runnable)</code>或<code>submit(Callable&lt;T>)</code>方法。在多线程的条件下，执行器还有一个非常明显的优势，它使用线程池管理线程，减少了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。</p>
 <p>本文将从执行器开始，阐述Java中的线程池。</p>
 <h1 id=1-executors>1 Executors</h1>
 <p><code>java.util.concurrent.Executors</code>类提供了许多静态方法来获取不同类型的 <strong>线程池</strong>，下表列出其常用方法<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>：</p>
@@ -230,16 +230,16 @@ kimbie
 </tr>
 <tr>
 <td align=left>newScheduledThreadPool</td>
-<td align=left>用于预定执行一次或周期执行的线程池</td>
+<td align=left>创建计划执行一次或周期执行的线程池</td>
 </tr>
 <tr>
 <td align=left>newSingleThreadScheduledExecutor</td>
-<td align=left>用于预定执行一次或周期执行的单线程池</td>
+<td align=left>创建计划执行一次或周期执行的单线程池</td>
 </tr>
 </tbody>
 </table>
 <p style=text-align:center;font-size:.9rem;font-style:italic>Executors用于构造线程池的部分方法</p>
-<p>上表中的前3个方法返回<code>ThreadPoolExecutor</code>实例，后面2个方法返回<code>ScheduledExecutorService</code>接口的实例，不管是ThreadPoolExecutor或是ScheduledExecutorService，都是<code>ExecutorService</code>的实现，<code>ExecutorService</code>接口是设计用来处理任务的接口，其顶层接口是<code>java.util.concurrent.Executor</code>，该接口简单地定义了一个执行任务的方法：</p>
+<p>上表中的前3个方法返回<code>ThreadPoolExecutor</code>实例，后面2个方法返回<code>ScheduledExecutorService</code>实例，不管是ThreadPoolExecutor或是ScheduledExecutorService，都是<code>ExecutorService</code>的实现，<code>ExecutorService</code>接口是设计用来处理任务的接口，其顶层接口是<code>java.util.concurrent.Executor</code>，该接口简单地定义了一个执行任务的方法：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -276,7 +276,7 @@ kimbie
 <h1 id=2-executor-框架>2 Executor 框架</h1>
 <p>前文就已经提过，<code>Executors</code>构建的线程池包括不同实现，可以应对不同的场景，那么Java中包含哪些实现呢？</p>
 <figure>
-<img data-src=/img/executor.png data-caption src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 d=%22M0 0h24v24H0V0z%22/%3E%3Cpath fill=%22%23aaa%22 d=%22M19 3H5c-1.1.0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1.0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55.0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55.0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41.0.65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79.0z%22/%3E%3C/svg%3E" class=lazyload style=width:600px;height:>
+<img data-src=/img/juc/executor.png data-caption src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22none%22 d=%22M0 0h24v24H0V0z%22/%3E%3Cpath fill=%22%23aaa%22 d=%22M19 3H5c-1.1.0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1.0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55.0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55.0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41.0.65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79.0z%22/%3E%3C/svg%3E" class=lazyload style=width:600px;height:>
 <figcaption style=text-align:center>
 <strong>Executor框架组成</strong>:
 </figcaption>
@@ -352,7 +352,7 @@ kimbie
 <p><code>DelegatedExecutorService</code>继承自<code>AbstractExecutorService</code>，它是<code>Executors</code>的内部类，是一个仅仅实现了<code>ExecutorService</code>方法的包装类，其有两个子类分别是<code>DelegatedScheduledExecutorServide</code>和<code>FinalizableDelegatedExecutorService</code>。</p>
 <p><code>CompletionService</code>接口有一个子类<code>ExecutorCompletionService</code>，该类由执行器实例化，用来管理执行器执行的任务的结果。</p>
 <h2 id=21-executorservice>2.1 ExecutorService</h2>
-<p>ExecutorService是次顶层接口，定义了线程池操作任务的基本方法</p>
+<p>ExecutorService是次顶层接口，定义了线程池操作任务的基本方法。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -657,9 +657,9 @@ kimbie
 <p>线程池的<code>getPoolSize()</code>方法返回的线程数不应该超过线程池的核心线程池大小（corePoolSize）<strong>或</strong> 最大线程池大小（maximumPoolSize）。线程池中的工作线程数不可能超过最大线程池大小。若想获得当前的正在执行任务的线程数，需使用<code>getActiveCount()</code>方法。</p>
 <p>当一个任务被提交至线程池后<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>，若：</p>
 <ul>
-<li>当前工作线程数 &lt; corePoolSize，新建一个线程来完成任务——尽管可能有空闲核心线程<br>
+<li>当前工作线程数 &lt; corePoolSize，新建一个线程来完成任务——尽管可能有空闲核心线程。<br>
 (当工作线程数 &lt; corePoolSize时，任务队列一定是空的)</li>
-<li>corePoolSize &lt; 当前工作线程数 &lt; maximumPoolSize，并且任务队列已满，那么新建一个<strong>非核心线</strong>程来完成任务</li>
+<li>corePoolSize &lt; 当前工作线程数 &lt; maximumPoolSize，并且任务队列已满，那么新建一个<strong>非核心线</strong>程来完成任务。</li>
 </ul>
 <p>当设置corePoolSize=maximumPoolSize时，你将获得一个固定容量的线程池；当将maxPoolSize设置为Integer.MAX_VALUE时，线程数没有限制，这有可能造成<strong>内存泄漏</strong>。</p>
 <p>尽管在构建线程池实例时要指定corePoolSize和maximumPoolSize，在获得实例之后还可以通过<code>setCorePoolSize(int)</code>和<code>setMaximumPoolSize(int)</code>来对其进行修改<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>。</p>
@@ -2597,16 +2597,16 @@ fails to respond to interrupts may never terminate.</em></p>
 <hr>
 <ol>
 <li id=fn:1 role=doc-endnote>
-<p>表中没有提及关于构建Fork/Join线程池的方法，这部分内容将在后续补全&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>表中没有提及关于构建<code>Fork/Join</code>线程池的方法，这部分内容将在后续补全。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:2 role=doc-endnote>
-<p>须调用合适的构造器，实际上所有参数必须提供，不过有些由构造器默认提供了&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>须调用合适的构造器，实际上所有参数必须提供，不过有些由构造器默认提供。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:3 role=doc-endnote>
-<p>本文约定当前工作线程指代线程池中存在的线程（getPoolSize()方法的返回值），其中可能存在部分空闲线程。当工作线程数小于核心线程数时：1）当前线程池中的线程全是核心线程；2）任务队列一定是空的；3）当前某个线程可能是空闲的(执行完任务，在等待队列中的任务（runWorker方法阻塞）)&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>本文约定当前工作线程指代线程池中存在的线程（<code>getPoolSize()</code>方法的返回值），其中可能存在部分空闲线程。当工作线程数小于核心线程数时：1）当前线程池中的线程全是核心线程；2）任务队列一定是空的；3）当前某个线程可能是空闲的(执行完任务，在等待队列中的任务（runWorker方法阻塞）)。&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:4 role=doc-endnote>
-<p>类似地，存活时间，线程工厂，拒绝策略都可以在线程池初始化之后再进行设置&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+<p>类似地，存活时间，线程工厂，拒绝策略都可以在线程池初始化之后再进行设置。&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
 </li>
 <li id=fn:5 role=doc-endnote>
 <p>目前作者还未找到隐式调用<code>finalize()</code>方法导致线程池关闭的例证&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
@@ -2762,7 +2762,7 @@ Web Developer
 </div>
 </div>
 <p class=caption>
-©2019-2022, All Rights Reserved<a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/> CC BY-SA</a>
+©2019-2024, All Rights Reserved<a rel=license href=http://creativecommons.org/licenses/by-sa/4.0/> CC BY-SA</a>
 </p>
 <p class=caption>Powered by <a href=https://gohugo.io/ target=_blank rel=noreferrer>Hugo</a> and the <a href=https://github.com/zzossig/hugo-theme-zzo target=_blank rel=noreferrer>Zzo theme</a></p>
 </div>
