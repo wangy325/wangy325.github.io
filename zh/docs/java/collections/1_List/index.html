@@ -1,0 +1,374 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  List列表
+  #
+
+
+  
+Java集合框架简图
+
+上图列出了集合框架的常见实现，Java集合框架系列文章介绍了图中列出的大部分内容"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/collections/1_List/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="List列表"><meta property="og:description" content=" List列表 # Java集合框架简图
+上图列出了集合框架的常见实现，Java集合框架系列文章介绍了图中列出的大部分内容"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-04-29T00:00:00+00:00"><meta property="article:modified_time" content="2024-06-19T21:14:32+08:00"><meta property="article:tag" content="Collections"><title>List列表 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/collections/1_List/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle checked>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/ class=active>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>List列表</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#list列表>List列表</a><ul><li><a href=#list>List</a><ul><li><a href=#1-arraylist>1 ArrayList</a><ul><li><a href=#11-初始化及扩容机制>1.1 初始化及扩容机制</a></li><li><a href=#12-迭代器>1.2 迭代器</a></li><li><a href=#13-sublist>1.3 SubList</a></li><li><a href=#14-插入与删除>1.4 插入与删除</a></li></ul></li><li><a href=#2-linkedlist>2 LinkedList</a><ul><li><a href=#21-node>2.1 Node</a></li><li><a href=#22-迭代器>2.2 迭代器</a></li><li><a href=#23-对比arraylist>2.3 对比ArrayList</a></li><li><a href=#24-作为双端队列>2.4 作为双端队列</a></li></ul></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=list列表>List列表
+<a class=anchor href=#list%e5%88%97%e8%a1%a8>#</a></h1><p><img src=/img/Collection.png alt=JXUL1s.png></p><p style=text-align:center;font-style:italic;font-size:.9rem>Java集合框架简图</p><p>上图列出了集合框架的常见实现，Java集合框架系列文章介绍了图中列出的大部分内容</p><h2 id=list>List
+<a class=anchor href=#list>#</a></h2><p>List是<strong>有序集合</strong>，或称之为<strong>序列</strong>。List的实现可以准确地控制插入元素的位置，也可以通过元素的<strong>索引</strong>(<em>index</em>)访问之，还可以在集合中搜索元素</p><p>和
+<a href=/zh/#set>Set</a>不同，List允许元素重复出现，甚至允许多个null元素出现</p><p>List定义了4个由索引执行的操作</p><blockquote><p>E get(int index);</p><p>E set(int index, E element);</p><p>void add(int index, E element);</p><p>E remove(int index);</p></blockquote><p>ArrayList由于实现了<code>RandomAccess</code>接口，其在使用索引随机访问时性能不会受影响，但是LinkedList执行索引操作的耗时是与集合大小正相关的。因此，在不清楚List的实现类型的时候<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，通<strong>过迭代器遍历集合中的元素进行操作比直接使用索引更可取</strong></p><p>List提供了一个独有的迭代器<em><strong>ListIterator</strong></em>，其提供了插入/替换元素的操作，并且支持<strong>双向迭代</strong></p><h3 id=1-arraylist>1 ArrayList
+<a class=anchor href=#1-arraylist>#</a></h3><p>ArrayList是Java集合框架中使用最为频繁的实现，其本质是一个<strong>有序的</strong>可自由扩容的<strong>对象数组</strong>。它实现了<code>RandomAccess</code>这个<strong>标记接口</strong>，意味着其在随机访问性能上有一定优势</p><p>下图显示了ArrayList的继承关系</p><p><img src=/img/ArrayList.png alt=JIvHtH.png></p><p style=text-align:center;font-style:italic;font-size:.9rem>ArrayList继承关系</p><h4 id=11-初始化及扩容机制>1.1 初始化及扩容机制
+<a class=anchor href=#11-%e5%88%9d%e5%a7%8b%e5%8c%96%e5%8f%8a%e6%89%a9%e5%ae%b9%e6%9c%ba%e5%88%b6>#</a></h4><p>ArrayList初始化为一个空的对象数组，如果<strong>不在构造对象时指定初始容量大小，那么ArrayList的默认初始化一个容量为10的对象数组</strong>，其扩容规则是每当新增加对象超出对象数组的容量时，将对象数组的容量<strong>增加当前容量的1/2</strong></p><p>参考如下示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>initializeTest</span>() <span style=color:#66d9ef>throws</span> NoSuchFieldException, IllegalAccessException {
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> list <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// initial size = 10</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span>16; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>    list.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> Random().<span style=color:#a6e22e>nextInt</span>(100));
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 本体是elementData</span>
+</span></span><span style=display:flex><span>    Field field <span style=color:#f92672>=</span> list.<span style=color:#a6e22e>getClass</span>().<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;elementData&#34;</span>);
+</span></span><span style=display:flex><span>    field.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 获取list的“elementData”</span>
+</span></span><span style=display:flex><span>    Object<span style=color:#f92672>[]</span> o <span style=color:#f92672>=</span> (Object<span style=color:#f92672>[]</span>) field.<span style=color:#a6e22e>get</span>(list);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// size是ArrayList的长度，length是elementData的长度</span>
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;size = &#34;</span> <span style=color:#f92672>+</span> (i<span style=color:#f92672>+</span>1) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                       length = &#34;</span> <span style=color:#f92672>+</span> o.<span style=color:#a6e22e>length</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; ,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                       element = &#34;</span> <span style=color:#f92672>+</span> Arrays.<span style=color:#a6e22e>toString</span>(o));
+</span></span><span style=display:flex><span>   }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 1, length = 10 ,element = [15, null, null, null, null, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 2, length = 10 ,element = [15, 15, null, null, null, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 3, length = 10 ,element = [15, 15, 31, null, null, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 4, length = 10 ,element = [15, 15, 31, 40, null, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 5, length = 10 ,element = [15, 15, 31, 40, 47, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 6, length = 10 ,element = [15, 15, 31, 40, 47, 26, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 7, length = 10 ,element = [15, 15, 31, 40, 47, 26, 47, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 8, length = 10 ,element = [15, 15, 31, 40, 47, 26, 47, 41, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 9, length = 10 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 10, length = 10 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 11, length = 15 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 12, length = 15 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, 94, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 13, length = 15 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, 94, 25, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 14, length = 15 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, 94, 25, 11, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 15, length = 15 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, 94, 25, 11, 80]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>size = 16, length = 22 ,element = [15, 15, 31, 40, 47, 26, 47, 41, 91, 69, 32, 94, 25, 11, 80, 86, null, null, null, null, null, null]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>ArrayList的内容存储在<code>elementData</code>对象数组中，通过在运行时获取对象信息，能够窥视ArrayList的初始化过程：</p><ul><li><p><code>elementData</code>初始化为容量默认为10，内容为空的对象数组<code>new Object[10] = {}</code></p></li><li><p>添加第10个元素时，此时<code>elementData</code>的容量也是10，无法容纳更多元素，需扩容，源码所见：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>if</span> (minCapacity <span style=color:#f92672>-</span> elementData.<span style=color:#a6e22e>length</span> <span style=color:#f92672>&gt;</span> 0){
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int</span> oldCapacity <span style=color:#f92672>=</span> elementData.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 扩容  扩容方式为将容量增加一半</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int</span> newCapacity <span style=color:#f92672>=</span> oldCapacity <span style=color:#f92672>+</span> (oldCapacity <span style=color:#f92672>&gt;&gt;</span> 1);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (newCapacity <span style=color:#f92672>-</span> minCapacity <span style=color:#f92672>&lt;</span> 0)
+</span></span><span style=display:flex><span>    newCapacity <span style=color:#f92672>=</span> minCapacity;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (newCapacity <span style=color:#f92672>-</span> MAX_ARRAY_SIZE <span style=color:#f92672>&gt;</span> 0)
+</span></span><span style=display:flex><span>    newCapacity <span style=color:#f92672>=</span> hugeCapacity(minCapacity);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// minCapacity is usually close to size, so this is a win:</span>
+</span></span><span style=display:flex><span>  elementData <span style=color:#f92672>=</span> Arrays.<span style=color:#a6e22e>copyOf</span>(elementData, newCapacity);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>使用<code>Arrays.copyOf()</code>方法将<code>elementData</code>重新引用至新的拷贝数组——这一过程去尾</p></li></ul><h4 id=12-迭代器>1.2 迭代器
+<a class=anchor href=#12-%e8%bf%ad%e4%bb%a3%e5%99%a8>#</a></h4><p>集合框架的继承关系图显示，Collection接口继承了 <em>Iterable</em> 接口，这意味着所有的集合实现都<strong>可以使用迭代器</strong>操作集合</p><p>作为使用最广的集合实现，ArrayList可以获取 <em>Iterator</em> 和 <em>ListIterator</em> 的实现，后者继承了前者，在前者的基础上新增了一些用于可逆迭代（ <em>cursor在集合中来回穿梭</em> ）的特性，如<code>previous()</code>，<code>previousIndex()</code>等方法</p><p><img src=/img/Iterator.png alt=JoCR9e.png></p><p style=font-size:.9rem;text-align:center;font-style:italic>迭代器方法表</p><p>下面代码简单展示了迭代器的使用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>iteratorTest</span>() {
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> a <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>() {{
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;apple&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;google&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;amazon&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;cisco&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;facebook&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;twitter&#34;</span>);
+</span></span><span style=display:flex><span>  }};
+</span></span><span style=display:flex><span>  Iterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> iterator <span style=color:#f92672>=</span> a.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>  a.<span style=color:#a6e22e>remove</span>(2);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// throw ConcurrentModificationException</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//        System.out.println(iterator.next());</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 重新获取迭代器，避免上述异常</span>
+</span></span><span style=display:flex><span>  Iterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> newIterator <span style=color:#f92672>=</span> a.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>  newIterator.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Java 8新增方法，迭代剩余元素</span>
+</span></span><span style=display:flex><span>  newIterator.<span style=color:#a6e22e>forEachRemaining</span>(s <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>    s<span style=color:#f92672>=</span> s.<span style=color:#a6e22e>replaceFirst</span>(<span style=color:#e6db74>&#34;g&#34;</span>,<span style=color:#e6db74>&#34;G&#34;</span>);
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(s);
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>cisco
+</span></span></span><span style=display:flex><span><span style=color:#75715e>facebook
+</span></span></span><span style=display:flex><span><span style=color:#75715e>twitter
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>listIteratorTest</span>() {
+</span></span><span style=display:flex><span>  ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> listIterator <span style=color:#f92672>=</span> a.<span style=color:#a6e22e>listIterator</span>();
+</span></span><span style=display:flex><span>  listIterator.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// do not change cursor</span>
+</span></span><span style=display:flex><span>  listIterator.<span style=color:#a6e22e>set</span>(<span style=color:#e6db74>&#34;Apple&#34;</span>);
+</span></span><span style=display:flex><span>  listIterator.<span style=color:#a6e22e>previous</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (listIterator.<span style=color:#a6e22e>hasNext</span>()) {
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(listIterator.<span style=color:#a6e22e>next</span>());
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;-------&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// cursor changed</span>
+</span></span><span style=display:flex><span>  listIterator.<span style=color:#a6e22e>remove</span>();
+</span></span><span style=display:flex><span>  listIterator.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;TWITTER&#34;</span>); <span style=color:#75715e>// cursor in the end</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// reverse output</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (listIterator.<span style=color:#a6e22e>hasPrevious</span>()) {
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(listIterator.<span style=color:#a6e22e>previous</span>());
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Apple
+</span></span></span><span style=display:flex><span><span style=color:#75715e>google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>twitter
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>TWITTER
+</span></span></span><span style=display:flex><span><span style=color:#75715e>google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Apple
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>关于<strong>集合的迭代器</strong><sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>，作如下说明：</p><p>1 当集合和迭代器持有的“计数器”不一致时，迭代器的 <em>ConcurrentModificationException</em> 出现：</p><p>计数器：记录发生集合<strong>结构性变化</strong>的次数，一般指集合元素增删，更新集合元素值一般不会被视作结构性 变化<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>；迭代器也维护一个计数器，此数字初始化为原集合计数器的值</p><p>需要记住的是，迭代器的计数器只能通过迭代器维护（ <em>调用迭代器的add()，remove()等方法会更新计数器</em> ），而集合的计数器却可以通过迭代器和集合维护，亦即通过迭代器更新的计数器会同步更新集合的计数器（ <em>因为迭代器方法也是通过集合方法实现的</em> ）；<strong>反之不亦然</strong>，记住，在获取迭代器之后，在使用<strong>集合而非迭代器</strong>的方法修改集合结构，那么迭代器会发生异常（ <em>2个计数器值不一致</em> ）</p><p>参考ArrayList.Itr.remove()<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>源码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>remove</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (lastRet <span style=color:#f92672>&lt;</span> 0)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalStateException();
+</span></span><span style=display:flex><span>  checkForComodification();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    ArrayList.<span style=color:#a6e22e>this</span>.<span style=color:#a6e22e>remove</span>(lastRet);
+</span></span><span style=display:flex><span>    cursor <span style=color:#f92672>=</span> lastRet;
+</span></span><span style=display:flex><span>    lastRet <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 更新计数器</span>
+</span></span><span style=display:flex><span>    expectedModCount <span style=color:#f92672>=</span> modCount;
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>catch</span> (IndexOutOfBoundsException ex) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ConcurrentModificationException();
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkForComodification</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 一致性检查</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (modCount <span style=color:#f92672>!=</span> expectedModCount)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ConcurrentModificationException();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>2 不论是 <em>Iterator</em> 或 <em>ListIterator</em> 接口在Java集合框架中都没有<strong>独立的实现类</strong>，都是作为<strong>集合具体实现的内部类</strong>存在的，这种机制使得不同的集合类型，拥有“定制”的迭代器类型，这意味着方法表并不是一成不变的，如ArrayList.ListIterator就缺失<code>hasNext()</code>方法</p><p><img src=/img/listIterator_partial.jpg alt=list的迭代器（部分）></p><p style=text-align:center;font-style:italic;font-size:.9rem><span id=llterator>LinkedList</span>(左)和ArrayList(右)内部ListIterator的实现差异</p><p>这种只定义接口<strong>而使用内部类实现</strong>的现象在Java集合框架中非常常见，理解这一点有利于理解<strong>集合视图</strong>( <em><strong>Collection view</strong></em> )，接下来这个概念将多次出现</p><p>按照理论，ListItr实现了ListIterator接口应该覆盖所有方法，Intellij IDEA编译器对于ArrayList的内部类ListItr给出了 <em>method should be defined since the class is not abstract</em>的批注，这或许是Java源码的豁免权</p><p>实际上，ArrayList.ListItr继承了ArrayList.Itr，因此，ListItr缺失的方法由Itr实现了</p><p>3 Java 8的改进</p><p>Java 8 新增的<strong>函数式接口</strong>，在集合框架中得到广泛使用，关于Java 8对集合框架的优化，后文将单独说明</p><p>在迭代器 <em>Iterator</em> 接口中，新增了一个方法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>default</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>forEachRemaining</span>(Consumer<span style=color:#f92672>&lt;?</span> <span style=color:#66d9ef>super</span> E<span style=color:#f92672>&gt;</span> action) {
+</span></span><span style=display:flex><span> Objects.<span style=color:#a6e22e>requireNonNull</span>(action);
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>while</span> (hasNext())
+</span></span><span style=display:flex><span>   action.<span style=color:#a6e22e>accept</span>(next());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这是一
+<a href=/zh/#default_method>默认方法</a>，其接受一个 <em>Consumer</em> 参数，用来对元素执行操作，需要注意的是此迭代器的指针( <em>cursor</em> )并不是0，而是当前实际的指针，亦即此法用于<strong>迭代还未被此迭代器迭代的元素</strong></p><h4 id=13-sublist>1.3 SubList
+<a class=anchor href=#13-sublist>#</a></h4><p>SubList是ArrayList的内部类，是方法<code>subList(int fromIndex, int toIndex)</code>的返回对象，也就是说，ArrayList.subList()的返回<strong>不是一个ArrayList实例</strong>，而是一个<strong>视图</strong></p><p>所谓<strong>集合视图</strong>，可以通俗的理解为集合的内部类<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>，如此Sublist，其一个主要的特点是<strong>可以更改原集合</strong>（作用可以理解为原集合的一个代理）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SubList</span> <span style=color:#66d9ef>extends</span> AbstractList<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> RandomAccess {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//...</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>SubList可以看作一个"类ArrayList"，方法也有很多共性，而往往只需要注意差异即可</p><p>参考下例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>subListTest</span>(){
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> a <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>() {{
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;apple&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;google&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;amazon&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;cisco&#34;</span>);
+</span></span><span style=display:flex><span>  }};
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> strings <span style=color:#f92672>=</span> a.<span style=color:#a6e22e>subList</span>(1, 2); <span style=color:#75715e>// [google]</span>
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Is subList instance of ArrayList? &#34;</span>
+</span></span><span style=display:flex><span>                     <span style=color:#f92672>+</span> (strings <span style=color:#66d9ef>instanceof</span> ArrayList)
+</span></span><span style=display:flex><span>                     <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\n-------&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// a.add(&#34;Java&#34;) // ERROR! cause ConcurrentModificationException for subList</span>
+</span></span><span style=display:flex><span>  ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> subIterator <span style=color:#f92672>=</span> strings.<span style=color:#a6e22e>listIterator</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (subIterator.<span style=color:#a6e22e>hasNext</span>()){
+</span></span><span style=display:flex><span>    subIterator.<span style=color:#a6e22e>set</span>(subIterator.<span style=color:#a6e22e>next</span>().<span style=color:#a6e22e>toUpperCase</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; revised by subList&#34;</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 增加元素</span>
+</span></span><span style=display:flex><span>  subIterator.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;foobar added by subList&#34;</span>);
+</span></span><span style=display:flex><span>  a.<span style=color:#a6e22e>forEach</span>(System.<span style=color:#a6e22e>out</span>::println);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 删除子集，父集也删除元素</span>
+</span></span><span style=display:flex><span>  strings.<span style=color:#a6e22e>clear</span>();
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;-------&#34;</span>);
+</span></span><span style=display:flex><span>  a.<span style=color:#a6e22e>forEach</span>(System.<span style=color:#a6e22e>out</span>::println);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Is subList instance of ArrayList? false
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>apple
+</span></span></span><span style=display:flex><span><span style=color:#75715e>GOOGLE revised by subList
+</span></span></span><span style=display:flex><span><span style=color:#75715e>foobar added by subList
+</span></span></span><span style=display:flex><span><span style=color:#75715e>amazon
+</span></span></span><span style=display:flex><span><span style=color:#75715e>cisco
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>apple
+</span></span></span><span style=display:flex><span><span style=color:#75715e>amazon
+</span></span></span><span style=display:flex><span><span style=color:#75715e>cisco
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>之所以将其称为<strong>视图</strong>，一个很重要的原因就是，这个类所有<strong>有利数据</strong>全部来自外围类(ArrayList)，其能够修改外围类的能力来自于<strong>直接对外围类方法的调用</strong><sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> index, E e) {
+</span></span><span style=display:flex><span>  rangeCheckForAdd(index);
+</span></span><span style=display:flex><span>  checkForComodification();
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 实际上调用的就是外围类的方法</span>
+</span></span><span style=display:flex><span>  parent.<span style=color:#a6e22e>add</span>(parentOffset <span style=color:#f92672>+</span> index, e);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>modCount</span> <span style=color:#f92672>=</span> parent.<span style=color:#a6e22e>modCount</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>size</span><span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>实际上，可以将SubList理解为ArrayList实用工具的巧妙封装</p><blockquote><p>和迭代器一样，获取SubList之后，对原集合进行结构性改变，也会引起<em>ConcurrentModificationException</em></p></blockquote><h4 id=14-插入与删除>1.4 插入与删除
+<a class=anchor href=#14-%e6%8f%92%e5%85%a5%e4%b8%8e%e5%88%a0%e9%99%a4>#</a></h4><p>前文提到，尽管ArrayList因实现了Random接口而具有很好的随机读取性，ArrayList也有一些缺点，比如<strong>差强人意的插入和删除</strong></p><p>ArrayList方法：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> index, E e) {...}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> E <span style=color:#a6e22e>remove</span>(<span style=color:#66d9ef>int</span> index) {...}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>remove</span>(Object o) {...}
+</span></span><span style=display:flex><span>...
+</span></span></code></pre></div><p>实现了从插入集合到指定索引为止或从集合中删除（指定索引）元素，但这些操作并不是ArrayList的强项，拿<code>add(int index, E e)</code>为例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> index, E element) {
+</span></span><span style=display:flex><span>  rangeCheckForAdd(index);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  ensureCapacityInternal(size <span style=color:#f92672>+</span> 1);  <span style=color:#75715e>// Increments modCount!!</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 拷贝数组--实际上是将数组index位置以后的所有元素”后移一位“</span>
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>arraycopy</span>(elementData, index, elementData, index <span style=color:#f92672>+</span> 1,
+</span></span><span style=display:flex><span>                   size <span style=color:#f92672>-</span> index);
+</span></span><span style=display:flex><span>  elementData<span style=color:#f92672>[</span>index<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> element;
+</span></span><span style=display:flex><span>  size<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>同理，从ArrayList的删除相关方法中也可以看到类似的操作，这意味着在操作大量数据的时候，ArrayList可能会遇到性能问题。在对象数组长度很小时，这种影响一般可以忽略</p><h3 id=2-linkedlist>2 LinkedList
+<a class=anchor href=#2-linkedlist>#</a></h3><p>LinkedList是基于<strong>双向链表</strong>实现的有序集合，<del>其不能像ArrayList一样通过索引(<em>index</em>)访问元素</del>，同时LinkedList还实现了Deque接口，意味着LinkedList可以<strong>实现双端队列的操作</strong></p><p><img src=/img/LinkedList.png alt=JIv7Ae.png></p><p style=text-align:center;font-style:italic;font-size:.9rem>LinkedList继承关系图</p><p>链表将每个对象存放在独立的节点(Node)中，节点中还保存对序列中前、后节点的引用。理论上，LinkedList<strong>没有容量限制</strong></p><p><img src=/img/doubly-linked_list.png alt=J4sq7d.png></p><p style=text-align:center;font-style:italic;font-size:.9rem>LinkedList的基本数据结构<sup>  from Core Java</sup></p><h4 id=21-node>2.1 Node
+<a class=anchor href=#21-node>#</a></h4><p><strong>Node</strong>（节点）是LinkedList的存储载体，每向LinkedList中增加/删除一个元素，就会增加/减少一个Node，Node定义了3个字段，其含义分别是：</p><blockquote><p>E item：存入LinkedList的内容</p><p>Node&lt;E> prev：前一个节点的引用</p><p>Node&lt;E> next：后一个节点的引用</p></blockquote><p>结合LinkedList的字段来看，LinkedList定义了两个个Node相关的引用：</p><blockquote><p>transient Node&lt;E> first：总是指向LinkedList的第一个节点</p><p>transient Node&lt;E> last：总是指向LinkedList的最后一个节点</p></blockquote><p>LinkedList有如下规律：</p><ol><li><code>first.prev</code>总是为null</li><li><code>last.next</code>总是为null</li><li>当LinkedList只有一个元素时，<code>first == last</code></li></ol><p>下面的代码验证了上述推论：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>initializeTest</span>() <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> a <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> LinkedList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>  a.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;google&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//        a.add(&#34;chrome&#34;);</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//        a.add(&#34;photos&#34;);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  Class<span style=color:#f92672>&lt;?&gt;</span> cls <span style=color:#f92672>=</span> LinkedList.<span style=color:#a6e22e>class</span>;
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// LinkedList field</span>
+</span></span><span style=display:flex><span>  Field ff <span style=color:#f92672>=</span> cls.<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;first&#34;</span>);
+</span></span><span style=display:flex><span>  Field lf <span style=color:#f92672>=</span> cls.<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;last&#34;</span>);
+</span></span><span style=display:flex><span>  ff.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  lf.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  Object first <span style=color:#f92672>=</span>  ff.<span style=color:#a6e22e>get</span>(a);
+</span></span><span style=display:flex><span>  Object last <span style=color:#f92672>=</span> lf.<span style=color:#a6e22e>get</span>(a);
+</span></span><span style=display:flex><span>  Class<span style=color:#f92672>&lt;?&gt;</span> node <span style=color:#f92672>=</span> Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;java.util.LinkedList$Node&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// LinkedList$Node field</span>
+</span></span><span style=display:flex><span>  Field item <span style=color:#f92672>=</span> node.<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;item&#34;</span>);
+</span></span><span style=display:flex><span>  Field next <span style=color:#f92672>=</span> node.<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;next&#34;</span>);
+</span></span><span style=display:flex><span>  Field prev <span style=color:#f92672>=</span> node.<span style=color:#a6e22e>getDeclaredField</span>(<span style=color:#e6db74>&#34;prev&#34;</span>);
+</span></span><span style=display:flex><span>  item.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  next.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  prev.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// first</span>
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;first: &#34;</span> <span style=color:#f92672>+</span> first);
+</span></span><span style=display:flex><span>  Object firstItem <span style=color:#f92672>=</span> item.<span style=color:#a6e22e>get</span>(first);
+</span></span><span style=display:flex><span>  Object firstPrev <span style=color:#f92672>=</span> prev.<span style=color:#a6e22e>get</span>(first); <span style=color:#75715e>// Node</span>
+</span></span><span style=display:flex><span>  Object firstNext <span style=color:#f92672>=</span> next.<span style=color:#a6e22e>get</span>(first); <span style=color:#75715e>// Node</span>
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;\t&#34;</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;item: &#34;</span> <span style=color:#f92672>+</span> firstItem <span style=color:#f92672>+</span><span style=color:#e6db74>&#34;\n\t&#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>                     <span style=color:#e6db74>&#34;prev: &#34;</span> <span style=color:#f92672>+</span> firstPrev <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\n\t&#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>                     <span style=color:#e6db74>&#34;next: &#34;</span> <span style=color:#f92672>+</span> firstNext <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\n&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// last</span>
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;last: &#34;</span> <span style=color:#f92672>+</span> last);
+</span></span><span style=display:flex><span>  Object lastItem <span style=color:#f92672>=</span> item.<span style=color:#a6e22e>get</span>(last);
+</span></span><span style=display:flex><span>  Object lastPrev <span style=color:#f92672>=</span> prev.<span style=color:#a6e22e>get</span>(last);
+</span></span><span style=display:flex><span>  Object lastNext <span style=color:#f92672>=</span> next.<span style=color:#a6e22e>get</span>(last);
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;\t&#34;</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;item: &#34;</span> <span style=color:#f92672>+</span> lastItem <span style=color:#f92672>+</span><span style=color:#e6db74>&#34;\n\t&#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>                     <span style=color:#e6db74>&#34;prev: &#34;</span> <span style=color:#f92672>+</span> lastPrev <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;\n\t&#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>                     <span style=color:#e6db74>&#34;next: &#34;</span> <span style=color:#f92672>+</span> lastNext);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>first: java.util.LinkedList$Node@512ddf17
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	item: google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	prev: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	next: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>last: java.util.LinkedList$Node@512ddf17
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	item: google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	prev: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	next: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// 当有3个元素时，first的next == last的prev
+</span></span></span><span style=display:flex><span><span style=color:#75715e>first: java.util.LinkedList$Node@512ddf17
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	item: google
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	prev: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	next: java.util.LinkedList$Node@2c13da15
+</span></span></span><span style=display:flex><span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>last: java.util.LinkedList$Node@77556fd
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	item: photos
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	prev: java.util.LinkedList$Node@2c13da15
+</span></span></span><span style=display:flex><span><span style=color:#75715e>	next: null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>利用Node，对链表中的元素的删除和插入操作将变得便利，只需要同时修改自身及前后节点的引用即可将元素置入链中</p><p>参考如下源码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * Inserts element e before non-null Node succ.
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>linkBefore</span>(E e, Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> succ) {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// assert succ != null;</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>final</span> Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> pred <span style=color:#f92672>=</span> succ.<span style=color:#a6e22e>prev</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>final</span> Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> newNode <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Node<span style=color:#f92672>&lt;&gt;</span>(pred, e, succ);
+</span></span><span style=display:flex><span>  succ.<span style=color:#a6e22e>prev</span> <span style=color:#f92672>=</span> newNode;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (pred <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>    first <span style=color:#f92672>=</span> newNode;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>    pred.<span style=color:#a6e22e>next</span> <span style=color:#f92672>=</span> newNode;
+</span></span><span style=display:flex><span>  size<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>  modCount<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上述源码解释了如何将一个新的元素插入到链表中</p><h4 id=22-迭代器>2.2 迭代器
+<a class=anchor href=#22-%e8%bf%ad%e4%bb%a3%e5%99%a8>#</a></h4><p>LinkedList没有 <em>Iterator</em> 的实现，只有 <em>ListIterator</em> 的实现，里面定义了相当充分的
+<a href=/zh/#llterator>操作元素的方法</a>，由于LinkedList也是List的实现类，故也可调用接口定义的<code>iterator()</code>方法<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup>，不过其实际上返回的是 <em>LinkedList.ListIterator</em> 实例</p><p><img src=/img/LinkedList%e8%b0%83%e7%94%a8iterator%e7%9a%84%e6%97%b6%e5%ba%8f%e5%9b%be.png alt=JoCYkT.png></p><p style=font-size:.9rem;font-style:italic;text-align:center>LinkedList调用iterator()的时序图</p><p>尽管如此，由于使用<code>LinkedList.iterator()</code>方法返回的是Iterator，其对集合的操作性降低到只有4个方法。由于我们知道其实际返回的是Listiterator，我们可以将该返回值<strong>向下转型</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> i <span style=color:#f92672>=</span> (ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>) list.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于</span>
+</span></span><span style=display:flex><span>ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> listIterator <span style=color:#f92672>=</span> list.<span style=color:#a6e22e>listIterator</span>();
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于</span>
+</span></span><span style=display:flex><span>ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> listIterator1 <span style=color:#f92672>=</span> list.<span style=color:#a6e22e>listIterator</span>(0);
+</span></span></code></pre></div><p>参考如下示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>iteratorTest</span>(){
+</span></span><span style=display:flex><span>  List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> list <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> LinkedList<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>(){{
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;Java&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;Python&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;JavaScript&#34;</span>);
+</span></span><span style=display:flex><span>    add(<span style=color:#e6db74>&#34;C&#34;</span>);
+</span></span><span style=display:flex><span>  }};
+</span></span><span style=display:flex><span>  ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> i <span style=color:#f92672>=</span> (ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>) list.<span style=color:#a6e22e>iterator</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (i.<span style=color:#a6e22e>hasNext</span>()){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (i.<span style=color:#a6e22e>next</span>().<span style=color:#a6e22e>equals</span>(<span style=color:#e6db74>&#34;JavaScript&#34;</span>)){
+</span></span><span style=display:flex><span>      i.<span style=color:#a6e22e>set</span>(<span style=color:#e6db74>&#34;JS&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  i.<span style=color:#a6e22e>remove</span>();
+</span></span><span style=display:flex><span>  i.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;C++&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 反向迭代</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>while</span> (i.<span style=color:#a6e22e>hasPrevious</span>()){
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(i.<span style=color:#a6e22e>previous</span>());
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;-------&#34;</span>);
+</span></span><span style=display:flex><span>  ListIterator<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> iterator <span style=color:#f92672>=</span> list.<span style=color:#a6e22e>listIterator</span>(2);
+</span></span><span style=display:flex><span>  iterator.<span style=color:#a6e22e>forEachRemaining</span>(System.<span style=color:#a6e22e>out</span>::println);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>C++
+</span></span></span><span style=display:flex><span><span style=color:#75715e>JS
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Python
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Java
+</span></span></span><span style=display:flex><span><span style=color:#75715e>-------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>JS
+</span></span></span><span style=display:flex><span><span style=color:#75715e>C++
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><blockquote><p>ListIterator&lt;E> listIterator(int index);</p><p>此方法用于获取 <em>index</em> （含）之后的元素的迭代器</p></blockquote><h4 id=23-对比arraylist>2.3 对比ArrayList
+<a class=anchor href=#23-%e5%af%b9%e6%af%94arraylist>#</a></h4><p>ArrayList的优势在于可以利用 <em>index</em> 快速访问集合中的元素，劣势在于对于容量大的集合，插入和删除的效率稍低</p><p>LinkedList基于链表，<del>插入和删除操作效率高</del><sup>并不总这样</sup>；但由于没有元素索引( <em>index</em> )，使用<code>get(int index)</code>和<code>set(int index , E e)</code>的效率稍低<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup></p><p>在LinkedList中，和索引相关的操作有：</p><blockquote><p>public E get(int index)</p><p>public E set(int index, E element)</p><p>public void add(int index, E element)</p><p>public E remove(int index)</p><p>public int indexOf(Object o) 获取对象首次出现的位置</p><p>public int lastIndexOf(Object o) 获取对象最后出现的位置</p></blockquote><p>除了<code>indexOf</code>和<code>lastIndexOf</code>方法之外，其他的四个方法的实现都和这个方法有关：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> index, E element) {
+</span></span><span style=display:flex><span>  checkPositionIndex(index);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (index <span style=color:#f92672>==</span> size)
+</span></span><span style=display:flex><span>    linkLast(element);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>    linkBefore(element, node(index));
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * Returns the (non-null) Node at the specified element index.
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span>Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>node</span>(<span style=color:#66d9ef>int</span> index) {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// assert isElementIndex(index);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (index <span style=color:#f92672>&lt;</span> (size <span style=color:#f92672>&gt;&gt;</span> 1)) {
+</span></span><span style=display:flex><span>    Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> x <span style=color:#f92672>=</span> first;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> index; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>      x <span style=color:#f92672>=</span> x.<span style=color:#a6e22e>next</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>    Node<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;</span> x <span style=color:#f92672>=</span> last;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> size <span style=color:#f92672>-</span> 1; i <span style=color:#f92672>&gt;</span> index; i<span style=color:#f92672>--</span>)
+</span></span><span style=display:flex><span>      x <span style=color:#f92672>=</span> x.<span style=color:#a6e22e>prev</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>可以看到，<code>node(int index)</code><strong>总是从头/尾开始逐一遍历</strong>，当集合较大时，这种操作的效率是很低的</p><p>既然如此，LinkedList<strong>插入和删除的效率如何高</strong>呢？答案就是<strong>使用迭代器</strong>，由于迭代器持有指针(<em>cursor</em>)，<strong>免去了遍历集合获取节点的时间消耗</strong>，因而插入和删除只需要修改前后节点的引用即可：</p><p><img src=/img/linkedlist_remove.jpg alt=JTEuRK.png></p><p style=text-align:center;font-size:.9rem;font-style:italic>从LinkedList删除一个元素<sup> from Core Java</sup></sup></p><blockquote><p>所以，不要在LinkedList中使用带有索引(<em>index</em>)参数的操作，这会大大降低程序的运行效率，若要使用索引，请使用ArrayList</p></blockquote><h4 id=24-作为双端队列>2.4 作为双端队列
+<a class=anchor href=#24-%e4%bd%9c%e4%b8%ba%e5%8f%8c%e7%ab%af%e9%98%9f%e5%88%97>#</a></h4><p>LinkedList除了实现了List接口之外，还实现了Deque接口，也就是说，<strong>LinkedList还是一个双端队列</strong>，具体请参照
+<a href=../queue/>Queue—Java集合框架系列之二</a></p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>这种情况在获取集合视图(Collection view)时经常出现&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>集合框架所有迭代器都是如此&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>这一论点的普适性有待验证&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>这只是一种表述形式，实际上ArrayList的迭代器是私有内部类，无法使用该语法访问，下同&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>是否一直如此？集合框架中的视图（子集、键集、条目映射、Collections视图等等）都是基于基本接口的内部类实现&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6><p>SubList并没有集合视图的共性，其操作集合的方法是独特的；它被称为集合视图的原因是其不是标准的Java集合框架成员&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:7><p>这和ArrayList的ListIterator没有实现<code>hasNext()</code>一样，实际上也是可以使用的(接口动态绑定超类方法)，这种情况在集合框架中很常见&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:8><p>LinkedList使用和索引相关的操作get()/set()/add()/remove()的效率是一致的&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/fdef4460000d54a11a8a9097f6f4db7f2f7676e2 title='最后修改者 wangy325 | 六月 19, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>六月 19, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#list列表>List列表</a><ul><li><a href=#list>List</a><ul><li><a href=#1-arraylist>1 ArrayList</a><ul><li><a href=#11-初始化及扩容机制>1.1 初始化及扩容机制</a></li><li><a href=#12-迭代器>1.2 迭代器</a></li><li><a href=#13-sublist>1.3 SubList</a></li><li><a href=#14-插入与删除>1.4 插入与删除</a></li></ul></li><li><a href=#2-linkedlist>2 LinkedList</a><ul><li><a href=#21-node>2.1 Node</a></li><li><a href=#22-迭代器>2.2 迭代器</a></li><li><a href=#23-对比arraylist>2.3 对比ArrayList</a></li><li><a href=#24-作为双端队列>2.4 作为双端队列</a></li></ul></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

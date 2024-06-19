@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>结构型 on Endless River</title><link>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/</link><description>Recent content in 结构型 on Endless River</description><generator>Hugo</generator><language>zh</language><atom:link href="https://wangy325.github.io/zh/docs/utility/design_pattern/structure/index.xml" rel="self" type="application/rss+xml"/><item><title>装饰者模式</title><link>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/3_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/3_decorator/</guid><description>&lt;h2 id="装饰者模式">
+ 装饰者模式
+ &lt;a class="anchor" href="#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>by Head First 设计模式:&lt;/p>
+&lt;blockquote>
+&lt;p>动态地将责任附加到对象上。若要拓展功能，装饰者模式提供了比继承更有弹性的替代方案。&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;li>
+&lt;p>by Dive into Design Patterns:&lt;/p>
+&lt;blockquote>
+&lt;p>Also known as &lt;em>Wrapper&lt;/em>&lt;/p>
+&lt;p>Decorator is a structural design pattern that lets you attach new behaviors
+to objects by placing these objects inside special wrapper objects that
+contain the behaviors.&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/2_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/2_adaptor/</guid><description>&lt;h2 id="适配器模式">
+ 适配器模式
+ &lt;a class="anchor" href="#%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#&lt;/a>
+&lt;/h2>
+&lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
+适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="外观模式facade">
+ 外观模式（Facade）
+ &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
+&lt;/h2>
+&lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
+系统中的一群接口。外观定义了一个高层接口，让系统更
+容易使用。&lt;/p></description></item><item><title>代理模式</title><link>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/proxy/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/design_pattern/structure/proxy/</guid><description>&lt;p>代理可以简单理解为，B类托管A类的功能，并根据需求，对A类的访问作&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>，这里的&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>可以理解为对A类方法执行的流程的影响，包括但不限于：&lt;/p></description></item></channel></rss>

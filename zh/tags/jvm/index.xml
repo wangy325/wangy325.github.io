@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jvm on Endless River</title><link>https://wangy325.github.io/zh/tags/jvm/</link><description>Recent content in Jvm on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 19 Jun 2024 21:14:32 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/tags/jvm/index.xml" rel="self" type="application/rss+xml"/><item><title>Java内存区域详解(转)</title><link>https://wangy325.github.io/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
+&lt;p>如果没有特殊说明，都是针对的是 HotSpot 虚拟机。&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;h1 id="1-概述">
+ 1 概述
+ &lt;a class="anchor" href="#1-%e6%a6%82%e8%bf%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free 操作，不容易出现内存泄漏和内存溢出问题。正是因为 Java 程序员把内存控制权利交给 Java 虚拟机，一旦出现内存泄漏和溢出方面的问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会是一个非常艰巨的任务。&lt;/p></description></item><item><title>JVM垃圾回收概要(转)</title><link>https://wangy325.github.io/zh/docs/java/jvm/java-gc/</link><pubDate>Wed, 25 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/jvm/java-gc/</guid><description>&lt;h2 id="本节常见面试题">
+ 本节常见面试题
+ &lt;a class="anchor" href="#%e6%9c%ac%e8%8a%82%e5%b8%b8%e8%a7%81%e9%9d%a2%e8%af%95%e9%a2%98">#&lt;/a>
+&lt;/h2>
+&lt;p>问题答案在文中都有提到&lt;/p>
+&lt;ul>
+&lt;li>如何判断对象是否死亡（两种方法）。&lt;/li>
+&lt;li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。&lt;/li>
+&lt;li>如何判断一个常量是废弃常量&lt;/li>
+&lt;li>如何判断一个类是无用的类&lt;/li>
+&lt;li>垃圾收集有哪些算法，各自的特点？&lt;/li>
+&lt;li>HotSpot 为什么要分为新生代和老年代？&lt;/li>
+&lt;li>常见的垃圾回收器有哪些？&lt;/li>
+&lt;li>介绍一下 CMS,G1 收集器。&lt;/li>
+&lt;li>Minor Gc 和 Full GC 有什么不同呢？&lt;/li>
+&lt;/ul></description></item></channel></rss>

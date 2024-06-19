@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>redis on Endless River</title><link>https://wangy325.github.io/zh/docs/utility/db/redis/</link><description>Recent content in redis on Endless River</description><generator>Hugo</generator><language>zh</language><atom:link href="https://wangy325.github.io/zh/docs/utility/db/redis/index.xml" rel="self" type="application/rss+xml"/><item><title>redis必知必会(转)</title><link>https://wangy325.github.io/zh/docs/utility/db/redis/redis-all/</link><pubDate>Tue, 24 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/db/redis/redis-all/</guid><description>&lt;p>简单来说 &lt;strong>Redis 就是一个使用 C 语言开发的数据库&lt;/strong>，不过与传统数据库不同的是 &lt;strong>Redis 的数据是存在内存中的&lt;/strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。&lt;/p></description></item><item><title>Redis Sentinel高可用实现</title><link>https://wangy325.github.io/zh/docs/utility/db/redis/build-redis-sentinel/</link><pubDate>Wed, 14 Aug 2019 16:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh/docs/utility/db/redis/build-redis-sentinel/</guid><description>&lt;p>Redis 
+ &lt;a href="https://raw.githubusercontent.com/antirez/redis/2.8/00-RELEASENOTES">v2.8&lt;/a> 之后提供了高可用实现&lt;code>Redis Sentinel&lt;/code>，实现了&lt;strong>主从复制&lt;/strong>以及&lt;del>被动&lt;/del>&lt;strong>主备切换&lt;/strong>。
+ &lt;a href="https://raw.githubusercontent.com/antirez/redis/3.0/00-RELEASENOTES">v3.0&lt;/a> 之后提供了分布式实现&lt;code>Redis Cluster&lt;/code>。&lt;/p>
+&lt;p>本文讨论的是使用Sentinel搭建Redis高可用服务。&lt;/p>
+&lt;blockquote>
+&lt;p>If all redis and sentinel instances were deployed in same host, you just build a fake redis-sentinel &lt;em>High-Availability&lt;/em> environment&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>.&lt;/p>
+&lt;/blockquote></description></item><item><title>使用docker镜像快速搭建redis集群开发环境</title><link>https://wangy325.github.io/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/</link><pubDate>Thu, 25 Aug 2022 16:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/</guid><description>&lt;h2 id="准备镜像">
+ 准备镜像
+ &lt;a class="anchor" href="#%e5%87%86%e5%a4%87%e9%95%9c%e5%83%8f">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;code>docker&lt;/code>以及&lt;code>docker-compose&lt;/code>的安装以及加速镜像的配置不在此处说明。windows系统上直接安装客户端即可完成docker及docker-compose的安装。在centOS 8中安装docker服务以及docker-compose可以参考下面的文章：&lt;/p>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://zhuanlan.zhihu.com/p/286845061">在centOS 8中安装docker&lt;/a>&lt;/li>
+&lt;li>
+ &lt;a href="https://www.cnblogs.com/51ma/p/15641138.html">在contOS 8中安装docker-compose&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>运行如下命令检查docker和docker-compose的安装情况：&lt;/p></description></item><item><title>布隆过滤器(转)</title><link>https://wangy325.github.io/zh/docs/utility/db/redis/bloom-filter/</link><pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/db/redis/bloom-filter/</guid><description>&lt;p>海量数据处理以及缓存穿透这两个场景让我认识了 布隆过滤器 ，我查阅了一些资料来了解它，但是很多现成资料并不满足我的需求，所以就决定自己总结一篇关于布隆过滤器的文章。希望通过这篇文章让更多人了解布隆过滤器，并且会实际去使用它！&lt;/p>
+&lt;p>下面我们将分为几个方面来介绍布隆过滤器：&lt;/p>
+&lt;ol>
+&lt;li>什么是布隆过滤器？&lt;/li>
+&lt;li>布隆过滤器的原理介绍。&lt;/li>
+&lt;li>布隆过滤器使用场景。&lt;/li>
+&lt;li>通过 Java 编程手动实现布隆过滤器。&lt;/li>
+&lt;li>利用Google开源的Guava中自带的布隆过滤器。&lt;/li>
+&lt;li>Redis 中的布隆过滤器。&lt;/li>
+&lt;/ol></description></item></channel></rss>

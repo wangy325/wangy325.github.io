@@ -1,0 +1,869 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  资源访问受限
+  #
+
+
+在
+  线程与任务文中，虽然创建了多线程，并且线程之间出现了一些不可预测的CPU调度，但是由于线程之间是相互隔离的——线程没有访问共同的资源，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。
+
+实际上，上篇文章通过join()方法演示了一种安全访问共享资源的方法。
+
+考虑一种情况，如果多个线程访问同一资源，并对资源内容进行修改，会发生什么情况？
+对于非原子性操作，多线程下会出现竞争条件。例如，对于操作accounts[to] += amount，可以被拆分为多个CPU指令：
+
+加载accounts[to]到寄存器
+增加amount
+将结果写回acounts[to]
+
+上述3个步骤中，线程执行到任一步骤时都可能被剥夺运行权。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="资源访问受限"><meta property="og:description" content=" 资源访问受限 # 在 线程与任务文中，虽然创建了多线程，并且线程之间出现了一些不可预测的CPU调度，但是由于线程之间是相互隔离的——线程没有访问共同的资源，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。
+实际上，上篇文章通过join()方法演示了一种安全访问共享资源的方法。
+考虑一种情况，如果多个线程访问同一资源，并对资源内容进行修改，会发生什么情况？
+对于非原子性操作，多线程下会出现竞争条件。例如，对于操作accounts[to] += amount，可以被拆分为多个CPU指令：
+加载accounts[to]到寄存器 增加amount 将结果写回acounts[to] 上述3个步骤中，线程执行到任一步骤时都可能被剥夺运行权。"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-05-20T00:00:00+00:00"><meta property="article:modified_time" content="2020-05-20T00:00:00+00:00"><meta property="article:tag" content="Concurrency"><title>资源访问受限 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle checked>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/ class=active>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>资源访问受限</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#资源访问受限>资源访问受限</a><ul><li><a href=#1-引例>1 引例</a></li><li><a href=#2-可重入锁>2 可重入锁</a><ul><li><a href=#21-span-idcondition条件span>2.1 <span id=condition>条件</span></a></li></ul></li><li><a href=#3-synchronized关键字>3 synchronized关键字</a><ul><li><a href=#31-同步方法>3.1 同步方法</a></li><li><a href=#32-同步代码块>3.2 同步代码块</a></li><li><a href=#33-如何使用同步>3.3 如何使用同步</a><ul><li><a href=#31-在资源上同步>3.1 在资源上同步</a></li><li><a href=#32-在任务上同步>3.2 在任务上同步</a></li><li><a href=#33-建议>3.3 建议</a></li></ul></li></ul></li><li><a href=#4-原子性与原子类>4 原子性与原子类</a><ul><li><a href=#41-原子性的误用>4.1 原子性的误用</a></li><li><a href=#42-谨慎使用原子类>4.2 谨慎使用原子类</a></li></ul></li><li><a href=#5-可见性volatile>5 可见性（volatile）</a></li><li><a href=#6-临界区>6 临界区</a></li><li><a href=#7-线程本地存储>7 线程本地存储</a></li><li><a href=#8-再论object超类>8 再论Object超类</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=资源访问受限>资源访问受限
+<a class=anchor href=#%e8%b5%84%e6%ba%90%e8%ae%bf%e9%97%ae%e5%8f%97%e9%99%90>#</a></h1><hr><p>在
+<a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a>文中，虽然创建了多线程，并且线程之间出现了一些<strong>不可预测</strong>的CPU调度，但是由于线程之间是<strong>相互隔离</strong>的——<strong>线程没有访问共同的资源</strong>，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。</p><blockquote><p>实际上，上篇文章通过<code>join()</code>方法演示了一种安全访问共享资源的方法。</p></blockquote><p>考虑一种情况，如果<strong>多个线程访问同一资源</strong>，并对资源内容进行修改，会发生什么情况？</p><p>对于<strong>非原子性</strong>操作，多线程下会出现<strong>竞争条件</strong>。例如，对于操作<code>accounts[to] += amount</code>，可以被拆分为多个CPU指令：</p><ol><li>加载accounts[to]到寄存器</li><li>增加amount</li><li>将结果写回acounts[to]</li></ol><p>上述3个步骤中，线程执行到<strong>任一步骤</strong>时都可能被剥夺运行权。</p><h2 id=1-引例>1 引例
+<a class=anchor href=#1-%e5%bc%95%e4%be%8b>#</a></h2><p>考虑一个经典的“转账”示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UnsynchronizedTransfer</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>double</span> INITIAL_MONEY <span style=color:#f92672>=</span> 1000;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> ACCOUNTS <span style=color:#f92672>=</span> 100;
+</span></span><span style=display:flex><span>        Bank bank <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Bank(ACCOUNTS, INITIAL_MONEY);
+</span></span><span style=display:flex><span>				<span style=color:#75715e>// 可以增加循环次数观察“出错”的概率提升</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 2; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>          	<span style=color:#75715e>// 多个线程使用同一个bank资源</span>
+</span></span><span style=display:flex><span>            Thread t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> TransferTask(bank));
+</span></span><span style=display:flex><span>            t.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransferTask</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Bank bank;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> size;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>double</span> maxAmount <span style=color:#f92672>=</span> 1000;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TransferTask</span>(Bank bank) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>bank</span> <span style=color:#f92672>=</span> bank;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> bank.<span style=color:#a6e22e>size</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> from <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>());
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> to <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>());
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>double</span> amount <span style=color:#f92672>=</span> maxAmount <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>();
+</span></span><span style=display:flex><span>                bank.<span style=color:#a6e22e>transfer</span>(from, to, amount);
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>sleep</span>((<span style=color:#66d9ef>long</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>()));
+</span></span><span style=display:flex><span>            }<span style=color:#66d9ef>catch</span> (InterruptedException e){
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// e.printStackTrace();</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Bank</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[]</span> accounts;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Bank</span>(<span style=color:#66d9ef>int</span> accountCount, <span style=color:#66d9ef>double</span> money) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// initialize bank account</span>
+</span></span><span style=display:flex><span>            accounts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[</span>accountCount<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            Arrays.<span style=color:#a6e22e>fill</span>(accounts, money);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>&lt;</span> amount) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>            accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>-=</span> amount;
+</span></span><span style=display:flex><span>          	<span style=color:#75715e>// 这句打印语句增加了调度器剥夺线程运行权的风险</span>
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>            accounts<span style=color:#f92672>[</span>to<span style=color:#f92672>]</span> <span style=color:#f92672>+=</span> amount;
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                amount,
+</span></span><span style=display:flex><span>                from,
+</span></span><span style=display:flex><span>                to,
+</span></span><span style=display:flex><span>                totalBalance());
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>totalBalance</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>double</span> sum <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>double</span> a : accounts) {
+</span></span><span style=display:flex><span>                sum <span style=color:#f92672>+=</span> a;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> sum;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>size</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> accounts.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output（sample）:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-1,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-1,5,main]:     217.65 from 30 to 20, Total Balance:   99445.52
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main]:     554.48 from 55 to 53, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//：～</span>
+</span></span></code></pre></div><p>上例中，使用多个线程访问了Bank类的资源，在Bank类的transfer()方法中，额外增加了一句控制台输出，这是为了增加线程被调度的可能性<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> （如果注释这句，会发现程序异常的概率会变小）。Bank类初始化时分配100个“账户”，每个账户1000元，然后不断转账，观察所有账户总额的变化。</p><p>仔细观察输出（循环2次，出现的概率较小），我们看到:</p><ol><li><p>线程1在输出 <em>move away</em> 之后被剥夺运行权；</p></li><li><p>接着线程0在 <em>move away</em> 之后也被剥夺运行权；</p></li><li><p>线程1继续运行，此时问题就出现了，总金额不是100000：</p><p>在计算总额时，线程1获取账户55的余额时少了554.48元，这正是第2步中线程0的<code>accounts[from] -= amount</code>将账户55的余额减少的金额。</p></li></ol><p>实际上CPU的调度过程比上述分析复杂得多，在Bank类的transfer()方法中，<strong>每一行代码在运行时都可能被剥夺运行权</strong>，值得一提的是，上例输出操作的还不是相同的“账户”，若是操作同样的“账户”，情况将变得更复杂。</p><p>所以说线程不安全是一种<strong>不确定性</strong>，在有限的线程时，它可能发生也可能不发生，比如main()方法里只循环1次时就不会发生，循环100次就极大概率会发生。并发编程就是要<strong>消除这种不确定性</strong>。</p><p><span id=evenGenerator>接下来的示例</span>，演示一个生成偶数的工具类，在多线程条件下调用生成偶数的方法并加以判断，若发现不是偶数则退出程序：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UnSynchronizedEvenGenerator</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;press Ctrl-C to exit&#34;</span>);
+</span></span><span style=display:flex><span>        EvenGenerator evenGenerator <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> EvenGenerator();
+</span></span><span style=display:flex><span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 3; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>           executorService.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> EvenTask(evenGenerator)));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        executorService.<span style=color:#a6e22e>shutdown</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AbstractIntGenerator</span> {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 此处使用了volatile关键字</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>boolean</span> canceled <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>cancel</span>() {
+</span></span><span style=display:flex><span>            canceled <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isCanceled</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> canceled;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EvenGenerator</span> <span style=color:#66d9ef>extends</span> AbstractIntGenerator {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> even <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>next</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>even;  <span style=color:#75715e>// danger here!</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>++</span>even;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> even;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EvenTask</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> EvenGenerator evenGenerator;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>EvenTask</span>(EvenGenerator evenGenerator) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>evenGenerator</span> <span style=color:#f92672>=</span> evenGenerator;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>evenGenerator.<span style=color:#a6e22e>isCanceled</span>()) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> next <span style=color:#f92672>=</span> evenGenerator.<span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (next <span style=color:#f92672>%</span> 2 <span style=color:#f92672>!=</span> 0) {
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>toString</span>() <span style=color:#f92672>+</span> next <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; not even!&#34;</span>);
+</span></span><span style=display:flex><span>                    evenGenerator.<span style=color:#a6e22e>cancel</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output: (sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>press Ctrl-C to exit
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[pool-1-thread-2,5,main]1427 not even!
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[pool-1-thread-1,5,main]1425 not even!
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[pool-1-thread-3,5,main]1429 not even!
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例中，使用<code>for</code>循环开启了多个线程，并使用同一个<code>evenGenerator</code>对象作为构造器参数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 3; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>   executorService.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> EvenTask(evenGenerator)));
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>当循环次数为1（只有一个线程）时，程序会一直执行，直到按下Ctrl-C手动结束任务；</p><p>而当循环次数大于1时，无论其运行多长时间，其总会结束。</p><p>AbstractIntGenerator类中的canceled标志是基本数据类型，而Java内存模型规定，所有<strong>原始类型对象（除了double和long）的读写都是原子的</strong><sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>；<del>并且由<strong>volatile</strong>修饰，说明其是<strong>可见的</strong>，因此当发生错误时，所有线程都能读取到cancel信息而退出</del>。</p><blockquote><p>这个表述没错，程序确实也退出了，但是不够严谨。</p><p>查看示例输出可以看到，有3个线程的输出信息，按照输出顺序可以作如下推测：</p><ol><li><p>线程2发现奇数，修改cancel为true</p></li><li><p>线程1发现奇数，修改cancel为true</p></li></ol><p>嗯？为什么线程1还会执行？根据volatile的语义，线程1不是应该“发现”线程1对cancel的改动么？</p><p>实际上volatile的语义只能保证在线程2之后执行的语句能够发现对cancel的改动。</p><p>但是由于run()方法没有任何同步，所以线程2可能是在线程1while执行之后剥夺线程1的运行权而运行的。</p><blockquote><p><strong>2022.05.11注</strong>：实际上是volotile关键字的特性，其能保证可见性，但是不能保证有序性。</p></blockquote></blockquote><p>EvenGenerator类中通过两次<strong>自增运算</strong>获取下一个偶数，但是<strong>自增运算也不是原子性操作</strong>，其仍可被拆分为多个CPU指令<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>，并且被调度器剥夺运行权，在多线程下问题就会显现。</p><blockquote><p>如何确定自增运算不是原子性的呢？</p></blockquote><p>以下是<code>javap -c -v UnSynchronizedEvenGenerator\$EvenGenerator</code>输出的<span id=byteCode>字节码</span>（部分）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>next</span>();
+</span></span><span style=display:flex><span> descriptor: ()I
+</span></span><span style=display:flex><span> flags: ACC_PUBLIC
+</span></span><span style=display:flex><span> Code:
+</span></span><span style=display:flex><span>   stack<span style=color:#f92672>=</span>3, locals<span style=color:#f92672>=</span>1, args_size<span style=color:#f92672>=</span>1
+</span></span><span style=display:flex><span>      0: aload_0
+</span></span><span style=display:flex><span>      1: dup
+</span></span><span style=display:flex><span>      2: getfield      <span style=color:#960050;background-color:#1e0010>#</span>2                  <span style=color:#75715e>// Field even:I</span>
+</span></span><span style=display:flex><span>      5: iconst_1
+</span></span><span style=display:flex><span>      6: iadd
+</span></span><span style=display:flex><span>      7: putfield      <span style=color:#960050;background-color:#1e0010>#</span>2                  <span style=color:#75715e>// Field even:I</span>
+</span></span><span style=display:flex><span>     10: aload_0
+</span></span><span style=display:flex><span>     11: dup
+</span></span><span style=display:flex><span>     12: getfield      <span style=color:#960050;background-color:#1e0010>#</span>2                  <span style=color:#75715e>// Field even:I</span>
+</span></span><span style=display:flex><span>     15: iconst_1
+</span></span><span style=display:flex><span>     16: iadd
+</span></span><span style=display:flex><span>     17: putfield      <span style=color:#960050;background-color:#1e0010>#</span>2                  <span style=color:#75715e>// Field even:I</span>
+</span></span><span style=display:flex><span>     20: aload_0
+</span></span><span style=display:flex><span>     21: getfield      <span style=color:#960050;background-color:#1e0010>#</span>2                  <span style=color:#75715e>// Field even:I</span>
+</span></span><span style=display:flex><span>     24: ireturn
+</span></span></code></pre></div><p>可以看到，一个自增操作被拆分为至少<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>3个步骤：</p><ol><li>get字段even</li><li>add修改even</li><li>put设置even</li></ol><p>在未同步的情况下，其中执行到其中任何一步的时候都可能被CPU剥夺运行权。</p><p>如何解决多线程下共享资源的竞争条件呢？</p><p>基本上所有的并发模式在解决线程冲突问题时，都采用<strong>序列化访问共享资源</strong>的方式。即同一时刻只允许某一个线程访问资源，其他线程被阻塞。通常是通过在代码前面加上一条<strong>锁语句</strong>来实现的，由于锁产生了一种互斥的效果，这种机制也被称为<strong>互斥量</strong>（ <em>mutex</em> ）。</p><h2 id=2-可重入锁>2 可重入锁
+<a class=anchor href=#2-%e5%8f%af%e9%87%8d%e5%85%a5%e9%94%81>#</a></h2><p>Java SE 5之后提供了位于<code>java.util.concurrent.locks</code>包下的显式<strong>互斥机制</strong>——Lock对象（显式锁），Lock对象必须被<strong>显式的创建，锁定和释放</strong>。</p><p>一般情况下 ，ReentrantLock保护代码块的基本结构是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>myLock.<span style=color:#a6e22e>lock</span>(); <span style=color:#75715e>// 可重入锁</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span>{
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 临界区代码</span>
+</span></span><span style=display:flex><span>}<span style=color:#66d9ef>finally</span>{
+</span></span><span style=display:flex><span>  myLock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这个结构可以确保同一时间只有<strong>一个线程</strong>进入临界区( <em>critical section</em> )，其他线程调用<code>lock()</code>时会被阻塞，直到第一个线程释放锁。</p><p>我们利用锁机制来修改之前的转账逻辑，看看会发生什么：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Bank</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[]</span> accounts;
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// lock</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> Lock lock;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Bank</span>(<span style=color:#66d9ef>int</span> accountCount, <span style=color:#66d9ef>double</span> money) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// initialize bank account</span>
+</span></span><span style=display:flex><span>    accounts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[</span>accountCount<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    Arrays.<span style=color:#a6e22e>fill</span>(accounts, money);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 使用JDK提供的可重入锁</span>
+</span></span><span style=display:flex><span>    lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ReentrantLock();
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>    lock.<span style=color:#a6e22e>lock</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>&lt;</span> amount) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>      <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>      accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>-=</span> amount;
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>      accounts<span style=color:#f92672>[</span>to<span style=color:#f92672>]</span> <span style=color:#f92672>+=</span> amount;
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                        Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                        amount,
+</span></span><span style=display:flex><span>                        from,
+</span></span><span style=display:flex><span>                        to,
+</span></span><span style=display:flex><span>                        totalBalance());
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>      <span style=color:#75715e>// 确保锁被释放</span>
+</span></span><span style=display:flex><span>      lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>totalBalance</span>() {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>double</span> sum <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>double</span> a : accounts) {
+</span></span><span style=display:flex><span>          sum <span style=color:#f92672>+=</span> a;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    	<span style=color:#66d9ef>return</span> sum;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>size</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> accounts.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output: (partial)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main]:     948.12 from 22 to 50, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-2,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-2,5,main]:     722.25 from 36 to 84, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-4,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-4,5,main]:     621.82 from 62 to 45, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-6,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-6,5,main]:     628.81 from 18 to 51, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-8,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>...
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例中，我们对<code>transfer()</code>方法里的核心代码块加锁，执行完成之后释放锁。每个线程在执行任务时都会获取锁，此时其他尝试进入方法的线程将被阻塞。从控制台输出来看，也是这样的：<strong>线程是有序执行的</strong>，下一个线程总是等待上一个线程执行完才开始执行，这样，无论多少次转账，总金额也不会变。</p><blockquote><p>思考一个问题：totalBalance()方法是否需要加锁？</p></blockquote><hr><p>上面的示例使用了<strong>可重入锁</strong><sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>（ReentrantLock），可重入的意思是<strong>同一个线程可以重复获取锁，由一个计数器来记录锁获取的次数</strong><sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>，它实现了Lock接口的所有方法：</p><blockquote><ul><li><p>public void lock() {&mldr;}</p><p>若锁未被其他线程获取，获取锁，并将锁的<strong>计数器</strong>置为1，立即返回</p><p>若当前线程已经获取锁，锁的计数器+1，立即返回</p><p>若锁被其他线程占有，那么此线程休眠<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup></p></li><li><p>public void lockInterruptibly() throws InterruptedException {&mldr;}</p><p>同lock()，不过此法可以被中断（interrupted）</p></li><li><p>public boolean tryLock() {&mldr;}</p><p>尝试获取锁并立即返回，成功获取同lock()并返回true，失败则返回false</p></li><li><p>public boolean tryLock(long timeout, TimeUnit unit) throws InterruptedException {&mldr;}</p><p>带有超时机制的尝试获取锁，此法可被中断</p></li><li><p>public void unlock() {&mldr;}</p><p>若计数器>1，则计数器-1，不释放锁，否则计数器置为0并释放锁</p></li><li><p>public Condition newCondition() {&mldr;}</p><p>获取锁的条件对象</p></li></ul></blockquote><p>下例展示了<strong>尝试获取锁</strong>的情况：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AttemptLocking</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Lock lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ReentrantLock();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        AttemptLocking al <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AttemptLocking();
+</span></span><span style=display:flex><span>        al.<span style=color:#a6e22e>untimed</span>();
+</span></span><span style=display:flex><span>        al.<span style=color:#a6e22e>timed</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> Thread(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>            al.<span style=color:#a6e22e>lock</span>.<span style=color:#a6e22e>lock</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;fetched&#34;</span>);
+</span></span><span style=display:flex><span>        }).<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// let thread-0 finish</span>
+</span></span><span style=display:flex><span>        Thread.<span style=color:#a6e22e>sleep</span>(100);
+</span></span><span style=display:flex><span>        al.<span style=color:#a6e22e>untimed</span>();
+</span></span><span style=display:flex><span>        al.<span style=color:#a6e22e>timed</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>untimed</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>boolean</span> b <span style=color:#f92672>=</span> lock.<span style=color:#a6e22e>tryLock</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;tryLock(): &#34;</span> <span style=color:#f92672>+</span> b);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (b) lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>timed</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>boolean</span> b <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            b <span style=color:#f92672>=</span> lock.<span style=color:#a6e22e>tryLock</span>(2, TimeUnit.<span style=color:#a6e22e>SECONDS</span>);
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;tryLock(2, TimeUnit.SECONDS): &#34;</span> <span style=color:#f92672>+</span> b);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// e.printStackTrace();</span>
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (b) lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>tryLock(): true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>tryLock(2, TimeUnit.SECONDS): true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>fetched
+</span></span></span><span style=display:flex><span><span style=color:#75715e>tryLock(): false
+</span></span></span><span style=display:flex><span><span style=color:#75715e>tryLock(2, TimeUnit.SECONDS): false
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>可以看到，main()方法中使用新线程获取了锁而不释放，此时再使用方法获取锁时失败，注意timed()方法在<strong>2s等待之后才返回失败</strong>。</p><blockquote><p>可重入锁可以构建公平锁或非公平锁，默认使用非公平锁（上下文切换少，吞吐量高）。</p></blockquote><h3 id=21-span-idcondition条件span>2.1 <span id=condition>条件</span>
+<a class=anchor href=#21-span-idcondition%e6%9d%a1%e4%bb%b6span>#</a></h3><blockquote><p>思考转账的逻辑，当从from转帐amount到to账户时，若from余额不足，任务会直接返回。</p><p>若想在from账户余额足够时再执行任务而不是直接退出，应该怎样做呢？</p></blockquote><p><code>java.util.concurrent.locks</code>包下还提供了Condition对象，这个对象用来管理那些获得锁但是不能执行任务（条件不满足）的线程，条件可以这样使用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>  lock.<span style=color:#a6e22e>lock</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>&lt;</span> amount) {
+</span></span><span style=display:flex><span>      <span style=color:#75715e>// could be interrupted</span>
+</span></span><span style=display:flex><span>      suficient.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>    };
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>    accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>-=</span> amount;
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>    accounts<span style=color:#f92672>[</span>to<span style=color:#f92672>]</span> <span style=color:#f92672>+=</span> amount;
+</span></span><span style=display:flex><span>    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                      Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                      amount,
+</span></span><span style=display:flex><span>                      from,
+</span></span><span style=display:flex><span>                      to,
+</span></span><span style=display:flex><span>                      totalBalance());
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// invoke all waited condition</span>
+</span></span><span style=display:flex><span>    suficient.<span style=color:#a6e22e>signalAll</span>();
+</span></span><span style=display:flex><span>  } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>    lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>此时，当余额不足时，线程不再退出，而时等待其他转账线程唤醒之，知道满足条件继续执行任务。</p><blockquote><ul><li><p>void await() throws InterruptedException;</p><p>使当前线程等待，和条件相关的<strong>锁被释放</strong>。等待的线程可以被<code>singal()</code>或<code>singalAll()</code>唤醒；若线程被中断也会解除等待状态；解除状态的线程重新<strong>排队获取锁</strong></p></li><li><p>void signalAll();</p><p>唤醒所有在此条件上等待的线程，被唤醒的线程需要重新获取锁</p></li><li><p>void signal();</p><p>唤醒在此条件上等待的任一线程，此方法具有随机性</p></li></ul></blockquote><p>此外，Condition还有一些带有<strong>超时参数</strong>和<strong>阻止中断</strong>的方法，请参照
+<a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/Condition.html>Java SE API</a>。</p><p>到此为止，我们可以利用锁和条件将转账任务改进为线程安全，功能更丰富类：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SynchronizedTransfer</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>double</span> INITIAL_MONEY <span style=color:#f92672>=</span> 1000;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> ACCOUNTS <span style=color:#f92672>=</span> 100;
+</span></span><span style=display:flex><span>        Bank bank <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Bank(ACCOUNTS, INITIAL_MONEY);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> ACCOUNTS; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            Thread t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> TransferTask(bank));
+</span></span><span style=display:flex><span>            t.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>						<span style=color:#75715e>// test thread</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>/* new Thread(new Runnable() {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                @Override
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                public void run() {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                    double v = bank.totalBalance();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                    BigDecimal bigDecimal  = new 			BigDecimal(v).setScale(2,BigDecimal.ROUND_HALF_UP);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                    if (bigDecimal.intValue()  != 100000){
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                        System.out.println(bigDecimal +  &#34;  is not even!&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                    }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>                }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>            }).start();*/</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransferTask</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Bank bank;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> size;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>double</span> maxAmount <span style=color:#f92672>=</span> INITIAL_MONEY;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TransferTask</span>(Bank bank) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>bank</span> <span style=color:#f92672>=</span> bank;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> bank.<span style=color:#a6e22e>size</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> from <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>());
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> to <span style=color:#f92672>=</span> (<span style=color:#66d9ef>int</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>());
+</span></span><span style=display:flex><span><span style=color:#75715e>//                int to = (from + 1 &gt;= size) ? 0 : from + 1;</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>double</span> amount <span style=color:#f92672>=</span> maxAmount <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>();
+</span></span><span style=display:flex><span>                bank.<span style=color:#a6e22e>transfer</span>(from, to, amount);
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>sleep</span>((<span style=color:#66d9ef>long</span>) (size <span style=color:#f92672>*</span> Math.<span style=color:#a6e22e>random</span>()));
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// e.printStackTrace();</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Bank</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[]</span> accounts;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// lock</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Lock lock;
+</span></span><span style=display:flex><span>      	<span style=color:#75715e>// condition</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Condition suficient;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Bank</span>(<span style=color:#66d9ef>int</span> accountCount, <span style=color:#66d9ef>double</span> money) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// initialize bank account</span>
+</span></span><span style=display:flex><span>            accounts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>double</span><span style=color:#f92672>[</span>accountCount<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            Arrays.<span style=color:#a6e22e>fill</span>(accounts, money);
+</span></span><span style=display:flex><span>            lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ReentrantLock();
+</span></span><span style=display:flex><span>            suficient  <span style=color:#f92672>=</span> lock.<span style=color:#a6e22e>newCondition</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>            lock.<span style=color:#a6e22e>lock</span>();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>&lt;</span> amount) {
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// could be interrupted</span>
+</span></span><span style=display:flex><span>                    suficient.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>                };
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>                accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>-=</span> amount;
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>                accounts<span style=color:#f92672>[</span>to<span style=color:#f92672>]</span> <span style=color:#f92672>+=</span> amount;
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                    Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                    amount,
+</span></span><span style=display:flex><span>                    from,
+</span></span><span style=display:flex><span>                    to,
+</span></span><span style=display:flex><span>                    totalBalance());
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// invoke all waited condition</span>
+</span></span><span style=display:flex><span>                suficient.<span style=color:#a6e22e>signalAll</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>totalBalance</span>() {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>double</span> sum <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>double</span> a : accounts) {
+</span></span><span style=display:flex><span>                    sum <span style=color:#f92672>+=</span> a;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> sum;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>size</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> accounts.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>实际上，上例在<strong>totalBalance()方法不加锁的情况下，转账任务也是安全的</strong>。</p><p>回答之前提出的问题：totalBalance()方法究竟是否需要加锁？</p><p>请注意main()方法中被注释的部分，它<strong>创建一个线程</strong>（记为T）去读取所有账户的余额，判断余额是否和初始化时相等。使用BigDecimal是为了<strong>处理Double数据类型的精度丢失</strong>。在totalBalance()<strong>不加锁</strong>的情况下，我们很容易看到这样的输出：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-0,5,main]:     793.81 from 86 to 37, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>99206.19  is not even!
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-2,5,main] move away
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-2,5,main]:     814.24 from 30 to 49, Total Balance:  100000.00
+</span></span></span><span style=display:flex><span><span style=color:#75715e>...
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>这给出一个暗示：在有其他的线程访问totalBalance()方法时，totalBalance()不是线程安全的。尽管transfer()方法加锁了，任意时刻只有一个线程访问totalBalance()方法，但是T和转账线程不相关，它可<strong>被CPU调度与转账线程竞争对totalBalance()方法中的accounts资源的访</strong>问，正如上述输出所显示的那样。</p><p><span id=sync_rule>所以，是否加锁应该以<strong>资源是否共享为参照</strong></span></p><p>当没有被注释的部分时，由于transfer()方法加锁了，线程在transfer()方法中调用totalBalance()不会受到其他线程的影响；当被注释的线程运行时，这时totalBalance资源可能被共享访问了，为保证安全就必须加锁。</p><h2 id=3-synchronized关键字>3 synchronized关键字
+<a class=anchor href=#3-synchronized%e5%85%b3%e9%94%ae%e5%ad%97>#</a></h2><p>自Java 1.0开始，每一个对象都有一个隐式<strong>内部锁</strong>（ <em>intrinsic lock</em> ），在Java API Specification中通常被称为<strong>监视器</strong>（ <em>monitor</em> ）。这个内部锁由synchronized关键字提供支持。synchronized关键字的语义就是“同步的”，这意味着使用这个关键字可以处理共享资源的冲突。</p><p>当访问被synchronized关键字保护的方法或代码块时，它将检查锁能否获得——<strong>这个锁可以是当前类对象的锁，也可以是一个临时锁</strong>( <em>ad-hoc lock</em> )，取决你如何使用，任务执行完成之后会释放锁。</p><p>和ReentrantLock一样，synchronized关键字获取的锁也是<strong>独占锁</strong>，并且也是“可重入”的，某个任务可以多次获得对象的锁，并由计数器维护获得锁的次数，当退出一个方法时，计数器-1，完全退出时，才释放锁，这和可重入锁的机制是一样的。</p><p>类对象也持有一个锁，也就是说synchronized关键字<strong>可作用于静态方法</strong>。</p><p>关于什么时候该使用同步， <em>Brian Goetz</em> 提出过<strong>同步规则</strong>：</p><blockquote><p><em>若向一个变量写入值，它可能接下来被另一个线程读取，或者正在读取一个上一次由另一个线程写过的值，那么必须使用同步，并且读写线程都必须使用<strong>相同的监视器</strong>同步</em>。</p></blockquote><p><strong>监视器</strong>是由 <em>Per Brinch Hansen</em> 和 <em>Tony Hoare</em> 提出的一种<strong>无锁机制</strong>，最初的监视器具有如下特性：</p><ol><li>监视器是只包含私有域的类</li><li>每个监视器的类对象有一个相关的锁</li><li>使用该锁对所有相关的方法加锁</li><li>该锁可以有任意多个相关条件</li></ol><p>Java不完全地采用了监视器的设计概念，这就是synchronized关键字。</p><p>在<strong>使用synchronized关键字时，将共享域设为私有是非常重要的</strong>。由于域只能通过方法访问，而synchronized保证方法执行的有序性；若域不是私有的，其他任务可以直接操作域，这就可能产生冲突。</p><h3 id=31-同步方法>3.1 同步方法
+<a class=anchor href=#31-%e5%90%8c%e6%ad%a5%e6%96%b9%e6%b3%95>#</a></h3><p>当synchronized关键字作用于方法时，表示这个方法是同步的，执行方法时，首先会尝试获取当前对象的锁——这个对象一般是类的实例对象（ <em>this</em> ），若是静态方法，便是类对象。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>&lt;</span> amount) wait();  <span style=color:#75715e>// can be interrupted</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>  accounts<span style=color:#f92672>[</span>from<span style=color:#f92672>]</span> <span style=color:#f92672>-=</span> amount;
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>  accounts<span style=color:#f92672>[</span>to<span style=color:#f92672>]</span> <span style=color:#f92672>+=</span> amount;
+</span></span><span style=display:flex><span>  System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                    Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                    amount,
+</span></span><span style=display:flex><span>                    from,
+</span></span><span style=display:flex><span>                    to,
+</span></span><span style=display:flex><span>                    totalBalance());
+</span></span><span style=display:flex><span>  notifyAll();  <span style=color:#75715e>// wake up all threads waiting on this monitor</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>考虑转账的任务，<strong>只需要将transfer()方法加上synchronized关键字即可保证安全</strong>，运行此方法时，线程会先去获取Bank实例的内部锁，并将其他线程阻塞，此线程完成之后会释放这个对象锁，其他线程方可继续运行。</p><p>继续思考之前的问题，对于使用<code>synchronized</code>关键字的<code>transfer()</code>方法，里面调用了<code>totalBalance()</code>方法，那<code>totalBalance()</code>方法是否需要同步呢？前面说过「是否加锁应该以
+<a href=/zh/#sync_rule>资源是否共享为参照</a>」，这其实和“同步法则“是的表述是一致的。如果有多个线程访问<code>transfer()</code>方法，正好此方法是<strong>串行访问</strong>（有序访问）的，那么<code>totalBalance()</code>方法无需同步；若还有其他线程对访问<code>totalBalance()</code>方法的资源，那么必须使用同步。</p><h3 id=32-同步代码块>3.2 同步代码块
+<a class=anchor href=#32-%e5%90%8c%e6%ad%a5%e4%bb%a3%e7%a0%81%e5%9d%97>#</a></h3><p>synchronized关键字也可以用于同步代码块（同步阻塞）。</p><p>在用于同步方法时，相当于<code>synchronized(this)</code>，而同步代码块则多了一点灵活性。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>synchronized</span> (obj){ <span style=color:#75715e>// synchronized block</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// critical section</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>示例中的<code>obj</code>可以是 <em>this</em> ，也可以是其他对象。</p><p>考虑最开始的
+<a href=/zh/#evenGenerator>EvenGenerator</a>类，在next()方法中可以使用同步代码块加锁可保证安全性：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EvenGenerator</span> <span style=color:#66d9ef>extends</span> AbstractIntGenerator {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> Integer even <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> Object lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Object();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>next</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// equals to using</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// synchronized (this){</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> (lock) {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>++</span>even;
+</span></span><span style=display:flex><span>      Thread.<span style=color:#a6e22e>yield</span>();
+</span></span><span style=display:flex><span>      <span style=color:#f92672>++</span>even;
+</span></span><span style=display:flex><span>      <span style=color:#75715e>// return语句必须包含在同步代码块里</span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> even;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上例中，synchronized关键字使用了“其他对象”作为“监视器”，注意，synchronized代码块必须包括所有读写域的代码，<strong>包括return语句</strong>。</p><blockquote><p><del>从
+<a href=/zh/#byteCode>字节码</a>来看，return语句也不是原子性的——它要先加载并获取变量域even的值，然后再返回</del></p><p>Java语言规范规定对变量的读写都是原子的（long和double）除外，因此return语句是原子的。但是<strong>单一语句的原子性并不能保证多线程的安全性</strong>，如果锁在return之前被释放，那么return可能获取到其他线程修改后的值。</p></blockquote><p>可以看到，使用synchronized关键字比使用显示锁代码更加简洁。</p><p>需要注意的是，尽管synchronized代码块中的锁可以是任意对象的，但是尽量不要把这种任意性视为绝对安全的。<strong>一般在同步代码块中使用this或某“不可变”域（上例中）的锁</strong>。</p><p>考虑如下示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Bank</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Vector<span style=color:#f92672>&lt;</span>Double<span style=color:#f92672>&gt;</span> accounts;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Bank</span>(<span style=color:#66d9ef>int</span> accountCount, <span style=color:#66d9ef>double</span> money) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// initialize bank account</span>
+</span></span><span style=display:flex><span>    accounts <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Vector<span style=color:#f92672>&lt;&gt;</span>(accountCount);
+</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>Double<span style=color:#f92672>&gt;</span> doubles <span style=color:#f92672>=</span> Collections.<span style=color:#a6e22e>nCopies</span>(accountCount, money);
+</span></span><span style=display:flex><span>    accounts.<span style=color:#a6e22e>addAll</span>(doubles);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>transfer</span>(<span style=color:#66d9ef>int</span> from, <span style=color:#66d9ef>int</span> to, <span style=color:#66d9ef>double</span> amount) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> (accounts) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (accounts.<span style=color:#a6e22e>get</span>(from) <span style=color:#f92672>&lt;</span> amount) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (from <span style=color:#f92672>==</span> to) <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>      <span style=color:#75715e>// transfer</span>
+</span></span><span style=display:flex><span>      accounts.<span style=color:#a6e22e>set</span>(from, accounts.<span style=color:#a6e22e>get</span>(from) <span style=color:#f92672>-</span> amount);
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; move away&#34;</span>);
+</span></span><span style=display:flex><span>      accounts.<span style=color:#a6e22e>set</span>(to, accounts.<span style=color:#a6e22e>get</span>(to) <span style=color:#f92672>+</span> amount);
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s: %10.2f from %d to %d, Total Balance: %10.2f%n&#34;</span>,
+</span></span><span style=display:flex><span>                        Thread.<span style=color:#a6e22e>currentThread</span>(),
+</span></span><span style=display:flex><span>                        amount,
+</span></span><span style=display:flex><span>                        from,
+</span></span><span style=display:flex><span>                        to,
+</span></span><span style=display:flex><span>                        totalBalance());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上例中使用Vector作为账户的容器，Vector是线程安全的实现，是否可以不加锁呢？</p><p>不是的，Vector只能保证其实现方法是线程安全的，并不能保证transfer方法是同步的。换言之，accounts.set()方法是同步的，其完成之后该线程可能被剥夺运行权。</p><p>作为改进，在<code>transfer()</code>方法中截获了accounts的锁，尝试使其同步，它是可行的。但是这是否意味着可以任意使用其他对象的锁呢？Java核心卷I给出一段晦涩的评论<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>：</p><p><del>如果冒昧地使用某个其他域（<strong>客户端锁定</strong>）的锁，可能不能保证安全性</del></p><blockquote><p><em>This approach works, but it is entirely dependent on the fact that the Vector class uses the intrinsic lock for all of its mutator methods. However, is this really a fact? The documentation of the Vector class makes no such promise. You have to carefully study the source code and hope that future versions do not introduce unsynchronized mutators. As you can see, client-side locking is very fragile and not generally recommended.</em></p></blockquote><p>其晦涩之处在于，synchronized使用accounts的内部锁保证同步，和Vector方法使用的锁是不是accounts的内部锁有什么联系？</p><h3 id=33-如何使用同步>3.3 如何使用同步
+<a class=anchor href=#33-%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%90%8c%e6%ad%a5>#</a></h3><p>从之前的阐述我们知道，如果多个线程同时对共享资源进行访问，并且至少有一个线程对资源进行了写操作，那就需要同步。</p><p>在编写同步代码的时候，我常常困惑，应该在哪里使用同步呢？究竟是在线程上同步还是应该在资源方法上同步，还是所有位置都需要同步？</p><p>接下来我们从两个维度去剖析“在哪里同步”这个问题。</p><h4 id=31-在资源上同步>3.1 在资源上同步
+<a class=anchor href=#31-%e5%9c%a8%e8%b5%84%e6%ba%90%e4%b8%8a%e5%90%8c%e6%ad%a5>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 资源</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>next</span>(){
+</span></span><span style=display:flex><span>    x<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 任务1</span>
+</span></span><span style=display:flex><span>run(){
+</span></span><span style=display:flex><span>    next();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 任务2</span>
+</span></span><span style=display:flex><span>run(){
+</span></span><span style=display:flex><span>    next();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这是常见的模式。当在资源上同步时，使用多线程执行任务1和任务2，都不会出现线程安全的问题。因为每一个对x进行操作的线程都会被同步阻塞。这就是资源的序列化访问。</p><h4 id=32-在任务上同步>3.2 在任务上同步
+<a class=anchor href=#32-%e5%9c%a8%e4%bb%bb%e5%8a%a1%e4%b8%8a%e5%90%8c%e6%ad%a5>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>final</span> Lock lock ;
+</span></span><span style=display:flex><span><span style=color:#75715e>// 资源</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>next</span>(){
+</span></span><span style=display:flex><span>    x<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 任务1</span>
+</span></span><span style=display:flex><span>run(){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span>(lock){
+</span></span><span style=display:flex><span>        next();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 任务2</span>
+</span></span><span style=display:flex><span>run(){
+</span></span><span style=display:flex><span>    next();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>如上代码示例所示，我们在任务1的run()方法上使用同步，当多个线程实例执行任务1时，x是线程安全的。</p><p>需要提出的是，run()方法中的synchronized使用的锁<strong>不能是this</strong>，如果是this，那么同步块将毫无作用。</p><p>但是若此时有线程执行任务2，那么此代码的安全隐患就出现了：任务2的操作和任务1的操作就会互相干扰!</p><p>若想保证线程安全，那么任务2的next方法也要和任务1一样使用同步，并且<strong>使用相同的对象锁</strong>。</p><p>这样的条件下，同时运行任务1和任务2，那么线程会在lock对象上获取锁而进入同步阻塞，从而保证安全性，和在资源上同步的效果是等同的。</p><h4 id=33-建议>3.3 建议
+<a class=anchor href=#33-%e5%bb%ba%e8%ae%ae>#</a></h4><p>从代码的简洁性，可读性与可复用性上来讲，在资源上使用同步显得更加优雅，两种实现方式的代码可以进行比较直观的对比：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 在任务上同步</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> TV <span style=color:#a6e22e>call</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>synchronized</span> (tick) {
+</span></span><span style=display:flex><span>            TV tv <span style=color:#f92672>=</span> tl.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>            tv.<span style=color:#a6e22e>setT</span>(Thread.<span style=color:#a6e22e>currentThread</span>());
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (tick.<span style=color:#a6e22e>getTick</span>()) {
+</span></span><span style=display:flex><span>                tv.<span style=color:#a6e22e>setV</span>((tv.<span style=color:#a6e22e>getV</span>() <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>?</span> 0 : tv.<span style=color:#a6e22e>getV</span>()) <span style=color:#f92672>+</span> 1);
+</span></span><span style=display:flex><span>                tl.<span style=color:#a6e22e>set</span>(tv);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// 给其他线程机会</span>
+</span></span><span style=display:flex><span>                    tick.<span style=color:#a6e22e>wait</span>(10);
+</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                    e.<span style=color:#a6e22e>printStackTrace</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>tick.<span style=color:#a6e22e>isTickSupply</span>) <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> tl.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 在资源上使用同步</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> TV <span style=color:#a6e22e>call</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>        TV tv <span style=color:#f92672>=</span> tl.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>        tv.<span style=color:#a6e22e>setT</span>(Thread.<span style=color:#a6e22e>currentThread</span>());
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// getTick()方法同步</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (tick.<span style=color:#a6e22e>getTick</span>()) {
+</span></span><span style=display:flex><span>            tv.<span style=color:#a6e22e>setV</span>((tv.<span style=color:#a6e22e>getV</span>() <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>?</span> 0 : tv.<span style=color:#a6e22e>getV</span>()) <span style=color:#f92672>+</span> 1);
+</span></span><span style=display:flex><span>            tl.<span style=color:#a6e22e>set</span>(tv);
+</span></span><span style=display:flex><span>            TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>tick.<span style=color:#a6e22e>isTickSupply</span>) <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> tl.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上述代码的作用是一样的，可以看到，在资源上使用同步比在任务上使用同步的代码更加易读，简洁。</p><p>正如之前所说的，在资源上使用同步还可以避免新建任务时又重新设计同步逻辑。</p><p>因此，在资源上使用同步是建议的方式。</p><p>扩展阅读:
+<a href=https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html>https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html</a></p><h2 id=4-原子性与原子类>4 原子性与原子类
+<a class=anchor href=#4-%e5%8e%9f%e5%ad%90%e6%80%a7%e4%b8%8e%e5%8e%9f%e5%ad%90%e7%b1%bb>#</a></h2><p>原子性一般指<strong>原子操作</strong>，原子操作不能<strong>被线程调度机制中断</strong>，一旦操作开始，那么它一定可以在可能发生的上下文切换之前完成。Java语言规范规定了对基本对象(long和double除外)的读写操作是原子的。</p><p><strong>不能将原子性和同步划等号</strong>！更不能使用原子性来代替同步，当你想使用原子性代替同步写出无锁代码时，思考 <em>Brain Goetz</em> 的建议：</p><blockquote><p><em><strong>If you can write a high-performance JVM for a modern microprocessor, then you are qualified to think about whether you can avoid synchronizing.</strong></em></p></blockquote><p>考虑如下几个操作：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> 1;              <span style=color:#75715e>// s1</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>boolean</span> flag <span style=color:#f92672>=</span> flase;   <span style=color:#75715e>// s2</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> y <span style=color:#f92672>=</span> x;              <span style=color:#75715e>// s3</span>
+</span></span><span style=display:flex><span>x<span style=color:#f92672>++</span>;                    <span style=color:#75715e>// s4</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> 1.<span style=color:#a6e22e>9d</span>;        <span style=color:#75715e>// s5</span>
+</span></span></code></pre></div><p>只有前2个操作是原子操作，后面的操作都不是原子操作。</p><p>对于s3来说，可以拆分为读取x的值和将y赋值两个操作，虽然这两个操作都是原子的，但是合起来就不是原子操作了；s4就更复杂了；对于double和long类型的变量，JMM（Java Memory Model）规定了对其的写操作分为2步，每步写入32位，因此也不是原子的。</p><h3 id=41-原子性的误用>4.1 原子性的误用
+<a class=anchor href=#41-%e5%8e%9f%e5%ad%90%e6%80%a7%e7%9a%84%e8%af%af%e7%94%a8>#</a></h3><p>查看一个<strong>误用原子性</strong>的例子：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AtomicTest</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getValue</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// atomic operation</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> i;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>increment</span>() {
+</span></span><span style=display:flex><span>        i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>      	<span style=color:#75715e>// equals to</span>
+</span></span><span style=display:flex><span>      	<span style=color:#75715e>// i += 2;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) increment();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        AtomicTest at <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicTest();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 线程1</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> Thread(at).<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>          	<span style=color:#75715e>// the value can still be odd</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> value <span style=color:#f92672>=</span> at.<span style=color:#a6e22e>getValue</span>();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (value <span style=color:#f92672>%</span> 2 <span style=color:#f92672>!=</span> 0) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(value);
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>exit</span>(0);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output: (sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>145881
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例过分<strong>高估了原子性的能力</strong>，当另一个线程（mian线程）调用getValue()去访问共享变量时，尽管getValue()方法只有一个<strong>return</strong>语句，是原子性的，但还是获得了一个不希望的结果——奇数，为什么？虽然<code>increment()</code>方法是同步的，但是<code>getValue()</code>方法不需要锁即可访问共享域，此时的i可能在一个<strong>不稳定的中间状态</strong>。</p><blockquote><p>Java内存模型有如下约定<sup id=fnref:9><a href=#fn:9 class=footnote-ref role=doc-noteref>9</a></sup></p><ol><li><p>Java的域都储存在主存（即物理内存）中</p></li><li><p>Java的工作线程有独立的内存（CPU缓存）</p></li><li><p>同步保证可见性</p></li><li><p>原子操作不保证可见性</p></li></ol><p>依据上面的论断，尝试分析这个不稳定状态：increment()方法使用了同步，即increment()每次自增后都将变量i的结果写入主存；由于getValue()是无锁访问i，它可能获取的可能是increment()方法第一次自增的结果。</p></blockquote><p>那么解决办法有：</p><ol><li>同步getValue()方法；</li><li>将2步自增换成一步操作(并不能保证每次getValue()获取的都是期望值，只是不再出现奇数罢了)；</li><li>使用原子类</li></ol><p>Java SE 5 引入了<code>java.util.concurrent.atomic</code>包，里面提供了原子性变量类，这些类提供了一些原子性操作，实际应用的不多，但合理应用可以提升应用性能。</p><blockquote><p>不要过分依赖原子类，就像不要过分依赖原子性一样。</p></blockquote><h3 id=42-谨慎使用原子类>4.2 谨慎使用原子类
+<a class=anchor href=#42-%e8%b0%a8%e6%85%8e%e4%bd%bf%e7%94%a8%e5%8e%9f%e5%ad%90%e7%b1%bb>#</a></h3><p>可以使用AtomicInteger类对AtomicTest类进行优化，使其得到预期的结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AtomicClassTest</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> AtomicInteger i <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicInteger(0);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getValue</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// atomic operation</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> i.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 无锁的原因不是因为原子性，而是因为有且只有一个原子操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 若此处使用
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * &lt;pre&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *     i.incrementAndGet();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *     i.incrementAndGet();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * &lt;/pre&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 那么依旧和{@link AtomicTest}一样失败
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>increment</span>() {
+</span></span><span style=display:flex><span>        i.<span style=color:#a6e22e>addAndGet</span>(2);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) increment();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        AtomicClassTest act <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicClassTest();
+</span></span><span style=display:flex><span>        ExecutorService executor <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newSingleThreadExecutor</span>();
+</span></span><span style=display:flex><span>        executor.<span style=color:#a6e22e>execute</span>(act);
+</span></span><span style=display:flex><span>        ScheduledExecutorService s <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newSingleThreadScheduledExecutor</span>();
+</span></span><span style=display:flex><span>        s.<span style=color:#a6e22e>schedule</span>(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>          	<span style=color:#75715e>// 此方法不会主动退出</span>
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Aborting...&#34;</span>);
+</span></span><span style=display:flex><span>            executor.<span style=color:#a6e22e>shutdown</span>();
+</span></span><span style=display:flex><span>            s.<span style=color:#a6e22e>shutdown</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>exit</span>(0);
+</span></span><span style=display:flex><span>        }, 5, TimeUnit.<span style=color:#a6e22e>SECONDS</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> value <span style=color:#f92672>=</span> act.<span style=color:#a6e22e>getValue</span>();
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// the value can still be odd</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (value <span style=color:#f92672>%</span> 2 <span style=color:#f92672>!=</span> 0) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(value);
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>exit</span>(0);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上面的示例中，方法不用同步，获取到的i的值也不会是奇数。</p><p>思考这个问题，main线程每次读取的都是最新修改的i么？</p><p><em><strong>不一定</strong></em></p><p>因为<strong>原子性并不能保证可见性</strong>，main线程也<strong>并不能保证每次获取的都是最新的i值</strong>。</p><h2 id=5-可见性volatile>5 可见性（volatile）
+<a class=anchor href=#5-%e5%8f%af%e8%a7%81%e6%80%a7volatile>#</a></h2><p>在讨论原子性的时候，提到了<strong>原子操作并不能保证可见性</strong>。什么是可见性？<strong>可见性</strong>指的是一个变量被被线程修改后，另一个线程能够马上知道这一修改。</p><p>Java SE 5 提供了<strong>volatile</strong>关键字保证可见性，对<strong>volatail</strong>域的修改会马上写入到主存中，其他线程会的本地缓存会失效而从主存中去读取。</p><p>听起来不错，volatile似乎可以解决资源共享的问题，真的是这样么？</p><p>遗憾的是，volatile<strong>并不能保证原子性</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>VolatileIsNotAtomic</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>   <span style=color:#75715e>// 将变量设置为volatile并不能保证并发安全</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>int</span> sum;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>increase</span>() {
+</span></span><span style=display:flex><span>        sum<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>multiThread2</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 10; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            Thread thread <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> 0; j <span style=color:#f92672>&lt;</span> 1000; j<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                    increase();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>            thread.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Thread.<span style=color:#a6e22e>sleep</span>(3000);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(sum);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        VolatileIsNotAtomic va <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> VolatileIsNotAtomic();
+</span></span><span style=display:flex><span>        va.<span style=color:#a6e22e>multiThread2</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:(sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>8806
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例中将域设置为volatile并不能解决多线程环境下的资源共享问题，原因在于，volatile只保证了可见性，没有保证<strong>共享资源的有序访问</strong>。</p><p>volatile关键字的使用非常有限，当想使用volatile关键字的时候，需要仔细考量，因为其可能有潜在的多线程风险。</p><p>volatiile关键字最著名的应用是在双重检查( <em>double-check-lock</em> )
+<a href=https://medium.com/@kevalpatel2106/how-to-make-the-perfect-singleton-de6b951dfdb0>单例</a>中：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DoubleCheckSingleton</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>volatile</span> DoubleCheckSingleton instance;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>DoubleCheckSingleton</span>() {
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> DoubleCheckSingleton <span style=color:#a6e22e>getInstance</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (instance <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>synchronized</span> (DoubleCheckSingleton.<span style=color:#a6e22e>class</span>) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// the double check lock</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (instance <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>                    instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DoubleCheckSingleton();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>更详细的关于volatile关键字的介绍：
+<a href=../java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字</a></p><h2 id=6-临界区>6 临界区
+<a class=anchor href=#6-%e4%b8%b4%e7%95%8c%e5%8c%ba>#</a></h2><p>使用synchronized关键字对整个方法加锁（防止其他线程访问整个方法）往往会带来更大的性能开销，如果你只想保护某些代码块，可以使用<strong>同步代码块</strong>，这一段被锁保护的代码块就称为<strong>临界区</strong>（ <em>critical section</em> ），前面的<strong>显式锁</strong>所保护的区域以及使用<strong>synchronized</strong>保护的代码块都是临界区。</p><h2 id=7-线程本地存储>7 线程本地存储
+<a class=anchor href=#7-%e7%ba%bf%e7%a8%8b%e6%9c%ac%e5%9c%b0%e5%ad%98%e5%82%a8>#</a></h2><p>既然共享资源需要考虑同步问题，那么阻止资源共享就可避免线程冲突<sup id=fnref:10><a href=#fn:10 class=footnote-ref role=doc-noteref>10</a></sup>。<code>java.lang.ThreadLoacl</code>类提供了一种机制，为使用相同变量的不同线程提供不同的存储，称为<strong>线程本地存储</strong>。</p><p>考虑SimpleDateFormat类，它不是线程安全的，如果作为全局变量，在多线程情况下可能会出现问题。使用同步的开销太大，一般是直接使用局部变量来解决问题，不过这也很浪费资源。因为SimpleDateFormat<strong>不必是</strong>共享资源，这时候，可以使用线程本地存储：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> ThreadLoacl<span style=color:#f92672>&lt;</span>SimpleDateFormat<span style=color:#f92672>&gt;</span> dateFormat
+</span></span><span style=display:flex><span>  <span style=color:#f92672>=</span> ThreadLoacal.<span style=color:#a6e22e>withInitial</span>(()<span style=color:#f92672>-&gt;</span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> SimpleDateFormat(<span style=color:#e6db74>&#34;yyyy-MM-dd&#34;</span>);
+</span></span><span style=display:flex><span>  })
+</span></span></code></pre></div><p>这样每个线程都有一个dataFormat实例。</p><p>下例中，每个线程都有一个线程本地存储，用于存储一个0-100的随机数，然后对其进行自增运算：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ThreadLocalVariableHolder</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Java 8 提供的方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> ThreadLocal<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> value <span style=color:#f92672>=</span> ThreadLocal.<span style=color:#a6e22e>withInitial</span>(<span style=color:#66d9ef>new</span> Supplier<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Integer <span style=color:#a6e22e>get</span>() {
+</span></span><span style=display:flex><span>            Random r <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> r.<span style=color:#a6e22e>nextInt</span>(100);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Task</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>increment</span>() {
+</span></span><span style=display:flex><span>            value.<span style=color:#a6e22e>set</span>(value.<span style=color:#a6e22e>get</span>() <span style=color:#f92672>+</span> 1);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> Integer <span style=color:#a6e22e>getValue</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> value.<span style=color:#a6e22e>get</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> Thread.<span style=color:#a6e22e>currentThread</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;: &#34;</span> <span style=color:#f92672>+</span> getValue();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>isInterrupted</span>()) {
+</span></span><span style=display:flex><span>                increment();
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 2; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> Task()).<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>exit</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output(sample):
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-1,5,main]: 41
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-3,5,main]: 19
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-1,5,main]: 42
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-3,5,main]: 20
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-1,5,main]: 43
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Thread[Thread-3,5,main]: 21
+</span></span></span><span style=display:flex><span><span style=color:#75715e>...
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>可以看到，虽然没有同步，但是也无需担心资源冲突的问题，线程1和线程3的数据不会互相干扰。</p><p>ThreadLoacl通常作为<strong>静态域</strong>存储，虽然多个线程只有一个ThreadLocal实例，但是每个实例都有自己的存储，并不会有竞争条件。</p><ul><li><p><a href=https://github.com/wangy325/java-review/blob/master/src/main/java/com/wangy/review/concurrency/sync/TicketIssuePs.java>一个使用TheadLocal的例子</a></p></li><li><p><a href=https://www.jianshu.com/p/00abc3e884d2>深入理解ThreadLocal</a></p></li></ul><h2 id=8-再论object超类>8 再论Object超类
+<a class=anchor href=#8-%e5%86%8d%e8%ae%baobject%e8%b6%85%e7%b1%bb>#</a></h2><p>之前的讨论中，我们说到了
+<a href=../../basic/object%e8%b6%85%e7%b1%bb/>Object超类</a>的hashCode和equals方法，这次在多线程环境下阐释Object超类的其他几个重要方法。</p><p>多线程条件下，使用互斥（mutex）来解决资源共享问题时常用手段，接下来讨论的是如何让2个线程之间协同起来。</p><p>其实在可重入锁的
+<a href=/zh/#condition>条件</a>对象的使用中，就使用了对象之间的协作——当要转账时，发现余额不足则当前转账线程等待，而被其他线程唤醒以继续执行（虽然它可能又进入等待）。它工作的机制是线程A获得了锁，但是发现其必须在某个条件上等待（余额充足），于是其阻塞并释放锁（可被中断），线程B得以获得锁并执行，B执行完成之后唤醒线程A，其进入Runnable状态。</p><img src=/img/wait_on_condition.svg alt=线程在条件上等待的工作逻辑 width=500px position=center><p><strong>Object对象的wait()，notify()和notifyAll()方法提供了线程线程之间协作的能力</strong>。</p><p><code>wait()</code>方法使当前线程进入等待，其还可以接受一个超时参数。</p><p><code>wait()</code>方法必须配合synchronized关键字使用，原因是调用<code>wait()</code>方法时，该对象的监视器被释放了——前提是<strong>必须要先持有对象的监视器</strong>。</p><p><code>notify()</code>用于唤醒一个在<strong>当前监视器</strong>（如果是临界区，则是指定对象锁；若是同步方法，则是实例锁）上等待的线程，notify方法有相当的局限性：</p><ol><li>并不是唤醒所有的<code>wait()</code>线程，它没有这个能力，只能唤醒在相同锁（监视器）上等待的线程；</li><li>并不是唤醒指定当前监视器的线程，它只唤醒一个，至于是哪一个是不确定的；</li></ol><p><code>notifyAll()</code>用于唤醒在<strong>当前监视器</strong>上等待的所有线程。</p><p><code>notify()</code>和<code>notifyAll()</code>方法也只能在获取锁之后执行，被唤醒的线程也只有等调用<code>notify()</code>和<code>notifyAll()</code>方法的锁被释放之后才可能继续执行。</p><p>考虑下面的例子：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WaitOnCondition</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>boolean</span> tracked <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>playTrack</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>tracked) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 在WaitOnCondition实例上等待</span>
+</span></span><span style=display:flex><span>            wait();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;play &#34;</span>);
+</span></span><span style=display:flex><span>        tracked <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>recordTrack</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (tracked) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;record &#34;</span>);
+</span></span><span style=display:flex><span>        tracked <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 最好不要使用notify,除非你明确地知道期待的线程一定被唤醒</span>
+</span></span><span style=display:flex><span>        notifyAll();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Play</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@SneakyThrows</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>                playTrack();
+</span></span><span style=display:flex><span>                TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(1000);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Record</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@SneakyThrows</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
+</span></span><span style=display:flex><span>                recordTrack();
+</span></span><span style=display:flex><span>                TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(1000);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        WaitOnCondition tp <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> WaitOnCondition();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> pool <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>submit</span>(tp.<span style=color:#a6e22e>new</span> <span style=color:#a6e22e>Play</span>());
+</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>submit</span>((tp.<span style=color:#a6e22e>new</span> <span style=color:#a6e22e>Record</span>()));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(5);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>exit</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>record play record play record play record play
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>record和play任务本来是可以无序运行的，但是由于play任务在<code>playTrack()</code>方法上使用了<code>wait()</code>，条件是布尔值<code>tracked</code>，该值由record任务在<code>recordTrack</code>时修改，修改完成之后record任务负责唤醒等待的线程。这样就完成了线程的交互。</p><p>将<code>tracked</code>设置为<code>volatile</code>变量是volatile关键字的典型应用场景。</p><blockquote><p>在使用条件时，应当谨慎地避免死锁。</p></blockquote><hr><p>本文完。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>一般看来，任务越耗时，其被CPU调度剥夺运行权的几率越大。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p><a href=https://docs.oracle.com/javase/specs/jls/se15/html/jls-17.html#jls-17.7>https://docs.oracle.com/javase/specs/jls/se15/html/jls-17.html#jls-17.7</a>&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>java文件编译的字节码会对Java代码进行拆分&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>尚不清楚前面aload_0以及dup的意义。&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>可重入锁是典型的独占锁。&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6><p>计数器最大2<sup>31</sup>-1。&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:7><p>实际上线程进入同步队列中排队，并自旋尝试获取锁，获取失败则线程的中断状态置位&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:8><p>Java核心技术卷1 第14章并发第14.5.6节同步阻塞&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:9><p>不一定正确，还需要查阅资料进行确认&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:10><p>有时候资源共享是必须的，同步也是必须的&#160;<a href=#fnref:10 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#资源访问受限>资源访问受限</a><ul><li><a href=#1-引例>1 引例</a></li><li><a href=#2-可重入锁>2 可重入锁</a><ul><li><a href=#21-span-idcondition条件span>2.1 <span id=condition>条件</span></a></li></ul></li><li><a href=#3-synchronized关键字>3 synchronized关键字</a><ul><li><a href=#31-同步方法>3.1 同步方法</a></li><li><a href=#32-同步代码块>3.2 同步代码块</a></li><li><a href=#33-如何使用同步>3.3 如何使用同步</a><ul><li><a href=#31-在资源上同步>3.1 在资源上同步</a></li><li><a href=#32-在任务上同步>3.2 在任务上同步</a></li><li><a href=#33-建议>3.3 建议</a></li></ul></li></ul></li><li><a href=#4-原子性与原子类>4 原子性与原子类</a><ul><li><a href=#41-原子性的误用>4.1 原子性的误用</a></li><li><a href=#42-谨慎使用原子类>4.2 谨慎使用原子类</a></li></ul></li><li><a href=#5-可见性volatile>5 可见性（volatile）</a></li><li><a href=#6-临界区>6 临界区</a></li><li><a href=#7-线程本地存储>7 线程本地存储</a></li><li><a href=#8-再论object超类>8 再论Object超类</a></li></ul></li></ul></nav></div></aside></main></body></html>

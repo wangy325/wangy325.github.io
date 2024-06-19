@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>定时任务 on Endless River</title><link>https://wangy325.github.io/zh/docs/misc/job/</link><description>Recent content in 定时任务 on Endless River</description><generator>Hugo</generator><language>zh</language><atom:link href="https://wangy325.github.io/zh/docs/misc/job/index.xml" rel="self" type="application/rss+xml"/><item><title>在xxl-job中使用分片任务</title><link>https://wangy325.github.io/zh/docs/misc/job/xxl-sharding-job/</link><pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/misc/job/xxl-sharding-job/</guid><description>&lt;p>本文介绍在如何在xxl-job中使用创建并使用分片任务。&lt;/p></description></item><item><title>cron表达式速查</title><link>https://wangy325.github.io/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/</link><pubDate>Thu, 13 Dec 2018 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/</guid><description>&lt;p>cron表达式常用于配置定时任务。cron表达式实际上是由七个子表达式组成。这些表达式之间用空格分隔：&lt;/p>
+&lt;ol>
+&lt;li>Seconds （秒）&lt;/li>
+&lt;li>Minutes（分）&lt;/li>
+&lt;li>Hours（小时）&lt;/li>
+&lt;li>Day-of-Month （天）&lt;/li>
+&lt;li>Month（月）&lt;/li>
+&lt;li>Day-of-Week （周）&lt;/li>
+&lt;li>Year（年）&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>例：表达式&lt;code>0 0 12 ? \* WED&lt;/code> 意思是：每个星期三的中午12点执行。&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

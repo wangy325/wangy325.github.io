@@ -1,0 +1,1074 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  重要的并发组件
+  #
+
+Java 1.5以后的并发类库新加入了一些用于解决并发问题的新构件，合理地使用这些构件能够帮助我们写出更加简单且健壮的并发程序。本节内容介绍java.util.concurrent包中一些具有代表性的构件，包括
+
+CountDownLatch
+CyclicBarrier
+Semaphore
+Exchanger
+DelayQueue
+PriorityBlockingQueue
+"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="一些重要的并发组件"><meta property="og:description" content=" 重要的并发组件 # Java 1.5以后的并发类库新加入了一些用于解决并发问题的新构件，合理地使用这些构件能够帮助我们写出更加简单且健壮的并发程序。本节内容介绍java.util.concurrent包中一些具有代表性的构件，包括
+CountDownLatch CyclicBarrier Semaphore Exchanger DelayQueue PriorityBlockingQueue "><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-11-16T00:00:00+00:00"><meta property="article:modified_time" content="2020-11-16T00:00:00+00:00"><meta property="article:tag" content="Concurrency"><title>一些重要的并发组件 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle checked>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/ class=active>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>一些重要的并发组件</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#重要的并发组件>重要的并发组件</a></li><li><a href=#1-countdownlatch>1 CountDownLatch</a></li><li><a href=#2-cyclicbarrier>2 CyclicBarrier</a></li><li><a href=#3-semaphore>3 Semaphore</a></li><li><a href=#4-exchanger>4 Exchanger</a></li><li><a href=#5-priorityblockingqueue>5 PriorityBlockingQueue</a></li><li><a href=#6-delayqueue>6 DelayQueue</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=重要的并发组件>重要的并发组件
+<a class=anchor href=#%e9%87%8d%e8%a6%81%e7%9a%84%e5%b9%b6%e5%8f%91%e7%bb%84%e4%bb%b6>#</a></h1><p>Java 1.5以后的并发类库新加入了一些用于解决并发问题的新构件，合理地使用这些构件能够帮助我们写出更加简单且健壮的并发程序。本节内容介绍<code>java.util.concurrent</code>包中一些具有代表性的构件，包括</p><ul><li>CountDownLatch</li><li>CyclicBarrier</li><li>Semaphore</li><li>Exchanger</li><li>DelayQueue</li><li>PriorityBlockingQueue</li></ul><h1 id=1-countdownlatch>1 CountDownLatch
+<a class=anchor href=#1-countdownlatch>#</a></h1><p>在讨论线程的基本概念时，我们说过<code>join()</code>方法可使当前线程等待调用join方法的线程执行完，可以实现简单的
+<a href=../%e7%ba%bf%e7%a8%8b%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5-%e5%b9%b6%e5%8f%91%e5%9f%ba%e7%a1%80%e4%b9%8b%e4%b8%80/#9-%e5%8a%a0%e5%85%a5%e4%b8%80%e4%b8%aa%e7%ba%bf%e7%a8%8bjoin>无锁同步</a>，使用<code>CountDownLatch</code>可以更加简单的实现这一目的。毕竟，<code>join()</code>方法的语义“加入一个线程”不是很容易就能让人理解。相较于<code>join()</code>方法，<code>CountDownLatch</code>的语义就明确多了。</p><p>在有些文档上，将<code>CountDownLatch</code>译为"倒计时门闩【shuān】"，其维护一个计数器，这个计数器在<code>CountDownLatch</code>初始化之后便<strong>不能重置</strong>。在<code>CountDownLatch</code>上调用<code>countDown()</code>方法来将计数值减1，调用这个方法并不会引起阻塞。不过，在这个计数器为0之前，任何调用<code>CountDownLatch</code>的<code>await()</code>方法的任务都将阻塞。</p><p><code>CountDownLatch</code>的典型用法是将一个任务分割为n个可以独立解决的部分，并创建一个计数器值为n（n为线程数量）的<code>CountDownLatch</code>，在每个任务完成时，调用<code>countDown()</code>方法将计数器减1，在等待所有任务完成的线程上调用<code>await()</code>方法，将任务阻塞，直到计数器为0之后再继续运行。</p><p>下面的代码演示了CountdownLatch的用法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CountDownLatchDemo</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskPortion</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random(47);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> CountDownLatch latch;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        TaskPortion(CountDownLatch latch) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>latch</span> <span style=color:#f92672>=</span> latch;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                doWork();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException ex) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to exit</span>
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                latch.<span style=color:#a6e22e>countDown</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>doWork</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>            TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(rand.<span style=color:#a6e22e>nextInt</span>(2000));
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;completed&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> String.<span style=color:#a6e22e>format</span>(<span style=color:#e6db74>&#34;%1$-3d &#34;</span>, id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** Waits on the CountDownLatch: */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WaitingTask</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> CountDownLatch latch;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        WaitingTask(CountDownLatch latch) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>latch</span> <span style=color:#f92672>=</span> latch;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                latch.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Latch barrier passed for &#34;</span> <span style=color:#f92672>+</span> <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException ex) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; interrupted&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> String.<span style=color:#a6e22e>format</span>(<span style=color:#e6db74>&#34;WaitingTask %1$-3d &#34;</span>, id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> SIZE <span style=color:#f92672>=</span> 10;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 所有任务都必须使用同一个CountDownLatch对象</span>
+</span></span><span style=display:flex><span>        CountDownLatch latch <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CountDownLatch(SIZE);
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> WaitingTask(latch));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> SIZE; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> TaskPortion(latch));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Launched all tasks&#34;</span>);
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>shutdown</span>(); <span style=color:#75715e>// Quit when all tasks complete</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output (sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Launched all tasks
+</span></span></span><span style=display:flex><span><span style=color:#75715e>7   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>9   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>5   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>8   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>1   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>2   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>6   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>4   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>0   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>3   completed
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Latch barrier passed for WaitingTask 0  
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上面的示例中，WaitingTask将会阻塞，直到所有的TaskPortion执行完成，TaskPortion完成之后调用了<code>countDown()</code>方法，注意，<code>countDown()</code>方法是在finally块中调用的，这是为了防止TaskPortion出现异常而导致任务一直阻塞。当计数器为0后，我们看到WaitingTask成功执行。</p><p><code>await()</code>还有一个重载方法<code>await(long, TimeUnit)</code>，避免任务让线程一直等待。</p><h1 id=2-cyclicbarrier>2 CyclicBarrier
+<a class=anchor href=#2-cyclicbarrier>#</a></h1><p>CyclicBarrier被称为“同步屏障”，事实上就可以把它理解为一个屏障，多个任务调用屏障的<code>await()</code>方法将被阻塞，直到所有的任务都进入阻塞，那么屏障开启，所有任务继续执行。这看起来和CountDownLatch非常像，不过CountDownLatch只能触发一次，而CyclicBarrier可以多次重用，这是它们的主要区别之一。</p><p>和CountDownLatch一样，CyclicBarrier接受一个整型参数，表示可限制的线程数。除此之外，CyclicBarrier还可以接受一个Runnable作为参数，这个参数称作<code>barrierAction</code>，<code>barrierAction</code>在所有线程到达屏障之后即开始执行，其他任务<strong>只能等待</strong><code>barrierAction</code>执行完毕之后才能继续执行，这是CyclicBarrier和CountDownLatch的区别之二。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestCyclicBarrier</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> StringBuffer sb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> StringBuffer();
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** CyclicBarrier的构造器任务总是会先执行完毕 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> CyclicBarrier c <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CyclicBarrier(2, () <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>        sb.<span style=color:#a6e22e>append</span>(3);
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> ASSERT_VALUE <span style=color:#f92672>=</span> 312;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        Thread t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                c.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// ignore;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            sb.<span style=color:#a6e22e>append</span>(1);
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>        t.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            c.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>            sb.<span style=color:#a6e22e>append</span>(2);
+</span></span><span style=display:flex><span>            t.<span style=color:#a6e22e>join</span>();
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// ignore</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> Integer.<span style=color:#a6e22e>parseInt</span>(sb.<span style=color:#a6e22e>toString</span>()) <span style=color:#f92672>|</span> (sb.<span style=color:#a6e22e>delete</span>(0, sb.<span style=color:#a6e22e>length</span>())).<span style=color:#a6e22e>length</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (; ; ) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> r;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> ((r <span style=color:#f92672>=</span> run()) <span style=color:#f92672>!=</span> ASSERT_VALUE) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// should be 321</span>
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(r);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上例中，barrier有一个<code>barrierAction</code>和2个“屏障任务”，main方法的输出大概率为312，小概率为321，不会出现其他结果，所以main方法无论执行多长时间，其总会结束。由于<code>barrierAction</code>总是先执行，故结果总是3xx<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，其先执行完毕的原因在源码中很容易找到：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#75715e>//...</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 所有任务到达屏障</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> (index <span style=color:#f92672>==</span> 0) {  <span style=color:#75715e>// tripped</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>boolean</span> ranAction <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> Runnable command <span style=color:#f92672>=</span> barrierCommand;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//直接在当前线程调用command的run方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (command <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>        command.<span style=color:#a6e22e>run</span>();
+</span></span><span style=display:flex><span>    ranAction <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>    nextGeneration();  <span style=color:#75715e>// 唤醒所有线程</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> 0;
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>ranAction)
+</span></span><span style=display:flex><span>            breakBarrier();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>//...</span>
+</span></span></code></pre></div><p>不过，屏障开启后，任务的执行顺序完全是由cpu调度的。同时，本例中的CyclicBarrier是静态域，在main方法重复执行时，并不会重新初始化，因此也直接证明了CyclicBarrier的可重用性——屏障开启后，任务继续执行后调用屏障的<code>await()</code>方法同样会阻塞而等待所有任务到达屏障，依次循环。</p><p>下例的“赛马游戏”<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>完美地阐述了CyclicBarrier可以多次重用的特点，马每次跑一步，不过不同的马步长不同，等待所有的马都“跑出这一步”后，屏障开启，先确定是否有马到达终点，如有则结束赛跑，否则继续下一轮，直到有马越过终点线，下面是示例代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HorseRace</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Horse</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> strides <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random(47);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> CyclicBarrier barrier;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Horse</span>(CyclicBarrier b) {
+</span></span><span style=display:flex><span>            barrier <span style=color:#f92672>=</span> b;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getStrides</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> strides;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
+</span></span><span style=display:flex><span>                    strides <span style=color:#f92672>+=</span> rand.<span style=color:#a6e22e>nextInt</span>(3); <span style=color:#75715e>// Produces 0, 1 or 2</span>
+</span></span><span style=display:flex><span>                    barrier.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// A legitimate way to exit</span>
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (BrokenBarrierException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// This one we want to know about</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(e);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Horse &#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>tracks</span>() {
+</span></span><span style=display:flex><span>            StringBuilder s <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> StringBuilder();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> getStrides(); i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                s.<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;*&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            s.<span style=color:#a6e22e>append</span>(id);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> s.<span style=color:#a6e22e>toString</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> FINISH_LINE <span style=color:#f92672>=</span> 20;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> List<span style=color:#f92672>&lt;</span>Horse<span style=color:#f92672>&gt;</span> horses <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> CyclicBarrier barrier;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** 这是一构造器 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>HorseRace</span>(<span style=color:#66d9ef>int</span> nHorses, <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> pause) {
+</span></span><span style=display:flex><span>        barrier <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CyclicBarrier(nHorses, () <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>            StringBuilder s <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> StringBuilder();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> FINISH_LINE; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                s.<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;=&#34;</span>); <span style=color:#75715e>// The fence on the racetrack</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(s);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (Horse horse : horses) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(horse.<span style=color:#a6e22e>tracks</span>());
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (Horse horse : horses) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (horse.<span style=color:#a6e22e>getStrides</span>() <span style=color:#f92672>&gt;=</span> FINISH_LINE) {
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(horse <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;won!&#34;</span>);
+</span></span><span style=display:flex><span>                    exec.<span style=color:#a6e22e>shutdownNow</span>();
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(pause);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;barrier-action sleep interrupted&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> nHorses; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            Horse horse <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Horse(barrier);
+</span></span><span style=display:flex><span>            horses.<span style=color:#a6e22e>add</span>(horse);
+</span></span><span style=display:flex><span>            exec.<span style=color:#a6e22e>execute</span>(horse);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> nHorses <span style=color:#f92672>=</span> 7;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> pause <span style=color:#f92672>=</span> 200;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (args.<span style=color:#a6e22e>length</span> <span style=color:#f92672>&gt;</span> 0) { <span style=color:#75715e>// Optional argument</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> n <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Integer(args<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span>);
+</span></span><span style=display:flex><span>            nHorses <span style=color:#f92672>=</span> n <span style=color:#f92672>&gt;</span> 0 <span style=color:#f92672>?</span> n : nHorses;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (args.<span style=color:#a6e22e>length</span> <span style=color:#f92672>&gt;</span> 1) { <span style=color:#75715e>// Optional argument</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> p <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Integer(args<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>);
+</span></span><span style=display:flex><span>            pause <span style=color:#f92672>=</span> p <span style=color:#f92672>&gt;</span> <span style=color:#f92672>-</span>1 <span style=color:#f92672>?</span> p : pause;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> HorseRace(nHorses, pause);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>实际上程序通过获取每匹马的<code>strides</code>域来判断马是否到达终点。在TIJ原书中，对<code>strides</code>域的有关操作做了同步处理，而本例中移除了这些同步，这是否安全？虽然CyclicBarrier的<code>barrierAction</code>和<code>HorseRace</code>都访问了<code>strides</code>域，不过，二者访问域的时间一定是错开的：前者在所有马都到达屏障后开始访问，而此时的马处于阻塞状态，而马获得访问权时，<code>barrierAction</code>一定没在执行<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>。因此本例中，不使用同步也是安全的。</p><p>CyclicBarrier还有一些特殊方法：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>reset</span>();
+</span></span><span style=display:flex><span>    这个方法将CyclicBarrier重置到初始状态
+</span></span><span style=display:flex><span>    注意<span style=color:#960050;background-color:#1e0010>，</span>这个方法会导致已经在屏障处等待的线程抛出BrokenBarrierException
+</span></span><span style=display:flex><span>    如果确实需要一个新的CyclicBarrier来执行操作<span style=color:#960050;background-color:#1e0010>，</span>新建一个实例是更好的选择
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getNumberWaiting</span>() ;
+</span></span><span style=display:flex><span>    这个方法获取在屏障等待的线程数
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getParties</span>() ;
+</span></span><span style=display:flex><span>    这个方法获取所有的线程数<span style=color:#960050;background-color:#1e0010>（</span>用来构建CyclicBarrier实例的int入参<span style=color:#960050;background-color:#1e0010>）</span>
+</span></span></code></pre></div><p>下面的例子展示了在任务执行时重置CyclicBarrier的操作，这个示例只是为了展示上面几个方法的用法，<strong>千万不要</strong>在执行任务时贸然去做这样的操作！如果处理不得当将很大可能引发阻塞或其他并发问题。</p><blockquote><p>笔者本意是计划执行批量任务，这些任务有一个域来计算其运行次数，并可能在某个任务上调用CyclicBarrier的<code>reset()</code>方法，在<code>reset()</code>调用之前和之后的任务其运行次数会有差别，通过这个运行差异在<code>barrierAction</code>中来终结线程池。事实上这个预想完全落空了，<code>reset()</code>之后，如果不再次使所有线程重新到达屏障处等待，<code>barrierAction</code>就不可能执行。</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ResetCyclicBarrier</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>reSetBarrierIf</span>(<span style=color:#66d9ef>int</span> parties, <span style=color:#66d9ef>int</span> bound) {
+</span></span><span style=display:flex><span>        TaskMayFail<span style=color:#f92672>[]</span> tasks <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskMayFail<span style=color:#f92672>[</span>parties<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>        ThreadPoolExecutor exec <span style=color:#f92672>=</span> (ThreadPoolExecutor) Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>setKeepAliveTime</span>(0, TimeUnit.<span style=color:#a6e22e>SECONDS</span>);
+</span></span><span style=display:flex><span>        AtomicInteger ai <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicInteger();
+</span></span><span style=display:flex><span>        CyclicBarrier c2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CyclicBarrier(parties, () <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// if reset barrier while task is running, the</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// barrier action can not reach in this cycle</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// until relaunch all parties to reach at barrier</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// in next round</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> r <span style=color:#f92672>=</span> tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>runtime</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (i <span style=color:#f92672>&lt;</span> parties) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (r <span style=color:#f92672>!=</span> tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>runtime</span>) {
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span> tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>runtime</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;: &#34;</span> <span style=color:#f92672>+</span> r);
+</span></span><span style=display:flex><span>                    exec.<span style=color:#a6e22e>shutdownNow</span>();
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                r <span style=color:#f92672>=</span> tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>.<span style=color:#a6e22e>runtime</span>;
+</span></span><span style=display:flex><span>                i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> parties; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            TaskMayFail taskMayFail <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskMayFail(c2, ai, bound);
+</span></span><span style=display:flex><span>            tasks<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> taskMayFail;
+</span></span><span style=display:flex><span>            exec.<span style=color:#a6e22e>execute</span>(taskMayFail);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskMayFail</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> count <span style=color:#f92672>=</span> 1;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> CyclicBarrier cb;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> AtomicInteger reSetCount;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> bound;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> count<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> runtime <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TaskMayFail</span>(CyclicBarrier cb, AtomicInteger reSetCount, <span style=color:#66d9ef>int</span> bound) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>cb</span> <span style=color:#f92672>=</span> cb;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>reSetCount</span> <span style=color:#f92672>=</span> reSetCount;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>bound</span> <span style=color:#f92672>=</span> bound;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;[TaskMayFail-&#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;-runtime-&#34;</span> <span style=color:#f92672>+</span> runtime <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;]&#34;</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>isInterrupted</span>()) {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> (rand.<span style=color:#a6e22e>nextBoolean</span>()) {
+</span></span><span style=display:flex><span>                        <span style=color:#75715e>// bound值可调整reset的概率</span>
+</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>if</span> (rand.<span style=color:#a6e22e>nextInt</span>(bound) <span style=color:#f92672>==</span> 0) {
+</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ArithmeticException();
+</span></span><span style=display:flex><span>                        }
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    runtime<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>                    cb.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (ArithmeticException ae) {
+</span></span><span style=display:flex><span>                reSetCount.<span style=color:#a6e22e>incrementAndGet</span>();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (cb.<span style=color:#a6e22e>getNumberWaiting</span>() <span style=color:#f92672>&lt;</span> (cb.<span style=color:#a6e22e>getParties</span>() <span style=color:#f92672>-</span> reSetCount.<span style=color:#a6e22e>intValue</span>())) {
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// waiting for all parties reach at barrier</span>
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// or all parties throws exception</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// reset barrier</span>
+</span></span><span style=display:flex><span>                cb.<span style=color:#a6e22e>reset</span>();
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s-%s reset %s%n&#34;</span>,
+</span></span><span style=display:flex><span>                    Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>getName</span>(),
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>this</span>,
+</span></span><span style=display:flex><span>                    cb);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException <span style=color:#f92672>|</span> BrokenBarrierException ae) {
+</span></span><span style=display:flex><span>                reSetCount.<span style=color:#a6e22e>incrementAndGet</span>();
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// once barrier reset, other parties wait on barrier</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// will throw BrokenBarrierException</span>
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s-%s return by broken barrier.%n&#34;</span>,
+</span></span><span style=display:flex><span>                    Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>getName</span>(),
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>interrupt</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>            reSetBarrierIf(13, 100);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output (sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-3-[TaskMayFail-3-runtime-19] reset java.util.concurrent.CyclicBarrier@618bfe9a
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-4-[TaskMayFail-4-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-9-[TaskMayFail-9-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-8-[TaskMayFail-8-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-5-[TaskMayFail-5-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-12-[TaskMayFail-12-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-7-[TaskMayFail-7-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-13-[TaskMayFail-13-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-1-[TaskMayFail-1-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-11-[TaskMayFail-11-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-2-[TaskMayFail-2-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-10-[TaskMayFail-10-runtime-20] return by broken barrier.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>pool-1-thread-6-[TaskMayFail-6-runtime-19] reset java.util.concurrent.CyclicBarrier@618bfe9a
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>从输出可以看到，CyclicBarrier可以重复使用。上例的设计很巧妙，因为屏障在开启之后，任务可能很快就抛出<code>ArithmeticException</code>而进入<code>reset</code>流程，而此时其他任务可能在屏障处等待或者还未执行，若此时贸然reset，那些等待的线程会抛出<code>BrokenBarrierException</code>并退出，但是未执行的线程并未意识到reset的发生（可以这么表述），依然进入阻塞，如果没有再次任务进入<code>reset</code>流程，程序很快将因为没有足够多的线程到达屏障而阻塞<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>。</p><p>所以，上例引入一个原子变量，用于跟踪进入reset和已经退出的任务数，那么剩余的线程应该就是到达屏障的线程数，利用这个限制来保证<strong>所有的线程都得到处理</strong>，以简化问题的复杂性，一旦确定所有的线程都被处理，就可以执行<code>reset()</code>方法。同时<code>reset()</code>之后，<code>barrierAction</code>便无法执行。</p><h1 id=3-semaphore>3 Semaphore
+<a class=anchor href=#3-semaphore>#</a></h1><p>无论是显式锁还是通过synchronized关键字获取的隐式锁，其在任一时刻都只能让一个任务访问资源，而Semaphore（计数信号量）允许多个任务同时访问资源。可以把Semaphore看作是持有对象访问许可（permits）的“security”。访问对象时，须先通过<code>acquire()</code>获取许可，若此时没有许可可用，那么<code>acquire()</code>将阻塞，否则获取许可，可用许可数-1；使用完资源后，通过<code>release()</code>方法返还许可。事实上，并没有实际上的许可证对象，Semaphore通过协同各个线程工作，来达到目的。</p><p>Semaphore的构造器接受一个“公平性参数”。不传入此参数或传入<i>false</i>时，线程获取许可的顺序无法保证，即使线程阻塞了很久，其仍然可能被刚调用<code>acquire()</code>方法的线程“抢走”许可，这可能会导致线程“饿死”。当传入<i>true</i>时，Semaphore保证线程获取许可的顺序和其调用<code>acquire()</code>方法之后被执行的顺序一致<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>，也就是先执行的任务先获取许可（FIFO）。需要说明的是，<code>tryAcquire()</code>方法不遵循公平性原则，如果有许可可用，它直接获取之。在使用Semaphore时，一般将其设置为<strong>公平</strong>的</p><p>Semaphore通常用于限制访问资源的线程数量，典型的例子就是控制“池”的并发访问量。下例中使用Semaphore控制池中的对象方法，当需要使用时，可以将它们“签出”（checkout），使用完毕之后再将其“签入”（checkin），使用泛型类封装功能<sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pool</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> size;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> List<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> items <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[]</span> checkedOut;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Semaphore available;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Pool</span>(Class<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> classObject, <span style=color:#66d9ef>int</span> size) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> size;
+</span></span><span style=display:flex><span>        checkedOut <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>boolean</span><span style=color:#f92672>[</span>size<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>        available <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Semaphore(size, <span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Load pool with objects that can be checked out:</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> size; <span style=color:#f92672>++</span>i) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Assumes a default constructor:</span>
+</span></span><span style=display:flex><span>                items.<span style=color:#a6e22e>add</span>(classObject.<span style=color:#a6e22e>newInstance</span>());
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(e);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    T <span style=color:#a6e22e>checkOut</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        available.<span style=color:#a6e22e>acquire</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> getItem();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkIn</span>(T x) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (releaseItem(x)) {
+</span></span><span style=display:flex><span>            available.<span style=color:#a6e22e>release</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;release &#34;</span> <span style=color:#f92672>+</span> x);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkAllIn</span>() {
+</span></span><span style=display:flex><span>        available.<span style=color:#a6e22e>release</span>(releaseAll());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> T <span style=color:#a6e22e>getItem</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> size; <span style=color:#f92672>++</span>i) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>checkedOut<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>) {
+</span></span><span style=display:flex><span>                checkedOut<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> items.<span style=color:#a6e22e>get</span>(i);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Semaphore prevents reaching here</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>releaseItem</span>(T item) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> index <span style=color:#f92672>=</span> items.<span style=color:#a6e22e>indexOf</span>(item);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (index <span style=color:#f92672>==</span> <span style=color:#f92672>-</span>1) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>; <span style=color:#75715e>// Not in the list</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (checkedOut<span style=color:#f92672>[</span>index<span style=color:#f92672>]</span>) {
+</span></span><span style=display:flex><span>            checkedOut<span style=color:#f92672>[</span>index<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Wasn&#39;t checked out</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>releaseAll</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> r <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> items.<span style=color:#a6e22e>size</span>(); i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (checkedOut<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>) {
+</span></span><span style=display:flex><span>                checkedOut<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>                <span style=color:#f92672>++</span>r;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> r;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这个池使用<code>checkout</code>和<code>checkIn</code>方法来签出和签入对象，在签出对象之前调用<code>acquire()</code>，如果没有可用对象，那么<code>checkOut</code>将阻塞。由于Semaphore的机制，<code>checkOut</code>方法并不需要使用同步，但是<code>getItem</code>方法则需要同步了，Semaphore协同多线程对资源的访问，但是并不能保证多线程对资源修改的并发安全，这是两回事<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup>。<code>checkIn</code>方法则判断给定对象是否被使用，是则签入之，否则不做任何操作，同样的，<code>releaseItem</code>方法也需要使用同步。</p><blockquote><p><em>The semaphore encapsulates the synchronization needed to restrict access to the pool, separately from
+any synchronization needed to maintain the consistency of the pool itself.</em></p></blockquote><p>接下来我们可以测试这个池能否正常工作了:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SemaphoreDemo</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AcquireTask</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Pool<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> pool;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>AcquireTask</span>(Pool<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> pool) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>pool</span> <span style=color:#f92672>=</span> pool;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                T item <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>checkOut</span>();
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; acquire &#34;</span> <span style=color:#f92672>+</span> item);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to terminate</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;CheckoutTask-&#34;</span> <span style=color:#f92672>+</span> id;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ReleaseTask</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Pool<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> pool;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>ReleaseTask</span>(Pool<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> pool) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>pool</span> <span style=color:#f92672>=</span> pool;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                List<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> items <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>items</span>;
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (T item : items) {
+</span></span><span style=display:flex><span>                    pool.<span style=color:#a6e22e>checkIn</span>(item);
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to terminate</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;AcquireTask-&#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; &#34;</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Fat</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>double</span> d; <span style=color:#75715e>// Prevent optimization</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Fat</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Expensive, interruptible operation:</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 1; i <span style=color:#f92672>&lt;</span> 10000; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                d <span style=color:#f92672>+=</span> (Math.<span style=color:#a6e22e>PI</span> <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>E</span>) <span style=color:#f92672>/</span> (<span style=color:#66d9ef>double</span>) i;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fat-&#34;</span> <span style=color:#f92672>+</span> id;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> SIZE <span style=color:#f92672>=</span> 5;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> Pool<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> pool <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Pool<span style=color:#f92672>&lt;&gt;</span>(Fat.<span style=color:#a6e22e>class</span>, SIZE);
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> SIZE; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> AcquireTask<span style=color:#f92672>&lt;&gt;</span>(pool));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> ReleaseTask<span style=color:#f92672>&lt;&gt;</span>(pool));
+</span></span><span style=display:flex><span>        List<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> list <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> SIZE; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            Fat f <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>checkOut</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(i <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;: main() acquire &#34;</span> <span style=color:#f92672>+</span> f);
+</span></span><span style=display:flex><span>            list.<span style=color:#a6e22e>add</span>(f);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Future<span style=color:#f92672>&lt;?&gt;</span> blocked <span style=color:#f92672>=</span> exec.<span style=color:#a6e22e>submit</span>(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Semaphore prevents additional checkout,</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// so call is blocked:</span>
+</span></span><span style=display:flex><span>                pool.<span style=color:#a6e22e>checkOut</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;checkOut() Interrupted&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(2);
+</span></span><span style=display:flex><span>        blocked.<span style=color:#a6e22e>cancel</span>(<span style=color:#66d9ef>true</span>); <span style=color:#75715e>// Break out of blocked call</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// release all items</span>
+</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>checkAllIn</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (Fat f : list) {
+</span></span><span style=display:flex><span>            pool.<span style=color:#a6e22e>checkIn</span>(f); <span style=color:#75715e>// Second checkIn ignored</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>shutdown</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        SemaphoreDemo semaphoreDemo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SemaphoreDemo();
+</span></span><span style=display:flex><span>        semaphoreDemo.<span style=color:#a6e22e>test</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output(sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>AcquireTask-0 acquire Fat-0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>AcquireTask-4 acquire Fat-4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>AcquireTask-3 acquire Fat-3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>AcquireTask-2 acquire Fat-2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>AcquireTask-1 acquire Fat-1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>release Fat-0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>0: main() acquire Fat-0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>release Fat-1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>1: main() acquire Fat-1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>release Fat-2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>2: main() acquire Fat-2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>release Fat-3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>3: main() acquire Fat-3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>release Fat-4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>4: main() acquire Fat-4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>checkOut() Interrupted
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例<code>SemaphoreDemo</code>有两个任务，分别用于签入签出对象，程序首先使用<code>AcquireTask</code>签出所有对象，接着使用<code>ReleaseTask</code>签入对象。主线程接着依次签出所有对象，可以看到，主线程的签出过程是被阻塞的，只有对象签入之后，才能被签出。主线程签出所有对象之后，由于没有签入任务，接着的签出任务一定是被阻塞的，主线程休眠2s后中断了阻塞的任务。</p><h1 id=4-exchanger>4 Exchanger
+<a class=anchor href=#4-exchanger>#</a></h1><p>Exchanger是在两个任务之间交换对象的栅栏。当这些任务进入栅栏时，各自拥有一个对象，离开时交换它们拥有的对象。栅栏可以用来设计缓存对象，2个任务分别来使用和清空缓存，当缓存空间满时，则在Exchanger上交换缓存，缓存得以重复使用<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DataBuffer</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Queue<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> buffer;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** 利用size构造一个有界队列 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> size;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DataBuffer</span>(Class<span style=color:#f92672>&lt;?</span> <span style=color:#66d9ef>extends</span> Queue<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> cls, <span style=color:#66d9ef>int</span> size) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>(cls, size, <span style=color:#66d9ef>null</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DataBuffer</span>(Class<span style=color:#f92672>&lt;?</span> <span style=color:#66d9ef>extends</span> Queue<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> cls, <span style=color:#66d9ef>int</span> size, Generator<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> gen) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (cls <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NullPointerException();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 检查cls的类型，如果不是队列，则抛出异常</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>Queue.<span style=color:#a6e22e>class</span>.<span style=color:#a6e22e>isAssignableFrom</span>(cls)) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ClassCastException();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (size <span style=color:#f92672>&lt;</span> 0) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> size;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            Constructor<span style=color:#f92672>&lt;?</span> <span style=color:#66d9ef>extends</span> Queue<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> c <span style=color:#f92672>=</span> cls.<span style=color:#a6e22e>getConstructor</span>(<span style=color:#66d9ef>int</span>.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>            c.<span style=color:#a6e22e>setAccessible</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>buffer</span> <span style=color:#f92672>=</span> c.<span style=color:#a6e22e>newInstance</span>(size);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (NoSuchMethodException <span style=color:#f92672>|</span> SecurityException <span style=color:#f92672>|</span> InvocationTargetException e) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>buffer</span> <span style=color:#f92672>=</span> cls.<span style=color:#a6e22e>newInstance</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (gen <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> size; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>                buffer.<span style=color:#a6e22e>offer</span>(gen.<span style=color:#a6e22e>next</span>());
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isFull</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> buffer.<span style=color:#a6e22e>size</span>() <span style=color:#f92672>&gt;=</span> size;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isEmpty</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> buffer.<span style=color:#a6e22e>isEmpty</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>bufferSize</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> buffer.<span style=color:#a6e22e>size</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>public</span> Queue<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getBuffer</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> buffer;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>addToBuffer</span>(T t) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>isFull()) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> buffer.<span style=color:#a6e22e>offer</span>(t);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>synchronized</span> T <span style=color:#a6e22e>takeFromBuffer</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>isEmpty()) {
+</span></span><span style=display:flex><span>            buffer.<span style=color:#a6e22e>remove</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>DataBuffer</code>接受一个<code>Queue&lt;T></code>类型参数，用来初始化缓存队列，并且利用size指定了缓存队列的容量，作为是“达到栅栏”的前置条件。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BufferSwap</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FillTask</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> db;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Exchanger<span style=color:#f92672>&lt;</span>DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> ex;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Generator<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> gen;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>FillTask</span>(DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> db, Generator<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> gen, Exchanger<span style=color:#f92672>&lt;</span>DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> ex) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>db</span> <span style=color:#f92672>=</span> db;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>gen</span> <span style=color:#f92672>=</span> gen;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>ex</span> <span style=color:#f92672>=</span> ex;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (db <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> (db.<span style=color:#a6e22e>isFull</span>()) {
+</span></span><span style=display:flex><span>                        db <span style=color:#f92672>=</span> ex.<span style=color:#a6e22e>exchange</span>(db);
+</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                        db.<span style=color:#a6e22e>addToBuffer</span>(gen.<span style=color:#a6e22e>next</span>());
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// right to exit here</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EmptyTask</span><span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> db;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Exchanger<span style=color:#f92672>&lt;</span>DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> ex;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> ecLimit;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>EmptyTask</span>(DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> db, Exchanger<span style=color:#f92672>&lt;</span>DataBuffer<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span> ex, <span style=color:#66d9ef>int</span> limit) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>db</span> <span style=color:#f92672>=</span> db;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>ex</span> <span style=color:#f92672>=</span> ex;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>ecLimit</span> <span style=color:#f92672>=</span> limit;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (ec.<span style=color:#a6e22e>intValue</span>() <span style=color:#f92672>&lt;</span> ecLimit) {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> (db.<span style=color:#a6e22e>isEmpty</span>()) {
+</span></span><span style=display:flex><span>                        db <span style=color:#f92672>=</span> ex.<span style=color:#a6e22e>exchange</span>(db);
+</span></span><span style=display:flex><span>                        ec.<span style=color:#a6e22e>incrementAndGet</span>();
+</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                        db.<span style=color:#a6e22e>takeFromBuffer</span>();
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// exit by interrupted</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** 交换缓存的次数，用来限制程序的运行 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> AtomicInteger ec <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicInteger();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param size  the buffer size
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param limit the exchange time limit
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>(<span style=color:#66d9ef>int</span> size, <span style=color:#66d9ef>int</span> limit) {
+</span></span><span style=display:flex><span>        Exchanger<span style=color:#f92672>&lt;</span>DataBuffer<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;&gt;</span> xh <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Exchanger<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>        Generator<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> generator <span style=color:#f92672>=</span> BasicGenerator.<span style=color:#a6e22e>create</span>(Fat.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// ignore class check</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// can not solve the issue actually...</span>
+</span></span><span style=display:flex><span>        DataBuffer<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> fullBuffer, emptyBuffer;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            fullBuffer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DataBuffer(ArrayBlockingQueue.<span style=color:#a6e22e>class</span>, size, generator);
+</span></span><span style=display:flex><span>            emptyBuffer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DataBuffer(ArrayBlockingQueue.<span style=color:#a6e22e>class</span>, size);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;initialization failure&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        ExecutorService pool <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        Future<span style=color:#f92672>&lt;?&gt;</span> t1 <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>submit</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> FillTask(fullBuffer, generator, xh));
+</span></span><span style=display:flex><span>        Future<span style=color:#f92672>&lt;?&gt;</span> done <span style=color:#f92672>=</span> pool.<span style=color:#a6e22e>submit</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> EmptyTask<span style=color:#f92672>&lt;&gt;</span>(emptyBuffer, xh, limit));
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (; ; ) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (done.<span style=color:#a6e22e>isDone</span>()) {
+</span></span><span style=display:flex><span>                t1.<span style=color:#a6e22e>cancel</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>shutdown</span>();
+</span></span><span style=display:flex><span>        Queue<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> full <span style=color:#f92672>=</span> fullBuffer.<span style=color:#a6e22e>getBuffer</span>();
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34;fullTask&#39;s buffer: &#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (Fat fat : full) {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s\t&#34;</span>, fat);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>();
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>ocvnut</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;++++++++++++++++++++++++++++++++&#34;</span>);
+</span></span><span style=display:flex><span>        Queue<span style=color:#f92672>&lt;</span>Fat<span style=color:#f92672>&gt;</span> empty <span style=color:#f92672>=</span> emptyBuffer.<span style=color:#a6e22e>getBuffer</span>();
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34;emptyTask&#39;s buffer:&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (Fat fat : empty) {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;%s\t&#34;</span>, fat);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        BufferSwap bs <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BufferSwap();
+</span></span><span style=display:flex><span>        bs.<span style=color:#a6e22e>test</span>(10, 100);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output
+</span></span></span><span style=display:flex><span><span style=color:#75715e>fillTask&#39;s buffer: Fat-1000	Fat-1001	Fat-1002	Fat-1003	Fat-1004	Fat-1005	Fat-1006	Fat-1007	Fat-1008	Fat-1009
+</span></span></span><span style=display:flex><span><span style=color:#75715e>++++++++++++++++++++++++++++++++
+</span></span></span><span style=display:flex><span><span style=color:#75715e>emptyTask&#39;s buffer: Fat-990	Fat-991	Fat-992	Fat-993	Fat-994	Fat-995	Fat-996	Fat-997	Fat-998	Fat-999
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p><code>BufferSwap</code>中有2个任务，<code>FillTask</code>用来使用缓存，当缓存队列未满时，一直向缓存中添加对象，一旦缓存已满，则进入“栅栏”；而<code>EmptyTask</code>用来清空已满的缓存队列，知道缓存队列为空进入”栅栏”，同时为了限制缓存交换的次数，我们在缓存交换达到限制时停止<code>EmptyTask</code>。在<code>test()</code>方法中，我们初始化了2个缓存对象<code>fullBuffer</code>和<code>emptyBuffer</code>，前者会初始化一个满的缓存，后者则会初始化一个空的缓存。本例中传入的类型参数是<code>ArrayBlockingQueue.class</code>，并且忽略了类型检查<sup id=fnref:9><a href=#fn:9 class=footnote-ref role=doc-noteref>9</a></sup>。</p><p>之后提交这2个缓存任务，使用<code>Future&lt;?></code>来检查<code>EmptyTask</code>的状态并适时取消<code>FillTask</code>。这样做时可行的，因为<code>FillTask</code>一定会在最后一次交换之后继续使用而占满缓存空间进入“栅栏”处阻塞，使用<code>Future.cancel()</code>可以中断其阻塞并抛出中断异常，从而结束运行。随后重看2个任务阻塞队列中的对象，输出符合期望<sup id=fnref:10><a href=#fn:10 class=footnote-ref role=doc-noteref>10</a></sup>。</p><h1 id=5-priorityblockingqueue>5 PriorityBlockingQueue
+<a class=anchor href=#5-priorityblockingqueue>#</a></h1><p>就是一个基础的可阻塞的
+<a href=../../collections/queue/#1-priorityqueue>优先级队列</a>，当队列为空时，从队列中获取元素时被阻塞。其余特性和优先级队列是一致的。</p><p>下例展示了如何构建一个<span id=pt>可以放入优先级队列</span>的任务：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PrioritizedTask</span> <span style=color:#66d9ef>implements</span> Runnable, Comparable<span style=color:#f92672>&lt;</span>PrioritizedTask<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> List<span style=color:#f92672>&lt;</span>PrioritizedTask<span style=color:#f92672>&gt;</span> sequence <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random(47);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> priority;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>PrioritizedTask</span>(<span style=color:#66d9ef>int</span> priority) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>priority</span> <span style=color:#f92672>=</span> priority;
+</span></span><span style=display:flex><span>        sequence.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compareTo</span>(PrioritizedTask arg) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> priority <span style=color:#f92672>&lt;</span> arg.<span style=color:#a6e22e>priority</span> <span style=color:#f92672>?</span> 1 :
+</span></span><span style=display:flex><span>            (priority <span style=color:#f92672>&gt;</span> arg.<span style=color:#a6e22e>priority</span> <span style=color:#f92672>?</span> <span style=color:#f92672>-</span>1 : 0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(rand.<span style=color:#a6e22e>nextInt</span>(250));
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Acceptable way to exit</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> String.<span style=color:#a6e22e>format</span>(<span style=color:#e6db74>&#34;[%1$-3d]&#34;</span>, priority) <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34; Task &#34;</span> <span style=color:#f92672>+</span> id;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>summary</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;(&#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span> priority <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;)&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EndSentinel</span> <span style=color:#66d9ef>extends</span> PrioritizedTask {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ExecutorService exec;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>EndSentinel</span>(ExecutorService e) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>super</span>(<span style=color:#f92672>-</span>1); <span style=color:#75715e>// Lowest priority in this program</span>
+</span></span><span style=display:flex><span>            exec <span style=color:#f92672>=</span> e;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> count <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (PrioritizedTask pt : sequence) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(pt.<span style=color:#a6e22e>summary</span>());
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (<span style=color:#f92672>++</span>count <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0)
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; Calling shutdownNow()&#34;</span>);
+</span></span><span style=display:flex><span>            exec.<span style=color:#a6e22e>shutdownNow</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><code>PrioritizedTask</code>实现了Runnable和Comparable接口，有一个int型<code>priority</code>域，用来表示任务的优先级，在<code>compareTo</code>方法中的逻辑表示，优先级高的将会优先出队。其还有一个静态域，用来记录所有任务被置入队列的顺序。<code>PrioritizedTask</code>有一个静态内部类，也是其子类，它被称作“结束哨兵”，它的优先级为-1，代表它会最后出队，当执行这个任务时，代表任务所有的任务执行完毕，可以关闭线程池资源。</p><p>在接下来的示例中，将模拟生产者和消费者，执行PriorityBlockingQueue中的任务，我们可以从程序的输出观察优先级队列的出队（被执行）的顺序：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PriorityBlockingQueueDemo</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PrioritizedTaskProducer</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random(47);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Queue<span style=color:#f92672>&lt;</span>Runnable<span style=color:#f92672>&gt;</span> queue;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ExecutorService exec;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>PrioritizedTaskProducer</span>(
+</span></span><span style=display:flex><span>            Queue<span style=color:#f92672>&lt;</span>Runnable<span style=color:#f92672>&gt;</span> q, ExecutorService e) {
+</span></span><span style=display:flex><span>            queue <span style=color:#f92672>=</span> q;
+</span></span><span style=display:flex><span>            exec <span style=color:#f92672>=</span> e; <span style=color:#75715e>// Used for EndSentinel</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Unbounded queue; never blocks.</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Fill it up fast with random priorities:</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> PrioritizedTask(rand.<span style=color:#a6e22e>nextInt</span>(10)));
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>yield</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Trickle in highest-priority jobs:</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 10; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                    TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(250);
+</span></span><span style=display:flex><span>                    queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> PrioritizedTask(10));
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Add jobs, lowest priority first:</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 10; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>                    queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> PrioritizedTask(i));
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// A sentinel to stop all the tasks:</span>
+</span></span><span style=display:flex><span>                queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> PrioritizedTask.<span style=color:#a6e22e>EndSentinel</span>(exec));
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to exit</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Finished PrioritizedTaskProducer&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PrioritizedTaskConsumer</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> PriorityBlockingQueue<span style=color:#f92672>&lt;</span>Runnable<span style=color:#f92672>&gt;</span> q;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>PrioritizedTaskConsumer</span>(
+</span></span><span style=display:flex><span>            PriorityBlockingQueue<span style=color:#f92672>&lt;</span>Runnable<span style=color:#f92672>&gt;</span> q) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>q</span> <span style=color:#f92672>=</span> q;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>())
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Use current thread to run the task:</span>
+</span></span><span style=display:flex><span>                    q.<span style=color:#a6e22e>take</span>().<span style=color:#a6e22e>run</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to exit</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Finished PrioritizedTaskConsumer&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        PriorityBlockingQueue<span style=color:#f92672>&lt;</span>Runnable<span style=color:#f92672>&gt;</span> queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> PriorityBlockingQueue<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> PrioritizedTaskProducer(queue, exec));
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> PrioritizedTaskConsumer(queue));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output(partial)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[9  ] Task 5
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[9  ] Task 13
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[9  ] Task 14
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[8  ] Task 10
+</span></span></span><span style=display:flex><span><span style=color:#75715e>... other 15 tasks
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[0  ] Task 18
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[10 ] Task 20
+</span></span></span><span style=display:flex><span><span style=color:#75715e>... other 7 tasks
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[10 ] Task 28
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Finished PrioritizedTaskProducer
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[10 ] Task 29
+</span></span></span><span style=display:flex><span><span style=color:#75715e>... other 9 tasks
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[0  ] Task 30
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(0:8)(1:5)(2:3)(3:1)(4:1)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(5:9)(6:8)(7:0)(8:2)(9:7)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(10:8)(11:8)(12:1)(13:9)(14:9)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(15:8)(16:8)(17:1)(18:0)(19:8)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(20:10)(21:10)(22:10)(23:10)(24:10)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(25:10)(26:10)(27:10)(28:10)(29:10)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(30:0)(31:1)(32:2)(33:3)(34:4)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(35:5)(36:6)(37:7)(38:8)(39:9)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(40:-1)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[-1 ] Task 40 Calling shutdownNow()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Finished PrioritizedTaskConsumer
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p><code>PrioritizedTaskProducer</code>任务负责向队列添加40个任务，前20个任务不间断地添加进队，且随机0-10的优先级；后10个任务是间隔固定时间添加优先级为10的任务，最后10个任务不间断添加优先级递增到9的任务，最后添加"结束哨兵"任务，其将打印所有任务添加到队列的顺序。<code>PrioritizedTaskConsumer</code>则是不间断的尝试从队列中取出任务执行。从输出可以看到，队列中如果有优先级高的任务，它一定是先出队的。</p><p>这个例子不需要任何显式同步，因为阻塞队列提供了所需的同步。</p><h1 id=6-delayqueue>6 DelayQueue
+<a class=anchor href=#6-delayqueue>#</a></h1><p>DelayQueue是一个无界的阻塞队列，利用PriorityQueue实现，用于存放实现Delay接口<sup id=fnref:11><a href=#fn:11 class=footnote-ref role=doc-noteref>11</a></sup>的对象，队列中的对象只能在其到期之后才能被取出。同时其还是一个有序队列，即队头的元素将最先到期，若没有任何元素到期，就不会有队头元素，<code>poll()</code>方法将返回<code>null</code>，因此DelayQueue<strong>不接受</strong><code>null</code>作为元素。</p><p>实际上，在了解了<code>ScheduledThreadPoolExecutor.ScheduledFutureTask</code>的
+<a href=../%e8%ae%a1%e5%88%92%e6%89%a7%e8%a1%8c%e4%bb%bb%e5%8a%a1/#4-4-%e4%bb%bb%e5%8a%a1%e5%87%ba%e9%98%9f>出队规则</a>之后，DelayQueue的出队的实现也就不言自明了——当leader被设置时，表明有任务即将出队，其他任务进入等待，该任务出队之后重置leader：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Delayqueue.take</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> E <span style=color:#a6e22e>take</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> ReentrantLock lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>lock</span>;
+</span></span><span style=display:flex><span>    lock.<span style=color:#a6e22e>lockInterruptibly</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (;;) {
+</span></span><span style=display:flex><span>            E first <span style=color:#f92672>=</span> q.<span style=color:#a6e22e>peek</span>();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (first <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>                available.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>long</span> delay <span style=color:#f92672>=</span> first.<span style=color:#a6e22e>getDelay</span>(NANOSECONDS);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (delay <span style=color:#f92672>&lt;=</span> 0)
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>return</span> q.<span style=color:#a6e22e>poll</span>();
+</span></span><span style=display:flex><span>                first <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>; <span style=color:#75715e>// don&#39;t retain ref while waiting</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (leader <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>                    available.<span style=color:#a6e22e>await</span>();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                    Thread thisThread <span style=color:#f92672>=</span> Thread.<span style=color:#a6e22e>currentThread</span>();
+</span></span><span style=display:flex><span>                    leader <span style=color:#f92672>=</span> thisThread;
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                        available.<span style=color:#a6e22e>awaitNanos</span>(delay);
+</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>if</span> (leader <span style=color:#f92672>==</span> thisThread)
+</span></span><span style=display:flex><span>                            leader <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (leader <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> q.<span style=color:#a6e22e>peek</span>() <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>            available.<span style=color:#a6e22e>signal</span>();
+</span></span><span style=display:flex><span>        lock.<span style=color:#a6e22e>unlock</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>下例展示了如何构造一个可以放入DelayQueue中的任务，这个示例的基本逻辑和
+<a href=/zh/#pt>PrioritizedTask</a>相当：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DelayQueueDemo</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DelayedTask</span> <span style=color:#66d9ef>implements</span> Runnable, Delayed {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> List<span style=color:#f92672>&lt;</span>DelayedTask<span style=color:#f92672>&gt;</span> sequence <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id <span style=color:#f92672>=</span> counter<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> delta;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/** 到期时间 */</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>long</span> trigger;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DelayedTask</span>(<span style=color:#66d9ef>int</span> delayInMilliseconds) {
+</span></span><span style=display:flex><span>            delta <span style=color:#f92672>=</span> delayInMilliseconds;
+</span></span><span style=display:flex><span>            trigger <span style=color:#f92672>=</span> System.<span style=color:#a6e22e>nanoTime</span>() <span style=color:#f92672>+</span> NANOSECONDS.<span style=color:#a6e22e>convert</span>(delta, MILLISECONDS);
+</span></span><span style=display:flex><span>            sequence.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>long</span> <span style=color:#a6e22e>getDelay</span>(TimeUnit unit) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> unit.<span style=color:#a6e22e>convert</span>(trigger <span style=color:#f92672>-</span> System.<span style=color:#a6e22e>nanoTime</span>(), NANOSECONDS);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compareTo</span>(Delayed arg) {
+</span></span><span style=display:flex><span>            DelayedTask that <span style=color:#f92672>=</span> (DelayedTask) arg;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (trigger <span style=color:#f92672>&lt;</span> that.<span style=color:#a6e22e>trigger</span>) <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span>1;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (trigger <span style=color:#f92672>&gt;</span> that.<span style=color:#a6e22e>trigger</span>) <span style=color:#66d9ef>return</span> 1;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> 0;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; &#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> String.<span style=color:#a6e22e>format</span>(<span style=color:#e6db74>&#34;[%1$-4d]&#34;</span>, delta) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; Task &#34;</span> <span style=color:#f92672>+</span> id;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>summary</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;(&#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span> delta <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;)&#34;</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>EndSentinel</span> <span style=color:#66d9ef>extends</span> DelayedTask {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>private</span> ExecutorService exec;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>EndSentinel</span>(<span style=color:#66d9ef>int</span> delay, ExecutorService e) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>super</span>(delay);
+</span></span><span style=display:flex><span>                exec <span style=color:#f92672>=</span> e;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>();
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>for</span> (DelayedTask pt : sequence) {
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(pt.<span style=color:#a6e22e>summary</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; &#34;</span>);
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>();
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#66d9ef>this</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; Calling shutdownNow()&#34;</span>);
+</span></span><span style=display:flex><span>                exec.<span style=color:#a6e22e>shutdownNow</span>();
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DelayedTaskConsumer</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> DelayQueue<span style=color:#f92672>&lt;</span>DelayedTask<span style=color:#f92672>&gt;</span> q;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DelayedTaskConsumer</span>(DelayQueue<span style=color:#f92672>&lt;</span>DelayedTask<span style=color:#f92672>&gt;</span> q) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>q</span> <span style=color:#f92672>=</span> q;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>())
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Run task with the current thread</span>
+</span></span><span style=display:flex><span>                    q.<span style=color:#a6e22e>take</span>().<span style=color:#a6e22e>run</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                <span style=color:#75715e>// Acceptable way to exit</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Finished DelayedTaskConsumer&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        Random rand <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random(47);
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        DelayQueue<span style=color:#f92672>&lt;</span>DelayedTask<span style=color:#f92672>&gt;</span> queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DelayQueue<span style=color:#f92672>&lt;&gt;</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Fill with tasks that have random delays:</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>            queue.<span style=color:#a6e22e>put</span>(<span style=color:#66d9ef>new</span> DelayedTask(rand.<span style=color:#a6e22e>nextInt</span>(5000)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Set the stopping point</span>
+</span></span><span style=display:flex><span>        queue.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>new</span> DelayedTask.<span style=color:#a6e22e>EndSentinel</span>(5000, exec));
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> DelayedTaskConsumer(queue));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output（sample）
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[128 ] Task 11 [200 ] Task 7 [429 ] Task 5 [520 ] Task 18 [555 ] Task 1 [961 ] Task 4 [998 ] Task 16 [1207] Task 9 [1693] Task 2 [1809] Task 14 [1861] Task 3 [2278] Task 15 [3288] Task 10 [3551] Task 12 [4258] Task 0 [4258] Task 19 [4522] Task 8 [4589] Task 13 [4861] Task 17 [4868] Task 6
+</span></span></span><span style=display:flex><span><span style=color:#75715e>(0:4258) (1:555) (2:1693) (3:1861) (4:961) (5:429) (6:4868) (7:200) (8:4522) (9:1207) (10:3288) (11:128) (12:3551) (13:4589) (14:1809) (15:2278) (16:998) (17:4861) (18:520) (19:4258) (20:5000)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>[5000] Task 20 Calling shutdownNow()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Finished DelayedTaskConsumer
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>从输出可以看到，任务入队的顺序和任务出队的顺序没有任何关系，任务是按照超时先后出队的。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>这个示例演化自
+<a href=https://book.douban.com/subject/26591326/>《Java并发编程的艺术》方腾飞等.著</a>，第八章8.2节代码清单8-4。不过该书中关于这段代码的运行解释是不正确的，本例也证明了这一点。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>《Thinking in Java》 4th Edition, 第21章21.7.2示例代码。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>虽然是这样，但上述代码并不能保证对<code>strides</code>的内存可见性，main线程获取的可能不是最新值，使用<code>volatail</code>关键字修饰<code>strides</code>域可解决问题。&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>就算有任务再次进入了reset流程，也依然可能存在上面描述的问题，这仅仅增加了程序运行的不稳定性。&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>并不能保证先调用<code>acquire()</code>方法的线程就能先获得许可，而是先调用方法的线程先执行内部逻辑的线程优先获取许可。所以有可能线程a先于线程b调用<code>acquire()</code>方法，但是却晚于线程b到达“等待点”。&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6><p>这个示例演化自Semaphore的javaDoc：https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Semaphore.html。&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:7><p>如果使用是个“许可证数”为1的Semaphore，其作用相当于一个独占锁，任意时刻只有一个任务能够获取许可并且对资源进行修改，此时，<code>getItem</code>方法可以不使用同步。&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:8><p>这个示例演化自Exchanger的javaDoc：https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Exchanger.html。&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:9><p>忽略类型检查的原因是因为尚不能处理泛型编程的所有问题。理论上这里传入任意Queue<t>实现类都是可以的，但是由于示例中所用的实例Fat并没有实现Comparable接口，所以当传入优先级队列时，构造器会抛出初始化异常。&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:10><p>这里还存在一个潜在问题：<code>EmptyTask</code>完成时取消<code>FillTask</code>，<code>FillTask</code>的状态会影响程序的结果，若后者是在Exchanger处被阻塞时取消，那将抛出中断异常，程序输出如示例中说的那样；若后者在向缓存中添加对象时被中断，<code>shutdown()</code>方法无法立刻中止<code>FillTask</code>的运行，它将继续运行至进入栅栏而抛出异常，但是，主线程中的遍历(在使用普通队列时)就可能会抛出ConcorrentModificationException。解决此问题的方法是在<code>FillTask</code>中分别处理2种取消的情况，或者在主线程中使用<code>awaitTermination</code>等待<code>FillTask</code>抛出异常而终结。&#160;<a href=#fnref:10 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:11><p>Delay接口实际上继承了Comparable接口。&#160;<a href=#fnref:11 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#重要的并发组件>重要的并发组件</a></li><li><a href=#1-countdownlatch>1 CountDownLatch</a></li><li><a href=#2-cyclicbarrier>2 CyclicBarrier</a></li><li><a href=#3-semaphore>3 Semaphore</a></li><li><a href=#4-exchanger>4 Exchanger</a></li><li><a href=#5-priorityblockingqueue>5 PriorityBlockingQueue</a></li><li><a href=#6-delayqueue>6 DelayQueue</a></li></ul></nav></div></aside></main></body></html>

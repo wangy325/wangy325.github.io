@@ -1,0 +1,202 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  策略模式
+  #
+
+
+
+by Head First 设计模式:
+
+策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的变化独立于使用算法的"客户"。
+
+
+
+by Dive into Design Patterns:
+
+Strategy is a behavioral design pattern that lets you define a family of algorithms,
+put each of them into a separate class, and make their objects interchangeable.
+
+
+'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/utility/design_pattern/behaviour/3_strategy/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="策略模式"><meta property="og:description" content=' 策略模式 # by Head First 设计模式:
+策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的变化独立于使用算法的"客户"。
+by Dive into Design Patterns:
+Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.'><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-03-07T00:00:00+00:00"><meta property="article:modified_time" content="2024-06-19T21:11:17+08:00"><meta property="article:tag" content="Design Pattern"><title>策略模式 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/utility/design_pattern/behaviour/3_strategy/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle checked>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle checked>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/ class=active>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>策略模式</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#策略模式>策略模式</a><ul><li><a href=#设计原则>设计原则</a></li><li><a href=#uml简图>UML简图</a></li><li><a href=#示例代码>示例代码</a><ul><li><a href=#抽象角色>抽象角色</a></li><li><a href=#具体角色>具体角色</a></li><li><a href=#可变行为>可变行为</a></li><li><a href=#客户端代码>客户端代码</a></li></ul></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=策略模式>策略模式
+<a class=anchor href=#%e7%ad%96%e7%95%a5%e6%a8%a1%e5%bc%8f>#</a></h2><ul><li><p>by Head First 设计模式:</p><blockquote><p>策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的<strong>变化</strong>独立于使用算法的"客户"。</p></blockquote></li><li><p>by Dive into Design Patterns:</p><blockquote><p><strong>Strategy</strong> is a behavioral design pattern that lets you define a family of algorithms,
+put each of them into a separate class, and make their objects interchangeable.</p></blockquote></li></ul><h3 id=设计原则>设计原则
+<a class=anchor href=#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99>#</a></h3><ol><li>找出应用之中可以变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起</li><li>针对接口编程，而不是针对实现编程<ul><li>客户的行为可以抽象为接口的，不必让客户去实现接口。如果这样做，客户想改变行为需要不断地去编写
+实现。这样的行为，可以理解为针对实现编程。</li><li>鉴于此，可以在别处实现接口，客户只需要根据接口来选择合适的行为，这样做客户的代码更简洁且便于
+维护。</li></ul></li><li>多用组合，少用继承<ul><li>将两（多）个类组合起来使用，就是组合（<em>composition</em>），这样比使用继承好的一点是：系统的弹性
+更大，并且可以避免使用继承不得不出现的无意义重写（<em>override</em>）一些需要规避掉的方法。</li></ul></li></ol><h3 id=uml简图>UML简图
+<a class=anchor href=#uml%e7%ae%80%e5%9b%be>#</a></h3><script src=/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"dark"})</script><p class=mermaid>classDiagram
+direction UD
+class Charactor{
+<< Abstract >>
++WeaponBehavior weaponBehavior
++fight()*
++setWeapon(WeaponBeahvior)
+}
+Charactor <|-- King: Is A
+class King
+King: +fight()
+class Queen
+Queen: +fight()
+Charactor <|-- Queen: Is A
+class Knight
+Knight: +fight()
+Charactor <|-- Knight: Is A
+class WeaponBehavior
+Charactor *--> WeaponBehavior : Has A
+<< Interface >> WeaponBehavior
+WeaponBehavior: +useWeapon()*
+calss SwordBehavior
+WeaponBehavior <|.. SwordBehavior : Implement
+SwordBehavior: +useWeapon()
+calss AxeBehavior
+WeaponBehavior <|.. AxeBehavior : Implement
+AxeBehavior: +useWeapon()
+class KnifeBehavior
+WeaponBehavior <|.. KnifeBehavior: Implement
+KnifeBehavior: +useWeapon()</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>classDiagram
+    direction UD
+    class Charactor{
+        &lt;&lt;Abstract&gt;&gt;
+        +WeaponBehavior weaponBehavior
+        +fight()*
+        +setWeapon(WeaponBeahvior)
+    }
+    Charactor &lt;|-- King: Is A
+    class King
+    King: +fight()
+    class Queen
+    Queen: +fight()
+    Charactor &lt;|-- Queen: Is A
+    class Knight
+    Knight: +fight()
+    Charactor &lt;|-- Knight: Is A
+    
+    class WeaponBehavior
+    Charactor *--&gt; WeaponBehavior : Has A
+    &lt;&lt;Interface&gt;&gt; WeaponBehavior
+    WeaponBehavior: +useWeapon()*
+    
+    calss SwordBehavior
+    WeaponBehavior &lt;|.. SwordBehavior : Implement
+    SwordBehavior: +useWeapon()
+    calss AxeBehavior
+    WeaponBehavior &lt;|.. AxeBehavior : Implement
+    AxeBehavior: +useWeapon()
+    class KnifeBehavior
+    WeaponBehavior &lt;|.. KnifeBehavior: Implement
+    KnifeBehavior: +useWeapon()
+</code></pre><h3 id=示例代码>示例代码
+<a class=anchor href=#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81>#</a></h3><h4 id=抽象角色>抽象角色
+<a class=anchor href=#%e6%8a%bd%e8%b1%a1%e8%a7%92%e8%89%b2>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Duck</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 定义角色的可变行为</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> FlyBehavior flyBehavior;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> QuarkBehavior quarkBehavior;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 不变的部分</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swim</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>display</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// fly and quark</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 由于并不是所有的&#34;鸭子&#34;实现不能都会飞或者叫</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 实际开发中经常遇到实现并不需要全部的功能这种情况</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 于是把&#34;变化的部分&#34;独立出去，鸭子类更易于拓展，否则可能需要处理很多无用的覆写啦😄</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 实际上变化的功能，交给具体的实现去做啦</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * PS: 让鸭子实现直接实现FlyBehavior接口的话，也相当于只做了一半的工作。改变鸭子的行为，
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *     依然需要改变实现，这就是所谓&#34;面对实现编程&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>performFly</span>() {
+</span></span><span style=display:flex><span>        flyBehavior.<span style=color:#a6e22e>fly</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>performQuark</span>() {
+</span></span><span style=display:flex><span>        quarkBehavior.<span style=color:#a6e22e>quark</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 通过使用策略模式，不局限于规范行为的接口，可以动态改变实现的行为</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setFlyBehavior</span>(FlyBehavior fb) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>flyBehavior</span> <span style=color:#f92672>=</span> fb;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setQuarkBehavior</span>(QuarkBehavior qb) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>quarkBehavior</span> <span style=color:#f92672>=</span> qb;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=具体角色>具体角色
+<a class=anchor href=#%e5%85%b7%e4%bd%93%e8%a7%92%e8%89%b2>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MallardDuck</span> <span style=color:#66d9ef>extends</span> Duck {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>MallardDuck</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>quarkBehavior</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Quark();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>flyBehavior</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FlyWithWings();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swim</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//...</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>display</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//...</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=可变行为>可变行为
+<a class=anchor href=#%e5%8f%af%e5%8f%98%e8%a1%8c%e4%b8%ba>#</a></h4><p>可变行为一般有多个实现，这样才能实现策略嘛。比如支付通道什么的😄️。这里只简单贴点代码。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 要实现策略，它肯定有多个实现啦</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>FlyBehavior</span> { 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>fly</span>();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FlyWithWings</span> <span style=color:#66d9ef>implements</span> FlyBehavior{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>fly</span>() {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Yes! I can fly with wings!&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 另一个行为</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>QuarkBehavior</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>quark</span>();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Quark</span> <span style=color:#66d9ef>implements</span> QuarkBehavior{
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>quark</span>() {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Quark!&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=客户端代码>客户端代码
+<a class=anchor href=#%e5%ae%a2%e6%88%b7%e7%ab%af%e4%bb%a3%e7%a0%81>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DuckTest</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 这种🦆的飞/叫行为已经在策略里定义了</span>
+</span></span><span style=display:flex><span>        MallardDuck mock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MallardDuck();
+</span></span><span style=display:flex><span>        mock.<span style=color:#a6e22e>performFly</span>();
+</span></span><span style=display:flex><span>        mock.<span style=color:#a6e22e>performQuark</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 改变行为（策略）试试</span>
+</span></span><span style=display:flex><span>        mock.<span style=color:#a6e22e>setFlyBehavior</span>(<span style=color:#66d9ef>new</span> FlyWithRocket());
+</span></span><span style=display:flex><span>        mock.<span style=color:#a6e22e>performFly</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><a href=https://github.com/wangy325/java-review/blob/d6d740b5a9b5de3f7d64579288b1b8c96c8b8da5/src/main/java/com/wangy/designpattern/behavioral/strategy>更加详细的代码</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/f9cee305e3ea916ec0c7db13bf9e03cf90b9befb title='最后修改者 wangy325 | 六月 19, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>六月 19, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#策略模式>策略模式</a><ul><li><a href=#设计原则>设计原则</a></li><li><a href=#uml简图>UML简图</a></li><li><a href=#示例代码>示例代码</a><ul><li><a href=#抽象角色>抽象角色</a></li><li><a href=#具体角色>具体角色</a></li><li><a href=#可变行为>可变行为</a></li><li><a href=#客户端代码>客户端代码</a></li></ul></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

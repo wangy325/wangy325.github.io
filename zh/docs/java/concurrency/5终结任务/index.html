@@ -1,0 +1,379 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  终结任务
+  #
+
+一般地，如果程序运行良好，任务执行完所需操作后自然结束，任务终结。
+如果任务执行时出现异常，任务也会终结。
+在设计多个线程协同工作的任务时，需要判断任务终结的条件，以便合适地终结任务，这点尤为重要。
+在本节中主要讨论在多线程协同工作的情况下，如何合适的终结任务。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="终结任务"><meta property="og:description" content=" 终结任务 # 一般地，如果程序运行良好，任务执行完所需操作后自然结束，任务终结。
+如果任务执行时出现异常，任务也会终结。
+在设计多个线程协同工作的任务时，需要判断任务终结的条件，以便合适地终结任务，这点尤为重要。
+在本节中主要讨论在多线程协同工作的情况下，如何合适的终结任务。"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2020-10-23T00:00:00+00:00"><meta property="article:tag" content="Concurrency"><title>终结任务 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle checked>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/ class=active>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>终结任务</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#终结任务>终结任务</a></li><li><a href=#响应中断>响应中断</a></li><li><a href=#无法中断>无法中断</a></li><li><a href=#惯用法>惯用法</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=终结任务>终结任务
+<a class=anchor href=#%e7%bb%88%e7%bb%93%e4%bb%bb%e5%8a%a1>#</a></h1><p>一般地，如果程序运行良好，任务执行完所需操作后自然结束，任务终结。</p><p>如果任务执行时出现异常，任务也会终结。</p><p>在设计多个线程协同工作的任务时，需要判断<strong>任务终结的条件</strong>，以便合适地终结任务，这点尤为重要。</p><p>在本节中主要讨论在多线程协同工作的情况下，如何合适的终结任务。</p><h1 id=响应中断>响应中断
+<a class=anchor href=#%e5%93%8d%e5%ba%94%e4%b8%ad%e6%96%ad>#</a></h1><p>在讨论
+<a href=../2%e8%b5%84%e6%ba%90%e8%ae%bf%e9%97%ae%e5%8f%97%e9%99%90/#8-%e5%86%8d%e8%ae%baobject%e8%b6%85%e7%b1%bb>Object超类</a>的时候，我们曾通过“录音-播放”模型简单阐述线程之间的协同工作，在那个示例中，方便起见，我们通过<code>System.exit(0);</code>来粗暴地结束程序的运行。这种方式在并发编程实践中是不被允许的。</p><p>接下来的示例中，我们再次以线程之间的协同工作为切点，讨论如何“合理地”终结任务的运行。</p><p>下例模拟汽车的“打蜡-抛光”过程，抛光必须在打蜡完成之后，同样的，打蜡之前汽车必须是抛光过的。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Wax</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Car</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> waxOn <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>waxed</span>() {
+</span></span><span style=display:flex><span>            waxOn <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>; <span style=color:#75715e>// Ready to buff</span>
+</span></span><span style=display:flex><span>            notifyAll();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>buffed</span>() {
+</span></span><span style=display:flex><span>            waxOn <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>; <span style=color:#75715e>// Ready for another coat of wax</span>
+</span></span><span style=display:flex><span>            notifyAll();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>waitForWaxing</span>()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// waxOn = false时一直等待</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>waxOn)
+</span></span><span style=display:flex><span>                wait();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>waitForBuffing</span>()
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// waxOn = true时一直等待</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (waxOn)
+</span></span><span style=display:flex><span>                wait();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WaxOn</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Car car;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>WaxOn</span>(Car c) {
+</span></span><span style=display:flex><span>            car <span style=color:#f92672>=</span> c;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
+</span></span><span style=display:flex><span>                    TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(100);
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34;Wax On! &#34;</span>);
+</span></span><span style=display:flex><span>                    car.<span style=color:#a6e22e>waxed</span>();
+</span></span><span style=display:flex><span>                    car.<span style=color:#a6e22e>waitForBuffing</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;WaxOn Exiting via interrupt&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Ending Wax On task&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BufferOn</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Car car;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>BufferOn</span>(Car c) {
+</span></span><span style=display:flex><span>            car <span style=color:#f92672>=</span> c;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// 任务直接进入等待直到被唤醒, waxOn = true时得以执行</span>
+</span></span><span style=display:flex><span>                    car.<span style=color:#a6e22e>waitForWaxing</span>();
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34;Wax Off! &#34;</span>);
+</span></span><span style=display:flex><span>                    TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(100);
+</span></span><span style=display:flex><span>                    car.<span style=color:#a6e22e>buffed</span>();
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;BufferOn Exiting via interrupt&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Ending Buffer On task&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        Car car <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Car();
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> BufferOn(car));
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> WaxOn(car));
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(2); <span style=color:#75715e>// Run for a while...</span>
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>shutdownNow</span>(); <span style=color:#75715e>// Interrupt all tasks</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* Output: (95% match)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! Wax On! Wax Off! BufferOn Exiting via interrupt
+</span></span></span><span style=display:flex><span><span style=color:#75715e>WaxOn Exiting via interrupt
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Ending Wax On task
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Ending Buffer On task
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>因为两个任务是交互等待-执行的，调用<code>wait()</code>方法而进入<strong>WAITING</strong>状态的线程可以被中断并抛出异常<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>，上面的输出显示<code>BufferOn</code>任务先响应中断，这只是可能的情况之一，因为输出 <em>Wax Off!</em> 之后<code>BufferOn</code>任务会进入等待，而正好被中断。</p><p>调用执行器的<code>shutdownNow()</code>方法关闭提交的任务，<code>shutdownNow()</code>方法会立即给已经提交的任务发送一个中断<code>interrupt()</code>命令。调用<code>shutdownNow()</code>之后，可以看到两个任务都抛出<code>InterruptedException</code>。</p><blockquote><p>⚠️注意： 两个任务都抛出中断异常和任务中的sleep方法有关，由于sleep和wait都可以被中断并抛出异常，所以异常的抛出是由谁引发的并不容易确定。虽然try块位于任务的最外层，但是<code>Thread.interrupted()</code>方法并不抛出异常。</p></blockquote><p>上例实际上是利用了中断线程而出现的异常而终止线程的运行，然而，<strong>BLOCKED</strong><sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>状态下的线程无法响应中断。</p><h1 id=无法中断>无法中断
+<a class=anchor href=#%e6%97%a0%e6%b3%95%e4%b8%ad%e6%96%ad>#</a></h1><p>Thread提供了<code>interrupt()</code>方法，用于设置线程的中断状态。为了调用此方法，你必须持有Thread对象。并发编程过程中一般避免显式创建线程，上例中使用了<code>shutdownNow()</code>向任务发送<code>interrup()</code>命令，同样地，Java提供一个带有类型参数的接口
+<a href=../%e8%8e%b7%e5%8f%96%e4%bb%bb%e5%8a%a1%e7%9a%84%e8%bf%94%e5%9b%9e%e5%80%bc/#future-%e6%8e%a5%e5%8f%a3>Future&lt;V></a>，它具有取消任务执行的能力。</p><p>但是，阻塞状态下的线程是否都能响应中断呢？</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Interrupting</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>(Runnable r) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 构造一个可中断的任务</span>
+</span></span><span style=display:flex><span>        Future<span style=color:#f92672>&lt;?&gt;</span> f <span style=color:#f92672>=</span> exec.<span style=color:#a6e22e>submit</span>(r);
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(100);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 中断任务</span>
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(r.<span style=color:#a6e22e>getClass</span>().<span style=color:#a6e22e>getSimpleName</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; Interrupt: &#34;</span> <span style=color:#f92672>+</span> f.<span style=color:#a6e22e>cancel</span>(<span style=color:#66d9ef>true</span>));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        test(<span style=color:#66d9ef>new</span> SleepBlocked());
+</span></span><span style=display:flex><span>        test(<span style=color:#66d9ef>new</span> IOBlocked(System.<span style=color:#a6e22e>in</span>)); <span style=color:#75715e>// 不能中断</span>
+</span></span><span style=display:flex><span>        test(<span style=color:#66d9ef>new</span> SynchronizedBlocked()); <span style=color:#75715e>// 不能中断</span>
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(3);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>exit</span>(0); <span style=color:#75715e>// ... since last 2 interrupts failed</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** sleep可以被中断 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SleepBlocked</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(100);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;InterruptedException&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exiting SleepBlocked.run()&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** I/O不可被中断 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>IOBlocked</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> InputStream in;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>IOBlocked</span>(InputStream is) {
+</span></span><span style=display:flex><span>            in <span style=color:#f92672>=</span> is;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Waiting for read():&#34;</span>);
+</span></span><span style=display:flex><span>                in.<span style=color:#a6e22e>read</span>();
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>isInterrupted</span>()) {
+</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Interrupted from blocked I/O&#34;</span>);
+</span></span><span style=display:flex><span>                } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> RuntimeException(e);
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exiting IOBlocked.run()&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** 不可被中断 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SynchronizedBlocked</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>f</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) <span style=color:#75715e>// Never releases lock</span>
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>yield</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>SynchronizedBlocked</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 构造之后就获取锁而不释放</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> Thread(() <span style=color:#f92672>-&gt;</span> {
+</span></span><span style=display:flex><span>                f(); <span style=color:#75715e>// Lock acquired by this thread</span>
+</span></span><span style=display:flex><span>            }).<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/** run()方法将一直阻塞 */</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Trying to call f()&#34;</span>);
+</span></span><span style=display:flex><span>            f();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exiting SynchronizedBlocked.run()&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* output:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>InterruptedException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>SleepBlocked Interrupt: true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Exiting SleepBlocked.run()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Waiting for read():
+</span></span></span><span style=display:flex><span><span style=color:#75715e>IOBlocked Interrupt: true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Trying to call f()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>SynchronizedBlocked Interrupt: true
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>由于Future的<code>cancel(boolean)</code>方法也是向执行任务的线程发送<code>interrupt()</code>命令，上例中3个任务，只有<code>SleepBlocked</code>在休眠时被中断并退出运行，其他的两个任务<code>IOBlocked</code>和<code>SynchronizedBlocked</code>均没有被中断。实际上，在编码过程中我们也可以发现，只有<code>sleep()</code>方法需要处理<code>InterruptedException</code>异常，而无论时I/O还是尝试调用synchronized方法，都不需要处理<code>InterruptedException</code>。</p><p>对于I/O阻塞的情况，有一个简单的处理办法——即关闭任务在其上发生阻塞的资源：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CloseResource</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
+</span></span><span style=display:flex><span>        InputStream socketInput <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Socket(<span style=color:#e6db74>&#34;localhost&#34;</span>, 8080).<span style=color:#a6e22e>getInputStream</span>();
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> Interrupting.<span style=color:#a6e22e>IOBlocked</span>(socketInput));
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> Interrupting.<span style=color:#a6e22e>IOBlocked</span>(System.<span style=color:#a6e22e>in</span>));
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(10);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Shutting down all threads&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 两个任务都无法响应中断</span>
+</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>shutdownNow</span>();
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Closing &#34;</span> <span style=color:#f92672>+</span> socketInput.<span style=color:#a6e22e>getClass</span>().<span style=color:#a6e22e>getName</span>());
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 关闭资源可以使线程响应中断</span>
+</span></span><span style=display:flex><span>        socketInput.<span style=color:#a6e22e>close</span>(); <span style=color:#75715e>// Releases blocked thread</span>
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Closing &#34;</span> <span style=color:#f92672>+</span> System.<span style=color:#a6e22e>in</span>.<span style=color:#a6e22e>getClass</span>().<span style=color:#a6e22e>getName</span>());
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>in</span>.<span style=color:#a6e22e>close</span>(); <span style=color:#75715e>// Releases blocked thread</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* Output: (85% match)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Waiting for read():
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Waiting for read():
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Shutting down all threads
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Closing java.net.SocketInputStream
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Interrupted from blocked I/O
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Exiting IOBlocked.run()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Closing java.io.BufferedInputStream
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Exiting IOBlocked.run()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例中的2个任务都无法响应中断，但是一旦关闭资源，那么阻塞就被中断。</p><p>对于因获取锁失败而阻塞的情况，实际上，上例中的情况可以看作是<strong>死锁</strong>，由于任务无法获取对象的锁而一直阻塞。幸运的是，Java提供ReentrantLock锁，其具备在因获取锁而阻塞但是又能响应中断的能力。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LockingInterrupt</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 可重入锁获取锁的时候可以被中断</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Lock lock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ReentrantLock();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>LockingInterrupt</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// lock the instance once constructed</span>
+</span></span><span style=display:flex><span>        lock.<span style=color:#a6e22e>lock</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>f</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// invoke can be interrupted</span>
+</span></span><span style=display:flex><span>            lock.<span style=color:#a6e22e>lockInterruptibly</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;acquire lock in f() success&#34;</span>);
+</span></span><span style=display:flex><span>        }<span style=color:#66d9ef>catch</span> (InterruptedException e){
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Interrupted from acquire lock in f()&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MutexTask</span> <span style=color:#66d9ef>implements</span> Runnable{
+</span></span><span style=display:flex><span>        LockingInterrupt mbi <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> LockingInterrupt();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;waiting for f()&#34;</span>);
+</span></span><span style=display:flex><span>            mbi.<span style=color:#a6e22e>f</span>();
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Broken out of blocked call&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> InterruptedException {
+</span></span><span style=display:flex><span>        Thread t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> MutexTask());
+</span></span><span style=display:flex><span>        t.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 中断t，若不中断，t会一直阻塞</span>
+</span></span><span style=display:flex><span>        t.<span style=color:#a6e22e>interrupt</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>waiting for f()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Interrupted from acquire lock in f()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Broken out of blocked call
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例中，<code>LockingInterrupt</code>初始化的时候就占用锁，并没有释放锁，而在运行<code>f()</code>方法的时候再去获取锁时任务就被阻塞了，在调用<code>interrupt()</code>方法中断的时候，<code>lockInterruptibly()</code>响应了中断，任务结束程序退出。</p><h1 id=惯用法>惯用法
+<a class=anchor href=#%e6%83%af%e7%94%a8%e6%b3%95>#</a></h1><p>从上面的例子我们已经知道，可以通过检查线程的中断状态来结束任务的执行。下面的例子展示了一种惯用法，它使用try-finally块来紧跟资源，以应对任何时候任务出现中断时保证资源被释放：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InterruptingIdiom</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/** 需要清理的资源类 */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NeedsCleanup</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>NeedsCleanup</span>(<span style=color:#66d9ef>int</span> ident) {
+</span></span><span style=display:flex><span>            id <span style=color:#f92672>=</span> ident;
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;NeedsCleanup &#34;</span> <span style=color:#f92672>+</span> id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>cleanup</span>() {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Cleaning up &#34;</span> <span style=color:#f92672>+</span> id);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Blocked3</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> 0.<span style=color:#a6e22e>0</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
+</span></span><span style=display:flex><span>                    NeedsCleanup n1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> NeedsCleanup(1);
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// 在n1之后紧跟try-finally块，保证资源被合理的清除</span>
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>// node 1</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Sleeping&#34;</span>);
+</span></span><span style=display:flex><span>                        TimeUnit.<span style=color:#a6e22e>SECONDS</span>.<span style=color:#a6e22e>sleep</span>(1);
+</span></span><span style=display:flex><span>                        NeedsCleanup n2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> NeedsCleanup(2);
+</span></span><span style=display:flex><span>                        <span style=color:#75715e>// 同理</span>
+</span></span><span style=display:flex><span>                        <span style=color:#75715e>// node2</span>
+</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Calculating&#34;</span>);
+</span></span><span style=display:flex><span>                            <span style=color:#75715e>//耗时操作</span>
+</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 1; i <span style=color:#f92672>&lt;</span> 2500000; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>                                d <span style=color:#f92672>=</span> d <span style=color:#f92672>+</span> (Math.<span style=color:#a6e22e>PI</span> <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>E</span>) <span style=color:#f92672>/</span> d;
+</span></span><span style=display:flex><span>                            }
+</span></span><span style=display:flex><span>                            <span style=color:#75715e>// node3</span>
+</span></span><span style=display:flex><span>                            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Finished time-consuming operation&#34;</span>);
+</span></span><span style=display:flex><span>                        } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                            n2.<span style=color:#a6e22e>cleanup</span>();
+</span></span><span style=display:flex><span>                        }
+</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>finally</span> {
+</span></span><span style=display:flex><span>                        n1.<span style=color:#a6e22e>cleanup</span>();
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exiting via while() test&#34;</span>);
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exiting via InterruptedException&#34;</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (args.<span style=color:#a6e22e>length</span> <span style=color:#f92672>!=</span> 1) {
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;usage: java InterruptingIdiom delay-in-mS&#34;</span>);
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>exit</span>(1);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Thread t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(<span style=color:#66d9ef>new</span> Blocked3());
+</span></span><span style=display:flex><span>        t.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(<span style=color:#66d9ef>new</span> Integer(args<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span>));
+</span></span><span style=display:flex><span>        t.<span style=color:#a6e22e>interrupt</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>/* Output: (Sample)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>NeedsCleanup 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Sleeping
+</span></span></span><span style=display:flex><span><span style=color:#75715e>NeedsCleanup 2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Calculating
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Finished time-consuming operation
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Cleaning up 2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Cleaning up 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>NeedsCleanup 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Sleeping
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Cleaning up 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>Exiting via InterruptedException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
+</span></span></code></pre></div><p>上例接收一个参数，表示程序中断之前的运行时间(ms)，由于任务中有一段耗时的循环操作，当参数大小不同时，程序的输出会有所差异：</p><p>任务可能在node1和node2之间中断，因此其输出为：</p><pre><code>NeedsCleanup 1
+Sleeping
+Cleaning up 1
+Exiting via InterruptedException
+</code></pre><p>当任务在node2和node3之间设置中断状态，再次进入循环时中断被监测到，程序退出，此时的输出为：</p><pre><code>NeedsCleanup 1
+Sleeping
+NeedsCleanup 2
+Calculating
+Finished time-consuming operation
+Cleaning up 2
+Cleaning up 1
+Exiting via while() test
+</code></pre><p>总之，无论任务在何时被释放，其创建的资源都会被合适地释放。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>TIJ第四版第21章并发（694页）在描述线程的状态时，将调用休眠/等待之后线程的状态称为阻塞。为避免混淆，本文采用
+<a href=https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html>Thread.State</a>中关于线程的描述，并认为其不应该被称为阻塞状态。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>本博客约定此状态（等待锁）的线程才处于阻塞状态。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#终结任务>终结任务</a></li><li><a href=#响应中断>响应中断</a></li><li><a href=#无法中断>无法中断</a></li><li><a href=#惯用法>惯用法</a></li></ul></nav></div></aside></main></body></html>

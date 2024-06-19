@@ -1,0 +1,421 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="现在流行在项目中使用
+  swagger对接口进行测试，这确实很方便、直观。
+但是MockMvc作为spring-test包中指定的测试框架，在没有使用swagger的项目中，使用其进行测试是很好的选择。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="在SpringBoot项目中使用MockMvc进行接口测试"><meta property="og:description" content="现在流行在项目中使用 swagger对接口进行测试，这确实很方便、直观。
+但是MockMvc作为spring-test包中指定的测试框架，在没有使用swagger的项目中，使用其进行测试是很好的选择。"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2021-02-07T00:00:00+00:00"><meta property="article:modified_time" content="2021-02-07T00:00:00+00:00"><meta property="article:tag" content="Spring"><title>在SpringBoot项目中使用MockMvc进行接口测试 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/><link rel=stylesheet href=/book.min.4964903a822a7acb10dac6d1ab524833c97fb5f99b141976bcb8a47d539be9c0.css integrity="sha256-SWSQOoIqessQ2sbRq1JIM8l/tfmbFBl2vLikfVOb6cA=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.406184ba7e17fa154df9fc898d4a7301a2fef2ea3982811831050358afbf29aa.js integrity="sha256-QGGEun4X+hVN+fyJjUpzAaL+8uo5goEYMQUDWK+/Kao=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>必知必会</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>lambda表达式</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a role=button>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List/>List列表</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map/>Java集合框架之Map</a></li><li><a href=/zh/docs/java/collections/5_Collections/>Collections工具类</a></li><li><a href=/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1/>线程与任务</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90/>资源访问受限</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-e45ae315fd63ae771fd5cd0bb732cd6a class=toggle checked>
+<label for=section-e45ae315fd63ae771fd5cd0bb732cd6a class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/utility/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/utility/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/ class=active>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/utility/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>数据库</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-e0ec0d59ffd2b577bbabd60a51de9e11 class=toggle>
+<label for=section-e0ec0d59ffd2b577bbabd60a51de9e11 class="flex justify-between"><a role=button>定时任务</a></label><ul><li><a href=/zh/docs/misc/job/xxl-sharding-job/>在xxl-job中使用分片任务</a></li><li><a href=/zh/docs/misc/job/%E5%B8%B8%E8%A7%81cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%A4%BA%E4%BE%8B/>cron表达式速查</a></li></ul></li><li><input type=checkbox id=section-064c88e55046be49abd31400cc335650 class=toggle>
+<label for=section-064c88e55046be49abd31400cc335650 class="flex justify-between"><a role=button>版本控制</a></label><ul><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A82/>Git入门2</a></li><li><a href=/zh/docs/misc/vc/Git%E5%85%A5%E9%97%A81/>Git入门1</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>在SpringBoot项目中使用MockMvc进行接口测试</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-了解mockito>1 了解Mockito</a><ul><li><a href=#11-mock一个对象>1.1 mock一个对象</a></li><li><a href=#12-绑定方法参数和返回值>1.2 绑定方法参数和返回值</a></li><li><a href=#13-参数匹配器>1.3 参数匹配器</a></li><li><a href=#14-检验方法被调用的次数>1.4 检验方法被调用的次数</a></li></ul></li><li><a href=#2-使用mockmvc测试控制器>2 使用MockMvc测试控制器</a><ul><li><a href=#21-熟悉这几个静态导入>2.1 熟悉这几个静态导入</a></li><li><a href=#22-测试示例>2.2 测试示例</a><ul><li><a href=#221-简单路径参数get请求测试>2.2.1 简单路径参数GET请求测试</a></li><li><a href=#222-拼接参数的get方法测试>2.2.2 拼接参数的GET方法测试</a></li><li><a href=#223-post请求方法测试>2.2.3 POST请求方法测试</a></li></ul></li></ul></li><li><a href=#3-jsonpath>3 JsonPath</a></li><li><a href=#4-补充内容使用idea直接进行restful接口测试>4 补充内容：使用idea直接进行RESTful接口测试</a></li><li><a href=#参考>参考</a></li></ul></nav></aside></header><article class="markdown book-article"><p>现在流行在项目中使用
+<a href=https://swagger.io>swagger</a>对接口进行测试，这确实很方便、直观。</p><p>但是MockMvc作为spring-test包中指定的测试框架，在没有使用swagger的项目中，使用其进行测试是很好的选择。</p><p>本文简单介绍在springboot项目中使用
+<a href=https://site.mockito.org/>Mockito</a>和
+<a href=https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html>MockMvc</a>对控制器进行测试。</p><h1 id=1-了解mockito>1 了解Mockito
+<a class=anchor href=#1-%e4%ba%86%e8%a7%a3mockito>#</a></h1><p>简单来说，
+<a href=https://site.mockito.org/>Mockito</a>是一个模拟创建对象的框架，利用它提供的API，可以简化单元测试工作。Mockito的API易读性是很好的，并且错误信息也很简明。<code>spring-boot-starter-test</code>模块中引入了<code>mockito</code>依赖，如果你使用springboot，那么就可以直接使用Mockito进行单元测试。</p><p>我们从Mockito
+<a href=https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html>官方API文档</a>的的引例开始，看看Mockito是如何工作的。</p><h2 id=11-mock一个对象>1.1 mock一个对象
+<a class=anchor href=#11-mock%e4%b8%80%e4%b8%aa%e5%af%b9%e8%b1%a1>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 学会使用静态导入，代码会更简洁</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>import static</span> org.mockito.Mockito.*;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// mock List接口对象</span>
+</span></span><span style=display:flex><span> List mockedList <span style=color:#f92672>=</span> mock(List.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 使用Mock的List对象</span>
+</span></span><span style=display:flex><span> mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;one&#34;</span>);
+</span></span><span style=display:flex><span> mockedList.<span style=color:#a6e22e>clear</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 校验某个行为是否发生过1次</span>
+</span></span><span style=display:flex><span> verify(mockedList).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;one&#34;</span>);
+</span></span><span style=display:flex><span> verify(mockedList).<span style=color:#a6e22e>clear</span>();
+</span></span></code></pre></div><p>一旦mock对象被创建，mock会记住对其的所有操作，之后，你便可以选择性的<span id=v1>校验</span>这些操作。</p><h2 id=12-绑定方法参数和返回值>1.2 绑定方法参数和返回值
+<a class=anchor href=#12-%e7%bb%91%e5%ae%9a%e6%96%b9%e6%b3%95%e5%8f%82%e6%95%b0%e5%92%8c%e8%bf%94%e5%9b%9e%e5%80%bc>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#75715e>// 也可以mock实体类对象</span>
+</span></span><span style=display:flex><span> LinkedList mockedList <span style=color:#f92672>=</span> mock(LinkedList.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 为指定参数的操作绑定返回值（stubbing）</span>
+</span></span><span style=display:flex><span> when(mockedList.<span style=color:#a6e22e>get</span>(0)).<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;first&#34;</span>);
+</span></span><span style=display:flex><span> when(mockedList.<span style=color:#a6e22e>get</span>(1)).<span style=color:#a6e22e>thenThrow</span>(<span style=color:#66d9ef>new</span> RuntimeException());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 打印 first</span>
+</span></span><span style=display:flex><span> System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(mockedList.<span style=color:#a6e22e>get</span>(0));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 抛出 RunTimeException</span>
+</span></span><span style=display:flex><span> System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(mockedList.<span style=color:#a6e22e>get</span>(1));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 打印null，因为get(999)的返回值没有指定</span>
+</span></span><span style=display:flex><span> System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(mockedList.<span style=color:#a6e22e>get</span>(999));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 尽管也可以对绑定操作进行校验，不过这通常是非必要的</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 如果你关注get(0)的返回值，那么你应该在代码里进行测试</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 如果get(0)的返回值无关紧要，那么就没有必要进行绑定</span>
+</span></span><span style=display:flex><span> verify(mockedList).<span style=color:#a6e22e>get</span>(0);
+</span></span></code></pre></div><p>一般来说，对于任意有返回值的方法，mockito都会返回null、原始类型/原始类型的包装类、或者一个空的集合。</p><p>返回值的绑定操作<strong>可以被覆盖</strong>。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 返回值的绑定可以连续设置</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 最后一次绑定就是实际调用的返回值</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 例如，mock.someMethod(&#34;some arg&#34;)将返回“foo”</span>
+</span></span><span style=display:flex><span>when(mock.<span style=color:#a6e22e>someMethod</span>(<span style=color:#e6db74>&#34;some arg&#34;</span>))
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenThrow</span>(<span style=color:#66d9ef>new</span> RuntimeException())
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;foo&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 连续绑定的简单形式：</span>
+</span></span><span style=display:flex><span>when(mock.<span style=color:#a6e22e>someMethod</span>(<span style=color:#e6db74>&#34;some arg&#34;</span>))
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;one&#34;</span>, <span style=color:#e6db74>&#34;two&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于：</span>
+</span></span><span style=display:flex><span>when(mock.<span style=color:#a6e22e>someMethod</span>(<span style=color:#e6db74>&#34;some arg&#34;</span>))
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;one&#34;</span>)
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;two&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 抛出异常的简单形式：</span>
+</span></span><span style=display:flex><span>when(mock.<span style=color:#a6e22e>someMethod</span>(<span style=color:#e6db74>&#34;some arg&#34;</span>))
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>thenThrow</span>(<span style=color:#66d9ef>new</span> RuntimeException(), <span style=color:#66d9ef>new</span> NullPointerException());
+</span></span></code></pre></div><p>一旦方法的返回值被绑定，那么其将一直返回绑定的值，无论其被调用多少次。</p><h2 id=13-参数匹配器>1.3 参数匹配器
+<a class=anchor href=#13-%e5%8f%82%e6%95%b0%e5%8c%b9%e9%85%8d%e5%99%a8>#</a></h2><p>上面形式的返回值绑定在测试时似乎很好用，我们构建参数，设置预期的返回结果，再进行校验即可。但仔细想想，或许少了点什么？对，少了参数的模糊匹配，比如我想绑定<code>get(int)</code>方法的返回值，无论其参数是多少。mockito自然能够为我们做到这些：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#75715e>// 使用mockito内建的anyInt()来进行匹配</span>
+</span></span><span style=display:flex><span> when(mockedList.<span style=color:#a6e22e>get</span>(anyInt())).<span style=color:#a6e22e>thenReturn</span>(<span style=color:#e6db74>&#34;element&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>//stubbing using custom matcher (let&#39;s say isValid() returns your own matcher implementation):</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 使用自定义matcher进行绑定</span>
+</span></span><span style=display:flex><span> when(mockedList.<span style=color:#a6e22e>contains</span>(argThat(isValid()))).<span style=color:#a6e22e>thenReturn</span>(<span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>//following prints &#34;element&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 打印999</span>
+</span></span><span style=display:flex><span> System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(mockedList.<span style=color:#a6e22e>get</span>(999));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// 也可以校验方法被调用了一次</span>
+</span></span><span style=display:flex><span> verify(mockedList).<span style=color:#a6e22e>get</span>(anyInt());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>// mockito同样支持java8的lambda表达式进行参数匹配</span>
+</span></span><span style=display:flex><span> verify(mockedList).<span style=color:#a6e22e>add</span>(argThat(someString <span style=color:#f92672>-&gt;</span> someString.<span style=color:#a6e22e>length</span>() <span style=color:#f92672>&gt;</span> 5));
+</span></span></code></pre></div><p>参数匹配可以方便地进行动态返回值绑定校验。</p><p>想了解更多关于 argument matcher和hamcrest matcher的内容，可参考：</p><ul><li><a href=https://javadoc.io/static/org.mockito/mockito-core/3.8.0/org/mockito/ArgumentMatchers.html>https://javadoc.io/static/org.mockito/mockito-core/3.8.0/org/mockito/ArgumentMatchers.html</a></li><li><a href=https://javadoc.io/static/org.mockito/mockito-core/3.8.0/org/mockito/hamcrest/MockitoHamcrest.html>https://javadoc.io/static/org.mockito/mockito-core/3.8.0/org/mockito/hamcrest/MockitoHamcrest.html</a></li></ul><p>除了使用matcher之外，mockito还支持使用类型（class）匹配，这种参数匹配方式在进行MVC测试时，对json参数进行序列化和反序列化时尤其有用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>when(spittleService.<span style=color:#a6e22e>pageQuerySpittlesByTimeLine</span>(any(SpittleDTO.<span style=color:#a6e22e>class</span>))).<span style=color:#a6e22e>thenReturn</span>(page);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> ResultActions resultActions <span style=color:#f92672>=</span> mockMvc
+</span></span><span style=display:flex><span>                .<span style=color:#a6e22e>perform</span>(MockMvcRequestBuilders.<span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#34;/spittle/range/spittles&#34;</span>)
+</span></span><span style=display:flex><span>                        .<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>)
+</span></span><span style=display:flex><span>                        .<span style=color:#a6e22e>content</span>(jsonString)
+</span></span><span style=display:flex><span>                );
+</span></span></code></pre></div><p>就像上面那样，在使用<code>RequestBody</code>传参时，若使用JSON，需要对json字符串进行<strong>反序列化</strong>。这种情形，在进行参数绑定时，自然不能使用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>when(spittleService.<span style=color:#a6e22e>pageQuerySpittlesByTimeLine</span>(spittleDTO).<span style=color:#a6e22e>thenReturn</span>(page);
+</span></span></code></pre></div><p>这样的形式，因为控制器接收到的必然不是这个指定的<code>spittleDTO</code>对象。使用类类型参数，mockito进行参数匹配时，使用<code>equals</code>方法比较的对象的相等性，因此可以获取绑定的返回值。</p><blockquote><p><a href=https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#argument_matchers>Sometimes its just better to refactor the code to allow equals() matching or even implement equals() method to help out with testing</a>.</p></blockquote><h2 id=14-检验方法被调用的次数>1.4 检验方法被调用的次数
+<a class=anchor href=#14-%e6%a3%80%e9%aa%8c%e6%96%b9%e6%b3%95%e8%a2%ab%e8%b0%83%e7%94%a8%e7%9a%84%e6%ac%a1%e6%95%b0>#</a></h2><p><a href=/zh/#v1>前文</a>我们提到，<code>verify()</code>方法可以校验指定方法被调用过一次。</p><p>mokito提供了更加灵活的校验API，可以用来检验指定方法被调用的次数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//using mock</span>
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;once&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;twice&#34;</span>);
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;twice&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>mockedList.<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 当verify方法不指定次数时，默认检验方法调用1次，以下2个调用是等价的</span>
+</span></span><span style=display:flex><span>verify(mockedList).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;once&#34;</span>);
+</span></span><span style=display:flex><span>verify(mockedList, times(1)).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;once&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// add(&#34;twice)被调用了2次</span>
+</span></span><span style=display:flex><span>verify(mockedList, times(2)).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;twice&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>// add(&#34;three times&#34;)被调用了3次</span>
+</span></span><span style=display:flex><span>verify(mockedList, times(3)).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// add(&#34;never happened&#34;)方法没有被调用</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于 times(0)</span>
+</span></span><span style=display:flex><span>verify(mockedList, never()).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;never happened&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 使用atLeast()/atMost()可以校验参数至少/至多被调用几次</span>
+</span></span><span style=display:flex><span>verify(mockedList, atMostOnce()).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;once&#34;</span>);
+</span></span><span style=display:flex><span>verify(mockedList, atLeastOnce()).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>verify(mockedList, atLeast(2)).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span><span style=display:flex><span>verify(mockedList, atMost(5)).<span style=color:#a6e22e>add</span>(<span style=color:#e6db74>&#34;three times&#34;</span>);
+</span></span></code></pre></div><p><code>times(1)</code>是默认，因此<code>verify(mockedList, times(1)).add("once")</code>这样的形式是不必要的。</p><p>除了上面介绍的之外，moikito还有很多使用的测试方法，具体可以参考API文档：</p><ul><li><a href=https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#in_order_verification>https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#in_order_verification</a></li></ul><h1 id=2-使用mockmvc测试控制器>2 使用MockMvc测试控制器
+<a class=anchor href=#2-%e4%bd%bf%e7%94%a8mockmvc%e6%b5%8b%e8%af%95%e6%8e%a7%e5%88%b6%e5%99%a8>#</a></h1><p>介绍了mockito的基本用法，可以开始用它测试控制器了。</p><p>spring web项目的测试使用的是Spring MVC测试框架（<em>Spring MVC Test framework(MockMvc)</em>），其使用方式和Mockito很像，实际上MockMvc借用了Mockito的API，因此，熟悉Mockito的使用对使用MockMVC测试web服务大有裨益。</p><h2 id=21-熟悉这几个静态导入>2.1 熟悉这几个静态导入
+<a class=anchor href=#21-%e7%86%9f%e6%82%89%e8%bf%99%e5%87%a0%e4%b8%aa%e9%9d%99%e6%80%81%e5%af%bc%e5%85%a5>#</a></h2><ul><li>MockMvcBuilders.*</li><li>MockMvcRequestBuilders.*</li><li>MockMvcResultMatchers.*</li><li>MockMvcResultHandlers.*</li></ul><p>和Mockito一样，熟悉并使用静态导入会让代码看起来更简洁。不过，对刚使用MockMVC进行测试的新手来说，使用静态导入可能会陷入一个麻烦：方法这么多，我怎么记得这个方法该使用哪个静态导入，容易陷入混乱。</p><p>不过，记住他们的惯用法就行了：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// MockMvcBuilders.* 用于构建MockMvc应用</span>
+</span></span><span style=display:flex><span>MockMvc mockMvc <span style=color:#f92672>=</span> MockMvcBuilders.<span style=color:#a6e22e>stansaloneSetup</span>(controller).<span style=color:#a6e22e>build</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// MockMvcRequestBuilders.*用于构建请求</span>
+</span></span><span style=display:flex><span>ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(MockMvcRequestBuilders.<span style=color:#a6e22e>get</span>(url));
+</span></span><span style=display:flex><span>ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(MockMvcRequestBuilders.<span style=color:#a6e22e>post</span>(url));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// MockMvcResultMatchers.*用于请求结果匹配</span>
+</span></span><span style=display:flex><span>resultActions.<span style=color:#a6e22e>andExpect</span>(MockMvcResultMatchers.<span style=color:#a6e22e>status</span>().<span style=color:#a6e22e>isOK</span>())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// MockMvcResultHandlers.* 嘛，用得少，其提供一个print()方法，可以打印请求信息</span>
+</span></span><span style=display:flex><span>resultActions.<span style=color:#a6e22e>andDo</span>(MockMvcResultHandlers.<span style=color:#a6e22e>print</span>());
+</span></span></code></pre></div><h2 id=22-测试示例>2.2 测试示例
+<a class=anchor href=#22-%e6%b5%8b%e8%af%95%e7%a4%ba%e4%be%8b>#</a></h2><p>在进行<span id=start>单元测试</span>时，通常习惯将通用模版进行抽象，本示例中也是如此，我们建立一个抽象测试类，用于准备数据、提供<span id=jsonpath>通用方法</span>等：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@SpringBootTest</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@TestPropertySource</span>(<span style=color:#e6db74>&#34;classpath:application-test.properties&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BaseMockInit</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    @Autowired</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    protected ObjectMapper objectMapper;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> ObjectMapper objectMapper <span style=color:#f92672>=</span> Jackson2ObjectMapperBuilder.<span style=color:#a6e22e>json</span>().<span style=color:#a6e22e>build</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#a6e22e>@Mock</span>
+</span></span><span style=display:flex><span>    ISpitterService spitterService;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#a6e22e>@Mock</span>
+</span></span><span style=display:flex><span>    ISpittleService spittleService;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> SpitterController spitterController;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> SpittleController spittleController;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>initMock</span>() {
+</span></span><span style=display:flex><span>        MockitoAnnotations.<span style=color:#a6e22e>initMocks</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>        spitterController <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SpitterController();
+</span></span><span style=display:flex><span>        spitterController.<span style=color:#a6e22e>setSpitterService</span>(spitterService);
+</span></span><span style=display:flex><span>        spittleController <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SpittleController();
+</span></span><span style=display:flex><span>        spittleController.<span style=color:#a6e22e>setSpittleService</span>(spittleService);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>你可能注意到上面的示例中使用的<code>@Mock</code>注解和<code>MockitoAnnotations.initMocks(this);</code>方法，实际作用就是mock web测试中所需要使用到的服务层service，因为测试web模块不涉及到数据服务层的业务，因此借助Mockito即可轻松创建测试所需要的实例。</p><h3 id=221-简单路径参数get请求测试>2.2.1 简单路径参数GET请求测试
+<a class=anchor href=#221-%e7%ae%80%e5%8d%95%e8%b7%af%e5%be%84%e5%8f%82%e6%95%b0get%e8%af%b7%e6%b1%82%e6%b5%8b%e8%af%95>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>getSpitterById</span>() <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>    SpitterVO source <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SpitterVO(1, <span style=color:#e6db74>&#34;alan&#34;</span>, <span style=color:#e6db74>&#34;walker&#34;</span>, <span style=color:#e6db74>&#34;aw&#34;</span>, <span style=color:#e6db74>&#34;xxx&#34;</span>);
+</span></span><span style=display:flex><span>    Spitter spitter <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Spitter();
+</span></span><span style=display:flex><span>    BeanUtils.<span style=color:#a6e22e>copyBeanProp</span>(spitter, source);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    when(spitterService.<span style=color:#a6e22e>getById</span>(1)).<span style=color:#a6e22e>thenReturn</span>(spitter);
+</span></span><span style=display:flex><span>    spitterController.<span style=color:#a6e22e>setSpitterService</span>(spitterService);
+</span></span><span style=display:flex><span>    MockMvc mockMvc <span style=color:#f92672>=</span> standaloneSetup(spitterController).<span style=color:#a6e22e>build</span>();
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// perform get request with path variables</span>
+</span></span><span style=display:flex><span>    ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spitter/1&#34;</span>));
+</span></span><span style=display:flex><span>    log.<span style=color:#a6e22e>info</span>(resultActions.<span style=color:#a6e22e>andReturn</span>().<span style=color:#a6e22e>getResponse</span>().<span style=color:#a6e22e>getContentAsString</span>(StandardCharsets.<span style=color:#a6e22e>UTF_8</span>));
+</span></span><span style=display:flex><span>    resultActions.<span style=color:#a6e22e>andExpect</span>(status().<span style=color:#a6e22e>isOk</span>())
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>andExpect</span>(content().<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>))
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data&#34;</span>)
+</span></span><span style=display:flex><span>                    .<span style=color:#a6e22e>value</span>(objectMapper.<span style=color:#a6e22e>convertValue</span>(spitter, HashMap.<span style=color:#a6e22e>class</span>)));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    verify(spitterService).<span style=color:#a6e22e>getById</span>(1);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>观察上面的测试用例，我们首先使用Mockito对数据层的mock对象进行了参数和返回值绑定，这在前文已经提及：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>when(spitterService.<span style=color:#a6e22e>getById</span>(1)).<span style=color:#a6e22e>thenReturn</span>(spitter);
+</span></span></code></pre></div><p>随即使用MockMvc发起<code>get</code>请求，发起请求的方式有多种：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spitter/1&#34;</span>));
+</span></span><span style=display:flex><span><span style=color:#75715e>// 等价于</span>
+</span></span><span style=display:flex><span>ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spitter/{id}&#34;</span>, 1));
+</span></span></code></pre></div><p>当请求进入控制器时，根据控制器的业务逻辑，调用<code>spitterService.getById(1)</code>方法，该方法返回之前绑定的返回值，进行封装之后，返回web请求的结果。</p><p>上述请求返回一个<code>ResultActions</code>结果，web请求的结果被封装在内，我们可以对这个结果进行校验：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>resultActions.<span style=color:#a6e22e>andExpect</span>(status().<span style=color:#a6e22e>isOk</span>())
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>andExpect</span>(content().<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>))
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data&#34;</span>)
+</span></span><span style=display:flex><span>                    .<span style=color:#a6e22e>value</span>(objectMapper.<span style=color:#a6e22e>convertValue</span>(spitter, HashMap.<span style=color:#a6e22e>class</span>)));
+</span></span></code></pre></div><p>注意到，<code>jsonPath("$.data")</code>，这意味着请求返回的json字串中包含一个<code>data</code>键，<code>.value()</code>操作暗示其对应的内容就是<code>spitterService.getById(1)</code>的返回对象。所以这个请求返回的json应该像这样：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;code&#34;</span>: <span style=color:#ae81ff>200</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;ok&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;data&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;usename&#34;</span>: <span style=color:#e6db74>&#34;aw&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;firstname&#34;</span>: <span style=color:#e6db74>&#34;alan&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;lastname&#34;</span>: <span style=color:#e6db74>&#34;walker&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;xxx&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>  .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data&#34;</span>).<span style=color:#a6e22e>value</span>(objectMapper.<span style=color:#a6e22e>convertValue</span>(spitter, HashMap.<span style=color:#a6e22e>class</span>)));
+</span></span></code></pre></div><p>的<span id=path>意义</span>是比较通过<code>jsonPath("$.data")</code>解析到的对象和<code>objectMapper.convertValue(spitter, HashMap.class))</code>获取到的对象的相等性。</p><p>实际上，通过<code>jsonPath("$.data")</code>获取到的内容是一个LinkedHashMap，而<code>.value()</code>的相等性比较的是map中对应键的值的相等性，<strong>单单从这个示例</strong>来讲，这个比较是可行的<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>。</p><p>最后，我们使用<code>verify</code>方法对mock对象的方法调用进行了测试：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> verify(spitterService).<span style=color:#a6e22e>getById</span>(1);
+</span></span></code></pre></div><p>不过，由于我们已经校验了web接口的返回值，那么mock对象的方法一定被调用了，所以一般我们无需这么做。</p><h3 id=222-拼接参数的get方法测试>2.2.2 拼接参数的GET方法测试
+<a class=anchor href=#222-%e6%8b%bc%e6%8e%a5%e5%8f%82%e6%95%b0%e7%9a%84get%e6%96%b9%e6%b3%95%e6%b5%8b%e8%af%95>#</a></h3><p>除了路径参数，使用最多的就是形如<code>?para1=xxx&amp;para2=xxx</code>这样的请求参数，MockMvc同样对这样的web服务提供测试支持</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>getUserSpittlesPageTest</span>() <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ... 省略准备数据</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 此处必须使用类类型作为参数</span>
+</span></span><span style=display:flex><span>    when(spittleService.<span style=color:#a6e22e>pageQuerySpittleBySpitterId</span>(any(SpittleDTO.<span style=color:#a6e22e>class</span>))).<span style=color:#a6e22e>thenReturn</span>(page);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// perform get with request params transferred by pojo</span>
+</span></span><span style=display:flex><span>    ResultActions resultActions <span style=color:#f92672>=</span> mockMvc
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spittle/user/spittles?spitterId={spitterId}&#34;</span>, 4))
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// get element from json</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// see https://github.com/json-path/JsonPath</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data.currentPage&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>value</span>(pageDomain.<span style=color:#a6e22e>getCurrentPage</span>()))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data.pageSize&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>value</span>(pageDomain.<span style=color:#a6e22e>getPageSize</span>()))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data.pages&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>value</span>(pageDomain.<span style=color:#a6e22e>getPages</span>()))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andExpect</span>(jsonPath(<span style=color:#e6db74>&#34;$.data.total&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>value</span>(pageDomain.<span style=color:#a6e22e>getTotal</span>()))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andDo</span>(print());
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/* 报错原因 ：long和integer的问题*/</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//            .andExpect(jsonPath(&#34;$.data.records[0]&#34;)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//                .value(objectMapper.convertValue(sample, HashMap.class)));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    String jsonResult <span style=color:#f92672>=</span> resultActions.<span style=color:#a6e22e>andReturn</span>().<span style=color:#a6e22e>getResponse</span>().<span style=color:#a6e22e>getContentAsString</span>(StandardCharsets.<span style=color:#a6e22e>UTF_8</span>);
+</span></span><span style=display:flex><span>    log.<span style=color:#a6e22e>info</span>(jsonResult);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// verify is not necessary here</span>
+</span></span><span style=display:flex><span>    verify(spittleService).<span style=color:#a6e22e>pageQuerySpittleBySpitterId</span>(any(SpittleDTO.<span style=color:#a6e22e>class</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    assertEquals((<span style=color:#66d9ef>int</span>) jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records.length()&#34;</span>), 1);
+</span></span><span style=display:flex><span>    SpittleVO rvo <span style=color:#f92672>=</span> jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records[0]&#34;</span>, SpittleVO.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>    assertEquals(sample, rvo);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>这个测试和上一个测试有一些区别，首先第一个区别就是mock对象的参数与返回值绑定方式变了：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> when(spittleService.<span style=color:#a6e22e>pageQuerySpittleBySpitterId</span>(any(SpittleDTO.<span style=color:#a6e22e>class</span>))).<span style=color:#a6e22e>thenReturn</span>(page);
+</span></span></code></pre></div><p>多数情况下，我们不会直接在控制器中使用具体的参数，而是使用Java Bean作为控制器的参数。这个时候，Spring MVC的<code>MappingJasksonHttpMessageConverter</code>将会发挥作用<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>，将请求中的中的参数转换为对应的Java Bean实例。</p><p>这样一来，我们便不能指定某一个实例作为mock对象的参数了，只能使用<code>any(class)</code>这样的形式进行模糊匹配。</p><p>其次，关于使用地址栏参数的参数传递，除了使用上述的方式（最简单）之外，还有其他的方式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>  ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spittle/user/spittles?spitterId={spitterId}&#34;</span>, 4))
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// 等价于</span>
+</span></span><span style=display:flex><span>  ResultActions resultActions <span style=color:#f92672>=</span> mockMvc.<span style=color:#a6e22e>perform</span>(get(<span style=color:#e6db74>&#34;/spittle/user&#34;</span>)).<span style=color:#a6e22e>param</span>(<span style=color:#e6db74>&#34;spitterId&#34;</span>, 4)
+</span></span></code></pre></div><p>第三，如果再次使用类似于
+<a href=/zh/#path>上一个示例</a>那样校验返回数据的方法校验<code>$.data.records[0]</code>，将会得到一个错误。原因也和前文描述的一样。我们必须使用更为稳妥的方法。</p><p>第四，对于同一个控制器的测试，我们可以预先做一些设置，比如依赖<code>@BeforeEach</code>注解，约定好一些通用的内容：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyWebTests</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    MockMvc mockMvc;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>init</span>(){
+</span></span><span style=display:flex><span>        mockMvc <span style=color:#f92672>=</span> standaloneSetup(spittleController)
+</span></span><span style=display:flex><span>                .<span style=color:#a6e22e>alwaysExpect</span>(status().<span style=color:#a6e22e>isOk</span>())
+</span></span><span style=display:flex><span>                .<span style=color:#a6e22e>alwaysExpect</span>(content().<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>))
+</span></span><span style=display:flex><span>                .<span style=color:#a6e22e>build</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>上述方法在每一个测试之前准备mockMvc对象，并且约定了servlet的返回状态和返回类型。</p><h3 id=223-post请求方法测试>2.2.3 POST请求方法测试
+<a class=anchor href=#223-post%e8%af%b7%e6%b1%82%e6%96%b9%e6%b3%95%e6%b5%8b%e8%af%95>#</a></h3><p>如前所述，在发起<span id=post>POST请求</span>时，一般使用JSON，此时<code>MappingJasksonHttpMessageConverter</code>便会介入。它负责将JSON对象反序列化为控制器指定的Java Baean。在使用MockMvc进行测试时，我们直接使用JSON字符串，将其设置在请求体中即可。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>postSpittlesTimeLinePageTest</span>() <span style=color:#66d9ef>throws</span> Exception {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ... 省略其他设置</span>
+</span></span><span style=display:flex><span>    dto.<span style=color:#a6e22e>setLeftTime</span>(LocalDateTime.<span style=color:#a6e22e>parse</span>(<span style=color:#e6db74>&#34;2012-06-09T00:00:00.000&#34;</span>));
+</span></span><span style=display:flex><span>    dto.<span style=color:#a6e22e>setRightTime</span>(LocalDateTime.<span style=color:#a6e22e>parse</span>(<span style=color:#e6db74>&#34;2012-06-09T23:59:59.999&#34;</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    when(spittleService.<span style=color:#a6e22e>pageQuerySpittlesByTimeLine</span>(any(SpittleDTO.<span style=color:#a6e22e>class</span>))).<span style=color:#a6e22e>thenReturn</span>(page);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// perform post request</span>
+</span></span><span style=display:flex><span>    String s <span style=color:#f92672>=</span> objectMapper.<span style=color:#a6e22e>writeValueAsString</span>(dto);
+</span></span><span style=display:flex><span>    log.<span style=color:#a6e22e>info</span>(<span style=color:#e6db74>&#34;request body: {}&#34;</span>, s);
+</span></span><span style=display:flex><span>    ResultActions resultActions <span style=color:#f92672>=</span> mockMvc
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>perform</span>(post(<span style=color:#e6db74>&#34;/spittle/range/spittles&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>characterEncoding</span>(<span style=color:#e6db74>&#34;utf8&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>content</span>(s))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>andDo</span>(print());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 以下用来获取MockMvc返回(Json)</span>
+</span></span><span style=display:flex><span>    String jsonResult <span style=color:#f92672>=</span> resultActions.<span style=color:#a6e22e>andReturn</span>().<span style=color:#a6e22e>getResponse</span>().<span style=color:#a6e22e>getContentAsString</span>(StandardCharsets.<span style=color:#a6e22e>UTF_8</span>);
+</span></span><span style=display:flex><span>    log.<span style=color:#a6e22e>info</span>(jsonResult);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    PageDomain<span style=color:#f92672>&lt;</span>SpittleVO<span style=color:#f92672>&gt;</span> rpg <span style=color:#f92672>=</span> jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data&#34;</span>, PageDomain.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>    assertEquals((<span style=color:#66d9ef>int</span>) jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records.length()&#34;</span>), 1);
+</span></span><span style=display:flex><span>    SpittleVO rvo <span style=color:#f92672>=</span> jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records[0]&#34;</span>, SpittleVO.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>    rpg.<span style=color:#a6e22e>setRecords</span>(<span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>SpittleVO<span style=color:#f92672>&gt;</span>() {{
+</span></span><span style=display:flex><span>        add(rvo);
+</span></span><span style=display:flex><span>    }});
+</span></span><span style=display:flex><span>    assertEquals(rpg, pageDomain);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>可以看到，发起POST请求的方式比较简单：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> ResultActions resultActions <span style=color:#f92672>=</span> mockMvc
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>perform</span>(post(<span style=color:#e6db74>&#34;/spittle/range/spittles&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>contentType</span>(MediaType.<span style=color:#a6e22e>APPLICATION_JSON</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>characterEncoding</span>(<span style=color:#e6db74>&#34;utf8&#34;</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>content</span>(s));
+</span></span></code></pre></div><p>设置好请求头接受的文件类型和编码，使用<code>content(json)</code>方法传入json字符串即可。</p><p>在本节的
+<a href=/zh/#start>开头</a>，我们进行了一些通用的配置，你可能暂时还没有注意到这个细节：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//    @Autowired</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    protected ObjectMapper objectMapper;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> ObjectMapper objectMapper <span style=color:#f92672>=</span> Jackson2ObjectMapperBuilder.<span style=color:#a6e22e>json</span>().<span style=color:#a6e22e>build</span>();
+</span></span></code></pre></div><p>我们注释掉了spring自动装配的<code>ObjectMapper</code>，转而使用了<code>Jackson2ObjectMapperBuilder</code>构建了一个默认的<code>ObjectMapper</code>，这样做是有原因的：</p><p>对于spring自动装配的<code>ObjectMapper</code>，我们在项目改变了其对<code>LocalDateTime</code>的序列化与反序列化规则：</p><blockquote><p>对于<code>LocalDateTime</code>，默认情况下其字符串输出格式类似于<code>2012-06-09T23:59:59.999</code>，这样的字符串形式非常不利于页面传递参数，因此我们在项目配置中改变了其规则，使得在实际使用时，能够将<code>2012-06-09 23:59:59.999</code>形式的日期字符串直接转化为<code>LocalDateTime</code>对象；反之，<code>LocalDateTime</code>也将会直接转化为<code>2012-06-09 23:59:59.999</code>的形式返回。</p></blockquote><p>但是在使用MockMvc进行测试时，其进行反序列化时（将请求JSON转化为Java Bean），使用的可能是默认的消息转换规则。而当我们使用自动装配的<code>ObjectMapper</code>将配置好的Bean转化为JSON时，时间的字符串形式是<code>2012-06-09 23:59:59.999</code>，默认的消息转换无法将其转化为<code>LocaldateTime</code>，因此会出现<strong>转换异常</strong>。</p><p>关于<code>ObjactMapper</code>的详细内容，会在后续博客中详细介绍。</p><h1 id=3-jsonpath>3 JsonPath
+<a class=anchor href=#3-jsonpath>#</a></h1><p>看到这里，你可能对使用Mockito和MockMvc进行测试有了初步的了解。不过如果你细心的话，就会发现，前面的测试用例对最后的接口的返回校验都没有提及。并且示例代码中关于提取返回内容出现最多的字就是<code>jsonPath</code>。</p><p>并且在前面的测试用例中，我们也通过简单的表达式<code>jsonPath("$.data")</code>提取了返回JSON中的结果。</p><p>实际上，Spring MockMvc默认是支持使用JsonPath获取返回内容的，就像<code>jsonPath("$.data")</code>那样，不过其灵活性没有直接使用JspnPath大，特别是在反序列化的操作上。</p><p>很多时候，RESTful接口返回的内容实际上是Java Bean序列化之后的JSON串，所以我们希望将获取到的JSON反序列化之后再进行校验，而MockMvc在这方面表现的就比较蹩脚了，其只能转化为Map进行比较，就像
+<a href=/zh/#path>###2.2.1节</a>中表现的那样<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup>。</p><p>说实话，测试在获取到返回的JSON串，通过控制台打印输出确认符合预期基本上就可以结束，再去检验JSON的内容有点<strong>强迫症</strong>的意味了。</p><p>其实在
+<a href=https://github.com/json-path/JsonPath>JsonPath</a>的仓库里详细地介绍了JsonPath的基本用法，针对本实例的具体情况，通过阅读文档，我们可以很容易取得想要的值并进行校验。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;code&#34;</span>:<span style=color:#ae81ff>20000</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;msg&#34;</span>:<span style=color:#e6db74>&#34;http.ok&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;data&#34;</span>:
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;currentPage&#34;</span>:<span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;pageSize&#34;</span>:<span style=color:#ae81ff>10</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;total&#34;</span>:<span style=color:#ae81ff>4</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;pages&#34;</span>:<span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;records&#34;</span>:
+</span></span><span style=display:flex><span>                [
+</span></span><span style=display:flex><span>                    {
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;id&#34;</span>:<span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;spitterId&#34;</span>:<span style=color:#ae81ff>4</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;message&#34;</span>:<span style=color:#e6db74>&#34;sixth man&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;time&#34;</span>:<span style=color:#e6db74>&#34;2012-06-09 22:20:00&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;latitude&#34;</span>:<span style=color:#ae81ff>0.0</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>&#34;longitude&#34;</span>:<span style=color:#ae81ff>0.0</span>
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                ]
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>我们要校验的就是<code>data</code>中的内容，现在我们再回过头来看看上面的
+<a href=/zh/#post>测试代码</a>，实际上很容易理解:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>PageDomain<span style=color:#f92672>&lt;</span>SpittleVO<span style=color:#f92672>&gt;</span> rpg <span style=color:#f92672>=</span> jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data&#34;</span>, PageDomain.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>    assertEquals((<span style=color:#66d9ef>int</span>) jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records.length()&#34;</span>), 1);
+</span></span><span style=display:flex><span>    SpittleVO rvo <span style=color:#f92672>=</span> jsonPathParser(jsonResult).<span style=color:#a6e22e>read</span>(<span style=color:#e6db74>&#34;$.data.records[0]&#34;</span>, SpittleVO.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>    rpg.<span style=color:#a6e22e>setRecords</span>(<span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>SpittleVO<span style=color:#f92672>&gt;</span>() {{
+</span></span><span style=display:flex><span>        add(rvo);
+</span></span><span style=display:flex><span>    }});
+</span></span><span style=display:flex><span>    assertEquals(rpg, pageDomain);
+</span></span></code></pre></div><p>首先我们获取了<code>$.data</code>节点的内容，里面也是一个Json对象，按照<em>传统的</em>反序列化理解，这是一个Java Bean，我们该如何将其读取为我们程序中的Bean呢，JsonPath也
+<a href=https://github.com/json-path/JsonPath#what-is-returned-when>作了说明</a></p><blockquote><p>默认情况下，通过<code>JsonPath.parse(json).read("$.data")</code>获取的到的是Map实例，并不会映射为Java Bean。不过JsonPath也为此提供了可能：</p><blockquote><p>If you configure JsonPath to use JacksonMappingProvider or GsonMappingProvider you can even map your JsonPath output directly into POJO&rsquo;s.</p></blockquote></blockquote><p>要想映射为JavaBean，我们需要：</p><ul><li>自定义配置JsonProvider</li><li>传入类型参数</li></ul><p>配置JsonProvider的方式也很简单：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * Use json-path, tweaking configuration&lt;br&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * The config below change default action of json-path&lt;br&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * Use application-context ObjectMapper config as json and mapper provider&lt;br&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * &lt;p&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * Reference: &lt;a href=&#34;https://github.com/json-path/JsonPath&#34;&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * https://github.com/json-path/JsonPath&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * @param json standard json string
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    * @return {@link DocumentContext}
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>protected</span> DocumentContext <span style=color:#a6e22e>jsonPathParser</span>(String json) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> JsonProvider jsonProvider <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JacksonJsonProvider(objectMapper);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>final</span> MappingProvider mappingProvider <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JacksonMappingProvider(objectMapper);
+</span></span><span style=display:flex><span>    Configuration.<span style=color:#a6e22e>setDefaults</span>(<span style=color:#66d9ef>new</span> Configuration.<span style=color:#a6e22e>Defaults</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> JsonProvider <span style=color:#a6e22e>jsonProvider</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> jsonProvider;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Set<span style=color:#f92672>&lt;</span>Option<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>options</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> EnumSet.<span style=color:#a6e22e>noneOf</span>(Option.<span style=color:#a6e22e>class</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> MappingProvider <span style=color:#a6e22e>mappingProvider</span>() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> mappingProvider;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> JsonPath.<span style=color:#a6e22e>parse</span>(json);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>此时，我们就已经获取到了接口返回的对象。不过等等，我们再仔细看看上面的Json，会发现<code>$.data.records</code>节点是一个数组，数组里面又是可以映射为Java Bean的Json。而经过上一步，获取的<code>PageDomain</code>对象中的<code>records</code>域实际上还是一个<code>List&lt;Map></code>的默认映射结果，所以我们还需要梅开二度。</p><h1 id=4-补充内容使用idea直接进行restful接口测试>4 补充内容：使用idea直接进行RESTful接口测试
+<a class=anchor href=#4-%e8%a1%a5%e5%85%85%e5%86%85%e5%ae%b9%e4%bd%bf%e7%94%a8idea%e7%9b%b4%e6%8e%a5%e8%bf%9b%e8%a1%8crestful%e6%8e%a5%e5%8f%a3%e6%b5%8b%e8%af%95>#</a></h1><p>到这里，本文的主要内容就结束了。</p><p>如果你使用的IDEA，你不妨找找<code>tools->httpClients</code>，你会发现，idea的绝妙功能：其可以通过脚本文件测试rest接口。</p><p>idea提供了不同HTTP请求的脚本示例，很容易就能上手，脚本文件以<code>.http</code>结尾，你可轻松创建自己的测试脚本。</p><p>例如，我为上面的测试创建一个名为<code>rest-api.http</code>的脚本：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-http data-lang=http><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### get spitter info by spitterId
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{host}}/spitter/{{spitterId}}?lang={{lang}}
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### 分页获取spittle， 根据用户spitterId，请求参数放在GET请求体中的情形:
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>GET {{host}}/spittle/user/spittles?lang={{lang}}
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Accept: application/json
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>{
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;spitterId&#34;: 4,
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;currentPage&#34;: 1,
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;pageSize&#34;: 1
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>### 分页获取某个时间段的spittle 1
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>POST {{host}}/spittle/range/spittles?lang={{lang}}
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>Content-Type: application/json
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>{
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;leftTime&#34;: &#34;2012-06-09 00:00:00&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;rightTime&#34;: &#34;2012-06-09 23:59:59&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;currentPage&#34;:2,
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>  &#34;pageSize&#34;: 1
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}
+</span></span></span></code></pre></div><p>可以看到，<code>.http</code>脚本文件的可读性非常强。其中，为了方便，还使用了用双花括号语法的<strong>环境变量</strong>，这些变量被命名在一个名为<code>http-client-env.json</code>的json文件中：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;mem&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;host&#34;</span>:<span style=color:#e6db74>&#34;http://localhost:9000/mem&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;spitterId&#34;</span>: <span style=color:#ae81ff>4</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lang&#34;</span>: <span style=color:#e6db74>&#34;en&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;currentPage&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;pageSize&#34;</span>: <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;mysql&#34;</span>:{
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;host&#34;</span>: <span style=color:#e6db74>&#34;http://localhost:9100/dev&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;spitterId&#34;</span>: <span style=color:#ae81ff>2</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lang&#34;</span>: <span style=color:#e6db74>&#34;en&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>运行脚本时，可以通过执行环境配置传入不同的测试参数，就这么简单。</p><hr><h1 id=参考>参考
+<a class=anchor href=#%e5%8f%82%e8%80%83>#</a></h1><ul><li>本文用例所在项目地址：https://www.github.com/wangy325/mybatis-plus-starter</li><li>mockito官网：https://www.site.mockito.org/</li><li>mockito API官网：https://www.javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html</li><li>MockMvc java doc：https://www.docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html</li><li>json-path仓库介绍了其基本使用方法：https://www.github.com/json-path/JsonPath</li><li>可能出现的bug：https://www.stackoverflow.com/questions/47276920/mockito-error-however-there-was-exactly-1-interaction-with-this-mock</li><li>MockMvc官方文档：https://www.docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-framework</li><li>MockMVC官方测试示例代码库：https://www.github.com/spring-projects/spring-framework/tree/master/spring-test/src/test/java/org/springframework/test/web/servlet/samples</li></ul><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>这种形式的比较往往会出现问题，例如，如果pojo类中的<code>id</code>字段定义为<code>Long</code>型，使用objectMapper进行转换的时候<em>可能</em>会转换为<code>Integer</code>型。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>关于Spring MVC的消息转换器，参考《Spring实战，第4版》第16章相关内容。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>或许笔者还没有找到更加优雅的方法。&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-了解mockito>1 了解Mockito</a><ul><li><a href=#11-mock一个对象>1.1 mock一个对象</a></li><li><a href=#12-绑定方法参数和返回值>1.2 绑定方法参数和返回值</a></li><li><a href=#13-参数匹配器>1.3 参数匹配器</a></li><li><a href=#14-检验方法被调用的次数>1.4 检验方法被调用的次数</a></li></ul></li><li><a href=#2-使用mockmvc测试控制器>2 使用MockMvc测试控制器</a><ul><li><a href=#21-熟悉这几个静态导入>2.1 熟悉这几个静态导入</a></li><li><a href=#22-测试示例>2.2 测试示例</a><ul><li><a href=#221-简单路径参数get请求测试>2.2.1 简单路径参数GET请求测试</a></li><li><a href=#222-拼接参数的get方法测试>2.2.2 拼接参数的GET方法测试</a></li><li><a href=#223-post请求方法测试>2.2.3 POST请求方法测试</a></li></ul></li></ul></li><li><a href=#3-jsonpath>3 JsonPath</a></li><li><a href=#4-补充内容使用idea直接进行restful接口测试>4 补充内容：使用idea直接进行RESTful接口测试</a></li><li><a href=#参考>参考</a></li></ul></nav></div></aside></main></body></html>
