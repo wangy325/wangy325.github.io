@@ -368,15 +368,14 @@ concrete classes.&lt;/p>
  &lt;a class="anchor" href="#%e6%89%a7%e8%a1%8c%e5%99%a8%e5%92%8c%e7%ba%bf%e7%a8%8b%e6%b1%a0">#&lt;/a>
 &lt;/h1>
 &lt;p>Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，&lt;code>Executors&lt;/code>提供了一些非常方便的静态方法，可以根据需要创建不同的&lt;code>ExecutorService&lt;/code>，然后调用其&lt;code>execute(Runnable)&lt;/code>或&lt;code>submit(Callable&amp;lt;T&amp;gt;)&lt;/code>方法。在多线程的条件下，执行器还有一个非常明显的优势，它使用线程池管理线程，减少了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。&lt;/p>
-&lt;p>本文将从执行器开始，阐述Java中的线程池。&lt;/p></description></item><item><title>lambda表达式</title><link>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>&lt;h1 id="lambda表达式">
+&lt;p>本文将从执行器开始，阐述Java中的线程池。&lt;/p></description></item><item><title>Lambda表达式与函数式接口</title><link>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>&lt;blockquote>
+&lt;p>Java 函数式接口和Lambda表达式是 Java 8 中引入的一个重要概念，它允许你将行为作为参数传递给方法，从而实现更简洁、更灵活的代码。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="lambda表达式">
  Lambda表达式
  &lt;a class="anchor" href="#lambda%e8%a1%a8%e8%be%be%e5%bc%8f">#&lt;/a>
-&lt;/h1>
-&lt;h2 id="lambda表达式-1">
- lambda表达式
- &lt;a class="anchor" href="#lambda%e8%a1%a8%e8%be%be%e5%bc%8f-1">#&lt;/a>
 &lt;/h2>
-&lt;p>lambda表达式是一个&lt;strong>可传递的代码块&lt;/strong>，可以在以后执行&lt;strong>一次或多次&lt;/strong>。&lt;/p></description></item><item><title>计划执行任务</title><link>https://wangy325.github.io/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/</link><pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/</guid><description>&lt;h1 id="计划执行任务">
+&lt;p>Lambda表达式是一个&lt;strong>可传递的代码块&lt;/strong>，可以在以后执行&lt;strong>一次或多次&lt;/strong>。&lt;/p></description></item><item><title>计划执行任务</title><link>https://wangy325.github.io/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/</link><pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/</guid><description>&lt;h1 id="计划执行任务">
  计划执行任务
  &lt;a class="anchor" href="#%e8%ae%a1%e5%88%92%e6%89%a7%e8%a1%8c%e4%bb%bb%e5%8a%a1">#&lt;/a>
 &lt;/h1>
