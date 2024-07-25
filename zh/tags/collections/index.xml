@@ -1,45 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Collections on Endless River</title><link>https://wangy325.github.io/zh/tags/collections/</link><description>Recent content in Collections on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 19 Jun 2024 21:14:32 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/tags/collections/index.xml" rel="self" type="application/rss+xml"/><item><title>List列表</title><link>https://wangy325.github.io/zh/docs/java/collections/1_List/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/1_List/</guid><description>&lt;h1 id="list列表">
- List列表
- &lt;a class="anchor" href="#list%e5%88%97%e8%a1%a8">#&lt;/a>
-&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Collections on Endless River</title><link>https://wangy325.github.io/zh/tags/collections/</link><description>Recent content in Collections on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 25 Jul 2024 15:23:45 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/tags/collections/index.xml" rel="self" type="application/rss+xml"/><item><title>ArrayList</title><link>https://wangy325.github.io/zh/docs/java/collections/1_List_arraylist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/1_List_arraylist/</guid><description>&lt;p>&lt;code>ArrayList&lt;/code>是Java集合框架中使用最为频繁的实现，其本质是一个&lt;strong>有序的&lt;/strong>可自由扩容的&lt;strong>对象数组&lt;/strong>。它实现了&lt;code>RandomAccess&lt;/code>这个&lt;strong>标记接口&lt;/strong>，意味着其在随机访问性能上有一定优势。&lt;/p></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>Queue</title><link>https://wangy325.github.io/zh/docs/java/collections/2_Queue/</link><pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/2_Queue/</guid><description>&lt;p>Queue（队列），实际开发过程中，&lt;del>在单线程环境下&lt;/del>使用的并不多，Queue作为集合框架中重要组成似乎习惯性被忽略。队列总是先持有元素，再处理元素&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
 &lt;p>
- &lt;img src="https://wangy325.github.io/img/Collection.png" alt="JXUL1s.png" />&lt;/p>
-&lt;p style="text-align:center;font-style:italic;font-size:.9rem">Java集合框架简图&lt;/p>
-&lt;!-- > 1. 未列出枚举集（EnumSet/EnumMap）
-> 2. 未列出IdentityHashMap
-> 3. 未列出java.util.concurrent包下的实现 -->
-&lt;p>上图列出了集合框架的常见实现，Java集合框架系列文章介绍了图中列出的大部分内容&lt;/p></description></item><item><title>Queue</title><link>https://wangy325.github.io/zh/docs/java/collections/2_Queue/</link><pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/2_Queue/</guid><description>&lt;h1 id="queue队列">
- Queue队列
- &lt;a class="anchor" href="#queue%e9%98%9f%e5%88%97">#&lt;/a>
-&lt;/h1>
-&lt;p>Queue（队列），实际开发过程中，在单线程环境下使用的情况下不多，Queue作为集合框架中重要组成似乎习惯性被忽略，队列总是先持有元素，再处理元素&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
-&lt;p>
- &lt;img src="https://wangy325.github.io/img/Queue.png" alt="J7NBrQ.png" />&lt;/p>
-&lt;p style="text-align:center;font-size:.9rem;font-style:italic">Queue继承关系简图&lt;/p></description></item><item><title>Set</title><link>https://wangy325.github.io/zh/docs/java/collections/3_Set/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/3_Set/</guid><description>&lt;h1 id="set集">
- Set集
- &lt;a class="anchor" href="#set%e9%9b%86">#&lt;/a>
-&lt;/h1>
-&lt;p>Set是&lt;strong>不含重复元素的集&lt;/strong>，严格来讲，Set不允许当&lt;code>e1.equals(e2)&lt;/code>为真时， &lt;em>e1&lt;/em> 和 &lt;em>e2&lt;/em> 同时出现在集合中。Set最多允许一个&lt;code>null&lt;/code>元素。&lt;/p>
-&lt;p>将&lt;strong>可变对象&lt;/strong>置入Set时需要特别小心，当对象的改动影响到了元素之间的&lt;code>equals()&lt;/code>比较的结果，那么Set的行为就变得不确定了。因此，&lt;strong>不能将Set本身作为Set的元素&lt;/strong>。&lt;/p></description></item><item><title>Java集合框架之Map</title><link>https://wangy325.github.io/zh/docs/java/collections/4_Map/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/4_Map/</guid><description>&lt;h1 id="map映射">
- Map映射
- &lt;a class="anchor" href="#map%e6%98%a0%e5%b0%84">#&lt;/a>
-&lt;/h1>
-&lt;p>Map即映射，即键-值对，键不允许重复，并且一个键最多映射一个值。Map不在Java集合框架的范畴，但是其由集合框架的内容实现。自然也在集合框架的讨论之内。&lt;/p>
-&lt;p>映射提供3种&lt;strong>集合视图&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>键集 （Set实现）&lt;/li>
-&lt;li>值集 （Collection实现）&lt;/li>
-&lt;li>Map.Entry集（Set实现）&lt;/li>
-&lt;/ul></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</guid><description>&lt;h1 id="collections工具类">
- Collections工具类
- &lt;a class="anchor" href="#collections%e5%b7%a5%e5%85%b7%e7%b1%bb">#&lt;/a>
-&lt;/h1>
-&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
-&lt;p>由于视图是直接封装的Collection接口，&lt;strong>因此其方法有些局限&lt;/strong>，并且由于特殊的设计，部分操作是不允许的（会抛出 &lt;em>UnsupportedOperationExceptin&lt;/em> ）。&lt;/p></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="hashmap的源码分析">
+ &lt;img src="https://wangy325.github.io/img//collections/Queue.png" alt="J7NBrQ.png" />&lt;/p>
+&lt;p style="color:grey;text-align:center;font-size:.8rem;font-style:italic">Queue继承关系简图&lt;/p></description></item><item><title>Set</title><link>https://wangy325.github.io/zh/docs/java/collections/3_Set/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/3_Set/</guid><description>&lt;p>&lt;code>Set&lt;/code>是&lt;strong>不含重复元素的集&lt;/strong>，严格来讲，&lt;code>Set&lt;/code>不允许当&lt;code>e1.equals(e2)&lt;/code>为真时， &lt;em>e1&lt;/em> 和 &lt;em>e2&lt;/em> 同时出现在集合中。&lt;code>Set&lt;/code>最多允许一个&lt;code>null&lt;/code>元素。&lt;/p>
+&lt;p>将&lt;strong>可变对象&lt;/strong>置入&lt;code>Set&lt;/code>时需要特别小心，当对象的改动影响到了元素之间的&lt;code>equals()&lt;/code>比较的结果，那么&lt;code>Set&lt;/code>的行为就变得不确定了。因此，&lt;strong>不能将Set本身作为Set的元素&lt;/strong>。&lt;/p></description></item><item><title>HashMap和TreeMap</title><link>https://wangy325.github.io/zh/docs/java/collections/4_Map_hash_tree_map/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/4_Map_hash_tree_map/</guid><description>&lt;p>由于&lt;code>Map&lt;/code>的键是&lt;code>Set&lt;/code>，因此使用可变对象作为&lt;code>Map&lt;/code>的key时，&lt;strong>需要覆盖 &lt;em>equals&lt;/em> 和 &lt;em>hashCode&lt;/em> 方法&lt;/strong>，&lt;strong>Map不能使用自身作为key&lt;/strong>。&lt;/p>
+&lt;p>Java 8对&lt;code>Map&lt;/code>接口进行了优化，新增了主要是针对&lt;strong>函数式接口&lt;/strong>的 &lt;em>默认&lt;/em> 方法（方法体被省略）：&lt;/p>
+&lt;pre>&lt;code>default V merge (K key, V value,
+ BiFunction&amp;lt;? super V, ? super V, ? extends V&amp;gt; remappingFunction) {...}
+default V compute (K key,
+ BiFunction&amp;lt;? super K, ? super V, ? extends V&amp;gt; remappingFunction) {...}
+default V computeIfPresent (K key,
+ BiFunction&amp;lt;? super K, ? super V, ? extends V&amp;gt; remappingFunction) {...}
+default V computeIfAbsent (K key,
+ Function&amp;lt;? super K, ? extends V&amp;gt; mappingFunction) {...}
+default V replace (K key, V value) {...}
+default boolean replace(K key, V oldValue, V newValue) {...}
+default boolean remove (Object key, Object value) {...}
+default V putIfAbsent (K key, V value) {...}
+default void replaceAll (
+ BiFunction&amp;lt;? super K, ? super V, ? extends V&amp;gt; function) {...}
+default V getOrDefault (Object key, V defaultValue) {...}
+&lt;/code>&lt;/pre>
+&lt;p>上述方法使用的不多，主要用来对Map键值进行更新，按需查阅API文档。&lt;/p></description></item><item><title>LinkedHashMap</title><link>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</guid><description>&lt;p>&lt;code>LinkedHashMap&lt;/code>(链表散列映射)是&lt;code>HashMap&lt;/code>的导出类，像&lt;code>LinkedHashSet&lt;/code>与&lt;code>HashSet&lt;/code>的关系一样。&lt;/p>
+&lt;p>其与&lt;code>HashMap&lt;/code>的差别在于其使用&lt;code>LinkedList&lt;/code>来维护键值对插入的顺序，其插入机制和&lt;code>HashMap&lt;/code>是一致的。&lt;/p>
+&lt;p>&lt;code>LinkedHashMap&lt;/code>和&lt;code>HashMap&lt;/code>的
+ &lt;a href="https://wangy325.github.io/zh/docs/java/collections/3_Set/#linkedhashset">性能相差不大&lt;/a>与&lt;code>HashSet&lt;/code>和&lt;code>LinkedHashSet&lt;/code>一致：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">集合&lt;/th>
+&lt;th style="text-align:center">特征&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">HashMap&lt;/td>
+&lt;td style="text-align:center">HashMap基于散列表，插入和查询键值对的开销是固定的&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">LinkedHashMap&lt;/td>
+&lt;td style="text-align:center">和HashMap类似，不过其使用LinkedList维护内部次序，因此其迭代顺序是插入顺序或者LRU（最近最少使用）次序，性能稍差于HashMap&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="hashmap的源码分析">
  HashMap的源码分析
  &lt;a class="anchor" href="#hashmap%e7%9a%84%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90">#&lt;/a>
 &lt;/h1>
 &lt;p>HashMap基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
 &lt;blockquote>
 &lt;p>此文中没有讨论HashMap中涉及到树结构的源码。&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;/blockquote></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</guid><description>&lt;h1 id="collections工具类">
+ Collections工具类
+ &lt;a class="anchor" href="#collections%e5%b7%a5%e5%85%b7%e7%b1%bb">#&lt;/a>
+&lt;/h1>
+&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
+&lt;p>由于视图是直接封装的Collection接口，&lt;strong>因此其方法有些局限&lt;/strong>，并且由于特殊的设计，部分操作是不允许的（会抛出 &lt;em>UnsupportedOperationExceptin&lt;/em> ）。&lt;/p></description></item></channel></rss>
