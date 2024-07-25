@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Endless River</title><link>https://wangy325.github.io/zh/categories/java/</link><description>Recent content in Java on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 25 Jul 2024 15:23:45 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>线程与任务(一)</title><link>https://wangy325.github.io/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/</link><pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/</guid><description>&lt;p>&lt;strong>并发&lt;/strong>的本质是多个线程同时处理某个任务&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>，&lt;del>不同于进程&lt;/del>，线程可以访问同一共享资源（临界资源），当程序不够健壮时，使用多线程就可能带来问题，这是要反复讨论并发的原因之一。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Endless River</title><link>https://wangy325.github.io/zh/categories/java/</link><description>Recent content in Java on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Thu, 25 Jul 2024 22:52:50 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>线程与任务(一)</title><link>https://wangy325.github.io/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/</link><pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/</guid><description>&lt;p>&lt;strong>并发&lt;/strong>的本质是多个线程同时处理某个任务&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>，&lt;del>不同于进程&lt;/del>，线程可以访问同一共享资源（临界资源），当程序不够健壮时，使用多线程就可能带来问题，这是要反复讨论并发的原因之一。&lt;/p>
 &lt;p>在Java中，必须明白一点：线程由Thread类启动，但Thread类并不执行任何操作，&lt;strong>它只是驱动赋予它的任务&lt;/strong>。因此将&lt;strong>线程与任务&lt;/strong>的概念区分开，有利于理解并发。&lt;/p>
 &lt;p>实际上，开发过程中线程与任务（的联系）被隔离的更加明显，往往不需要显式地声明(创建)线程，然后将任务（声明任务是必须的）分配给线程，并由线程负责驱动（ &lt;em>allocate task to thread to execute&lt;/em> ），这一过程通常由&lt;strong>线程池&lt;/strong>完成 。&lt;/p></description></item><item><title>ArrayList</title><link>https://wangy325.github.io/zh/docs/java/collections/1_List_arraylist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/1_List_arraylist/</guid><description>&lt;p>&lt;code>ArrayList&lt;/code>是Java集合框架中使用最为频繁的实现，其本质是一个&lt;strong>有序的&lt;/strong>可自由扩容的&lt;strong>对象数组&lt;/strong>。它实现了&lt;code>RandomAccess&lt;/code>这个&lt;strong>标记接口&lt;/strong>，意味着其在随机访问性能上有一定优势。&lt;/p></description></item><item><title>访问权限修饰符</title><link>https://wangy325.github.io/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid><description>&lt;h1 id="访问权限修饰符">
  访问权限修饰符
@@ -120,8 +120,8 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;p>&lt;em>&lt;strong>If you can write a high-performance JVM for a modern microprocessor, then you are qualified to think about whether you can avoid synchronizing.&lt;/strong>&lt;/em>&lt;/p>
 &lt;/blockquote></description></item><item><title>LinkedHashMap</title><link>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</guid><description>&lt;p>&lt;code>LinkedHashMap&lt;/code>(链表散列映射)是&lt;code>HashMap&lt;/code>的导出类，像&lt;code>LinkedHashSet&lt;/code>与&lt;code>HashSet&lt;/code>的关系一样。&lt;/p>
 &lt;p>其与&lt;code>HashMap&lt;/code>的差别在于其使用&lt;code>LinkedList&lt;/code>来维护键值对插入的顺序，其插入机制和&lt;code>HashMap&lt;/code>是一致的。&lt;/p>
-&lt;p>&lt;code>LinkedHashMap&lt;/code>和&lt;code>HashMap&lt;/code>的
- &lt;a href="https://wangy325.github.io/zh/docs/java/collections/3_Set/#linkedhashset">性能相差不大&lt;/a>与&lt;code>HashSet&lt;/code>和&lt;code>LinkedHashSet&lt;/code>一致：&lt;/p>
+&lt;p>&lt;code>LinkedHashMap&lt;/code>和&lt;code>HashMap&lt;/code>的性能相差不大，与&lt;code>HashSet&lt;/code>和&lt;code>LinkedHashSet&lt;/code>
+ &lt;a href="https://wangy325.github.io/zh/docs/java/collections/3_Set/#linkedhashset">一致&lt;/a>：&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -131,12 +131,12 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align:center">HashMap&lt;/td>
-&lt;td style="text-align:center">HashMap基于散列表，插入和查询键值对的开销是固定的&lt;/td>
+&lt;td style="text-align:center">&lt;code>HashMap&lt;/code>&lt;/td>
+&lt;td style="text-align:center">&lt;code>HashMap&lt;/code>基于散列表，插入和查询键值对的开销是固定的&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align:center">LinkedHashMap&lt;/td>
-&lt;td style="text-align:center">和HashMap类似，不过其使用LinkedList维护内部次序，因此其迭代顺序是插入顺序或者LRU（最近最少使用）次序，性能稍差于HashMap&lt;/td>
+&lt;td style="text-align:center">&lt;code>LinkedHashMap&lt;/code>&lt;/td>
+&lt;td style="text-align:center">和&lt;code>HashMap&lt;/code>类似，不过其使用&lt;code>LinkedList&lt;/code>维护内部次序，因此其迭代顺序是插入顺序或者LRU（最近最少使用）次序，性能稍差于&lt;code>HashMap&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>抽象类与接口</title><link>https://wangy325.github.io/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/</guid><description>&lt;h1 id="抽象类与接口">
@@ -144,13 +144,10 @@ default V getOrDefault (Object key, V defaultValue) {...}
  &lt;a class="anchor" href="#%e6%8a%bd%e8%b1%a1%e7%b1%bb%e4%b8%8e%e6%8e%a5%e5%8f%a3">#&lt;/a>
 &lt;/h1>
 &lt;p>抽象类是由&lt;code>abstract&lt;/code>关键字修饰的类。将一个普通类用&lt;code>abstract&lt;/code>修饰，它就是抽象类。&lt;/p>
-&lt;p>若使用&lt;code>abstract&lt;/code>修饰方法，那么称该方法为&lt;strong>抽象方法&lt;/strong>，抽象方法没有方法体。&lt;/p></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="hashmap的源码分析">
- HashMap的源码分析
- &lt;a class="anchor" href="#hashmap%e7%9a%84%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90">#&lt;/a>
-&lt;/h1>
-&lt;p>HashMap基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
+&lt;p>若使用&lt;code>abstract&lt;/code>修饰方法，那么称该方法为&lt;strong>抽象方法&lt;/strong>，抽象方法没有方法体。&lt;/p></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;p>&lt;code>HashMap&lt;/code>基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
+&lt;p>本文从初始化，扩容，插入，获取，删除这几个方面深入讨论了&lt;code>HashMap&lt;/code>的实现细节。&lt;/p>
 &lt;blockquote>
-&lt;p>此文中没有讨论HashMap中涉及到树结构的源码。&lt;/p>
+&lt;p>此文中没有讨论&lt;code>HashMap&lt;/code>中涉及到树结构的源码。&lt;/p>
 &lt;/blockquote></description></item><item><title>线程本地存储</title><link>https://wangy325.github.io/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</link><pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</guid><description>&lt;p>使用&lt;code>synchronized&lt;/code>关键字对整个方法加锁（防止其他线程访问整个方法）往往会带来更大的性能开销，如果你只想保护某些代码块，可以使用&lt;strong>同步代码块&lt;/strong>，这一段被锁保护的代码块就称为&lt;strong>临界区&lt;/strong>（ &lt;em>critical section&lt;/em> ），前面的&lt;strong>显式锁&lt;/strong>所保护的区域以及使用&lt;strong>synchronized&lt;/strong>保护的代码块都是临界区。&lt;/p></description></item><item><title>Lambda表达式与函数式接口</title><link>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>&lt;blockquote>
 &lt;p>Java 函数式接口和Lambda表达式是 Java 8 中引入的一个重要概念，它允许你将行为作为参数传递给方法，从而实现更简洁、更灵活的代码。&lt;/p>
 &lt;/blockquote>
@@ -158,11 +155,7 @@ default V getOrDefault (Object key, V defaultValue) {...}
  Lambda表达式
  &lt;a class="anchor" href="#lambda%e8%a1%a8%e8%be%be%e5%bc%8f">#&lt;/a>
 &lt;/h2>
-&lt;p>Lambda表达式是一个&lt;strong>可传递的代码块&lt;/strong>，可以在以后执行&lt;strong>一次或多次&lt;/strong>。&lt;/p></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</guid><description>&lt;h1 id="collections工具类">
- Collections工具类
- &lt;a class="anchor" href="#collections%e5%b7%a5%e5%85%b7%e7%b1%bb">#&lt;/a>
-&lt;/h1>
-&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
+&lt;p>Lambda表达式是一个&lt;strong>可传递的代码块&lt;/strong>，可以在以后执行&lt;strong>一次或多次&lt;/strong>。&lt;/p></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/6_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_Collections/</guid><description>&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
 &lt;p>由于视图是直接封装的Collection接口，&lt;strong>因此其方法有些局限&lt;/strong>，并且由于特殊的设计，部分操作是不允许的（会抛出 &lt;em>UnsupportedOperationExceptin&lt;/em> ）。&lt;/p></description></item><item><title>内部类</title><link>https://wangy325.github.io/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</guid><description>&lt;h1 id="内部类">
  内部类
  &lt;a class="anchor" href="#%e5%86%85%e9%83%a8%e7%b1%bb">#&lt;/a>

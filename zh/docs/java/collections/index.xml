@@ -22,8 +22,8 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;/code>&lt;/pre>
 &lt;p>上述方法使用的不多，主要用来对Map键值进行更新，按需查阅API文档。&lt;/p></description></item><item><title>LinkedHashMap</title><link>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</link><pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/4_Map_linkedhashmap/</guid><description>&lt;p>&lt;code>LinkedHashMap&lt;/code>(链表散列映射)是&lt;code>HashMap&lt;/code>的导出类，像&lt;code>LinkedHashSet&lt;/code>与&lt;code>HashSet&lt;/code>的关系一样。&lt;/p>
 &lt;p>其与&lt;code>HashMap&lt;/code>的差别在于其使用&lt;code>LinkedList&lt;/code>来维护键值对插入的顺序，其插入机制和&lt;code>HashMap&lt;/code>是一致的。&lt;/p>
-&lt;p>&lt;code>LinkedHashMap&lt;/code>和&lt;code>HashMap&lt;/code>的
- &lt;a href="https://wangy325.github.io/zh/docs/java/collections/3_Set/#linkedhashset">性能相差不大&lt;/a>与&lt;code>HashSet&lt;/code>和&lt;code>LinkedHashSet&lt;/code>一致：&lt;/p>
+&lt;p>&lt;code>LinkedHashMap&lt;/code>和&lt;code>HashMap&lt;/code>的性能相差不大，与&lt;code>HashSet&lt;/code>和&lt;code>LinkedHashSet&lt;/code>
+ &lt;a href="https://wangy325.github.io/zh/docs/java/collections/3_Set/#linkedhashset">一致&lt;/a>：&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -33,24 +33,17 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align:center">HashMap&lt;/td>
-&lt;td style="text-align:center">HashMap基于散列表，插入和查询键值对的开销是固定的&lt;/td>
+&lt;td style="text-align:center">&lt;code>HashMap&lt;/code>&lt;/td>
+&lt;td style="text-align:center">&lt;code>HashMap&lt;/code>基于散列表，插入和查询键值对的开销是固定的&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align:center">LinkedHashMap&lt;/td>
-&lt;td style="text-align:center">和HashMap类似，不过其使用LinkedList维护内部次序，因此其迭代顺序是插入顺序或者LRU（最近最少使用）次序，性能稍差于HashMap&lt;/td>
+&lt;td style="text-align:center">&lt;code>LinkedHashMap&lt;/code>&lt;/td>
+&lt;td style="text-align:center">和&lt;code>HashMap&lt;/code>类似，不过其使用&lt;code>LinkedList&lt;/code>维护内部次序，因此其迭代顺序是插入顺序或者LRU（最近最少使用）次序，性能稍差于&lt;code>HashMap&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;h1 id="hashmap的源码分析">
- HashMap的源码分析
- &lt;a class="anchor" href="#hashmap%e7%9a%84%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90">#&lt;/a>
-&lt;/h1>
-&lt;p>HashMap基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
+&lt;/table></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;p>&lt;code>HashMap&lt;/code>基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
+&lt;p>本文从初始化，扩容，插入，获取，删除这几个方面深入讨论了&lt;code>HashMap&lt;/code>的实现细节。&lt;/p>
 &lt;blockquote>
-&lt;p>此文中没有讨论HashMap中涉及到树结构的源码。&lt;/p>
-&lt;/blockquote></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/5_Collections/</guid><description>&lt;h1 id="collections工具类">
- Collections工具类
- &lt;a class="anchor" href="#collections%e5%b7%a5%e5%85%b7%e7%b1%bb">#&lt;/a>
-&lt;/h1>
-&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
+&lt;p>此文中没有讨论&lt;code>HashMap&lt;/code>中涉及到树结构的源码。&lt;/p>
+&lt;/blockquote></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh/docs/java/collections/6_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/collections/6_Collections/</guid><description>&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
 &lt;p>由于视图是直接封装的Collection接口，&lt;strong>因此其方法有些局限&lt;/strong>，并且由于特殊的设计，部分操作是不允许的（会抛出 &lt;em>UnsupportedOperationExceptin&lt;/em> ）。&lt;/p></description></item></channel></rss>
