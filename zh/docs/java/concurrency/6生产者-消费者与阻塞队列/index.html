@@ -1,15 +1,11 @@
-<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
-  生产者-消费者与阻塞队列
-  #
-
-在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。
-除了简单的线程协同之外，Java提供了同步队列来解决线程的协同问题，本节重点讨论这部分的内容。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="生产者-消费者与阻塞队列"><meta property="og:description" content=" 生产者-消费者与阻塞队列 # 在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。
+除了简单的线程协同之外，Java提供了同步队列来解决线程的协同问题，本节重点讨论这部分的内容。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="生产者-消费者与阻塞队列"><meta property="og:description" content="在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。
 除了简单的线程协同之外，Java提供了同步队列来解决线程的协同问题，本节重点讨论这部分的内容。"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-10-26T00:00:00+00:00"><meta property="article:modified_time" content="2020-10-26T00:00:00+00:00"><meta property="article:tag" content="Concurrency"><title>生产者-消费者与阻塞队列 | Endless River</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/><link rel=stylesheet href=/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css integrity="sha256-MJt+0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.1046d0df52f76cd63d4d0debdf164bb37ee27d56322d030bd6784c7d48045e62.js integrity="sha256-EEbQ31L3bNY9TQ3r3xZLs37ifVYyLQML1nhMfUgEXmI=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/><link rel=stylesheet href=/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css integrity="sha256-MJt+0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.6eed45993946414ee8edea60e80cbd52329cf15f54b17533e0dda49d8d9107aa.js integrity="sha256-bu1FmTlGQU7o7epg6Ay9UjKc8V9UsXUz4N2knY2RB6o=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
 <label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>面向对象</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda表达式与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
 <label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle checked>
-<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a role=button>并发编程</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/>线程与任务(一)</a></li><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_2/>线程与任务(二)</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/>资源访问受限--引论</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/>锁和条件</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/>synchronized关键字</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/>原子性和可见性</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/>线程本地存储</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/ class=active>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/7%E6%89%A7%E8%A1%8C%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/>执行器与线程池</a></li><li><a href=/zh/docs/java/concurrency/8%E8%AE%A1%E5%88%92%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/>计划执行任务</a></li><li><a href=/zh/docs/java/concurrency/9%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BB%84%E4%BB%B6/>一些重要的并发组件</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a href=/zh/docs/java/concurrency/>并发编程</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/>线程与任务(一)</a></li><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_2/>线程与任务(二)</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/>资源访问受限--引论</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/>锁和条件</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/>synchronized关键字</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/>原子性和可见性</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/>线程本地存储</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁问题2例</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/ class=active>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/6%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A82%E4%BE%8B/>阻塞队列的使用2例</a></li><li><a href=/zh/docs/java/concurrency/7_1_Executors_and_ExecutorService/>Executors与Executor框架</a></li><li><a href=/zh/docs/java/concurrency/7_2_ThreadPoolExecutor1/>ThreadPoolExecutor-p1</a></li><li><a href=/zh/docs/java/concurrency/7_3_ThreadPoolExecutor2/>ThreadPoolExecutor-p2</a></li><li><a href=/zh/docs/java/concurrency/7_4_CompletionService/>CompletionService</a></li><li><a href=/zh/docs/java/concurrency/8_1_ScheduledExecutorService1/>ScheduledExecutorService-p1</a></li><li><a href=/zh/docs/java/concurrency/8_2_ScheduledExecutorService2/>ScheduledExecutorService-p2</a></li><li><a href=/zh/docs/java/concurrency/9_1_countdownlatch/>并发组件-CountDownLatch</a></li><li><a href=/zh/docs/java/concurrency/9_2_cyclicbarrier/>并发组件-CyclicBarrier</a></li><li><a href=/zh/docs/java/concurrency/9_3_semaphore/>并发组件-Semaphore</a></li><li><a href=/zh/docs/java/concurrency/9_4_exchanger/>并发组件-Exchanger</a></li><li><a href=/zh/docs/java/concurrency/9_5_priorityblockqueue_delayqueue/>并发组件-PBQ/DQ</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
 <label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li><li><input type=checkbox id=section-162997d8460d3e3e2ce056aadf759dc7 class=toggle>
 <label for=section-162997d8460d3e3e2ce056aadf759dc7 class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/java/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/java/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/java/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
 <label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>存储数据</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
@@ -26,9 +22,8 @@
 <label for=section-cf40788af8121fac0f467a53c2054d44 class="flex justify-between"><a role=button>Python</a></label><ul><li><a href=/zh/docs/misc/py/1_flow_control/>流程控制语句</a></li><li><a href=/zh/docs/misc/py/2_data_str_tuple_dict/>字符串，元组和字典</a></li><li><a href=/zh/docs/misc/py/3_data_list/>列表（list）</a></li><li><a href=/zh/docs/misc/py/4_func/>函数</a></li><li><a href=/zh/docs/misc/py/5_4_important_functions/>4个重要的内置函数</a></li><li><a href=/zh/docs/misc/py/6_file_io/>格式化输出与文件I/O</a></li><li><a href=/zh/docs/misc/py/7_try_excep_finally/>异常处理</a></li><li><a href=/zh/docs/misc/py/8_scope/>命名空间与作用域</a></li><li><a href=/zh/docs/misc/py/9_class/>类</a></li><li><a href=/zh/docs/misc/py/10_decoration/>闭包与装饰器</a></li><li><a href=/zh/docs/misc/py/11_decoration_2/>装饰器2</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
 <label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
 </label><strong>生产者-消费者与阻塞队列</strong>
-<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#生产者-消费者与阻塞队列>生产者-消费者与阻塞队列</a></li><li><a href=#1-线程协同>1 线程协同</a></li><li><a href=#2-阻塞队列>2 阻塞队列</a><ul><li><a href=#21-arrayblockingqueue>2.1 ArrayBlockingQueue</a></li><li><a href=#22-linkedblockingqueue>2.2 LinkedBlockingQueue</a></li><li><a href=#23-synchronousqueue>2.3 SynchronousQueue</a></li><li><a href=#24-了解不同的阻塞队列>2.4 了解不同的阻塞队列</a></li></ul></li><li><a href=#3-应用示例>3 应用示例</a><ul><li><a href=#31-查找关键字>3.1 查找关键字</a></li><li><a href=#32-面包工厂的阻塞链>3.2 面包工厂的阻塞链</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=生产者-消费者与阻塞队列>生产者-消费者与阻塞队列
-<a class=anchor href=#%e7%94%9f%e4%ba%a7%e8%80%85-%e6%b6%88%e8%b4%b9%e8%80%85%e4%b8%8e%e9%98%bb%e5%a1%9e%e9%98%9f%e5%88%97>#</a></h1><p>在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。</p><p>除了简单的线程协同之外，Java提供了<strong>同步队列</strong>来解决线程的协同问题，本节重点讨论这部分的内容。</p><h1 id=1-线程协同>1 线程协同
-<a class=anchor href=#1-%e7%ba%bf%e7%a8%8b%e5%8d%8f%e5%90%8c>#</a></h1><p>不妨继续查看一个示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Restaurant</span> {
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#线程协同>线程协同</a></li><li><a href=#阻塞队列>阻塞队列</a><ul><li><a href=#arrayblockingqueue>ArrayBlockingQueue</a></li><li><a href=#linkedblockingqueue>LinkedBlockingQueue</a></li><li><a href=#synchronousqueue>SynchronousQueue</a></li><li><a href=#了解不同的阻塞队列>了解不同的阻塞队列</a></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><p>在讨论线程协作的时候，已经讨论了生产者与消费者雏形，比如录音是生产者，而播放则是消费者；同样的，在汽车打蜡的模型中，打蜡可看作生产者，抛光可看作消费者；只是它们的关系是简单的生产-消费关系。</p><p>除了简单的线程协同之外，Java提供了<strong>同步队列</strong>来解决线程的协同问题，本节重点讨论这部分的内容。</p><h2 id=线程协同>线程协同
+<a class=anchor href=#%e7%ba%bf%e7%a8%8b%e5%8d%8f%e5%90%8c>#</a></h2><p>不妨继续查看一个示例：</p><p>饭店类，有一个餐点类和一个使用<code>volatile</code>修饰的计数器，用来统计进餐的次数。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Restaurant</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Meal meal;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>int</span> count;
 </span></span><span style=display:flex><span>
@@ -44,8 +39,8 @@
 </span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Meal &#34;</span> <span style=color:#f92672>+</span> orderNum;
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Chef</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>厨师线程，负责提供餐点。当饭店有多余餐点时，等待服务员消耗餐点；当餐点消耗完时，则被唤醒继续提供餐点。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Chef</span> <span style=color:#66d9ef>implements</span> Runnable {
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> Restaurant rest;
 </span></span><span style=display:flex><span>
@@ -79,8 +74,8 @@
 </span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exit Chef&#34;</span>);
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Waiter</span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span></code></pre></div><p>服务员线程，当饭店没有餐点时，则等待厨师制作餐点；若有餐点，则消耗餐点</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Waiter</span> <span style=color:#66d9ef>implements</span> Runnable {
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>final</span> Restaurant rest;
 </span></span><span style=display:flex><span>
@@ -108,8 +103,7 @@
 </span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Exit Waiter&#34;</span>);
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span></code></pre></div><p>主线程，不断运行厨师和服务员线程。直到饭店提供10份餐点为止。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
 </span></span><span style=display:flex><span>        ExecutorService pool <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
 </span></span><span style=display:flex><span>        Restaurant restaurant <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Restaurant();
 </span></span><span style=display:flex><span>        pool.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>new</span> Waiter(restaurant));
@@ -125,43 +119,42 @@
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>        <span style=color:#75715e>// end</span>
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>/*（sample）
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 1
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 2
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 3
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 4
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 5
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 6
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 7
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 8
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 9
-</span></span></span><span style=display:flex><span><span style=color:#75715e>order up: Meal 10
-</span></span></span><span style=display:flex><span><span style=color:#75715e>exit waiter by interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Exit Chef
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
-</span></span></code></pre></div><p>主线程中的while循环必须使用同步块获取<code>restaurant</code>的锁，以保证其在获取count值的时候没有其他线程对其进行修改。可以看到输出结果满足预期，<code>waiter</code>任务执行10次之后程序退出。</p><p>我们不妨关注一下任务结束的方式：在输出样例中，<code>Waiter</code>被中断，而<code>Chef</code>是正常退出<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>。中断的线程一定是wait状态，此时<code>Waiter</code>在wait，而<code>Chef</code>正好满足运行的条件，但此时主线程的线程池发出了<code>interrupt()</code>命令，所以<code>Chef</code>的while循环的判断条件不成立，不运行while语句而退出。</p><p>如果我们取消<code>Chef</code>任务中的注释部分，那么任务结束的方式又会有所不同：</p><pre><code>Exit Chef Sleep by Interrupted
+</span></span></code></pre></div><pre><code>/*（sample）
+order up: Meal 1
+order up: Meal 2
+order up: Meal 3
+order up: Meal 4
+order up: Meal 5
+order up: Meal 6
+order up: Meal 7
+order up: Meal 8
+order up: Meal 9
+order up: Meal 10
+exit waiter by interrupted
+Exit Chef
+*///:~
+</code></pre><p>主线程中的while循环必须使用同步块获取<code>restaurant</code>的锁，以保证其在获取count值的时候没有其他线程对其进行修改。可以看到输出结果满足预期，<code>waiter</code>任务执行10次之后程序退出。</p><p>我们不妨关注一下任务结束的方式：在输出样例中，<code>Waiter</code>被中断，而<code>Chef</code>是正常退出<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>。中断的线程一定是wait状态，此时<code>Waiter</code>在wait，而<code>Chef</code>正好满足运行的条件，但此时主线程的线程池发出了<code>interrupt()</code>命令，所以<code>Chef</code>的while循环的判断条件不成立，不运行while语句而退出。</p><p>如果我们取消<code>Chef</code>任务中的注释部分，那么任务结束的方式又会有所不同：</p><pre><code>Exit Chef Sleep by Interrupted
 Exit Waiter by Interrupted
-</code></pre><p>除此之外，关于此示例，还有一些特别说明：</p><ol><li><p>可以使用try-catch块包含任务的while循环，这样保证任何时候出现异常都能结束任务；示例中对每个可能出现异常的地方使用try-catch主要是为了明确异常发生的地方罢了；</p></li><li><p>关于使任务进入等待的条件，示例中使用了<code>if</code>语句进行判断，实际上更通用的方法是使用while循环(虽然个人感觉没有实质上的差别)。</p><pre tabindex=0><code>synchronized(monitor){
-    while(condition){
-        wait();
-    }
-}
-</code></pre></li></ol><h1 id=2-阻塞队列>2 阻塞队列
-<a class=anchor href=#2-%e9%98%bb%e5%a1%9e%e9%98%9f%e5%88%97>#</a></h1><p><code>java.util.concurrent</code>包中提供了 <em>同步队列</em> 来解决线程协作的问题，同步队列在任意时刻都只允许一个任务插入或移除元素，juc包中同步队列的顶级接口是<code>BlockingQueue</code>，其有大量实现，<code>LinkedBlockingQueue</code>是一个无界队列；<code>ArrayBlockingQueue</code>具有固定的尺寸，在其元素数达到容量限制时，再向其他插入元素则会阻塞；<code>SynchronousQueue</code>是一个没有容量的同步队列，仅当有任务从队列中移除元素时，另一任务才可以向队列中插入元素，反之亦然。</p><p><img src=/img/BlockingQueue.png alt=Java中的阻塞队列></p><table><thead><tr><th style=text-align:left>操作</th><th style=text-align:left>抛出异常</th><th style=text-align:left>返回特殊值</th><th style=text-align:left>阻塞</th><th style=text-align:left>超时阻塞</th></tr></thead><tbody><tr><td style=text-align:left><strong>插入</strong></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#add%28E%29><em>add(e)</em></a></td><td style=text-align:left><em>offer(e)</em></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#put%28E%29><em>put(e)</em></a></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#offer%28E,%20long,%20java.util.concurrent.TimeUnit%29><em>offer(e, time, unit)</em></a></td></tr><tr><td style=text-align:left><strong>移除</strong></td><td style=text-align:left><em>remove()</em></td><td style=text-align:left><em>poll()</em></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#take%28%29><em>take()</em></a></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#poll%28long,%20java.util.concurrent.TimeUnit%29><em>poll(time, unit)</em></a></td></tr><tr><td style=text-align:left><strong>检查</strong></td><td style=text-align:left><em>element()</em></td><td style=text-align:left><em>peek()</em></td><td style=text-align:left>&mdash;</td><td style=text-align:left>&mdash;</td></tr></tbody></table><p>上表展示了阻塞队列的方法概要，与
-<a href=../../collections/queue/>普通队列</a>相比，阻塞队列添加了阻塞和超时阻塞的方法：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>put</span>(E e) <span style=color:#66d9ef>throws</span> InterruptedException
-</span></span><span style=display:flex><span>    向队列中插入元素<span style=color:#960050;background-color:#1e0010>，</span>队列中没有空间时一直等待
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>E <span style=color:#a6e22e>take</span>() <span style=color:#66d9ef>throws</span> InterruptedException
-</span></span><span style=display:flex><span>    取出队首的元素<span style=color:#960050;background-color:#1e0010>，</span>队列为空时一直等待
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>offer</span>(E e, <span style=color:#66d9ef>long</span> timeout, TimeUnit unit) <span style=color:#66d9ef>throws</span> InterruptedException
-</span></span><span style=display:flex><span>    向队列中插入元素<span style=color:#960050;background-color:#1e0010>，</span>超时等待队列中空间可用<span style=color:#960050;background-color:#1e0010>，</span>超时之前插入则返回true<span style=color:#960050;background-color:#1e0010>，</span>超时则返回false
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>E <span style=color:#a6e22e>poll</span>(<span style=color:#66d9ef>long</span> timeout, TimeUnit unit) <span style=color:#66d9ef>throws</span> InterruptedException
-</span></span><span style=display:flex><span>    取出队首的元素<span style=color:#960050;background-color:#1e0010>，</span>超时等待队首元素可用<span style=color:#960050;background-color:#1e0010>，</span>返回该元素或者null(超时)
-</span></span></code></pre></div><p>下面我们以ArrayBlockingQueue和LinkedBlockingQueue为例，看看阻塞队列是如何阻塞和唤醒的：</p><h2 id=21-arrayblockingqueue>2.1 ArrayBlockingQueue
-<a class=anchor href=#21-arrayblockingqueue>#</a></h2><p>这是一个典型的FIFO队列，新的元素插入队尾，并从队首移出。<code>ArrayBlockingQueue</code>是有界队列，构造器带有一个初始容量参数，一旦初始化，这个容量不能改变。</p><p>下面列出<code>ArrayBlockingQueue</code>的几个重要成员变量和构造器</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/** The queued items */</span>
+</code></pre><p>除此之外，关于此示例，还有一些特别说明：</p><ol><li><p>可以使用<code>try-catch</code>块包含任务的while循环，这样保证任何时候出现异常都能结束任务；示例中对每个可能出现异常的地方使用<code>try-catch</code>主要是为了明确异常发生的地方罢了；</p></li><li><p>关于使任务进入等待的条件，示例中使用了<code>if</code>语句进行判断，实际上更通用的方法是使用while循环(虽然个人感觉没有实质上的差别)。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>synchronized</span>(monitor){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(condition){
+</span></span><span style=display:flex><span>        wait();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li></ol><p>类似这样的例子，之前的文章已经讨论过很多次了。实现同步的方式使用同步块+线程等待/唤醒。前文也讨论了Java提供的一些线程交互的API（如<code>join()</code>方法）。</p><h2 id=阻塞队列>阻塞队列
+<a class=anchor href=#%e9%98%bb%e5%a1%9e%e9%98%9f%e5%88%97>#</a></h2><p><code>java.util.concurrent</code>包中提供了 <em>同步队列</em> 来解决线程协作的问题，同步队列在任意时刻都只允许一个任务插入或移除元素，juc包中同步队列的顶级接口是<code>BlockingQueue</code>，其有大量实现，<code>LinkedBlockingQueue</code>是一个无界队列；<code>ArrayBlockingQueue</code>具有固定的尺寸，在其元素数达到容量限制时，再向其他插入元素则会阻塞；<code>SynchronousQueue</code>是一个没有容量的同步队列，仅当有任务从队列中移除元素时，另一任务才可以向队列中插入元素，反之亦然。</p><p><img src=/img/juc/BlockingQueue.png alt=Java中的阻塞队列></p><table><thead><tr><th style=text-align:left>操作</th><th style=text-align:left>抛出异常</th><th style=text-align:left>返回特殊值</th><th style=text-align:left>阻塞</th><th style=text-align:left>超时阻塞</th></tr></thead><tbody><tr><td style=text-align:left><strong>插入</strong></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#add%28E%29><em>add(e)</em></a></td><td style=text-align:left><em>offer(e)</em></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#put%28E%29><em>put(e)</em></a></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#offer%28E,%20long,%20java.util.concurrent.TimeUnit%29><em>offer(e, time, unit)</em></a></td></tr><tr><td style=text-align:left><strong>移除</strong></td><td style=text-align:left><em>remove()</em></td><td style=text-align:left><em>poll()</em></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#take%28%29><em>take()</em></a></td><td style=text-align:left><a href=https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html#poll%28long,%20java.util.concurrent.TimeUnit%29><em>poll(time, unit)</em></a></td></tr><tr><td style=text-align:left><strong>检查</strong></td><td style=text-align:left><em>element()</em></td><td style=text-align:left><em>peek()</em></td><td style=text-align:left>&mdash;</td><td style=text-align:left>&mdash;</td></tr></tbody></table><p>上表展示了阻塞队列的方法概要，与
+<a href=/zh/docs/java/collections/2_Queue/>普通队列</a>相比，阻塞队列添加了阻塞和超时阻塞的方法：</p><pre><code>void put(E e) throws InterruptedException
+    向队列中插入元素，队列中没有空间时一直等待
+
+E take() throws InterruptedException
+    取出队首的元素，队列为空时一直等待
+
+boolean offer(E e, long timeout, TimeUnit unit) throws InterruptedException
+    向队列中插入元素，超时等待队列中空间可用，超时之前插入则返回true，超时则返回false
+
+E poll(long timeout, TimeUnit unit) throws InterruptedException
+    取出队首的元素，超时等待队首元素可用，返回该元素或者null(超时)
+</code></pre><p>下面我们以ArrayBlockingQueue和LinkedBlockingQueue为例，看看阻塞队列是如何阻塞和唤醒的：</p><h3 id=arrayblockingqueue>ArrayBlockingQueue
+<a class=anchor href=#arrayblockingqueue>#</a></h3><p>这是一个典型的FIFO队列，新的元素插入队尾，并从队首移出。<code>ArrayBlockingQueue</code>是有界队列，构造器带有一个初始容量参数，一旦初始化，这个容量不能改变。</p><p>下面列出<code>ArrayBlockingQueue</code>的几个重要成员变量和构造器</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/** The queued items */</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>final</span> Object<span style=color:#f92672>[]</span> items; <span style=color:#75715e>// 可以看到是用对象数组实现</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>/** Main lock guarding all access */</span>
@@ -239,8 +232,8 @@ Exit Waiter by Interrupted
 </span></span><span style=display:flex><span>    notFull.<span style=color:#a6e22e>signal</span>();
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x;
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>可以看到，阻塞队列的<code>put(e)</code>和<code>take()</code>方法是互相唤醒的，因此是生产——消费模式的绝佳实现。同时也注意到，方法中使用显式锁的可中断获取锁方法，以便在必要的时候中断，避免出现阻塞无法响应的情况。</p><p>同时，ArrayBlockingQueue的<code>put(e)</code>和<code>take()</code>方法使用的是同一个锁对象，这就意味着同一时刻只能有一个任务执行插入或移除元素的操作。</p><p>ArrayBlockingQueue的<code>put(e)</code>和<code>take()</code>逻辑可以简单概括为：</p><p><img src=/img/ArrayBlockingQueue_put_take.svg alt></p><p style=text-align:center;font-style:italic;font-size:.9rem>ArrayBlockingQueue的put/take方法流程图</p><h2 id=22-linkedblockingqueue>2.2 LinkedBlockingQueue
-<a class=anchor href=#22-linkedblockingqueue>#</a></h2><p>这是一个基于 <em>linked nodes</em> 的FIFO队列，如果构造时不指定容量，其容量默认为<code>Integer.MAX_VALUE</code>。</p><p>下面列出了LinkedBlockingQueue关于<code>put(e)</code>和<code>take()</code>的主要字段：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/** Lock held by take, poll, etc */</span>
+</span></span></code></pre></div><p>可以看到，阻塞队列的<code>put(e)</code>和<code>take()</code>方法是互相唤醒的，因此是生产——消费模式的绝佳实现。同时也注意到，方法中使用显式锁的可中断获取锁方法，以便在必要的时候中断，避免出现阻塞无法响应的情况。</p><p>同时，ArrayBlockingQueue的<code>put(e)</code>和<code>take()</code>方法使用的是同一个锁对象，这就意味着同一时刻只能有一个任务执行插入或移除元素的操作。</p><p>ArrayBlockingQueue的<code>put(e)</code>和<code>take()</code>逻辑可以简单概括为：</p><p><img src=/img/juc/ArrayBlockingQueue_put_take.svg alt></p><p style=text-align:center;font-style:italic;font-size:.8rem;color:grey>ArrayBlockingQueue的put/take方法流程图</p><h3 id=linkedblockingqueue>LinkedBlockingQueue
+<a class=anchor href=#linkedblockingqueue>#</a></h3><p>这是一个基于 <em>linked nodes</em> 的FIFO队列，如果构造时不指定容量，其容量默认为<code>Integer.MAX_VALUE</code>。</p><p>下面列出了LinkedBlockingQueue关于<code>put(e)</code>和<code>take()</code>的主要字段：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/** Lock held by take, poll, etc */</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> ReentrantLock takeLock <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ReentrantLock();
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>/** Wait queue for waiting takes */</span>
@@ -333,9 +326,9 @@ Exit Waiter by Interrupted
 </span></span><span style=display:flex><span>        putLock.<span style=color:#a6e22e>unlock</span>();
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>相较<code>ArrayBlockingQueue</code>而言，<code>LinkedBlockingQueue</code>的<code>put(e)</code>和<code>take()</code>方法稍显复杂，因为后者使用了2个锁对象，<code>put(e)</code>和<code>take()</code>方法除了被对方唤醒之外，还会被自己唤醒，更为重要的是，使用2个锁对象允许在同一时刻有至多2个任务分别进行<code>put(e)</code>和<code>take()</code>操作。</p><p><img src=/img/LinkedBlockingQueue_put_take.svg alt></p><p style=text-align:center;font-style:italic;font-size:.9rem>LinkedBlockingQueue的put/take方法流程图</p><h2 id=23-synchronousqueue>2.3 SynchronousQueue
-<a class=anchor href=#23-synchronousqueue>#</a></h2><p><code>SynchronousQueue</code>是一个比较特殊的阻塞队列，它<strong>没有容量</strong>，它更像是一种机制：</p><p>当任务a试图向队列中插入元素时，必然要等待另一个任务b从队列中移除元素，反之亦然。</p><h2 id=24-了解不同的阻塞队列>2.4 了解不同的阻塞队列
-<a class=anchor href=#24-%e4%ba%86%e8%a7%a3%e4%b8%8d%e5%90%8c%e7%9a%84%e9%98%bb%e5%a1%9e%e9%98%9f%e5%88%97>#</a></h2><p>下例展示了不同阻塞队列实例在同一应用中的不同行为<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestBlockingQueue</span> {
+</span></span></code></pre></div><p>相较<code>ArrayBlockingQueue</code>而言，<code>LinkedBlockingQueue</code>的<code>put(e)</code>和<code>take()</code>方法稍显复杂，因为后者使用了2个锁对象，<code>put(e)</code>和<code>take()</code>方法除了被对方唤醒之外，还会被自己唤醒，更为重要的是，使用2个锁对象允许在同一时刻有至多2个任务分别进行<code>put(e)</code>和<code>take()</code>操作。</p><p><img src=/img/juc/LinkedBlockingQueue_put_take.svg alt></p><p style=text-align:center;font-style:italic;font-size:.8rem;color:grey>LinkedBlockingQueue的put/take方法流程图</p><h3 id=synchronousqueue>SynchronousQueue
+<a class=anchor href=#synchronousqueue>#</a></h3><p><code>SynchronousQueue</code>是一个比较特殊的阻塞队列，它<strong>没有容量</strong>，它更像是一种机制：</p><p>当任务a试图向队列中插入元素时，必然要等待另一个任务b从队列中移除元素，反之亦然。</p><h3 id=了解不同的阻塞队列>了解不同的阻塞队列
+<a class=anchor href=#%e4%ba%86%e8%a7%a3%e4%b8%8d%e5%90%8c%e7%9a%84%e9%98%bb%e5%a1%9e%e9%98%9f%e5%88%97>#</a></h3><p>下例展示了不同阻塞队列实例在同一应用中的不同行为<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TestBlockingQueue</span> {
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> BlockingQueue<span style=color:#f92672>&lt;</span>LiftOff<span style=color:#f92672>&gt;</span> rockets;
 </span></span><span style=display:flex><span>
@@ -466,471 +459,5 @@ Exit Waiter by Interrupted
 </span></span></span><span style=display:flex><span><span style=color:#75715e>Interrupted during add()
 </span></span></span><span style=display:flex><span><span style=color:#75715e> */</span><span style=color:#75715e>//:~</span>
 </span></span></code></pre></div><p>在上面的示例中，有一个待发射的“火箭队列”，另有2个任务分别向队列中添加火箭和取出火箭执行发射，其中添加火箭的任务是以无限循环的形式进行的，只有当任务阻塞或者中断时添加任务才结束，而发射火箭的任务每100ms会从队列中取出火箭并发射。示例中有3个不同的阻塞队列实现，除了上面提到的两种之外，还有一个<code>SynchronousQueue</code>，主线程执行1s后通过执行器向所有任务执行中断命令，通过输出观察3个阻塞队列的行为。</p><p>首先是<code>LinkedBlockingQueue</code>，它是一个无界(Integer.MAX_VALUE)队列，我们看到它1s内完成了8次发射任务，这也是符合预期的，因为除了CPU休眠的时间，线程的上下文切换也会消耗部分时间，同时我们可以看到，由于没有容量限制，在短短的1s时间内，队列中的火箭实例竟然多达208万之多，队列的元素如此之多也会对性能有一定影响！最后发送中断命令之后，显而易见发射任务是在休眠时被中断退出的，而添加任务是正常退出的，这是由于没有容量限制，于是不存在让队列的<code>put(e)</code>方法阻塞的条件，添加任务没有被阻塞，而是检测到中断状态而退出。</p><p>接着是一个固定容量为1<code>ArrayBlockingQueue</code>，我们看到其完成了10次发射任务，中断发生之前，队列中还有一个火箭实例，并且两个任务都是被中断的。在最后一次完成发射之后，添加任务被唤醒并执行并在再次执行时由于队列中元素数到达容量上限而进入等待，此时接收到中断命令，于是在休眠中的发射任务直接抛出中断异常，而添加任务也在等待中直接抛出中断异常。</p><p>其次是<code>SynchronousQueue</code>，这是一个特殊的阻塞队列，我们看到它也执行了10次发射任务，中断发生时，队列中没有元素，并且2个任务都是被中断的。这个最容易理解：最后一次发射之后发射任务进入休眠的过程中，由于发射任务的take()方法没有运行，因此添加任务的put(e)也会被阻塞。</p><p>关于其他的阻塞队列，参考
-<a href=../concurrency/%e5%85%b6%e4%bb%96%e9%87%8d%e8%a6%81%e7%9a%84%e5%b9%b6%e5%8f%91%e7%bb%84%e4%bb%b6/#priorityblockingqueue>其他重要的并发组件</a>。</p><h1 id=3-应用示例>3 应用示例
-<a class=anchor href=#3-%e5%ba%94%e7%94%a8%e7%a4%ba%e4%be%8b>#</a></h1><h2 id=31-查找关键字>3.1 查找关键字
-<a class=anchor href=#31-%e6%9f%a5%e6%89%be%e5%85%b3%e9%94%ae%e5%ad%97>#</a></h2><p>下面的示例从目录及其子目录中查找指定关键字的文件并列出关键字所在的行的信息。我们使用阻塞队列存放目录及其子目录中所有文件，并且使用2个任务分别添加文件和查找文件。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SearchKeyword</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> FILE_QUEUE_SIZE <span style=color:#f92672>=</span> 10;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> SEARCH_THREADS <span style=color:#f92672>=</span> 100;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> File DUMMY <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> File(<span style=color:#e6db74>&#34;&#34;</span>);
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**有界阻塞队列*/</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> BlockingQueue<span style=color:#f92672>&lt;</span>File<span style=color:#f92672>&gt;</span> queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayBlockingQueue<span style=color:#f92672>&lt;&gt;</span>(FILE_QUEUE_SIZE);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> String DIR <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;src&#34;</span>;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> String keyword;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>boolean</span> done <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
-</span></span><span style=display:flex><span>        SearchKeyword sk <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SearchKeyword();
-</span></span><span style=display:flex><span>        sk.<span style=color:#a6e22e>test</span>();
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#75715e>// 带资源的try块</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> (Scanner in <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner(System.<span style=color:#a6e22e>in</span>)) {
-</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>print</span>(<span style=color:#e6db74>&#34;Enter keyword (e.g. volatile): &#34;</span>);
-</span></span><span style=display:flex><span>            keyword <span style=color:#f92672>=</span> in.<span style=color:#a6e22e>nextLine</span>();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            Producer p <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Producer();
-</span></span><span style=display:flex><span>            Consumer c <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Consumer();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            ExecutorService pool <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            pool.<span style=color:#a6e22e>execute</span>(p);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 1; i <span style=color:#f92672>&lt;=</span> SEARCH_THREADS; i<span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#75715e>// run consumer</span>
-</span></span><span style=display:flex><span>                pool.<span style=color:#a6e22e>execute</span>(c);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>            pool.<span style=color:#a6e22e>shutdown</span>();
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Producer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                enumerate(<span style=color:#66d9ef>new</span> File(DIR));
-</span></span><span style=display:flex><span>                <span style=color:#75715e>// 空文件作为结束符</span>
-</span></span><span style=display:flex><span>                queue.<span style=color:#a6e22e>put</span>(DUMMY);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                <span style=color:#75715e>// ignore</span>
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Consumer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>done) {
-</span></span><span style=display:flex><span>                    File file <span style=color:#f92672>=</span> queue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> (file <span style=color:#f92672>==</span> DUMMY) {
-</span></span><span style=display:flex><span>                        done <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
-</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                        search(file, keyword);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span><span style=color:#75715e>//                  Thread.yield();</span>
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (Exception e) {
-</span></span><span style=display:flex><span>                <span style=color:#75715e>// ignore</span>
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Recursively enumerates all files in a given directory and its subdirectories.
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param directory the directory in which to start
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>enumerate</span>(File directory) <span style=color:#66d9ef>throws</span> InterruptedException {
-</span></span><span style=display:flex><span>        File<span style=color:#f92672>[]</span> files <span style=color:#f92672>=</span> directory.<span style=color:#a6e22e>listFiles</span>();
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (File file : files) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (file.<span style=color:#a6e22e>isDirectory</span>()) {
-</span></span><span style=display:flex><span>                enumerate(file);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                queue.<span style=color:#a6e22e>put</span>(file);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Searches a file for a given keyword and prints all matching lines.
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param file    the file to search
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param keyword the keyword to search for
-</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>search</span>(File file, String keyword) <span style=color:#66d9ef>throws</span> IOException {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> (Scanner in <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner(file, <span style=color:#e6db74>&#34;UTF-8&#34;</span>)) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> lineNumber <span style=color:#f92672>=</span> 0;
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>while</span> (in.<span style=color:#a6e22e>hasNextLine</span>()) {
-</span></span><span style=display:flex><span>                lineNumber<span style=color:#f92672>++</span>;
-</span></span><span style=display:flex><span>                String line <span style=color:#f92672>=</span> in.<span style=color:#a6e22e>nextLine</span>();
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> (line.<span style=color:#a6e22e>contains</span>(keyword)) {
-</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;[%s] %s:%d:%s%n&#34;</span>, Thread.<span style=color:#a6e22e>currentThread</span>().<span style=color:#a6e22e>getName</span>(), file.<span style=color:#a6e22e>getPath</span>(), lineNumber, line);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>上例中用于存放文件的是有界的阻塞队列实现，并且代码没有任何的显式同步控制，程序是线程安全的，这就是阻塞队列在处理生产——消费模型时的优势。</p><p>事实上，我们无需关注队列中元素的插入/移除、以及put/take方法的阻塞情况，阻塞队列会处理好一切。不过，我们可以简单分析程序可能的运行过程：</p><ul><li>若p任务一直占用cpu时间，那么队列很快将到达容量上限，put方法阻塞</li><li>此时c任务获得cpu时间及锁，并且能够顺利的移除元素，此时take方法唤醒put方法</li><li>但是put方法并没有获取锁，c任务继续执行，由于c任务有很多线程，队列中的元素很快被消耗完，所有执行c任务的线程take方法阻塞</li><li>此时p任务重新获得锁，put方法插入元素后唤醒take方法，c任务得以继续执行</li><li>&mldr;</li><li>插入dummy之后p任务完成</li><li>c任务的任一线程读取到dummy之后修改修改标记变量并在下一次循环退出</li><li>其他执行c任务的线程读取到标记量并相继退出</li></ul><p>实际上程序运行的过程比上面的阐述要复杂的多，不过需要理解的就是阻塞队列在队列满或空的情况下的阻塞是被相互唤醒的。</p><h2 id=32-面包工厂的阻塞链>3.2 面包工厂的阻塞链
-<a class=anchor href=#32-%e9%9d%a2%e5%8c%85%e5%b7%a5%e5%8e%82%e7%9a%84%e9%98%bb%e5%a1%9e%e9%93%be>#</a></h2><blockquote><p>⚠️此节的内容关于阻塞链的描述部分可能有部分错误。</p></blockquote><p>假设一个面包工厂有两个加工线，分别加工黄油面包和果酱面包，现在将面包工厂作为生产者，另外我们需要一个消费者，来看看每次都会吃到什么口味的面包</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ToastFactory</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>int</span> count;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Toast</span> {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>enum</span> Status {DRY, BUTTERED, JAMMED}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Status status <span style=color:#f92672>=</span> Status.<span style=color:#a6e22e>DRY</span>;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> id;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Toast</span>(<span style=color:#66d9ef>int</span> idn) {
-</span></span><span style=display:flex><span>            id <span style=color:#f92672>=</span> idn;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>butter</span>() {
-</span></span><span style=display:flex><span>            status <span style=color:#f92672>=</span> Status.<span style=color:#a6e22e>BUTTERED</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>jam</span>() {
-</span></span><span style=display:flex><span>            status <span style=color:#f92672>=</span> Status.<span style=color:#a6e22e>JAMMED</span>;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Status <span style=color:#a6e22e>getStatus</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> status;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getId</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> id;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>toString</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Toast &#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;: &#34;</span> <span style=color:#f92672>+</span> status;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ToastQueue</span> <span style=color:#66d9ef>extends</span> LinkedBlockingQueue<span style=color:#f92672>&lt;</span>Toast<span style=color:#f92672>&gt;</span> {
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Toaster</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ToastQueue rawQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Toaster</span>(ToastQueue tq) {
-</span></span><span style=display:flex><span>            rawQueue <span style=color:#f92672>=</span> tq;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>                    TimeUnit.<span style=color:#a6e22e>MILLISECONDS</span>.<span style=color:#a6e22e>sleep</span>(100);
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Make toast</span>
-</span></span><span style=display:flex><span>                    Toast t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Toast(count<span style=color:#f92672>++</span>);
-</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(t);
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Insert into queue</span>
-</span></span><span style=display:flex><span>                    rawQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Toaster off&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Toaster interrupted&#34;</span>);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/** Apply butter to toast: */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Butterer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ToastQueue dryQueue, finishQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Butterer</span>(ToastQueue dry, ToastQueue buttered) {
-</span></span><span style=display:flex><span>            dryQueue <span style=color:#f92672>=</span> dry;
-</span></span><span style=display:flex><span>            finishQueue <span style=color:#f92672>=</span> buttered;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>                    Toast t <span style=color:#f92672>=</span> dryQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>                    t.<span style=color:#a6e22e>butter</span>();
-</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(t);
-</span></span><span style=display:flex><span>                    finishQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Butterer off&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Butterer interrupted&#34;</span>);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/** Apply jam to buttered toast: */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Jammer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ToastQueue dryQueue, finishQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Jammer</span>(ToastQueue raw, ToastQueue jam) {
-</span></span><span style=display:flex><span>            dryQueue <span style=color:#f92672>=</span> raw;
-</span></span><span style=display:flex><span>            finishQueue <span style=color:#f92672>=</span> jam;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>                    Toast t <span style=color:#f92672>=</span> dryQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>                    t.<span style=color:#a6e22e>jam</span>();
-</span></span><span style=display:flex><span>                    System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(t);
-</span></span><span style=display:flex><span>                    finishQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Jammer off&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Jammer interrupted&#34;</span>);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>/** Consume the toast: */</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Eater</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> ToastQueue finishQueue;
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Eater</span>(ToastQueue finishQueue) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>finishQueue</span> <span style=color:#f92672>=</span> finishQueue;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>                    Toast toast <span style=color:#f92672>=</span> finishQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// Verify that the toast is coming in order,</span>
-</span></span><span style=display:flex><span>                    <span style=color:#75715e>// and that all pieces are getting jammed:</span>
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> (toast.<span style=color:#a6e22e>getId</span>() <span style=color:#f92672>!=</span> counter<span style=color:#f92672>++</span> <span style=color:#f92672>||</span> toast.<span style=color:#a6e22e>getStatus</span>() <span style=color:#f92672>==</span> Toast.<span style=color:#a6e22e>Status</span>.<span style=color:#a6e22e>DRY</span>) {
-</span></span><span style=display:flex><span>                        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;&gt;&gt;&gt;&gt; Error: &#34;</span> <span style=color:#f92672>+</span> toast);
-</span></span><span style=display:flex><span>                        System.<span style=color:#a6e22e>exit</span>(1);
-</span></span><span style=display:flex><span>                    } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Chomp! &#34;</span> <span style=color:#f92672>+</span> toast);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Eater off&#34;</span>);
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Eater interrupted&#34;</span>);
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
-</span></span><span style=display:flex><span>        ToastQueue dryQueue <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> ToastQueue(),
-</span></span><span style=display:flex><span>            finishQueue <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> ToastQueue();
-</span></span><span style=display:flex><span>        ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
-</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Toaster(dryQueue));
-</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Butterer(dryQueue, finishQueue));
-</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Jammer(dryQueue, finishQueue));
-</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Eater(finishQueue));
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (count <span style=color:#f92672>&gt;</span> 4) {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>        exec.<span style=color:#a6e22e>shutdownNow</span>();
-</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;toast count: &#34;</span> <span style=color:#f92672>+</span> count);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>        ToastFactory tf <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ToastFactory();
-</span></span><span style=display:flex><span>        tf.<span style=color:#a6e22e>test</span>();
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>/*
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 0: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 0: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 0: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 1: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 1: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 1: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 2: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 2: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 2: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 3: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 3: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 3: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 4: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 4: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 4: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>toast count: 5
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Eater interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Jammer interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Butterer interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toaster interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
-</span></span></code></pre></div><p>上例有4个任务，分别为生产干面包（记为T1），生产黄油面包（记为T2），生产果酱面包（记为T3），消费面包（记为T4）。黄油/果酱面包只能由干面包加工而成，而T4只能消费加工好的面包</p><script src=/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"light"})</script><p class=mermaid>graph LR
-A[开始] --> B(干面包T1)
-B-- 黄油T2 -->D[生产完成]
-B-- 果酱T3 -->D
-D-- 消费T4 -->E[结束]</p><p style=text-align:center;font-style:italic;font-size:.9rem>程序执行流程</p><p>从执行流程上来看，T1会阻塞T2和T3，而T2和T3会阻塞T4，而T4会阻塞T1，这样形成了一个阻塞链，从输出来看也正是如此，面包的生产和消费是有序的：被涂上黄油的面包0被消费，接着是被涂上果酱的面包1被消费&mldr;等等如此有规律的输出。</p><p>仔细想想，这种规律是怎么得到保证的呢？</p><p>从代码来看， 程序使用了2个阻塞队列：rawQueue和finishQueue分别表示干面包和加工完成的面包（黄油/果酱），程序运行时，T1， T2，T3，T4全部是RUNNABLE状态。由于采用的实现是<code>LinkedBlockingQueue</code>，所以rowQueue的<code>put(e)</code>方法无法被阻塞，单从这一点看，就不能保证得到代码示例中的规律输出，此外，T2/T3会随机争用rowQueue的take锁，所以面包被涂黄油还是果酱是无法确定的，完全由cpu随机调度，因此也不可能出现上述示例的规律输出，至于T4就更不用说了，由于T2/T3的随机争用，那么T4的if判断必然会出现错误，从而退出程序，符合逻辑的输出应该是向下面这样的（当然，把主线程的count判断值改大以观察效果）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/*
-</span></span></span><span style=display:flex><span><span style=color:#75715e>...
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 51: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 54: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 59: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 56: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>&gt;&gt;&gt;&gt; Error: Toast 53: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 55: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 57: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 59: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>...
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
-</span></span></code></pre></div><p>既然是rowQueue的<code>put(e)</code>方法无法被阻塞导致的问题，那么使用指定容量为1的<code>ArrayBlockingQueue</code>是否可以满足规律输出呢？</p><p>遗憾的是，也不行<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ToastQueue</span> <span style=color:#66d9ef>extends</span> ArrayBlockingQueue<span style=color:#f92672>&lt;</span>Toast<span style=color:#f92672>&gt;</span>{
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>ToastQueue</span>(<span style=color:#66d9ef>int</span> capacity) {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>super</span>(capacity);
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Toaster</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>private</span> ToastQueue rawQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Toaster</span>(ToastQueue tq) {
-</span></span><span style=display:flex><span>       rawQueue <span style=color:#f92672>=</span> tq;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>           <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>               <span style=color:#75715e>// 这句休眠是保证阻塞链的根本</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>//                TimeUnit.MILLISECONDS.sleep(100);</span>
-</span></span><span style=display:flex><span>               <span style=color:#75715e>// Make toast</span>
-</span></span><span style=display:flex><span>               Toast t <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Toast(count<span style=color:#f92672>++</span>);
-</span></span><span style=display:flex><span>               rawQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>           }
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Toaster off&#34;</span>);
-</span></span><span style=display:flex><span>       } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Toaster interrupted&#34;</span>);
-</span></span><span style=display:flex><span>       }
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>/** Apply butter to toast: */</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Butterer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>private</span> ToastQueue dryQueue, finishQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Butterer</span>(ToastQueue dry, ToastQueue buttered) {
-</span></span><span style=display:flex><span>       dryQueue <span style=color:#f92672>=</span> dry;
-</span></span><span style=display:flex><span>       finishQueue <span style=color:#f92672>=</span> buttered;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>           <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>               <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>               Toast t <span style=color:#f92672>=</span> dryQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>               t.<span style=color:#a6e22e>butter</span>();
-</span></span><span style=display:flex><span>               finishQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>           }
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Butterer off&#34;</span>);
-</span></span><span style=display:flex><span>       } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Butterer interrupted&#34;</span>);
-</span></span><span style=display:flex><span>       }
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>/** Apply jam to buttered toast: */</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Jammer</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>private</span> ToastQueue dryQueue, finishQueue;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Jammer</span>(ToastQueue raw, ToastQueue jam) {
-</span></span><span style=display:flex><span>       dryQueue <span style=color:#f92672>=</span> raw;
-</span></span><span style=display:flex><span>       finishQueue <span style=color:#f92672>=</span> jam;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>           <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>               <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>               Toast t <span style=color:#f92672>=</span> dryQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>               t.<span style=color:#a6e22e>jam</span>();
-</span></span><span style=display:flex><span>               finishQueue.<span style=color:#a6e22e>put</span>(t);
-</span></span><span style=display:flex><span>           }
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Jammer off&#34;</span>);
-</span></span><span style=display:flex><span>       } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Jammer interrupted&#34;</span>);
-</span></span><span style=display:flex><span>       }
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>/** Consume the toast: */</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Eater</span> <span style=color:#66d9ef>implements</span> Runnable {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>private</span> ToastQueue finishQueue;
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> counter <span style=color:#f92672>=</span> 0;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Eater</span>(ToastQueue finishQueue) {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>finishQueue</span> <span style=color:#f92672>=</span> finishQueue;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#a6e22e>@Override</span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>try</span> {
-</span></span><span style=display:flex><span>           <span style=color:#66d9ef>while</span> (<span style=color:#f92672>!</span>Thread.<span style=color:#a6e22e>interrupted</span>()) {
-</span></span><span style=display:flex><span>               <span style=color:#75715e>// Blocks until next piece of toast is available:</span>
-</span></span><span style=display:flex><span>               Toast toast <span style=color:#f92672>=</span> finishQueue.<span style=color:#a6e22e>take</span>();
-</span></span><span style=display:flex><span>               System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Chomp! &#34;</span> <span style=color:#f92672>+</span> toast);
-</span></span><span style=display:flex><span>           }
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Eater off&#34;</span>);
-</span></span><span style=display:flex><span>       } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>           System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Eater interrupted&#34;</span>);
-</span></span><span style=display:flex><span>       }
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>() <span style=color:#66d9ef>throws</span> InterruptedException {
-</span></span><span style=display:flex><span>   ToastQueue dryQueue <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> ToastQueue(1),
-</span></span><span style=display:flex><span>       finishQueue <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> ToastQueue(1);
-</span></span><span style=display:flex><span>   ExecutorService exec <span style=color:#f92672>=</span> Executors.<span style=color:#a6e22e>newCachedThreadPool</span>();
-</span></span><span style=display:flex><span>   exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Toaster(dryQueue));
-</span></span><span style=display:flex><span>   exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Butterer(dryQueue, finishQueue));
-</span></span><span style=display:flex><span>   exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Jammer(dryQueue, finishQueue));
-</span></span><span style=display:flex><span>   exec.<span style=color:#a6e22e>execute</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>new</span> Eater(finishQueue));
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>true</span>) {
-</span></span><span style=display:flex><span>       <span style=color:#66d9ef>if</span> (count <span style=color:#f92672>&gt;</span> 14) {
-</span></span><span style=display:flex><span>           <span style=color:#66d9ef>break</span>;
-</span></span><span style=display:flex><span>       }
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>   exec.<span style=color:#a6e22e>shutdownNow</span>();
-</span></span><span style=display:flex><span>   System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;toast count: &#34;</span> <span style=color:#f92672>+</span> count);
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) <span style=color:#66d9ef>throws</span> Exception {
-</span></span><span style=display:flex><span>   ToastFactory tf <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ToastFactory();
-</span></span><span style=display:flex><span>   tf.<span style=color:#a6e22e>test</span>();
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#75715e>/* output (partial sample)
-</span></span></span><span style=display:flex><span><span style=color:#75715e>...
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 18: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 20: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 19: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 22: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 21: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 24: JAMMED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Eater off
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Butterer interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>toast count: 28
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toaster interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Jammer interrupted
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span><span style=color:#75715e>//:~</span>
-</span></span></code></pre></div><p>可以看到，还是T2/T3的争用问题没有解决，T1的阻塞之后，T2/T3获得运行权之后将面包放入<code>finishQueue</code>时又存在争用情况，尽管大多数情况下都是有序的，但是也存在少数情况下的乱序问题。</p><p>同时，上述代码还暴露了一个问题： <code>volatile</code>变量的局限性，程序计划生产14块面包后结束，而最后的面包数却到了28！主线程和T1对共享变量<code>count</code>进行修改，应该使用同步<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>。</p><p>实际上，在T1任务开始时使用 <strong>休眠</strong>来降低面包生产的速度，这样当程序运行时，T1处于休眠状态，/T2/T3/T4都是处于阻塞状态，这和前面讨论的无规律输出是完全不同的局面；当T1休眠超时之后，生产第一片面包并唤醒一个在<code>rawQueue</code>上等待的任务（可能是T2或T3）后又进入休眠（100ms），此时（假如）T2被唤醒，那么T2加工面包之后唤醒T4并随即进入等待（T1任务100ms的休眠足够长时间让<code>rawQueue</code>为空），T4完成之后随即进入等待(同理，100ms足够长)，这样就完成了一轮规律输出<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/*
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 0: DRY
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Toast 0: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>Chomp! Toast 0: BUTTERED
-</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
-</span></span></code></pre></div><p>值得一提的是，关于上面提到的共享变量，并没有使用同步，但是却 <em>意外地</em> 没有出现问题<sup id=fnref1:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>。这确实令人意外，明明是不满足happens-before原则的，但是却没有出现讹误（或许是测试少，讹误没有发生）。原因就出现在T1的休眠上，由于T1的休眠，T1有足够的时间来接收主线程“滞后”的中断命令，因此看起来就像是主线程的判断没有逻辑上的缺陷一样。</p><p>这是我见过的最强休眠。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>实际测试过程的结果往往相反，而<code>Waiter</code>和<code>Chef</code>同时被中断的情况很少。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>LiftOff类参考本系列的第一个
-<a href=../%e7%ba%bf%e7%a8%8b%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5/#1-%e4%bb%bb%e5%8a%a1>任务实例</a>。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>这个代码还存在共享资源的访问讹误问题。&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>这是由于在前文中提到的，在使用<code>ArrayBlockingQueue</code>测试时，volatile关键字的局限性显现时意识到的。将count设置为volatile，并且只有线程T1在对其进行修改，主线程读取count的值作为任务中断的依据，看起来似乎不需要额外的同步，即可不出现讹误，但是却出现了。实际上，虽然保证了可见性，但是没有保证有序性，即对count的判断和对count的修改不满足happens-before原则，只有当对count值的读取总是发生在对count值的修改之前时，主线程中对count值的判断逻辑才是可行的，事实上主线程中对count值的判断总是滞后于修改的。&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a>&#160;<a href=#fnref1:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>看起来100ms的休眠好像是一个不太安全的机制，因为不能保证100ms的时间T4一定在T1休眠的时间内完成任务并进入等待。但是在测试过程中将休眠时间设置为1ns(Java能够设置的最小休眠时间)，仍然得到了规律输出，这一点让人费解。&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#生产者-消费者与阻塞队列>生产者-消费者与阻塞队列</a></li><li><a href=#1-线程协同>1 线程协同</a></li><li><a href=#2-阻塞队列>2 阻塞队列</a><ul><li><a href=#21-arrayblockingqueue>2.1 ArrayBlockingQueue</a></li><li><a href=#22-linkedblockingqueue>2.2 LinkedBlockingQueue</a></li><li><a href=#23-synchronousqueue>2.3 SynchronousQueue</a></li><li><a href=#24-了解不同的阻塞队列>2.4 了解不同的阻塞队列</a></li></ul></li><li><a href=#3-应用示例>3 应用示例</a><ul><li><a href=#31-查找关键字>3.1 查找关键字</a></li><li><a href=#32-面包工厂的阻塞链>3.2 面包工厂的阻塞链</a></li></ul></li></ul></nav></div></aside></main></body></html>
+<a href=/zh/docs/java/concurrency/9_5_priorityblockqueue_delayqueue/>其他重要的并发组件</a>。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>实际测试过程的结果往往相反，而<code>Waiter</code>和<code>Chef</code>同时被中断的情况很少。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>LiftOff类参考本系列的第一个
+<a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/#%e4%bb%bb%e5%8a%a1>任务实例</a>。&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#线程协同>线程协同</a></li><li><a href=#阻塞队列>阻塞队列</a><ul><li><a href=#arrayblockingqueue>ArrayBlockingQueue</a></li><li><a href=#linkedblockingqueue>LinkedBlockingQueue</a></li><li><a href=#synchronousqueue>SynchronousQueue</a></li><li><a href=#了解不同的阻塞队列>了解不同的阻塞队列</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

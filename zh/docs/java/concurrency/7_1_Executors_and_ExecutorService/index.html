@@ -1,0 +1,174 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Executors可以称作执行器。Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，Executors提供了一些非常方便的静态方法，可以根据需要创建不同的ExecutorService，然后调用其execute(Runnable)或submit(Callable<T>)方法。
+在并发条件下，执行器还有一个非常明显的优势，它使用线程池管理线程，减少了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。
+本文将从执行器开始，阐述Java中的线程池。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/java/concurrency/7_1_Executors_and_ExecutorService/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="Executors与Executor框架"><meta property="og:description" content="Executors可以称作执行器。Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，Executors提供了一些非常方便的静态方法，可以根据需要创建不同的ExecutorService，然后调用其execute(Runnable)或submit(Callable<T>)方法。
+在并发条件下，执行器还有一个非常明显的优势，它使用线程池管理线程，减少了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。
+本文将从执行器开始，阐述Java中的线程池。"><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2020-11-03T00:00:00+00:00"><meta property="article:modified_time" content="2024-07-26T17:45:49+08:00"><meta property="article:tag" content="Concurrency"><title>Executors与Executor框架 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/java/concurrency/7_1_Executors_and_ExecutorService/><link rel=stylesheet href=/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css integrity="sha256-MJt+0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.6eed45993946414ee8edea60e80cbd52329cf15f54b17533e0dda49d8d9107aa.js integrity="sha256-bu1FmTlGQU7o7epg6Ay9UjKc8V9UsXUz4N2knY2RB6o=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java核心</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>面向对象</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda表达式与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li><li><a href=/zh/docs/java/basic/Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/>Java接口回调</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle checked>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a href=/zh/docs/java/concurrency/>并发编程</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/>线程与任务(一)</a></li><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_2/>线程与任务(二)</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/>资源访问受限--引论</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/>锁和条件</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/>synchronized关键字</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/>原子性和可见性</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/>线程本地存储</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁问题2例</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/6%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A82%E4%BE%8B/>阻塞队列的使用2例</a></li><li><a href=/zh/docs/java/concurrency/7_1_Executors_and_ExecutorService/ class=active>Executors与Executor框架</a></li><li><a href=/zh/docs/java/concurrency/7_2_ThreadPoolExecutor1/>ThreadPoolExecutor-p1</a></li><li><a href=/zh/docs/java/concurrency/7_3_ThreadPoolExecutor2/>ThreadPoolExecutor-p2</a></li><li><a href=/zh/docs/java/concurrency/7_4_CompletionService/>CompletionService</a></li><li><a href=/zh/docs/java/concurrency/8_1_ScheduledExecutorService1/>ScheduledExecutorService-p1</a></li><li><a href=/zh/docs/java/concurrency/8_2_ScheduledExecutorService2/>ScheduledExecutorService-p2</a></li><li><a href=/zh/docs/java/concurrency/9_1_countdownlatch/>并发组件-CountDownLatch</a></li><li><a href=/zh/docs/java/concurrency/9_2_cyclicbarrier/>并发组件-CyclicBarrier</a></li><li><a href=/zh/docs/java/concurrency/9_3_semaphore/>并发组件-Semaphore</a></li><li><a href=/zh/docs/java/concurrency/9_4_exchanger/>并发组件-Exchanger</a></li><li><a href=/zh/docs/java/concurrency/9_5_priorityblockqueue_delayqueue/>并发组件-PBQ/DQ</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>Java内存模型与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li><li><input type=checkbox id=section-162997d8460d3e3e2ce056aadf759dc7 class=toggle>
+<label for=section-162997d8460d3e3e2ce056aadf759dc7 class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/java/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/java/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/java/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li></ul></li><li class=book-section-flat><span>所谓开发</span><ul><li><input type=checkbox id=section-94c876711ff851f5a564bef513938730 class=toggle>
+<label for=section-94c876711ff851f5a564bef513938730 class="flex justify-between"><a role=button>存储数据</a></label><ul><li><input type=checkbox id=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class=toggle>
+<label for=section-95d6c3eb8d9a1cf6b58bd1aaaeba338b class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/utility/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>在centOS上安装并配置mysql数据库</a></li><li><a href=/zh/docs/utility/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL中的几个字符串处理函数</a></li><li><a href=/zh/docs/utility/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>MySQL事务与隔离级别</a></li><li><a href=/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL锁的简单使用</a></li></ul></li><li><input type=checkbox id=section-63fe101f19994c0885fcb00347eb6cc3 class=toggle>
+<label for=section-63fe101f19994c0885fcb00347eb6cc3 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/utility/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/utility/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/utility/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/utility/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6b3913c766697bc2d56c09ab1e4448be class=toggle>
+<label for=section-6b3913c766697bc2d56c09ab1e4448be class="flex justify-between"><a href=/zh/docs/utility/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/utility/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/utility/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/utility/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/utility/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/utility/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-a0746926d02d10d842b9d0d7599deab2 class=toggle>
+<label for=section-a0746926d02d10d842b9d0d7599deab2 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-7081c8a81314efcce430f0f34c6571eb class=toggle>
+<label for=section-7081c8a81314efcce430f0f34c6571eb class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/utility/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-1adf78989f86ee1fe83f52eacf19986b class=toggle>
+<label for=section-1adf78989f86ee1fe83f52eacf19986b class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/utility/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-33da1b959d076efbdb019217cc6e3f10 class=toggle>
+<label for=section-33da1b959d076efbdb019217cc6e3f10 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/utility/design_pattern/structure/3_decorator/>装饰者模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/utility/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>实用主义</span><ul><li><input type=checkbox id=section-0aac8377e80b027920c9aeb4f4ee3fdd class=toggle>
+<label for=section-0aac8377e80b027920c9aeb4f4ee3fdd class="flex justify-between"><a href=/zh/docs/misc/course/>课程笔记</a></label><ul><li><input type=checkbox id=section-f1b8b9cc5c4f9d3f2a41f96bc1847842 class=toggle>
+<label for=section-f1b8b9cc5c4f9d3f2a41f96bc1847842 class="flex justify-between"><a href=/zh/docs/misc/course/operating_system_peking/>操作系统原理</a></label><ul><li><a href=/zh/docs/misc/course/operating_system_peking/1_intro/>引论</a></li><li><a href=/zh/docs/misc/course/operating_system_peking/2_env_and_logic/>操作系统运行环境与机制</a></li><li><a href=/zh/docs/misc/course/operating_system_peking/3_processes_and_threads/>进程和线程模型</a></li></ul></li><li><input type=checkbox id=section-18868d3df14ca5fcdbf6487ffa58a30f class=toggle>
+<label for=section-18868d3df14ca5fcdbf6487ffa58a30f class="flex justify-between"><a href=/zh/docs/misc/course/algorithms_part1/>算法-第一部分</a></label><ul></ul></li></ul></li><li><input type=checkbox id=section-cf40788af8121fac0f467a53c2054d44 class=toggle>
+<label for=section-cf40788af8121fac0f467a53c2054d44 class="flex justify-between"><a role=button>Python</a></label><ul><li><a href=/zh/docs/misc/py/1_flow_control/>流程控制语句</a></li><li><a href=/zh/docs/misc/py/2_data_str_tuple_dict/>字符串，元组和字典</a></li><li><a href=/zh/docs/misc/py/3_data_list/>列表（list）</a></li><li><a href=/zh/docs/misc/py/4_func/>函数</a></li><li><a href=/zh/docs/misc/py/5_4_important_functions/>4个重要的内置函数</a></li><li><a href=/zh/docs/misc/py/6_file_io/>格式化输出与文件I/O</a></li><li><a href=/zh/docs/misc/py/7_try_excep_finally/>异常处理</a></li><li><a href=/zh/docs/misc/py/8_scope/>命名空间与作用域</a></li><li><a href=/zh/docs/misc/py/9_class/>类</a></li><li><a href=/zh/docs/misc/py/10_decoration/>闭包与装饰器</a></li><li><a href=/zh/docs/misc/py/11_decoration_2/>装饰器2</a></li></ul></li><li><input type=checkbox id=section-2310d269d19e5e48d57d2c9fd6bf08f5 class=toggle>
+<label for=section-2310d269d19e5e48d57d2c9fd6bf08f5 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/misc/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/misc/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/misc/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>Executors与Executor框架</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#executors类>Executors类</a></li><li><a href=#executorservice接口>ExecutorService接口</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><p><code>Executors</code>可以称作执行器。Java并发系列的文章到目前为止，虽然没有特别说明，但是使用执行器(Executor(s))的次数已经难以计数了，<code>Executors</code>提供了一些非常方便的静态方法，可以根据需要创建不同的<code>ExecutorService</code>，然后调用其<code>execute(Runnable)</code>或<code>submit(Callable&lt;T>)</code>方法。</p><p>在并发条件下，执行器还有一个非常明显的优势，它使用<strong>线程池</strong>管理线程，减少了系统创建和销毁线程的开销。在一般的Java并发过程中，也建议使用执行器完成任务而非显式地创建线程。</p><p>本文将从执行器开始，阐述Java中的线程池。</p><h2 id=executors类>Executors类
+<a class=anchor href=#executors%e7%b1%bb>#</a></h2><p><code>java.util.concurrent.Executors</code>类提供了许多静态方法来获取不同类型的 <strong>线程池</strong>，下表列出其常用方法<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>：</p><table><thead><tr><th style=text-align:left>方法</th><th style=text-align:left>概要</th></tr></thead><tbody><tr><td style=text-align:left><code>newFixedThreadPool</code></td><td style=text-align:left>创建固定大小的线程池，线程会一直保留</td></tr><tr><td style=text-align:left><code>newCachedThreadPool</code></td><td style=text-align:left>创建线程池，该线程池在必要时创建新线程，旧线程也会被重用，线程空闲60s被销毁</td></tr><tr><td style=text-align:left><code>newSingleThreadExecutor</code></td><td style=text-align:left>相当于newFixedThreadPool(1)，其能保证任务顺序执行</td></tr><tr><td style=text-align:left><em><code>newScheduledThreadPool</code></em></td><td style=text-align:left>创建计划执行一次或周期执行的线程池</td></tr><tr><td style=text-align:left><em><code>newSingleThreadScheduledExecutor</code></em></td><td style=text-align:left>创建计划执行一次或周期执行的单线程池</td></tr></tbody></table><p style=text-align:center;font-size:.8rem;font-style:italic;color:grey>Executors用于构造线程池的部分方法</p><p>上表中的前3个方法返回<code>ThreadPoolExecutor</code>实例，后面2个方法返回<code>ScheduledExecutorService</code>实例，不管是<code>ThreadPoolExecutor</code>或是<code>ScheduledExecutorService</code>，都是<code>ExecutorService</code>的实现，<code>ExecutorService</code>接口是设计用来处理任务的接口，其顶层接口是<code>java.util.concurrent.Executor</code>，该接口简单地定义了一个执行任务的方法：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Executor</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * Executes the given command at some time in the future.  The command
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * may execute in a new thread, in a pooled thread, or in the calling
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * thread, at the discretion of the {@code Executor} implementation.
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param command the runnable task
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @throws RejectedExecutionException if this task cannot be
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * accepted for execution
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @throws NullPointerException if command is null
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>execute</span>(Runnable command);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>因此对执行器的讨论最终要回到对<code>Executor</code>及其实现上来。</p><center style=font-size:.8rem;font-style:italic;color:grey><img src=/img/juc/executor.png alt=Executor框架组成 position=center><p>Java Executor框架的主要构成</center><p>下图展示了Executor框架的执行逻辑<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup></p><script src=/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"light"})</script><p class=mermaid>flowchart LR
+A(["Main Thread"]) -->|Create| B(Rannable)
+A --> | Create| C("Callable<\V>")
+B --> | execute| D(ExecutorServiceth)
+B --> |submit| D
+C --> |submit| D
+D --> |return| G(Future<\V>)
+A --> |get| G
+A --> | cancel| H
+subgraph D["EcecutorServiceth"]
+E(ThreadPoolExecutor)
+F(ScheduledThreadPoolExecutor)
+end
+subgraph G[Future<\V>]
+H(FutureTask<\V>)
+end</p><p>从上面的框架组成图中，可以清晰的看到使用<code>Executors</code>能够构建所有线程池实例，<code>ExecutorService</code>接口定义了一系列和线程池以及任务相关的基本方法，用于检查关闭/关闭线程池，提交任务，执行任务等。</p><p><code>AbstractExecutorService</code>直接实现了<code>ExecutorService</code>的<code>invokeAny/invokeAll</code>方法。此外，从该类的源码可以清晰地看到，所有的任务都是通过转化为<code>RunnableFuture</code>(FutureTask)而后通过<code>execute(Runnable)</code>方法执行的。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>protected</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> RunnableFuture<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>newTaskFor</span>(Callable<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> callable) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> FutureTask<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span>(callable);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> Future<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>submit</span>(Callable<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> task) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (task <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NullPointerException();
+</span></span><span style=display:flex><span>    RunnableFuture<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> ftask <span style=color:#f92672>=</span> newTaskFor(task);
+</span></span><span style=display:flex><span>    execute(ftask);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ftask;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>protected</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> RunnableFuture<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>newTaskFor</span>(Runnable runnable, T value) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> FutureTask<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span>(runnable, value);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> Future<span style=color:#f92672>&lt;?&gt;</span> submit(Runnable task) {
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> (task <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NullPointerException();
+</span></span><span style=display:flex><span>   RunnableFuture<span style=color:#f92672>&lt;</span>Void<span style=color:#f92672>&gt;</span> ftask <span style=color:#f92672>=</span> newTaskFor(task, <span style=color:#66d9ef>null</span>);
+</span></span><span style=display:flex><span>   execute(ftask);
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>return</span> ftask;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> Future<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>submit</span>(Runnable task, T result) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (task <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NullPointerException();
+</span></span><span style=display:flex><span>    RunnableFuture<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> ftask <span style=color:#f92672>=</span> newTaskFor(task, result);
+</span></span><span style=display:flex><span>    execute(ftask);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ftask;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><pre><code> ScheduledExecutorService 接口继承自 ExecutorService，
+    定义了用于计划执行或周期执行的线程池方法。
+
+ ThreadPoolExecutor 
+    继承自 AbstractExecutorService，是线程池重要的实现之一。
+
+ ScheduledThreadPoolExecutor 
+    继承自 ScheduledExecutorService，是线程池重要的实现之二。
+
+ ForkJoinPool 
+    继承自 AbstractExecutorService，是线程池的重要实现之三，关于它的内容将单独展开。
+
+ DelegatedExecutorService 
+    继承自 AbstractExecutorService ，它是 Executors 的内部类，
+    是一个仅仅实现了 ExecutorService 方法的包装类，
+    其有两个子类分别是 DelegatedScheduledExecutorServide
+    和  FinalizableDelegatedExecutorService。
+
+ CompletionService 接口有一个子类 ExecutorCompletionService，
+    该类由执行器实例化，用来管理执行器执行的任务的结果。
+</code></pre><h2 id=executorservice接口>ExecutorService接口
+<a class=anchor href=#executorservice%e6%8e%a5%e5%8f%a3>#</a></h2><p><code>ExecutorService</code>是次顶层接口，定义了线程池操作任务的基本方法。</p><pre><code>// 继承自Executor的方法
+void execute(Runnable command);
+
+void shutdown();
+    /*有序地关闭线程池，已经提交（在运行或已经在队列中）的任务不会受到影响，将继续执行，
+    但线程池不接受新任务的提交
+
+    此法不会在当前线程上等待线程池后台任务的执行结果（或者任务执行后的作用），换言之，
+    如果想要获取任务执行之后的结果，调用此法无法达到目的*/
+
+List&lt;Runnable&gt; shutdownNow();
+    /*尝试去停止(stop)所有活动的任务，已提交且队列中的中的任务将取消执行，并返回取消的任务队列。
+    向正在执行的任务发送中断命令，那些无法响应中断命令的任务将无法中止
+
+    和shutdown()方法一样，此法不会等待正在执行的任务终止*/
+
+boolean isShutdown();
+    // 如果线程池已经关闭，返回true
+
+boolean isTerminated();
+    /*如果所有的任务都完成（中止运行或正常运行完成），则返回true
+
+    注意，若没有先调用shutdown()或shutdownNow()，此方法不可能返回true*/
+
+boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
+    /*线程池shutdown请求之后，阻塞当前线程，等待任务执行。当超时，任务执行完毕，或当前线程被中断
+    任一情况发生时，终止阻塞*/
+
+&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+    // 提交一个有返回结果的Callable任务
+
+&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);
+    // 提交一个Runnable并指定其返回result
+
+Future&lt;?&gt; submit(Runnable task);
+    /*提交一个Runnable，返回的Future&lt;?&gt;的get方法将返回null，其主要目的是利用Future的其他
+    方法控制任务的执行*/
+
+&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+        throws InterruptedException;
+    /*执行集合中包含的任务，并返回一个Future&lt;T&gt;集合，Future&lt;T&gt;集合包含各个任务的执行状态及结果
+
+    Future&lt;T&gt;集合中的的顺序和任务集合中的迭代顺序是一致的
+
+    这个方法会等待所有的任务执行完成（正常执行或抛出异常），如果任务集合在执行过程中被修改，那么
+    任务的结果将会变为undefined*/
+
+&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                                long timeout, TimeUnit unit)
+        throws InterruptedException;
+    /* 执行集合中包含的任务，在所有任务执行完成或超时之前返回一个Future&lt;T&gt;集合。在返回之前，
+    未能执行的任务将被取消
+
+    其他的特征和重载方法一致*/
+
+&lt;T&gt; T invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+        throws InterruptedException, ExecutionException;
+    /* 执行给定的任务集合中的任务，返回任何一个成功执行的任务的结果，其他未完成的任务被取消
+
+    如果任务集合在执行过程中被修改，那么任务的结果将会变为undefined*/
+
+&lt;T&gt; T invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                    long timeout, TimeUnit unit)
+        throws InterruptedException, ExecutionException, TimeoutException;
+    /* 执行给定的任务集合中的任务，在超时之前返回任何一个成功执行的任务的结果，
+    其他未完成的任务被取消
+
+    如果任务集合在执行过程中被修改，那么任务的结果将会变为undefined*/
+</code></pre><p>如上所示，ExecutorService定义了线程池的基本方法，其中<code>invokeAny</code>和<code>invokeAll</code>方法在<code>AbstractExecutorService</code>中实现。</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>表中没有提及关于构建<code>Fork/Join</code>线程池的方法，这部分内容将在后续补全<sup>坑</sup>。&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>引自《Java并发编程的艺术》方腾飞等著&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/e03cb168541251d7e998bf77c0244ee8fdedeaef title='最后修改者 wangy325 | 七月 26, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>七月 26, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//pkendlessriver.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#executors类>Executors类</a></li><li><a href=#executorservice接口>ExecutorService接口</a></li></ul></li></ul></nav></div></aside></main></body></html>
