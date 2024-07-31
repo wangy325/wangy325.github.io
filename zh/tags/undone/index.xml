@@ -4,4 +4,10 @@
 &lt;/h2>
 &lt;p>&lt;code>@Transactional&lt;/code>注解是使用spring-transaction的最便捷方式。也是使用Spring框架开发最先接触的内容。&lt;/p>
 &lt;p>当你在一个服务的方法上使用&lt;code>@Transactional&lt;/code>注解时，意味着你希望为此方法开启事务支持。如果你的项目成功配置了&lt;strong>数据源&lt;/strong>和&lt;strong>事务管理器&lt;/strong>，Spring会为此方法使用如下默认设置开启事务：&lt;/p></description></item><item><title>MySQL锁的简单使用</title><link>https://wangy325.github.io/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/</link><pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/utility/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/</guid><description>&lt;p>对于MySQL数据库而言，事务的隔离级别在不同程度上保证了数据一致性。这能够满足大部分的业务需求，但是，仍然有那么一小戳事情，仅仅依靠事务不能完美解决。&lt;/p>
-&lt;p>我们知道，事务能读取到事务开始前就存在的数据，如果事务A需要对某条数据data1进行修改，在事务A还没有提交之前，事务B虽然不能读取到事务A对data1的修改（read committed隔离级别以上），但是能够读取data1原始的数据快照，并且能够再读取到的数据基础上对其进行修改（在事务A提交之后）。&lt;/p></description></item></channel></rss>
+&lt;p>我们知道，事务能读取到事务开始前就存在的数据，如果事务A需要对某条数据data1进行修改，在事务A还没有提交之前，事务B虽然不能读取到事务A对data1的修改（read committed隔离级别以上），但是能够读取data1原始的数据快照，并且能够再读取到的数据基础上对其进行修改（在事务A提交之后）。&lt;/p></description></item><item><title>Git合并与分支管理</title><link>https://wangy325.github.io/zh/posts/Git%E5%85%A5%E9%97%A82/</link><pubDate>Thu, 20 Sep 2018 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/Git%E5%85%A5%E9%97%A82/</guid><description>&lt;blockquote>
+&lt;p>此文的操作背景在本次工作空间的master分支下, 并且追踪远程master分支
+部分内容参考自
+ &lt;a href="https://www.yiibai.com/git/git_pull.html">yibai.com&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>
+ &lt;a href="https://wangy325.github.io/zh/posts/Git%E5%85%A5%E9%97%A81/">常用操作速查&lt;/a>说到, git版本控制的基本原型与操作逻辑. 如果出现两台机器(比如公司和家)上同时更改&amp;rsquo;本地仓库&amp;rsquo;内容并且&lt;code>push&lt;/code>到远程库中,那么必然会导致另一个版本库中的文件低于远程库,如果是有效的改动, 必然涉及到本地库和远程库同步的问题, 这涉及到3个关键词: &lt;code>fetch&lt;/code>, &lt;code>merge&lt;/code>, &lt;code>pull&lt;/code>&lt;/p></description></item></channel></rss>
