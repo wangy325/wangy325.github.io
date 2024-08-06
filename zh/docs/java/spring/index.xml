@@ -5,4 +5,11 @@
  &lt;a class="anchor" href="#1-%e4%bb%8etransactional%e6%b3%a8%e8%a7%a3%e5%bc%80%e5%a7%8b">#&lt;/a>
 &lt;/h2>
 &lt;p>&lt;code>@Transactional&lt;/code>注解是使用spring-transaction的最便捷方式。也是使用Spring框架开发最先接触的内容。&lt;/p>
-&lt;p>当你在一个服务的方法上使用&lt;code>@Transactional&lt;/code>注解时，意味着你希望为此方法开启事务支持。如果你的项目成功配置了&lt;strong>数据源&lt;/strong>和&lt;strong>事务管理器&lt;/strong>，Spring会为此方法使用如下默认设置开启事务：&lt;/p></description></item></channel></rss>
+&lt;p>当你在一个服务的方法上使用&lt;code>@Transactional&lt;/code>注解时，意味着你希望为此方法开启事务支持。如果你的项目成功配置了&lt;strong>数据源&lt;/strong>和&lt;strong>事务管理器&lt;/strong>，Spring会为此方法使用如下默认设置开启事务：&lt;/p></description></item><item><title/><link>https://wangy325.github.io/zh/docs/java/spring/list/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/spring/list/</guid><description># spring-amqp
+spring-web-flux
+spring-cloud-open-feign
+spring-cloud-hystrix
+spring-data-redis/ spring-data-redis-reactive
+spring-websocket/ stomp
+spring-logging
+spring-security</description></item></channel></rss>
