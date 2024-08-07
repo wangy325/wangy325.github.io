@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Server on Endless River</title><link>https://wangy325.github.io/zh/categories/server/</link><description>Recent content in Server on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/server/index.xml" rel="self" type="application/rss+xml"/><item><title>一次服务器OOM故障</title><link>https://wangy325.github.io/zh/posts/2_%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%95%85%E9%9A%9C/</link><pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/2_%E6%9C%8D%E5%8A%A1%E5%99%A8OOM%E6%95%85%E9%9A%9C/</guid><description>&lt;p>使用idm下载y2b视频导致服务器内存溢出，内核强制关闭了服务进程。&lt;/p>
-&lt;p>通过系统日志定位原因，并探讨了服务器维护的几个相关命令。&lt;/p></description></item><item><title>单机版fdfs服务遇到的问题</title><link>https://wangy325.github.io/zh/posts/0_%E5%AE%89%E8%A3%85%E5%8D%95%E6%9C%BA%E7%89%88fdfs%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link><pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/0_%E5%AE%89%E8%A3%85%E5%8D%95%E6%9C%BA%E7%89%88fdfs%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid><description>&lt;blockquote>
-&lt;p>此文章记录的内容已经过时，现在有更多的文件存储方案，如
- &lt;a href="https://min.io/docs/minio/linux/index.html">minIO&lt;/a>。&lt;/p>
-&lt;/blockquote>
-&lt;p>以下为原文。&lt;/p>
-&lt;hr>
-&lt;p>简单记录了2个在安装单机版fdfs服务遇到的问题，虽然报错信息不同，但是问题出在同一个地方：&lt;/p></description></item></channel></rss>

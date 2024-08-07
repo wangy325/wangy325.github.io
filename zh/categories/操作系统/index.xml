@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>操作系统 on Endless River</title><link>https://wangy325.github.io/zh/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link><description>Recent content in 操作系统 on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Wed, 07 Aug 2024 16:20:46 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml"/><item><title>引论</title><link>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/1_intro/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/1_intro/</guid><description>&lt;h2 id="1-操作系统的定义和作用">
+ 1 操作系统的定义和作用
+ &lt;a class="anchor" href="#1-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%ae%9a%e4%b9%89%e5%92%8c%e4%bd%9c%e7%94%a8">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="11-操作系统定义">
+ 1.1 操作系统定义
+ &lt;a class="anchor" href="#11-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e5%ae%9a%e4%b9%89">#&lt;/a>
+&lt;/h3>
+&lt;p>操作系统是计算机中的一个系统软件，是一系列程序模块的集合。&lt;/p>
+&lt;ul>
+&lt;li>它们能尽可能以&lt;strong>有效&lt;/strong> 、&lt;strong>合理&lt;/strong>的方式组织和管理计算机的软硬件资源；&lt;/li>
+&lt;li>合理地组织计算机的工作流程，控制程序的执行并向用户提供各种服务功能；&lt;/li>
+&lt;li>使得用户更加灵活、方便的使用计算机，使整个计算机系统高效运行；&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>有效：指系统效率，资源利用率。如cpu利用率是否充足，I/O设备是否忙碌等。&lt;/p>
+&lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>
+&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
+ &lt;p>📖 回顾：操作系统的主要工作&lt;/p>
+&lt;ul>
+&lt;li>程序的执行
+启动程序、执行程序以及程序结束的工作&lt;/li>
+&lt;li>完成与体系结构相关的工作&lt;/li>
+&lt;li>完成应用程序所需的共性服务（提供各种基本服务，读盘、申请内存等等）&lt;/li>
+&lt;li>性能、安全、健壮等问题&lt;/li>
+&lt;/ul>
+&lt;p>应用程序&lt;/p>
+&lt;p>———————— 虚拟机器界面 &amp;mdash;&amp;gt; 操作系统运行机制（系统调用）&lt;/p>
+&lt;p>操作系统&lt;/p>
+&lt;p>———————— 物理机器界面 &amp;mdash;&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
+
+&lt;/blockquote>
+
+&lt;hr></description></item></channel></rss>

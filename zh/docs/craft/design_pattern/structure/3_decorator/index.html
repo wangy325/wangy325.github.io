@@ -1,0 +1,214 @@
+<!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  装饰者模式
+  #
+
+
+
+by Head First 设计模式:
+
+动态地将责任附加到对象上。若要拓展功能，装饰者模式提供了比继承更有弹性的替代方案。
+
+
+
+by Dive into Design Patterns:
+
+Also known as Wrapper
+Decorator is a structural design pattern that lets you attach new behaviors
+to objects by placing these objects inside special wrapper objects that
+contain the behaviors.
+
+
+"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/craft/design_pattern/structure/3_decorator/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="装饰者模式"><meta property="og:description" content=" 装饰者模式 # by Head First 设计模式:
+动态地将责任附加到对象上。若要拓展功能，装饰者模式提供了比继承更有弹性的替代方案。
+by Dive into Design Patterns:
+Also known as Wrapper
+Decorator is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors."><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-03-21T00:00:00+00:00"><meta property="article:modified_time" content="2024-08-07T16:20:46+08:00"><title>装饰者模式 | Endless River</title>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/craft/design_pattern/structure/3_decorator/><link rel=stylesheet href=/book.min.309b7ed028807cdb68d8d61e26d609f48369c098dbf5e4d8c0dcf4cdf49feafc.css integrity="sha256-MJt+0CiAfNto2NYeJtYJ9INpwJjb9eTYwNz0zfSf6vw=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.11b4deb83a5ba9fbda7e6cc13be174179eba734f498315c314da0bba3c1d13e2.js integrity="sha256-EbTeuDpbqfvafmzBO+F0F566c09JgxXDFNoLujwdE+I=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
+<label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>面向对象</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
+<label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>集合框架</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
+<label for=section-6d6d0626deeb0ce0f9826f9dabe58c16 class="flex justify-between"><a href=/zh/docs/java/concurrency/>并发编程</a></label><ul><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/>线程与任务(一)</a></li><li><a href=/zh/docs/java/concurrency/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_2/>线程与任务(二)</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/>资源访问受限--引论</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/>锁和条件</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/>synchronized关键字</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/>原子性和可见性</a></li><li><a href=/zh/docs/java/concurrency/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/>线程本地存储</a></li><li><a href=/zh/docs/java/concurrency/3%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/>获取任务的返回值</a></li><li><a href=/zh/docs/java/concurrency/4%E6%AD%BB%E9%94%81/>死锁问题2例</a></li><li><a href=/zh/docs/java/concurrency/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/>终结任务</a></li><li><a href=/zh/docs/java/concurrency/6%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E4%B8%8E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/>生产者-消费者与阻塞队列</a></li><li><a href=/zh/docs/java/concurrency/6%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A82%E4%BE%8B/>阻塞队列的使用2例</a></li><li><a href=/zh/docs/java/concurrency/7_1_Executors_and_ExecutorService/>Executors与Executor框架</a></li><li><a href=/zh/docs/java/concurrency/7_2_ThreadPoolExecutor1/>ThreadPoolExecutor-1</a></li><li><a href=/zh/docs/java/concurrency/7_3_ThreadPoolExecutor2/>ThreadPoolExecutor-2</a></li><li><a href=/zh/docs/java/concurrency/7_4_CompletionService/>CompletionService</a></li><li><a href=/zh/docs/java/concurrency/8_1_ScheduledExecutorService1/>ScheduledExecutorService-1</a></li><li><a href=/zh/docs/java/concurrency/8_2_ScheduledExecutorService2/>ScheduledExecutorService-2</a></li><li><a href=/zh/docs/java/concurrency/9_1_countdownlatch/>并发组件-CountDownLatch</a></li><li><a href=/zh/docs/java/concurrency/9_2_cyclicbarrier/>并发组件-CyclicBarrier</a></li><li><a href=/zh/docs/java/concurrency/9_3_semaphore/>并发组件-Semaphore</a></li><li><a href=/zh/docs/java/concurrency/9_4_exchanger/>并发组件-Exchanger</a></li><li><a href=/zh/docs/java/concurrency/9_5_priorityblockqueue_delayqueue/>并发组件-PBQ/DQ</a></li><li><a href=/zh/docs/java/concurrency/10_Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Evolatile%E5%85%B3%E9%94%AE%E5%AD%97/>JMM与volatile关键字(转)</a></li></ul></li><li><input type=checkbox id=section-1fe137527ef46393c946fbc7cb576209 class=toggle>
+<label for=section-1fe137527ef46393c946fbc7cb576209 class="flex justify-between"><a role=button>JVM</a></label><ul><li><a href=/zh/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/>Java内存区域详解(转)</a></li><li><a href=/zh/docs/java/jvm/java-gc/>JVM垃圾回收概要(转)</a></li></ul></li><li><input type=checkbox id=section-162997d8460d3e3e2ce056aadf759dc7 class=toggle>
+<label for=section-162997d8460d3e3e2ce056aadf759dc7 class="flex justify-between"><a role=button>Spring</a></label><ul><li><a href=/zh/docs/java/spring/SpringBoot-aop-demo/>SpringBoot使用AOP的简单示例</a></li><li><a href=/zh/docs/java/spring/%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/>在SpringBoot项目中使用MockMvc进行接口测试</a></li><li><a href=/zh/docs/java/spring/spring-transaction-propagation/>spring声明式事务的使用</a></li></ul></li></ul></li><li class=book-section-flat><span>Craft</span><ul><li><input type=checkbox id=section-634f81f2121a26b2cd3998d002677fd7 class=toggle>
+<label for=section-634f81f2121a26b2cd3998d002677fd7 class="flex justify-between"><a role=button>存储数据</a></label><ul><li><input type=checkbox id=section-a97291ad29c3a3b4bd7c61ffd8d5c44c class=toggle>
+<label for=section-a97291ad29c3a3b4bd7c61ffd8d5c44c class="flex justify-between"><a role=button>mysql</a></label><ul><li><a href=/zh/docs/craft/db/sql/1_%E5%9C%A8centOS%E4%B8%8A%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/>CentOS安装并配置MySQL</a></li><li><a href=/zh/docs/craft/db/sql/2_MySQL%E7%9A%84%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/>MySQL字符串处理函数</a></li><li><a href=/zh/docs/craft/db/sql/4_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/>事务隔离级别与MVCC</a></li><li><a href=/zh/docs/craft/db/sql/5_%E4%BD%BF%E7%94%A8mysql%E7%9A%84%E8%A1%8C%E9%94%81/>MySQL显式锁简单介绍</a></li><li><a href=/zh/docs/craft/db/sql/6_mysql%E6%AD%BB%E9%94%81/>MySQL死锁</a></li></ul></li><li><input type=checkbox id=section-bc4b2446005fdca660bd4c972e249165 class=toggle>
+<label for=section-bc4b2446005fdca660bd4c972e249165 class="flex justify-between"><a role=button>redis</a></label><ul><li><a href=/zh/docs/craft/db/redis/redis-all/>redis必知必会(转)</a></li><li><a href=/zh/docs/craft/db/redis/build-redis-sentinel/>Redis Sentinel高可用实现</a></li><li><a href=/zh/docs/craft/db/redis/deploy-redis-cluster-with-docker/>使用docker镜像快速搭建redis集群开发环境</a></li><li><a href=/zh/docs/craft/db/redis/bloom-filter/>布隆过滤器(转)</a></li></ul></li></ul></li><li><input type=checkbox id=section-6f60371e3df5bd386999aceaa1852abe class=toggle>
+<label for=section-6f60371e3df5bd386999aceaa1852abe class="flex justify-between"><a href=/zh/docs/craft/algo/>算法讨论</a></label><ul><li><a href=/zh/docs/craft/algo/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A5%E7%A0%81/>同余定理与二进制补码</a></li><li><a href=/zh/docs/craft/algo/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/>移位运算</a></li><li><a href=/zh/docs/craft/algo/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/>异或运算</a></li><li><a href=/zh/docs/craft/algo/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/>位运算的小技巧</a></li><li><a href=/zh/docs/craft/algo/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/>背包问题2例</a></li></ul></li><li><input type=checkbox id=section-30cbf81626e3b7f7e6edb89d12c78023 class=toggle checked>
+<label for=section-30cbf81626e3b7f7e6edb89d12c78023 class="flex justify-between"><a role=button>设计模式</a></label><ul><li><input type=checkbox id=section-42f50c16d27783d3bedd607a7e837d36 class=toggle>
+<label for=section-42f50c16d27783d3bedd607a7e837d36 class="flex justify-between"><a role=button>创建型</a></label><ul><li><a href=/zh/docs/craft/design_pattern/creation/1_singleton/>单例模式</a></li><li><a href=/zh/docs/craft/design_pattern/creation/2_factory/>工厂模式</a></li><li><a href=/zh/docs/craft/design_pattern/creation/3_abstract_factory/>抽象工厂模式</a></li><li><a href=/zh/docs/craft/design_pattern/creation/4_builder/>建造者模式</a></li></ul></li><li><input type=checkbox id=section-cb39206110b74ebd45f80b2f90510acc class=toggle>
+<label for=section-cb39206110b74ebd45f80b2f90510acc class="flex justify-between"><a role=button>行为型</a></label><ul><li><a href=/zh/docs/craft/design_pattern/behaviour/1_command/>命令模式</a></li><li><a href=/zh/docs/craft/design_pattern/behaviour/2_observer/>观察者模式</a></li><li><a href=/zh/docs/craft/design_pattern/behaviour/3_strategy/>策略模式</a></li><li><a href=/zh/docs/craft/design_pattern/behaviour/4_template_method/>模板方法模式</a></li></ul></li><li><input type=checkbox id=section-7db5831683340fa833c951dc3e200088 class=toggle checked>
+<label for=section-7db5831683340fa833c951dc3e200088 class="flex justify-between"><a role=button>结构型</a></label><ul><li><a href=/zh/docs/craft/design_pattern/structure/3_decorator/ class=active>装饰者模式</a></li><li><a href=/zh/docs/craft/design_pattern/structure/2_adaptor/>适配器模式</a></li><li><a href=/zh/docs/craft/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/>外观模式</a></li><li><a href=/zh/docs/craft/design_pattern/structure/proxy/>代理模式</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Note</span><ul><li><input type=checkbox id=section-e1b333d5984dfdf0a240ff1b0a6c2115 class=toggle>
+<label for=section-e1b333d5984dfdf0a240ff1b0a6c2115 class="flex justify-between"><a href=/zh/docs/note/course/>课程笔记</a></label><ul><li><input type=checkbox id=section-f0595ab9881a31f8c4cb8d57ad211189 class=toggle>
+<label for=section-f0595ab9881a31f8c4cb8d57ad211189 class="flex justify-between"><a href=/zh/docs/note/course/operating_system_peking/>操作系统原理</a></label><ul><li><a href=/zh/docs/note/course/operating_system_peking/1_intro/>引论</a></li><li><a href=/zh/docs/note/course/operating_system_peking/2_env_and_logic/>操作系统运行环境与机制</a></li><li><a href=/zh/docs/note/course/operating_system_peking/3_processes_and_threads/>进程和线程模型</a></li></ul></li><li><input type=checkbox id=section-aaef4b28e93ddde0053a8bd35b72d3fe class=toggle>
+<label for=section-aaef4b28e93ddde0053a8bd35b72d3fe class="flex justify-between"><a href=/zh/docs/note/course/algorithms_part1/>算法-第一部分</a></label><ul></ul></li></ul></li><li><input type=checkbox id=section-e799e08a1a55553117545d5d0f207e3e class=toggle>
+<label for=section-e799e08a1a55553117545d5d0f207e3e class="flex justify-between"><a role=button>Python</a></label><ul><li><a href=/zh/docs/note/pys/1_flow_control/>流程控制语句</a></li><li><a href=/zh/docs/note/pys/2_data_list/>列表（list）</a></li><li><a href=/zh/docs/note/pys/3_data_str/>字符串，元组和字典</a></li><li><a href=/zh/docs/note/pys/4_func/>函数式编程</a></li><li><a href=/zh/docs/note/pys/4_important_funcs/>4个重要的内置函数</a></li><li><a href=/zh/docs/note/pys/5_file_io/>格式化输出与文件I/O</a></li><li><a href=/zh/docs/note/pys/6_try_excep/>异常处理</a></li><li><a href=/zh/docs/note/pys/7_scope/>命名空间与作用域</a></li><li><a href=/zh/docs/note/pys/8_class_type/>类与对象</a></li><li><a href=/zh/docs/note/pys/9_decoration/>闭包与装饰器</a></li><li><a href=/zh/docs/note/pys/10_decoration_2/>装饰器2</a></li><li><a href=/zh/docs/note/pys/11_threading/>线程模型</a></li></ul></li><li><input type=checkbox id=section-a55bc121ab1723b9dedc870a0f128ac7 class=toggle>
+<label for=section-a55bc121ab1723b9dedc870a0f128ac7 class="flex justify-between"><a role=button>翻译文章</a></label><ul><li><a href=/zh/docs/note/translations/use-springboot-messagesource/>在SpringBoot中使用MessageSource</a></li><li><a href=/zh/docs/note/translations/guide-to-logback-cn/>使用Logback记录日志</a></li><li><a href=/zh/docs/note/translations/how2use-printf/>使用printf格式化输出</a></li></ul></li></ul></li></ul><ul><li><a href=/zh/posts/>Blog</a></li><li><a href=/zh/friend/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu>
+</label><strong>装饰者模式</strong>
+<label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#装饰者模式>装饰者模式</a><ul><li><a href=#设计原则>设计原则</a></li><li><a href=#uml简图>UML简图</a></li><li><a href=#示例代码>示例代码</a></li><li><a href=#笔记>笔记</a></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1><a href=/zh/docs/craft/design_pattern/structure/3_decorator/>装饰者模式</a></h1><h5>三月 21, 2024</h5><div><a href=/zh/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/>设计模式</a></div><h2 id=装饰者模式>装饰者模式
+<a class=anchor href=#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f>#</a></h2><ul><li><p>by Head First 设计模式:</p><blockquote><p>动态地将责任附加到对象上。若要拓展功能，装饰者模式提供了比继承更有弹性的替代方案。</p></blockquote></li><li><p>by Dive into Design Patterns:</p><blockquote><p>Also known as <em>Wrapper</em></p><p>Decorator is a structural design pattern that lets you attach new behaviors
+to objects by placing these objects inside special wrapper objects that
+contain the behaviors.</p></blockquote></li></ul><h3 id=设计原则>设计原则
+<a class=anchor href=#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99>#</a></h3><ol><li>找出应用之中可以变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起</li><li>针对接口编程，而不是针对实现编程</li><li>多用组合，少用继承</li><li>为交互对象的<em>松耦合</em>设计而努力</li><li>对象应对拓展开放，而对修改关闭（开闭原则）<ul><li>听起来很矛盾，但是确实有一些OO技巧，允许系统在不修改代码的情况下，进行功能拓展（想想观察者模式）。</li><li>装饰者模式也是一个好例子，完全遵循开放-关闭原则</li><li>通常，设计无法完全遵循开放-关闭原则。也没有必要让所有的代码都强行按照这个原则去设计，强行如此做
+只会增加工作量，并且让代码更加复杂。</li></ul></li></ol><h3 id=uml简图>UML简图
+<a class=anchor href=#uml%e7%ae%80%e5%9b%be>#</a></h3><script src=/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"light"})</script><p class=mermaid>classDiagram
+class Component {
+<< Abstract >>
++methodA()
++methodB()
+}
+Component <|-- ConcreteComponent
+class ConcreteComponent {
++methodA()
++methodB()
+}
+Component <|..* Decorator
+class Decorator {
+<< Abastract >>
+#Component component
++methodA()
++methodB()
+}
+Decorator <|-- DecoratorA
+class DecoratorA {
+#Component component
++methodA()
++methodB()
+}
+Decorator <|-- DecoratorB
+class DecoratorB {
+#Component component
++methodA()
++methodB()
+}
+Decorator <|-- DecoratorC
+class DecoratorC {
+#Component component
+-Object newStats
++methodA()
++methodB()
+}</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>classDiagram
+class Component {
+  &lt;&lt;Abstract&gt;&gt;
+  +methodA()
+  +methodB()
+}
+
+Component &lt;|-- ConcreteComponent
+class ConcreteComponent {
+  +methodA()
+  +methodB()
+}
+
+Component &lt;|..* Decorator
+class Decorator {
+  &lt;&lt;Abastract&gt;&gt;
+  #Component component
+  +methodA()
+  +methodB()
+}
+
+Decorator &lt;|-- DecoratorA
+class DecoratorA {
+  #Component component
+  +methodA()
+  +methodB()
+}
+
+Decorator &lt;|-- DecoratorB
+class DecoratorB {
+  #Component component
+  +methodA()
+  +methodB()
+}
+
+Decorator &lt;|-- DecoratorC
+class DecoratorC {
+  #Component component
+  -Object newStats
+  +methodA()
+  +methodB()
+}
+</code></pre><h3 id=示例代码>示例代码
+<a class=anchor href=#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81>#</a></h3><blockquote><p>Generated by chatgpt.</p></blockquote><p>装饰者模式（Decorator Pattern）是一种结构型设计模式，它允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有类的一个包装。</p><p>这个模式创建了一个装饰类，用来包装原有的类，并在保持原有类方法签名完整性的前提下，提供了额外的功能。</p><p>下面是一个简单的装饰者模式的示例代码，展示了如何为简单的饮料添加不同的调料装饰。</p><p>首先，创建一个Beverage接口和几个实现了Beverage接口的具体饮料类：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 饮料接口</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Beverage</span> {
+</span></span><span style=display:flex><span>    String <span style=color:#a6e22e>getDescription</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>cost</span>();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 具体饮料类：咖啡</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Coffee</span> <span style=color:#66d9ef>implements</span> Beverage {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getDescription</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Coffee&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>cost</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> 1.<span style=color:#a6e22e>99</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 具体饮料类：茶</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Tea</span> <span style=color:#66d9ef>implements</span> Beverage {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getDescription</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Tea&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>cost</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> 1.<span style=color:#a6e22e>49</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>接下来，创建一个装饰者抽象类，它实现了Beverage接口：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 装饰者抽象类</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CondimentDecorator</span> <span style=color:#66d9ef>implements</span> Beverage {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> Beverage beverage;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>然后，实现具体的装饰者类，为饮料添加不同的调料：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// 具体装饰者：牛奶</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Milk</span> <span style=color:#66d9ef>extends</span> CondimentDecorator {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Milk</span>(Beverage beverage) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>beverage</span> <span style=color:#f92672>=</span> beverage;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getDescription</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> beverage.<span style=color:#a6e22e>getDescription</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;, Milk&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>cost</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> beverage.<span style=color:#a6e22e>cost</span>() <span style=color:#f92672>+</span> 0.<span style=color:#a6e22e>50</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 具体装饰者：糖</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Sugar</span> <span style=color:#66d9ef>extends</span> CondimentDecorator {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Sugar</span>(Beverage beverage) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>beverage</span> <span style=color:#f92672>=</span> beverage;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getDescription</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> beverage.<span style=color:#a6e22e>getDescription</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;, Sugar&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>cost</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> beverage.<span style=color:#a6e22e>cost</span>() <span style=color:#f92672>+</span> 0.<span style=color:#a6e22e>20</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>最后，使用装饰者模式来装饰饮料：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DecoratorPatternDemo</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        Beverage coffee <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Coffee();
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(coffee.<span style=color:#a6e22e>getDescription</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; $&#34;</span> <span style=color:#f92672>+</span> coffee.<span style=color:#a6e22e>cost</span>());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Beverage tea <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Tea();
+</span></span><span style=display:flex><span>        tea <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Milk(tea);
+</span></span><span style=display:flex><span>        tea <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Sugar(tea);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(tea.<span style=color:#a6e22e>getDescription</span>() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; $&#34;</span> <span style=color:#f92672>+</span> tea.<span style=color:#a6e22e>cost</span>());
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>在这个示例中，Coffee和Tea是两种饮料，我们通过Milk和Sugar装饰者来为它们添加额外的调料。这样，我们可以动态地为饮料添加任意数量的调料，而不需要修改原有的饮料类。</p><h3 id=笔记>笔记
+<a class=anchor href=#%e7%ac%94%e8%ae%b0>#</a></h3><ol><li>继承属于拓展的形式之一，但是不见得是达到弹性拓展的最佳方式。</li><li>在我们的设计中，应该允许行为可以被拓展，而无需修改现有的代码。</li><li><em>组合和委托</em>可用于运行时动态地加上新行为。</li><li>除了继承，装饰者也可以让我们拓展行为。</li><li><strong>装饰者模式</strong>意味着<strong>一群</strong>装饰者类，用来包装具体的<em>组件</em></li><li>装饰者可以在被装饰者前面/后面加上自己的行为，或者替代被装饰者的行为，以达到目的。</li><li>如有必要，装饰者可以无限制地使用。</li><li>装饰者一般对组件的客户是透明的，除非客户程序依赖组件的具体类型。</li><li>装饰者模式会导致设计中多出许多小类，如果过度使用，<strong>会让程序变得复杂</strong>。</li></ol><hr><ol><li><a href=https://github.com/wangy325/java-review/blob/d6d740b5a9b5de3f7d64579288b1b8c96c8b8da5/src/main/java/com/wangy/designpattern/structure/decorator>装饰器模式示例代码</a></li></ol></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/fba135b7b5e87a5587fc627e422dea5eef0665bf title='最后修改者 wangy325 | 八月 7, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>八月 7, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>wangy325.
+<a href=https://creativecommons.org/licenses/by/4.0/deed.en title="Creative Commons Attribution" style=color:gray>&copy; 2019-2024 </a><a href="https://github.com/alex-shpak/hugo-book?tab=readme-ov-file#features" style=color:gray>Powered by Hugo Book</a></p></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#装饰者模式>装饰者模式</a><ul><li><a href=#设计原则>设计原则</a></li><li><a href=#uml简图>UML简图</a></li><li><a href=#示例代码>示例代码</a></li><li><a href=#笔记>笔记</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
