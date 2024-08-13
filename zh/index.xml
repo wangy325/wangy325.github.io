@@ -318,7 +318,7 @@ concrete classes.&lt;/p>
  建造模式
  &lt;a class="anchor" href="#%e5%bb%ba%e9%80%a0%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
-&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item><item><title>spring声明式事务的使用</title><link>https://wangy325.github.io/zh/docs/java/spring/spring-transaction-propagation/</link><pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/spring/spring-transaction-propagation/</guid><description>&lt;h2 id="1-从transactional注解开始">
+&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item><item><title>Spring声明式事务的使用</title><link>https://wangy325.github.io/zh/docs/java/spring/spring-transaction-propagation/</link><pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/java/spring/spring-transaction-propagation/</guid><description>&lt;h2 id="1-从transactional注解开始">
  1 从&lt;code>@Transactional&lt;/code>注解开始
  &lt;a class="anchor" href="#1-%e4%bb%8etransactional%e6%b3%a8%e8%a7%a3%e5%bc%80%e5%a7%8b">#&lt;/a>
 &lt;/h2>
