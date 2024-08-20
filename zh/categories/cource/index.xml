@@ -25,16 +25,16 @@
 &lt;li>性能、安全、健壮等问题&lt;/li>
 &lt;/ul>
 &lt;p>应用程序&lt;/p>
-&lt;p>———————— 虚拟机器界面 &amp;mdash;&amp;gt; 操作系统运行机制（系统调用）&lt;/p>
+&lt;p>———————— 虚拟机器界面 ---&amp;gt; 操作系统运行机制（系统调用）&lt;/p>
 &lt;p>操作系统&lt;/p>
-&lt;p>———————— 物理机器界面 &amp;mdash;&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
+&lt;p>———————— 物理机器界面 ---&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
 
 &lt;/blockquote>
 
 &lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/docs/note/course/operating_system_peking/3_processes_and_threads/</guid><description>进程模型 # 多道程序设计 # MultiProgramming：多个程序同时进入内存并运行，提高操作系统效率。并发环境。
-多个虚拟（逻辑）程序计数器 &amp;mdash;&amp;gt; 物理计数器
+多个虚拟（逻辑）程序计数器 ---&amp;gt; 物理计数器
 进程的概念以及进程控制块 # 进程 # Process：进程是具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位。
-是程序的一次执行过程 是正在运行的程序的抽象 将一个CPU变幻成多个虚拟的CPU （是CPU的抽象） 系统资源以进程为单位分配，如内存、文件、独立的地址空间&amp;hellip;&amp;hellip; 进程控制块(PCB) # PCB: Process Control Block
+是程序的一次执行过程 是正在运行的程序的抽象 将一个CPU变幻成多个虚拟的CPU （是CPU的抽象） 系统资源以进程为单位分配，如内存、文件、独立的地址空间...... 进程控制块(PCB) # PCB: Process Control Block
 又称进程描述符、进程属性 操作系统用于管理控制进程的一一个专门数据结构 不同操作系统，对PCB的实现可能不同，但是其功能相同。
 Linux中叫task_sturct
 Windows中叫EPROCESS，KPROCESS，PEB
