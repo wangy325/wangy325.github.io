@@ -1,5 +1,5 @@
 <!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" "><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/note/pys/snippets/2_data_list/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="列表（list）"><meta property="og:description" content=" "><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-06-06T00:00:00+00:00"><meta property="article:modified_time" content="2024-08-15T18:14:12+08:00"><meta property="article:tag" content="Snippet"><title>列表（list） | Endless River</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/2_data_list/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.a7252d8a975fbe35c7092be2a012aa5eba38007825312b1b041eb19213492815.js integrity="sha256-pyUtipdfvjXHCSvioBKqXro4AHglMSsbBB6xkhNJKBU=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/2_data_list/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.2b4cc753b8e2c9d9d6bbf40ffb0865dd848a6bcc573020154b12c8b0b1c8d42a.js integrity="sha256-K0zHU7jiydnWu/QP+whl3YSKa8xXMCAVSxLIsLHI1Co=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
 <label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>Obj-Oriented</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
 <label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>Collections</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
@@ -24,406 +24,406 @@
 <label for=toc-control></label></div></header><article class="markdown book-article"><h1><a href=/zh/docs/note/pys/snippets/2_data_list/>列表（list）</a></h1><div style=font-size:.9rem><div class="flex align-cneter" style=font-size:.9rem><div class="flex align-cneter" style=margin-right:1rem><img style=width:1rem;margin-inline-end:.5rem src=/svg/edit.svg class=book-icon alt>
 <a class=xxx title='创建者 wangy32'>六月 6, 2024</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/cates.svg class=book-icon alt>
 <a class=xxx href=/zh/categories/python/ style=margin-right:.5rem>Python</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/tag-alt.svg class=book-icon alt>
-<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
-<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=highlight><div style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 59
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 60
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 61
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 62
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 63
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 64
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 65
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 66
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 67
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 68
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 69
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 70
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 71
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 72
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 73
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 74
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 75
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 76
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 77
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 78
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 79
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 80
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 81
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 82
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 83
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 84
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 85
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 86
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 87
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 88
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 89
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 90
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 91
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 92
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 93
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 94
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 95
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 96
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 97
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 98
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 99
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">100
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">101
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">102
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">103
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">104
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">105
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">106
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">107
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">108
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">109
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">110
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">111
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">112
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">113
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">114
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">115
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">116
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">117
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">118
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">119
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">120
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">121
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">122
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">123
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">124
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">125
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">126
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">127
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">128
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">129
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">130
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">131
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">132
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">133
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">134
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">135
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">136
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">137
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">138
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">139
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">140
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">141
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">142
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">143
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">144
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">145
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">146
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">147
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">148
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">149
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">150
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">151
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">152
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">153
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">154
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">155
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">156
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">157
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">158
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">159
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">160
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">161
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">162
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">163
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">164
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">165
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">166
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">167
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">168
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">169
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">170
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">171
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">172
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">173
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">174
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">175
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">176
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">177
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">178
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">179
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">180
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">181
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">182
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">183
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">184
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">185
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">186
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">187
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">188
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">189
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">190
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">191
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">192
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">193
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">194
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">195
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">196
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">197
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">198
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">199
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>和字符串一样, 列表支持索引访问.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>列表是一个元素可重复, 可修改的序列.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>列表的元素可以包括不同的类型, 甚至是None 但是, 一般也不要那么做.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>重点：列表推导式
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;</span>
+<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>和字符串一样, 列表支持索引访问.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>列表是一个元素可重复, 可修改的序列.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>列表的元素可以包括不同的类型, 甚至是None 但是, 一般也不要那么做.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>重点：列表推导式
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>list_intro</span>():
-</span></span><span style=display:flex><span>    alist = [<span style=color:#3677a9>1</span>, <span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>, <span style=color:#3677a9>5</span>, <span style=color:#3677a9>8</span>, <span style=color:#3677a9>13</span>, <span style=color:#3677a9>21</span>, <span style=color:#3677a9>34</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(<span style=color:#24909d>type</span>(alist))
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(alist[<span style=color:#3677a9>4</span>])
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># Join 2 lists together</span>
-</span></span><span style=display:flex><span>    blist = alist + [<span style=color:#3677a9>54</span>, <span style=color:#3677a9>89</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(blist)
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># List element can be changed</span>
-</span></span><span style=display:flex><span>    blist[<span style=color:#3677a9>9</span>] = <span style=color:#3677a9>55</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(blist)
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># Also, list support slice</span>
-</span></span><span style=display:flex><span>    clist = [<span style=color:#ed9d13>&#39;apple&#39;</span>, <span style=color:#ed9d13>&#39;orange&#39;</span>, <span style=color:#ed9d13>&#39;grape&#39;</span>, <span style=color:#ed9d13>&#39;strawberry&#39;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(clist[<span style=color:#3677a9>2</span>:<span style=color:#3677a9>3</span>])  <span style=color:#999;font-style:italic># grape</span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># Assigning a slice can also modify original list, even clear the list</span>
-</span></span><span style=display:flex><span>    clist[<span style=color:#3677a9>2</span>:<span style=color:#3677a9>3</span>] = [<span style=color:#ed9d13>&#39;grape&#39;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(clist)  <span style=color:#999;font-style:italic># [&#39;apple&#39;, &#39;orange&#39;, &#39;grape&#39;, &#39;strawberry&#39;]</span>
-</span></span><span style=display:flex><span>    clist[<span style=color:#3677a9>3</span>:] = []
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(clist)  <span style=color:#999;font-style:italic># [&#39;apple&#39;, &#39;orange&#39;, &#39;grape&#39;]</span>
-</span></span><span style=display:flex><span>    clist[:] = []
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(clist)  <span style=color:#999;font-style:italic># []</span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># List has many useful APIs</span>
-</span></span><span style=display:flex><span>    clist.append(<span style=color:#ed9d13>&#39;banana&#39;</span>)
-</span></span><span style=display:flex><span>    clist[<span style=color:#24909d>len</span>(clist):] = [<span style=color:#ed9d13>&#39;peach&#39;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(clist)
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># List elements can be duplicated, and None</span>
-</span></span><span style=display:flex><span>    dlist = [<span style=color:#ed9d13>&#39;country&#39;</span>, <span style=color:#ed9d13>&#39;province&#39;</span>, <span style=color:#ed9d13>&#39;state&#39;</span>, <span style=color:#ed9d13>&#39;country&#39;</span>, <span style=color:#ed9d13>&#39;street&#39;</span>, <span style=color:#6ab825;font-weight:700>None</span>]
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(dlist)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>list_intro</span>():
+</span></span><span style=display:flex><span>    alist <span style=color:#ff79c6>=</span> [<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>8</span>, <span style=color:#bd93f9>13</span>, <span style=color:#bd93f9>21</span>, <span style=color:#bd93f9>34</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>type</span>(alist))
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(alist[<span style=color:#bd93f9>4</span>])
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># Join 2 lists together</span>
+</span></span><span style=display:flex><span>    blist <span style=color:#ff79c6>=</span> alist <span style=color:#ff79c6>+</span> [<span style=color:#bd93f9>54</span>, <span style=color:#bd93f9>89</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(blist)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># List element can be changed</span>
+</span></span><span style=display:flex><span>    blist[<span style=color:#bd93f9>9</span>] <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>55</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(blist)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># Also, list support slice</span>
+</span></span><span style=display:flex><span>    clist <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;apple&#39;</span>, <span style=color:#f1fa8c>&#39;orange&#39;</span>, <span style=color:#f1fa8c>&#39;grape&#39;</span>, <span style=color:#f1fa8c>&#39;strawberry&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(clist[<span style=color:#bd93f9>2</span>:<span style=color:#bd93f9>3</span>])  <span style=color:#6272a4># grape</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># Assigning a slice can also modify original list, even clear the list</span>
+</span></span><span style=display:flex><span>    clist[<span style=color:#bd93f9>2</span>:<span style=color:#bd93f9>3</span>] <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;grape&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(clist)  <span style=color:#6272a4># [&#39;apple&#39;, &#39;orange&#39;, &#39;grape&#39;, &#39;strawberry&#39;]</span>
+</span></span><span style=display:flex><span>    clist[<span style=color:#bd93f9>3</span>:] <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(clist)  <span style=color:#6272a4># [&#39;apple&#39;, &#39;orange&#39;, &#39;grape&#39;]</span>
+</span></span><span style=display:flex><span>    clist[:] <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(clist)  <span style=color:#6272a4># []</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># List has many useful APIs</span>
+</span></span><span style=display:flex><span>    clist<span style=color:#ff79c6>.</span>append(<span style=color:#f1fa8c>&#39;banana&#39;</span>)
+</span></span><span style=display:flex><span>    clist[<span style=color:#8be9fd;font-style:italic>len</span>(clist):] <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;peach&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(clist)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># List elements can be duplicated, and None</span>
+</span></span><span style=display:flex><span>    dlist <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#39;country&#39;</span>, <span style=color:#f1fa8c>&#39;province&#39;</span>, <span style=color:#f1fa8c>&#39;state&#39;</span>, <span style=color:#f1fa8c>&#39;country&#39;</span>, <span style=color:#f1fa8c>&#39;street&#39;</span>, <span style=color:#ff79c6>None</span>]
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(dlist)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>list_intro()
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>list_shallow_copy</span>():
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    列表的切片, 返回一个对列表的浅拷贝.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    以下操作, 返回了不同的结果.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    rgba = [<span style=color:#ed9d13>&#34;Red&#34;</span>, <span style=color:#ed9d13>&#34;Green&#34;</span>, <span style=color:#ed9d13>&#34;Blue&#34;</span>, <span style=color:#ed9d13>&#34;Alph&#34;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># slice will return a shallow copy of a list</span>
-</span></span><span style=display:flex><span>    rgba_correct = rgba[:]
-</span></span><span style=display:flex><span>    rgba[:] = [<span style=color:#ed9d13>&#34;Red&#34;</span>, <span style=color:#ed9d13>&#34;Green&#34;</span>, <span style=color:#ed9d13>&#34;Blue&#34;</span>, <span style=color:#ed9d13>&#34;Alpha&#34;</span>]
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># rgba_correct[-1] = &#39;alpha&#39;</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(rgba)  <span style=color:#999;font-style:italic># [&#39;Red&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Alpha&#39;]</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(rgba_correct)  <span style=color:#999;font-style:italic># [&#39;Red&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Alph&#39;]</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>list_shallow_copy</span>():
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    列表的切片, 返回一个对列表的浅拷贝.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    以下操作, 返回了不同的结果.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    rgba <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#34;Red&#34;</span>, <span style=color:#f1fa8c>&#34;Green&#34;</span>, <span style=color:#f1fa8c>&#34;Blue&#34;</span>, <span style=color:#f1fa8c>&#34;Alph&#34;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># slice will return a shallow copy of a list</span>
+</span></span><span style=display:flex><span>    rgba_correct <span style=color:#ff79c6>=</span> rgba[:]
+</span></span><span style=display:flex><span>    rgba[:] <span style=color:#ff79c6>=</span> [<span style=color:#f1fa8c>&#34;Red&#34;</span>, <span style=color:#f1fa8c>&#34;Green&#34;</span>, <span style=color:#f1fa8c>&#34;Blue&#34;</span>, <span style=color:#f1fa8c>&#34;Alpha&#34;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># rgba_correct[-1] = &#39;alpha&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(rgba)  <span style=color:#6272a4># [&#39;Red&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Alpha&#39;]</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(rgba_correct)  <span style=color:#6272a4># [&#39;Red&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Alph&#39;]</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>list_shallow_copy()
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>ListStack</span>:
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    使用列表模拟栈
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>ListStack</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    使用列表模拟栈
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># elements = [] 一般不在此处声明变量, 因为是public的（类变量）</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># elements = [] 一般不在此处声明变量, 因为是public的（类变量）</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># constructor</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, *args):
-</span></span><span style=display:flex><span>        <span style=color:#999;font-style:italic># 此处的变量才是实例变量</span>
-</span></span><span style=display:flex><span>        self.elements = <span style=color:#24909d>list</span>(args)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># constructor</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, <span style=color:#ff79c6>*</span>args):
+</span></span><span style=display:flex><span>        <span style=color:#6272a4># 此处的变量才是实例变量</span>
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>elements <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>list</span>(args)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>push</span>(self, ele):
-</span></span><span style=display:flex><span>        self.elements.append(ele)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>push</span>(self, ele):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>elements<span style=color:#ff79c6>.</span>append(ele)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>pull</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> <span style=color:#24909d>len</span>(self.elements) &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>return</span> self.elements.pop()
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>else</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>raise</span> <span style=color:#bbb>SystemError</span>(<span style=color:#ed9d13>&#34;stack is empty!&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>pull</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> <span style=color:#8be9fd;font-style:italic>len</span>(self<span style=color:#ff79c6>.</span>elements) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> self<span style=color:#ff79c6>.</span>elements<span style=color:#ff79c6>.</span>pop()
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>raise</span> SystemError(<span style=color:#f1fa8c>&#34;stack is empty!&#34;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>print_stack</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(self.elements)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>print_stack</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(self<span style=color:#ff79c6>.</span>elements)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>size</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>return</span> <span style=color:#24909d>len</span>(self.elements)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>stack = ListStack(<span style=color:#ed9d13>&#39;wind&#39;</span>, <span style=color:#ed9d13>&#39;forest&#39;</span>, <span style=color:#ed9d13>&#39;fire&#39;</span>)
-</span></span><span style=display:flex><span>stack.print_stack()
-</span></span><span style=display:flex><span>stack.push(<span style=color:#ed9d13>&#39;mountain&#39;</span>)
-</span></span><span style=display:flex><span>stack.print_stack()
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(stack.pull() + <span style=color:#ed9d13>&#39;, stack length is &#39;</span> + <span style=color:#24909d>str</span>(stack.size()))
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>size</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>len</span>(self<span style=color:#ff79c6>.</span>elements)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>ListQueue</span>:
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    使用list实现队列
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    更快的实现方式: from collections import deque
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, *args):
-</span></span><span style=display:flex><span>        self.elements = <span style=color:#24909d>list</span>(args)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>push</span>(self, ele):
-</span></span><span style=display:flex><span>        self.elements.append(ele)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>pull</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> self.size() &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>return</span> self.elements.pop(<span style=color:#3677a9>0</span>)
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>else</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>raise</span> <span style=color:#bbb>SystemError</span>(<span style=color:#ed9d13>&#34;queue is empty!&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>size</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>return</span> <span style=color:#24909d>len</span>(self.elements)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>print_queue</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(self.elements)
+</span></span><span style=display:flex><span>stack <span style=color:#ff79c6>=</span> ListStack(<span style=color:#f1fa8c>&#39;wind&#39;</span>, <span style=color:#f1fa8c>&#39;forest&#39;</span>, <span style=color:#f1fa8c>&#39;fire&#39;</span>)
+</span></span><span style=display:flex><span>stack<span style=color:#ff79c6>.</span>print_stack()
+</span></span><span style=display:flex><span>stack<span style=color:#ff79c6>.</span>push(<span style=color:#f1fa8c>&#39;mountain&#39;</span>)
+</span></span><span style=display:flex><span>stack<span style=color:#ff79c6>.</span>print_stack()
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(stack<span style=color:#ff79c6>.</span>pull() <span style=color:#ff79c6>+</span> <span style=color:#f1fa8c>&#39;, stack length is &#39;</span> <span style=color:#ff79c6>+</span> <span style=color:#8be9fd;font-style:italic>str</span>(stack<span style=color:#ff79c6>.</span>size()))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>queue = ListQueue(<span style=color:#3677a9>1</span>, <span style=color:#3677a9>3</span>, <span style=color:#3677a9>5</span>)
-</span></span><span style=display:flex><span>queue.print_queue()
-</span></span><span style=display:flex><span>queue.push(<span style=color:#3677a9>7</span>)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(queue.size())
-</span></span><span style=display:flex><span>queue.pull()
-</span></span><span style=display:flex><span>queue.print_queue()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>ListQueue</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    使用list实现队列
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    更快的实现方式: from collections import deque
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ##################################### #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 列表推导式, 让创建列表的方式更加简单</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 格式: 表达式 + for {[for...][if...]}</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 解释: 一个表达式，后面为一个 for 子句，</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#      然后，是零个或多个 for 或 if 子句。</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#      结果是由表达式依据 for 和 if 子句</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#      求值计算而得出一个新列表。</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ##################################### #</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, <span style=color:#ff79c6>*</span>args):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>elements <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>list</span>(args)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 以下初始化列表的方式</span>
-</span></span><span style=display:flex><span>squares = []
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> x <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>10</span>):
-</span></span><span style=display:flex><span>    squares.append(x ** <span style=color:#3677a9>2</span>)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(squares)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 等价于</span>
-</span></span><span style=display:flex><span>squares = <span style=color:#24909d>list</span>(<span style=color:#24909d>map</span>(<span style=color:#6ab825;font-weight:700>lambda</span> x: x ** <span style=color:#3677a9>2</span>, <span style=color:#24909d>range</span>(<span style=color:#3677a9>10</span>)))
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 还可以更加简单的表示成列表推导式</span>
-</span></span><span style=display:flex><span>squares = [x ** <span style=color:#3677a9>2</span> <span style=color:#6ab825;font-weight:700>for</span> x <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>10</span>)]
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>push</span>(self, ele):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>elements<span style=color:#ff79c6>.</span>append(ele)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 还可以使用更加复杂的表达式</span>
-</span></span><span style=display:flex><span>sqlist = [(x, y) <span style=color:#6ab825;font-weight:700>for</span> x <span style=color:#6ab825;font-weight:700>in</span> (<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>) <span style=color:#6ab825;font-weight:700>for</span> y <span style=color:#6ab825;font-weight:700>in</span> (<span style=color:#3677a9>3</span>, <span style=color:#3677a9>1</span>, <span style=color:#3677a9>4</span>) <span style=color:#6ab825;font-weight:700>if</span> x != y]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(sqlist)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 上面的表达式等价于</span>
-</span></span><span style=display:flex><span>sqlist = []
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> x <span style=color:#6ab825;font-weight:700>in</span> [<span style=color:#3677a9>4</span>, <span style=color:#3677a9>6</span>, <span style=color:#3677a9>9</span>]:
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>for</span> y <span style=color:#6ab825;font-weight:700>in</span> [<span style=color:#3677a9>5</span>, <span style=color:#3677a9>4</span>, <span style=color:#3677a9>6</span>]:
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> x != y:
-</span></span><span style=display:flex><span>            sqlist.append((x, y))
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(sqlist)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>pull</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> self<span style=color:#ff79c6>.</span>size() <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> self<span style=color:#ff79c6>.</span>elements<span style=color:#ff79c6>.</span>pop(<span style=color:#bd93f9>0</span>)
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>raise</span> SystemError(<span style=color:#f1fa8c>&#34;queue is empty!&#34;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 利用表达式展开复杂的列表</span>
-</span></span><span style=display:flex><span>vec = [[<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>], [<span style=color:#3677a9>4</span>, <span style=color:#3677a9>5</span>, <span style=color:#3677a9>6</span>], [<span style=color:#3677a9>7</span>, <span style=color:#3677a9>8</span>, <span style=color:#3677a9>9</span>]]
-</span></span><span style=display:flex><span>flat_vec = [e <span style=color:#6ab825;font-weight:700>for</span> l <span style=color:#6ab825;font-weight:700>in</span> vec <span style=color:#6ab825;font-weight:700>for</span> e <span style=color:#6ab825;font-weight:700>in</span> l]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(flat_vec)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 等价于</span>
-</span></span><span style=display:flex><span>vecc = []
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> vec:
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>for</span> j <span style=color:#6ab825;font-weight:700>in</span> i:
-</span></span><span style=display:flex><span>        vecc.append(j)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(vecc)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>size</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>len</span>(self<span style=color:#ff79c6>.</span>elements)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 前置表达式可以是更加复杂的表达式</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>from</span> <span style=color:#447fcf;text-decoration:underline>math</span> <span style=color:#6ab825;font-weight:700>import</span> pi
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>print_queue</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(self<span style=color:#ff79c6>.</span>elements)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>pil = [<span style=color:#24909d>str</span>(<span style=color:#24909d>round</span>(pi, i)) <span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>6</span>)]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(pil)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 甚至, 是另一个列表推导式. 不过这种语句, 少用, 可读性太差</span>
-</span></span><span style=display:flex><span>matrix = [
-</span></span><span style=display:flex><span>    [<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>, <span style=color:#3677a9>4</span>],
-</span></span><span style=display:flex><span>    [<span style=color:#3677a9>5</span>, <span style=color:#3677a9>6</span>, <span style=color:#3677a9>7</span>, <span style=color:#3677a9>8</span>],
-</span></span><span style=display:flex><span>    [<span style=color:#3677a9>9</span>, <span style=color:#3677a9>10</span>, <span style=color:#3677a9>11</span>, <span style=color:#3677a9>12</span>],
+</span></span><span style=display:flex><span>queue <span style=color:#ff79c6>=</span> ListQueue(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>5</span>)
+</span></span><span style=display:flex><span>queue<span style=color:#ff79c6>.</span>print_queue()
+</span></span><span style=display:flex><span>queue<span style=color:#ff79c6>.</span>push(<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(queue<span style=color:#ff79c6>.</span>size())
+</span></span><span style=display:flex><span>queue<span style=color:#ff79c6>.</span>pull()
+</span></span><span style=display:flex><span>queue<span style=color:#ff79c6>.</span>print_queue()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ##################################### #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 列表推导式, 让创建列表的方式更加简单</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 格式: 表达式 + for {[for...][if...]}</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 解释: 一个表达式，后面为一个 for 子句，</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#      然后，是零个或多个 for 或 if 子句。</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#      结果是由表达式依据 for 和 if 子句</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#      求值计算而得出一个新列表。</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ##################################### #</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 以下初始化列表的方式</span>
+</span></span><span style=display:flex><span>squares <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> x <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>10</span>):
+</span></span><span style=display:flex><span>    squares<span style=color:#ff79c6>.</span>append(x <span style=color:#ff79c6>**</span> <span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(squares)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 等价于</span>
+</span></span><span style=display:flex><span>squares <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>list</span>(<span style=color:#8be9fd;font-style:italic>map</span>(<span style=color:#ff79c6>lambda</span> x: x <span style=color:#ff79c6>**</span> <span style=color:#bd93f9>2</span>, <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>10</span>)))
+</span></span><span style=display:flex><span><span style=color:#6272a4># 还可以更加简单的表示成列表推导式</span>
+</span></span><span style=display:flex><span>squares <span style=color:#ff79c6>=</span> [x <span style=color:#ff79c6>**</span> <span style=color:#bd93f9>2</span> <span style=color:#ff79c6>for</span> x <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>10</span>)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 还可以使用更加复杂的表达式</span>
+</span></span><span style=display:flex><span>sqlist <span style=color:#ff79c6>=</span> [(x, y) <span style=color:#ff79c6>for</span> x <span style=color:#ff79c6>in</span> (<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>) <span style=color:#ff79c6>for</span> y <span style=color:#ff79c6>in</span> (<span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>4</span>) <span style=color:#ff79c6>if</span> x <span style=color:#ff79c6>!=</span> y]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(sqlist)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 上面的表达式等价于</span>
+</span></span><span style=display:flex><span>sqlist <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> x <span style=color:#ff79c6>in</span> [<span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>6</span>, <span style=color:#bd93f9>9</span>]:
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> y <span style=color:#ff79c6>in</span> [<span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>6</span>]:
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> x <span style=color:#ff79c6>!=</span> y:
+</span></span><span style=display:flex><span>            sqlist<span style=color:#ff79c6>.</span>append((x, y))
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(sqlist)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 利用表达式展开复杂的列表</span>
+</span></span><span style=display:flex><span>vec <span style=color:#ff79c6>=</span> [[<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>], [<span style=color:#bd93f9>4</span>, <span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>6</span>], [<span style=color:#bd93f9>7</span>, <span style=color:#bd93f9>8</span>, <span style=color:#bd93f9>9</span>]]
+</span></span><span style=display:flex><span>flat_vec <span style=color:#ff79c6>=</span> [e <span style=color:#ff79c6>for</span> l <span style=color:#ff79c6>in</span> vec <span style=color:#ff79c6>for</span> e <span style=color:#ff79c6>in</span> l]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(flat_vec)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 等价于</span>
+</span></span><span style=display:flex><span>vecc <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> vec:
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> j <span style=color:#ff79c6>in</span> i:
+</span></span><span style=display:flex><span>        vecc<span style=color:#ff79c6>.</span>append(j)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(vecc)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 前置表达式可以是更加复杂的表达式</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>from</span> math <span style=color:#ff79c6>import</span> pi
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>pil <span style=color:#ff79c6>=</span> [<span style=color:#8be9fd;font-style:italic>str</span>(<span style=color:#8be9fd;font-style:italic>round</span>(pi, i)) <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>6</span>)]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(pil)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 甚至, 是另一个列表推导式. 不过这种语句, 少用, 可读性太差</span>
+</span></span><span style=display:flex><span>matrix <span style=color:#ff79c6>=</span> [
+</span></span><span style=display:flex><span>    [<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>],
+</span></span><span style=display:flex><span>    [<span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>6</span>, <span style=color:#bd93f9>7</span>, <span style=color:#bd93f9>8</span>],
+</span></span><span style=display:flex><span>    [<span style=color:#bd93f9>9</span>, <span style=color:#bd93f9>10</span>, <span style=color:#bd93f9>11</span>, <span style=color:#bd93f9>12</span>],
 </span></span><span style=display:flex><span>]
-</span></span><span style=display:flex><span>mat = [[i[k] <span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> matrix] <span style=color:#6ab825;font-weight:700>for</span> k <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>4</span>)]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(mat)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 等价于</span>
-</span></span><span style=display:flex><span>matt = []
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>4</span>):
-</span></span><span style=display:flex><span>    tmp = []
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>for</span> j <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#24909d>len</span>(matrix)):
-</span></span><span style=display:flex><span>        tmp.append(matrix[j][i])
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># for ele in matrix:</span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># tmp.append(ele[i])</span>
-</span></span><span style=display:flex><span>    matt.append(tmp)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(matt)
+</span></span><span style=display:flex><span>mat <span style=color:#ff79c6>=</span> [[i[k] <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> matrix] <span style=color:#ff79c6>for</span> k <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>4</span>)]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(mat)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 等价于</span>
+</span></span><span style=display:flex><span>matt <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>4</span>):
+</span></span><span style=display:flex><span>    tmp <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> j <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#8be9fd;font-style:italic>len</span>(matrix)):
+</span></span><span style=display:flex><span>        tmp<span style=color:#ff79c6>.</span>append(matrix[j][i])
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># for ele in matrix:</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># tmp.append(ele[i])</span>
+</span></span><span style=display:flex><span>    matt<span style=color:#ff79c6>.</span>append(tmp)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(matt)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 可以使用内置函数zip替代</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#24909d>list</span>(<span style=color:#24909d>zip</span>(*matrix)))
+</span></span><span style=display:flex><span><span style=color:#6272a4># 可以使用内置函数zip替代</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>list</span>(<span style=color:#8be9fd;font-style:italic>zip</span>(<span style=color:#ff79c6>*</span>matrix)))
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># del 语句 可以用来删除列表的元素, 或者整个变量</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>del</span> [matt[<span style=color:#3677a9>0</span>]]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(matt)
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>del</span> matt
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(matt)  <span style=color:#999;font-style:italic># name &#39;matt&#39; is not defined</span>
-</span></span></code></pre></td></tr></table></div></div><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
+</span></span><span style=display:flex><span><span style=color:#6272a4># del 语句 可以用来删除列表的元素, 或者整个变量</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>del</span> [matt[<span style=color:#bd93f9>0</span>]]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(matt)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>del</span> matt
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(matt)  <span style=color:#6272a4># name &#39;matt&#39; is not defined</span>
+</span></span></code></pre></td></tr></table></div></div><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
 <a href=https://creativecommons.org/licenses/by/4.0/deed.en title="Creative Commons Attribution" style=color:gray>&copy; CC BY 4.0</a></p><p><a href="https://github.com/alex-shpak/hugo-book?tab=readme-ov-file#features" style=color:gray>2019-2024. Powered by Hugo Book</a>
 Presented by Github.</p></div><label for=menu-control class="hidden book-menu-overlay"></label></div></main><div class=back-to-top><div id=back-to-top><img src=/svg/chevrons-up.svg srcset="/svg/chevrons-up.svg 500w" onclick=topFunction() class=black>
 <img title=回到顶部 src=/svg/chevrons-up-blue.svg srcset="/svg/chevrons-up-blue.svg 500w" onclick=topFunction() class=blue></div><script>let mybutton=document.getElementById("back-to-top");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>500||document.documentElement.scrollTop>500?mybutton.style.display="block":mybutton.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><script src=/js/scroll-listening.js></script></body></html>

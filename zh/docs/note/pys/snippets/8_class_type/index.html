@@ -1,5 +1,5 @@
 <!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" "><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/note/pys/snippets/8_class_type/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="类与对象"><meta property="og:description" content=" "><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-06-06T00:00:00+00:00"><meta property="article:modified_time" content="2024-08-15T18:14:12+08:00"><meta property="article:tag" content="Snippet"><title>类与对象 | Endless River</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/8_class_type/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.a7252d8a975fbe35c7092be2a012aa5eba38007825312b1b041eb19213492815.js integrity="sha256-pyUtipdfvjXHCSvioBKqXro4AHglMSsbBB6xkhNJKBU=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/8_class_type/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.2b4cc753b8e2c9d9d6bbf40ffb0865dd848a6bcc573020154b12c8b0b1c8d42a.js integrity="sha256-K0zHU7jiydnWu/QP+whl3YSKa8xXMCAVSxLIsLHI1Co=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
 <label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>Obj-Oriented</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
 <label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>Collections</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
@@ -24,548 +24,548 @@
 <label for=toc-control></label></div></header><article class="markdown book-article"><h1><a href=/zh/docs/note/pys/snippets/8_class_type/>类与对象</a></h1><div style=font-size:.9rem><div class="flex align-cneter" style=font-size:.9rem><div class="flex align-cneter" style=margin-right:1rem><img style=width:1rem;margin-inline-end:.5rem src=/svg/edit.svg class=book-icon alt>
 <a class=xxx title='创建者 wangy32'>六月 6, 2024</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/cates.svg class=book-icon alt>
 <a class=xxx href=/zh/categories/python/ style=margin-right:.5rem>Python</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/tag-alt.svg class=book-icon alt>
-<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
-<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=highlight><div style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 59
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 60
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 61
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 62
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 63
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 64
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 65
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 66
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 67
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 68
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 69
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 70
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 71
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 72
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 73
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 74
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 75
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 76
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 77
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 78
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 79
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 80
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 81
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 82
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 83
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 84
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 85
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 86
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 87
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 88
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 89
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 90
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 91
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 92
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 93
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 94
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 95
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 96
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 97
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 98
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 99
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">100
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">101
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">102
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">103
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">104
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">105
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">106
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">107
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">108
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">109
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">110
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">111
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">112
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">113
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">114
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">115
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">116
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">117
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">118
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">119
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">120
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">121
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">122
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">123
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">124
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">125
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">126
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">127
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">128
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">129
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">130
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">131
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">132
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">133
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">134
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">135
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">136
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">137
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">138
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">139
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">140
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">141
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">142
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">143
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">144
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">145
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">146
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">147
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">148
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">149
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">150
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">151
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">152
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">153
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">154
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">155
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">156
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">157
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">158
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">159
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">160
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">161
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">162
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">163
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">164
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">165
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">166
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">167
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">168
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">169
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">170
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">171
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">172
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">173
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">174
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">175
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">176
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">177
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">178
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">179
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">180
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">181
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">182
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">183
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">184
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">185
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">186
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">187
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">188
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">189
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">190
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">191
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">192
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">193
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">194
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">195
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">196
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">197
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">198
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">199
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">200
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">201
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">202
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">203
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">204
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">205
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">206
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">207
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">208
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">209
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">210
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">211
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">212
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">213
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">214
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">215
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">216
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">217
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">218
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">219
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">220
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">221
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">222
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">223
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">224
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">225
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">226
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">227
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">228
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">229
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">230
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">231
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">232
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">233
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">234
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">235
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">236
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">237
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">238
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">239
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">240
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">241
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">242
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">243
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">244
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">245
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">246
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">247
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">248
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">249
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">250
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">251
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">252
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">253
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">254
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">255
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">256
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">257
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">258
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">259
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">260
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">261
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">262
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">263
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">264
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">265
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">266
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">267
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">268
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">269
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">270
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>Author: wangy325
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>Date: 2024-07-18 16:28:29
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>Description: 类
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>1) 作用域和命名空间 scope.py
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>2) Class对象
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>3) 实例对象
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>4) 方法对象
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>5) 类变量与实例变量
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>6) 继承
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>7) 多继承
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>8) 变量要&#34;私有&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>9) 迭代器与生成器
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;</span>
+<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">206
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">207
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">208
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">209
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">210
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">211
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">212
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">213
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">214
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">215
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">216
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">217
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">218
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">219
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">220
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">221
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">222
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">223
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">224
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">225
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">226
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">227
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">228
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">229
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">230
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">231
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">232
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">233
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">234
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">235
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">236
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">237
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">238
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">239
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">240
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">241
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">242
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">243
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">244
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">245
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">246
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">247
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">248
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">249
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">250
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">251
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">252
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">253
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">254
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">255
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">256
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">257
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">258
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">259
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">260
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">261
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">262
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">263
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">264
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">265
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">266
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">267
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">268
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">269
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">270
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>Author: wangy325
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>Date: 2024-07-18 16:28:29
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>Description: 类
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>1) 作用域和命名空间 scope.py
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>2) Class对象
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>3) 实例对象
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>4) 方法对象
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>5) 类变量与实例变量
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>6) 继承
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>7) 多继承
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>8) 变量要&#34;私有&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>9) 迭代器与生成器
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>EmptyError</span>(<span style=color:#bbb>BaseException</span>):
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>pass</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>EmptyError</span>(BaseException):
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>pass</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>MyClass</span>:
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># 类变量 (Java静态域)</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>property</span> = <span style=color:#ed9d13>&#39;MyClass</span><span style=color:#ed9d13>\&#39;</span><span style=color:#ed9d13>s property&#39;</span>
-</span></span><span style=display:flex><span>    trick = []
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>MyClass</span>:
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># 类变量 (Java静态域)</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>property</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;MyClass</span><span style=color:#f1fa8c>\&#39;</span><span style=color:#f1fa8c>s property&#39;</span>
+</span></span><span style=display:flex><span>    trick <span style=color:#ff79c6>=</span> []
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># 构造器</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, *args) -&gt; <span style=color:#6ab825;font-weight:700>None</span>:
-</span></span><span style=display:flex><span>        <span style=color:#999;font-style:italic># 实例变量(Java私有域)</span>
-</span></span><span style=display:flex><span>        self.data = []
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> args <span style=color:#6ab825;font-weight:700>is</span> <span style=color:#6ab825;font-weight:700>not</span> <span style=color:#6ab825;font-weight:700>None</span> <span style=color:#6ab825;font-weight:700>and</span> <span style=color:#24909d>len</span>(args) &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            self.data.append(args)
-</span></span><span style=display:flex><span>        self.size = <span style=color:#24909d>len</span>(self.data)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># 构造器</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, <span style=color:#ff79c6>*</span>args) <span style=color:#ff79c6>-&gt;</span> <span style=color:#ff79c6>None</span>:
+</span></span><span style=display:flex><span>        <span style=color:#6272a4># 实例变量(Java私有域)</span>
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>data <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> args <span style=color:#ff79c6>is</span> <span style=color:#ff79c6>not</span> <span style=color:#ff79c6>None</span> <span style=color:#ff79c6>and</span> <span style=color:#8be9fd;font-style:italic>len</span>(args) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            self<span style=color:#ff79c6>.</span>data<span style=color:#ff79c6>.</span>append(args)
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>size <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>len</span>(self<span style=color:#ff79c6>.</span>data)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># 它既是&#39;函数&#39;, 也是&#39;方法对象&#39;</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>add</span>(self, e):
-</span></span><span style=display:flex><span>        self.data.append(e)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># 它既是&#39;函数&#39;, 也是&#39;方法对象&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>add</span>(self, e):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>data<span style=color:#ff79c6>.</span>append(e)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>remove</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> self.size &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            self.data.pop()
-</span></span><span style=display:flex><span>            self.size = self.size - <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>else</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>raise</span> EmptyError(<span style=color:#ed9d13>&#39;data is empty.&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>remove</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> self<span style=color:#ff79c6>.</span>size <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            self<span style=color:#ff79c6>.</span>data<span style=color:#ff79c6>.</span>pop()
+</span></span><span style=display:flex><span>            self<span style=color:#ff79c6>.</span>size <span style=color:#ff79c6>=</span> self<span style=color:#ff79c6>.</span>size <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>else</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>raise</span> EmptyError(<span style=color:#f1fa8c>&#39;data is empty.&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>fun</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#999;font-style:italic># 局部变量</span>
-</span></span><span style=display:flex><span>        <span style=color:#24909d>property</span> = <span style=color:#ed9d13>&#39;Let</span><span style=color:#ed9d13>\&#39;</span><span style=color:#ed9d13>s hava fun!&#39;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># type(MyClass)</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(MyClass.__class__)  <span style=color:#999;font-style:italic># &lt;class &#39;type&#39;&gt;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 实例对象</span>
-</span></span><span style=display:flex><span>cls, cls2 = MyClass(), MyClass()
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>{</span><span style=color:#24909d>type</span>(cls)<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 类变量可以在模块作用域直接读取, 并且修改</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(MyClass.property)
-</span></span><span style=display:flex><span>MyClass.property = <span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;property changed by </span><span style=color:#ed9d13>{</span>MyClass.__class__<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;MyClass.property: </span><span style=color:#ed9d13>{</span>MyClass.property<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>MyClass.trick.append(<span style=color:#ed9d13>&#39;lie&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 实例对象也可以读取并修改类变量</span>
-</span></span><span style=display:flex><span>cls.property = <span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;property changed by </span><span style=color:#ed9d13>{</span>cls<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;cls.property: </span><span style=color:#ed9d13>{</span>cls.property<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>cls.trick.append(<span style=color:#ed9d13>&#39;truth&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;cls.trick: </span><span style=color:#ed9d13>{</span>cls.trick<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 注意看, cls2的property没随cls变</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 但是 trick随cls变了</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 这是因为, str 是&#39;不可变常量&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 而list是引用对象</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;cls2.property: </span><span style=color:#ed9d13>{</span>cls2.property<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;cls2.trick: </span><span style=color:#ed9d13>{</span>cls2.trick<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 尽管实例的修改仅仅对自己有效,</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 但是要改动类变量是非常轻松的</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 所以, python中的类变量是非常&#39;不安全&#39;的</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 实例变量是隐藏在构造器中的, MyClass &#39;看不到&#39;它们</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>try</span>:
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(MyClass.data)
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>except</span> <span style=color:#bbb>Exception</span> <span style=color:#6ab825;font-weight:700>as</span> e:
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;ERROR: </span><span style=color:#ed9d13>{</span>e<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 但是实例对象可以读取, 并修改</span>
-</span></span><span style=display:flex><span>cls.data.append(<span style=color:#ed9d13>&#39;apple&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;All cls</span><span style=color:#ed9d13>\&#39;</span><span style=color:#ed9d13>s attributes: </span><span style=color:#ed9d13>{</span>cls.data<span style=color:#ed9d13>}</span><span style=color:#ed9d13>, </span><span style=color:#ed9d13>{</span>cls.size<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 同样地, 仅仅对自身有效</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;All cls2</span><span style=color:#ed9d13>\&#39;</span><span style=color:#ed9d13>s attributes: </span><span style=color:#ed9d13>{</span>cls2.data<span style=color:#ed9d13>}</span><span style=color:#ed9d13>, </span><span style=color:#ed9d13>{</span>cls2.size<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 除了类变量, 模块作用域里还可以访问类里面的函数</span>
-</span></span><span style=display:flex><span>f = MyClass.fun
-</span></span><span style=display:flex><span>ff = cls.fun()
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>{</span>f == ff<span style=color:#ed9d13>}</span><span style=color:#ed9d13>: </span><span style=color:#ed9d13>{</span><span style=color:#24909d>type</span>(f)<span style=color:#ed9d13>}</span><span style=color:#ed9d13> ≠ </span><span style=color:#ed9d13>{</span><span style=color:#24909d>type</span>(ff)<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 显然, 上面2个是不一样的</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 通过类名获取的是一个函数</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 通过实例获取的是一个方法引用</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(ff == MyClass.fun(cls))  <span style=color:#999;font-style:italic># true</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>fun</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#6272a4># 局部变量</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>property</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;Let</span><span style=color:#f1fa8c>\&#39;</span><span style=color:#f1fa8c>s hava fun!&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 需要说明的是, 通过实例调用的&#39;方法&#39;,</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 都会隐式地将该实例作为参数, 传递给方法</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 因此, 类的方法总有一个参数: self</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># type(MyClass)</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(MyClass<span style=color:#ff79c6>.</span>__class__)  <span style=color:#6272a4># &lt;class &#39;type&#39;&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 实例对象</span>
+</span></span><span style=display:flex><span>cls, cls2 <span style=color:#ff79c6>=</span> MyClass(), MyClass()
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>{</span><span style=color:#8be9fd;font-style:italic>type</span>(cls)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 类变量可以在模块作用域直接读取, 并且修改</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(MyClass<span style=color:#ff79c6>.</span>property)
+</span></span><span style=display:flex><span>MyClass<span style=color:#ff79c6>.</span>property <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;property changed by </span><span style=color:#f1fa8c>{</span>MyClass<span style=color:#ff79c6>.</span>__class__<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;MyClass.property: </span><span style=color:#f1fa8c>{</span>MyClass<span style=color:#ff79c6>.</span>property<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>MyClass<span style=color:#ff79c6>.</span>trick<span style=color:#ff79c6>.</span>append(<span style=color:#f1fa8c>&#39;lie&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 实例对象也可以读取并修改类变量</span>
+</span></span><span style=display:flex><span>cls<span style=color:#ff79c6>.</span>property <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;property changed by </span><span style=color:#f1fa8c>{</span>cls<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;cls.property: </span><span style=color:#f1fa8c>{</span>cls<span style=color:#ff79c6>.</span>property<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>cls<span style=color:#ff79c6>.</span>trick<span style=color:#ff79c6>.</span>append(<span style=color:#f1fa8c>&#39;truth&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;cls.trick: </span><span style=color:#f1fa8c>{</span>cls<span style=color:#ff79c6>.</span>trick<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 注意看, cls2的property没随cls变</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 但是 trick随cls变了</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 这是因为, str 是&#39;不可变常量&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 而list是引用对象</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;cls2.property: </span><span style=color:#f1fa8c>{</span>cls2<span style=color:#ff79c6>.</span>property<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;cls2.trick: </span><span style=color:#f1fa8c>{</span>cls2<span style=color:#ff79c6>.</span>trick<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 尽管实例的修改仅仅对自己有效,</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 但是要改动类变量是非常轻松的</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 所以, python中的类变量是非常&#39;不安全&#39;的</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 实例变量是隐藏在构造器中的, MyClass &#39;看不到&#39;它们</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>try</span>:
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(MyClass<span style=color:#ff79c6>.</span>data)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>except</span> Exception <span style=color:#ff79c6>as</span> e:
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;ERROR: </span><span style=color:#f1fa8c>{</span>e<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 但是实例对象可以读取, 并修改</span>
+</span></span><span style=display:flex><span>cls<span style=color:#ff79c6>.</span>data<span style=color:#ff79c6>.</span>append(<span style=color:#f1fa8c>&#39;apple&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;All cls</span><span style=color:#f1fa8c>\&#39;</span><span style=color:#f1fa8c>s attributes: </span><span style=color:#f1fa8c>{</span>cls<span style=color:#ff79c6>.</span>data<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>, </span><span style=color:#f1fa8c>{</span>cls<span style=color:#ff79c6>.</span>size<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 同样地, 仅仅对自身有效</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;All cls2</span><span style=color:#f1fa8c>\&#39;</span><span style=color:#f1fa8c>s attributes: </span><span style=color:#f1fa8c>{</span>cls2<span style=color:#ff79c6>.</span>data<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>, </span><span style=color:#f1fa8c>{</span>cls2<span style=color:#ff79c6>.</span>size<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 除了类变量, 模块作用域里还可以访问类里面的函数</span>
+</span></span><span style=display:flex><span>f <span style=color:#ff79c6>=</span> MyClass<span style=color:#ff79c6>.</span>fun
+</span></span><span style=display:flex><span>ff <span style=color:#ff79c6>=</span> cls<span style=color:#ff79c6>.</span>fun()
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>{</span>f <span style=color:#ff79c6>==</span> ff<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>: </span><span style=color:#f1fa8c>{</span><span style=color:#8be9fd;font-style:italic>type</span>(f)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> ≠ </span><span style=color:#f1fa8c>{</span><span style=color:#8be9fd;font-style:italic>type</span>(ff)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 显然, 上面2个是不一样的</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 通过类名获取的是一个函数</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 通过实例获取的是一个方法引用</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(ff <span style=color:#ff79c6>==</span> MyClass<span style=color:#ff79c6>.</span>fun(cls))  <span style=color:#6272a4># true</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 名称改写</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 由于python没有访问权限修饰符, 所有的变量都是`public`的</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 为了保护&#39;私有&#39;变量</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 约定将以&#39;__&#39;开头的变量和函数认定为私有的</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 可以使用setter/getter方法来访问属性</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>Mapping</span>:
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, **args):
-</span></span><span style=display:flex><span>        self.__dict = {}
-</span></span><span style=display:flex><span>        self.__update(**args)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__update</span>(self, **kwargs):
-</span></span><span style=display:flex><span>        self.update(**kwargs)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>update</span>(self, **args):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> args <span style=color:#6ab825;font-weight:700>is</span> <span style=color:#6ab825;font-weight:700>not</span> <span style=color:#6ab825;font-weight:700>None</span> <span style=color:#6ab825;font-weight:700>and</span> <span style=color:#24909d>len</span>(args.keys()) &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>for</span> k, v <span style=color:#6ab825;font-weight:700>in</span> args.items():
-</span></span><span style=display:flex><span>                self.__dict[k] = v
-</span></span><span style=display:flex><span>            <span style=color:#999;font-style:italic># self.__dict = {k: v for k in args.keys() for v in args.values()}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>print_map</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(self.__dict)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 需要说明的是, 通过实例调用的&#39;方法&#39;,</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 都会隐式地将该实例作为参数, 传递给方法</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 因此, 类的方法总有一个参数: self</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>mapp = Mapping(name=<span style=color:#ed9d13>&#39;anna&#39;</span>, age=<span style=color:#3677a9>18</span>)
-</span></span><span style=display:flex><span>mapp.print_map()
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 名称改写, 将__dict隐藏起来了</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>try</span>:
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(mapp.__dict)
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>except</span> <span style=color:#bbb>Exception</span> <span style=color:#6ab825;font-weight:700>as</span> er:
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(er)  <span style=color:#999;font-style:italic># &#39;Mapping&#39; object has no attribute &#39;__dict&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 不过, 还是可以通过 _Class__attribute的方式访问</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(mapp._Mapping__dict)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 名称改写</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 由于python没有访问权限修饰符, 所有的变量都是`public`的</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 为了保护&#39;私有&#39;变量</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 约定将以&#39;__&#39;开头的变量和函数认定为私有的</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 可以使用setter/getter方法来访问属性</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Mapping</span>:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, <span style=color:#ff79c6>**</span>args):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__dict <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__update(<span style=color:#ff79c6>**</span>args)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__update</span>(self, <span style=color:#ff79c6>**</span>kwargs):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>update(<span style=color:#ff79c6>**</span>kwargs)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>update</span>(self, <span style=color:#ff79c6>**</span>args):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> args <span style=color:#ff79c6>is</span> <span style=color:#ff79c6>not</span> <span style=color:#ff79c6>None</span> <span style=color:#ff79c6>and</span> <span style=color:#8be9fd;font-style:italic>len</span>(args<span style=color:#ff79c6>.</span>keys()) <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>for</span> k, v <span style=color:#ff79c6>in</span> args<span style=color:#ff79c6>.</span>items():
+</span></span><span style=display:flex><span>                self<span style=color:#ff79c6>.</span>__dict[k] <span style=color:#ff79c6>=</span> v
+</span></span><span style=display:flex><span>            <span style=color:#6272a4># self.__dict = {k: v for k in args.keys() for v in args.values()}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>print_map</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(self<span style=color:#ff79c6>.</span>__dict)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 方法同理</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ################# #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#    Python的继承    #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ################# #</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>BaseClass</span>:
-</span></span><span style=display:flex><span>    base_class_attr = <span style=color:#ed9d13>&#39;Base attr&#39;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, arg: <span style=color:#24909d>str</span>):
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(<span style=color:#ed9d13>&#39;BaseClass with-args init&#39;</span>)
-</span></span><span style=display:flex><span>        self.base_instance_attr = arg
-</span></span><span style=display:flex><span>        self.__base_hidden_attr = arg
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__hidden_show</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;base_class_attr: </span><span style=color:#ed9d13>{</span>BaseClass.base_class_attr<span style=color:#ed9d13>}</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>
-</span></span><span style=display:flex><span>              <span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;base_instance_attr: </span><span style=color:#ed9d13>{</span>self.base_instance_attr<span style=color:#ed9d13>}</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>
-</span></span><span style=display:flex><span>              <span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;__base_hidden_attr: </span><span style=color:#ed9d13>{</span>self.__base_hidden_attr<span style=color:#ed9d13>}</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>show</span>(self):
-</span></span><span style=display:flex><span>        self.__hidden_show()
+</span></span><span style=display:flex><span>mapp <span style=color:#ff79c6>=</span> Mapping(name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;anna&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#bd93f9>18</span>)
+</span></span><span style=display:flex><span>mapp<span style=color:#ff79c6>.</span>print_map()
+</span></span><span style=display:flex><span><span style=color:#6272a4># 名称改写, 将__dict隐藏起来了</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>try</span>:
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(mapp<span style=color:#ff79c6>.</span>__dict)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>except</span> Exception <span style=color:#ff79c6>as</span> er:
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(er)  <span style=color:#6272a4># &#39;Mapping&#39; object has no attribute &#39;__dict&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 不过, 还是可以通过 _Class__attribute的方式访问</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(mapp<span style=color:#ff79c6>.</span>_Mapping__dict)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>SubClass</span>(BaseClass):
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>pass</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 方法同理</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ################# #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#    Python的继承    #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ################# #</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 子类可以访问父类的类变量</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(SubClass.base_class_attr)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>BaseClass</span>:
+</span></span><span style=display:flex><span>    base_class_attr <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;Base attr&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 子类使用调用父类的有参构造器</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># Java是不行的</span>
-</span></span><span style=display:flex><span>subclass = SubClass(<span style=color:#ed9d13>&#39;sub_class_attr&#39;</span>)
-</span></span><span style=display:flex><span>subclass.show()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, arg: <span style=color:#8be9fd;font-style:italic>str</span>):
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>&#39;BaseClass with-args init&#39;</span>)
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>base_instance_attr <span style=color:#ff79c6>=</span> arg
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__base_hidden_attr <span style=color:#ff79c6>=</span> arg
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ###################### #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#       对象迭代器         #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ###################### #</span>
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>迭代器(iterator)
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>只要是实现了 __iter__()和__next__()方法的类,
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>都可以实现迭代器的行为.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>迭代器什么行为? 可以使用for...in
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>比如list, 可以用 for e in [1, 2, 3]
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>比如str, for c in &#39;str&#39;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>比如file, for line in open(&#39;file.txt&#39;)
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>在幕后, for 语句会在容器对象上调用 iter()。 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>该函数返回一个定义了 __next__() 方法的迭代器对象,
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>此方法将逐一访问容器中的元素。 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>当元素用尽时, __next__() 将引发 StopIteration 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>异常来通知终止 for 循环。 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>你可以使用 next() 内置函数来调用 __next__() 方法
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>自定义类也是如此, 可以为任何类添加迭代器
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__hidden_show</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;base_class_attr: </span><span style=color:#f1fa8c>{</span>BaseClass<span style=color:#ff79c6>.</span>base_class_attr<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>
+</span></span><span style=display:flex><span>              <span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;base_instance_attr: </span><span style=color:#f1fa8c>{</span>self<span style=color:#ff79c6>.</span>base_instance_attr<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>
+</span></span><span style=display:flex><span>              <span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;__base_hidden_attr: </span><span style=color:#f1fa8c>{</span>self<span style=color:#ff79c6>.</span>__base_hidden_attr<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>show</span>(self):
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__hidden_show()
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>class</span> <span style=color:#447fcf;text-decoration:underline>Iter_class</span>():
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __init__(self, *args) -&gt; <span style=color:#6ab825;font-weight:700>None</span>:
-</span></span><span style=display:flex><span>        self.__data = <span style=color:#24909d>list</span>(args)
-</span></span><span style=display:flex><span>        self.__index = <span style=color:#24909d>len</span>(self.__data)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __iter__(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>return</span> self
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> __next__(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> self.__index == <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>raise</span> <span style=color:#bbb>StopIteration</span>
-</span></span><span style=display:flex><span>        self.__index = self.__index - <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>return</span> self.__data[self.__index]
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># 非必需方法</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>has_next</span>(self):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>return</span> self.__index &gt; <span style=color:#3677a9>0</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>SubClass</span>(BaseClass):
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>pass</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>it = Iter_class(<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>)
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>while</span> it.has_next():
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(<span style=color:#24909d>next</span>(it), end=<span style=color:#ed9d13>&#39;, &#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> e <span style=color:#6ab825;font-weight:700>in</span> it:
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(e, end=<span style=color:#ed9d13>&#39;$ &#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 子类可以访问父类的类变量</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(SubClass<span style=color:#ff79c6>.</span>base_class_attr)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ############ #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic>#   生成器      #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># ############ #</span>
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>生成器用于快速创建迭代器
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>它会自动创建__iter__()和__next__()方法
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 子类使用调用父类的有参构造器</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Java是不行的</span>
+</span></span><span style=display:flex><span>subclass <span style=color:#ff79c6>=</span> SubClass(<span style=color:#f1fa8c>&#39;sub_class_attr&#39;</span>)
+</span></span><span style=display:flex><span>subclass<span style=color:#ff79c6>.</span>show()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ###################### #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#       对象迭代器         #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ###################### #</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>迭代器(iterator)
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>只要是实现了 __iter__()和__next__()方法的类,
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>都可以实现迭代器的行为.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>迭代器什么行为? 可以使用for...in
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>比如list, 可以用 for e in [1, 2, 3]
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>比如str, for c in &#39;str&#39;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>比如file, for line in open(&#39;file.txt&#39;)
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>在幕后, for 语句会在容器对象上调用 iter()。 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>该函数返回一个定义了 __next__() 方法的迭代器对象,
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>此方法将逐一访问容器中的元素。 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>当元素用尽时, __next__() 将引发 StopIteration 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>异常来通知终止 for 循环。 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>你可以使用 next() 内置函数来调用 __next__() 方法
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>自定义类也是如此, 可以为任何类添加迭代器
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 以下函数创建了一个生成器</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>reverse</span>(data):
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>for</span> index <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#24909d>len</span>(data) - <span style=color:#3677a9>1</span>, -<span style=color:#3677a9>1</span>, -<span style=color:#3677a9>1</span>):
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>yield</span> data[index]
+</span></span><span style=display:flex><span><span style=color:#ff79c6>class</span> <span style=color:#50fa7b>Iter_class</span>():
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __init__(self, <span style=color:#ff79c6>*</span>args) <span style=color:#ff79c6>-&gt;</span> <span style=color:#ff79c6>None</span>:
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__data <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>list</span>(args)
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__index <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>len</span>(self<span style=color:#ff79c6>.</span>__data)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __iter__(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> self
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> __next__(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> self<span style=color:#ff79c6>.</span>__index <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>raise</span> StopIteration
+</span></span><span style=display:flex><span>        self<span style=color:#ff79c6>.</span>__index <span style=color:#ff79c6>=</span> self<span style=color:#ff79c6>.</span>__index <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> self<span style=color:#ff79c6>.</span>__data[self<span style=color:#ff79c6>.</span>__index]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># 非必需方法</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>def</span> <span style=color:#50fa7b>has_next</span>(self):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> self<span style=color:#ff79c6>.</span>__index <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>for</span> c <span style=color:#6ab825;font-weight:700>in</span> reverse(<span style=color:#ed9d13>&#39;golf&#39;</span>):
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(c, end=<span style=color:#ed9d13>&#39;,&#39;</span>)
+</span></span><span style=display:flex><span>it <span style=color:#ff79c6>=</span> Iter_class(<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>while</span> it<span style=color:#ff79c6>.</span>has_next():
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>next</span>(it), end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;, &#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> e <span style=color:#ff79c6>in</span> it:
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(e, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;$ &#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 当然, str本身就支持迭代器, 上述栗子只是为了阐述写法</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 生成器还可以使用生成器表达式</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 生成器表达式使用()而不是[], 后者是列表推导式!</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>()
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#24909d>list</span>(i <span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#ed9d13>&#39;golf&#39;</span>))
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#24909d>sum</span>(i * i <span style=color:#6ab825;font-weight:700>for</span> i <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>10</span>)))
-</span></span><span style=display:flex><span>vx = [<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>, <span style=color:#3677a9>3</span>]
-</span></span><span style=display:flex><span>vy = [<span style=color:#3677a9>6</span>, <span style=color:#3677a9>7</span>, <span style=color:#3677a9>8</span>]
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#24909d>list</span>(x * y <span style=color:#6ab825;font-weight:700>for</span> x, y <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>zip</span>(vx, vy)))
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 生成器表达式比较简单, 一般不用来出来复杂的逻辑</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 生成器表达式相比等效的列表推导式, 更加节省内存</span>
-</span></span><span style=display:flex><span>l = <span style=color:#24909d>list</span>(e <span style=color:#6ab825;font-weight:700>for</span> e <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>5</span>))
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 等效于</span>
-</span></span><span style=display:flex><span>l2 = [e <span style=color:#6ab825;font-weight:700>for</span> e <span style=color:#6ab825;font-weight:700>in</span> <span style=color:#24909d>range</span>(<span style=color:#3677a9>5</span>)]
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&gt;&gt;&gt; (i for i in range(3))
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&lt;generator object &lt;genexpr&gt; at 0x10463ba00&gt;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&gt;&gt;&gt; [i for i in range(3)]
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>[0, 1, 2]
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&gt;&gt;&gt; {x:x*x for x in range(1,4,1)}
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>{1: 1, 2: 4, 3: 9}
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ############ #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#   生成器      #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># ############ #</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>生成器用于快速创建迭代器
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>它会自动创建__iter__()和__next__()方法
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 关于yield表达式 #</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 在生成器中使用了yield表达式，yield表达式也只在生成器中使用</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># https://docs.python.org/zh-cn/3/reference/expressions.html#yield-expressions</span>
-</span></span></code></pre></td></tr></table></div></div><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 以下函数创建了一个生成器</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>reverse</span>(data):
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> index <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#8be9fd;font-style:italic>len</span>(data) <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>, <span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>, <span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>yield</span> data[index]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>for</span> c <span style=color:#ff79c6>in</span> reverse(<span style=color:#f1fa8c>&#39;golf&#39;</span>):
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(c, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;,&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 当然, str本身就支持迭代器, 上述栗子只是为了阐述写法</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 生成器还可以使用生成器表达式</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 生成器表达式使用()而不是[], 后者是列表推导式!</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>()
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>list</span>(i <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#f1fa8c>&#39;golf&#39;</span>))
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>sum</span>(i <span style=color:#ff79c6>*</span> i <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>10</span>)))
+</span></span><span style=display:flex><span>vx <span style=color:#ff79c6>=</span> [<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>, <span style=color:#bd93f9>3</span>]
+</span></span><span style=display:flex><span>vy <span style=color:#ff79c6>=</span> [<span style=color:#bd93f9>6</span>, <span style=color:#bd93f9>7</span>, <span style=color:#bd93f9>8</span>]
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#8be9fd;font-style:italic>list</span>(x <span style=color:#ff79c6>*</span> y <span style=color:#ff79c6>for</span> x, y <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>zip</span>(vx, vy)))
+</span></span><span style=display:flex><span><span style=color:#6272a4># 生成器表达式比较简单, 一般不用来出来复杂的逻辑</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 生成器表达式相比等效的列表推导式, 更加节省内存</span>
+</span></span><span style=display:flex><span>l <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>list</span>(e <span style=color:#ff79c6>for</span> e <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>5</span>))
+</span></span><span style=display:flex><span><span style=color:#6272a4># 等效于</span>
+</span></span><span style=display:flex><span>l2 <span style=color:#ff79c6>=</span> [e <span style=color:#ff79c6>for</span> e <span style=color:#ff79c6>in</span> <span style=color:#8be9fd;font-style:italic>range</span>(<span style=color:#bd93f9>5</span>)]
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&gt;&gt;&gt; (i for i in range(3))
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&lt;generator object &lt;genexpr&gt; at 0x10463ba00&gt;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&gt;&gt;&gt; [i for i in range(3)]
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>[0, 1, 2]
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&gt;&gt;&gt; {x:x*x for x in range(1,4,1)}
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>{1: 1, 2: 4, 3: 9}
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 关于yield表达式 #</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 在生成器中使用了yield表达式，yield表达式也只在生成器中使用</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># https://docs.python.org/zh-cn/3/reference/expressions.html#yield-expressions</span>
+</span></span></code></pre></td></tr></table></div></div><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
 <a href=https://creativecommons.org/licenses/by/4.0/deed.en title="Creative Commons Attribution" style=color:gray>&copy; CC BY 4.0</a></p><p><a href="https://github.com/alex-shpak/hugo-book?tab=readme-ov-file#features" style=color:gray>2019-2024. Powered by Hugo Book</a>
 Presented by Github.</p></div><label for=menu-control class="hidden book-menu-overlay"></label></div></main><div class=back-to-top><div id=back-to-top><img src=/svg/chevrons-up.svg srcset="/svg/chevrons-up.svg 500w" onclick=topFunction() class=black>
 <img title=回到顶部 src=/svg/chevrons-up-blue.svg srcset="/svg/chevrons-up-blue.svg 500w" onclick=topFunction() class=blue></div><script>let mybutton=document.getElementById("back-to-top");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>500||document.documentElement.scrollTop>500?mybutton.style.display="block":mybutton.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><script src=/js/scroll-listening.js></script></body></html>

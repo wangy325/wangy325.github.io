@@ -1,5 +1,5 @@
 <!doctype html><html lang=zh dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" "><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://wangy325.github.io/zh/docs/note/pys/snippets/4_func/"><meta property="og:site_name" content="Endless River"><meta property="og:title" content="函数式编程"><meta property="og:description" content=" "><meta property="og:locale" content="zh"><meta property="og:type" content="article"><meta property="article:section" content="docs"><meta property="article:published_time" content="2024-06-06T00:00:00+00:00"><meta property="article:modified_time" content="2024-08-15T18:14:12+08:00"><meta property="article:tag" content="Snippet"><title>函数式编程 | Endless River</title>
-<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/4_func/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.a7252d8a975fbe35c7092be2a012aa5eba38007825312b1b041eb19213492815.js integrity="sha256-pyUtipdfvjXHCSvioBKqXro4AHglMSsbBB6xkhNJKBU=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
+<link rel=manifest href=/manifest.json><link rel=icon href=/favicon.png><link rel=canonical href=https://wangy325.github.io/zh/docs/note/pys/snippets/4_func/><link rel=stylesheet href=/book.min.e7654cdd04a0103d5766f90259ce1a8382d778a3aad8c66ddcb97827f5859aff.css integrity="sha256-52VM3QSgED1XZvkCWc4ag4LXeKOq2MZt3Ll4J/WFmv8=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/zh.search.min.2b4cc753b8e2c9d9d6bbf40ffb0865dd848a6bcc573020154b12c8b0b1c8d42a.js integrity="sha256-K0zHU7jiydnWu/QP+whl3YSKa8xXMCAVSxLIsLHI1Co=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HHNKR5H8KN"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-HHNKR5H8KN")}</script></head><body dir=ltr data-bs-spy=scroll data-bs-target=#TableOfContents><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/zh/><span>Endless River</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=搜索 aria-label=搜索 maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/zh/docs/java/>Java</a><ul><li><input type=checkbox id=section-287084f81620420b7ed7e40a42c44d2f class=toggle>
 <label for=section-287084f81620420b7ed7e40a42c44d2f class="flex justify-between"><a role=button>Obj-Oriented</a></label><ul><li><a href=/zh/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/>访问权限修饰符</a></li><li><a href=/zh/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/>static关键字</a></li><li><a href=/zh/docs/java/basic/3_%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8/>传值还是传引用</a></li><li><a href=/zh/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/>final关键字</a></li><li><a href=/zh/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/>Object超类</a></li><li><a href=/zh/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/>动态绑定与静态绑定</a></li><li><a href=/zh/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/>抽象类与接口</a></li><li><a href=/zh/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/>Lambda与函数式接口</a></li><li><a href=/zh/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/>内部类</a></li><li><a href=/zh/docs/java/basic/11_java-new-time-api/>Java8日期和时间API</a></li></ul></li><li><input type=checkbox id=section-3d2f820e49b3d97a7a712be90f9fd6ad class=toggle>
 <label for=section-3d2f820e49b3d97a7a712be90f9fd6ad class="flex justify-between"><a href=/zh/docs/java/collections/>Collections</a></label><ul><li><a href=/zh/docs/java/collections/1_List_arraylist/>ArrayList</a></li><li><a href=/zh/docs/java/collections/1_List_linkedlist/>LinkedList</a></li><li><a href=/zh/docs/java/collections/2_Queue/>Queue</a></li><li><a href=/zh/docs/java/collections/3_Set/>Set</a></li><li><a href=/zh/docs/java/collections/4_Map_hash_tree_map/>HashMap和TreeMap</a></li><li><a href=/zh/docs/java/collections/4_Map_linkedhashmap/>LinkedHashMap</a></li><li><a href=/zh/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/>HashMap的源码分析</a></li><li><a href=/zh/docs/java/collections/6_Collections/>Collections工具类</a></li></ul></li><li><input type=checkbox id=section-6d6d0626deeb0ce0f9826f9dabe58c16 class=toggle>
@@ -24,418 +24,418 @@
 <label for=toc-control></label></div></header><article class="markdown book-article"><h1><a href=/zh/docs/note/pys/snippets/4_func/>函数式编程</a></h1><div style=font-size:.9rem><div class="flex align-cneter" style=font-size:.9rem><div class="flex align-cneter" style=margin-right:1rem><img style=width:1rem;margin-inline-end:.5rem src=/svg/edit.svg class=book-icon alt>
 <a class=xxx title='创建者 wangy32'>六月 6, 2024</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/cates.svg class=book-icon alt>
 <a class=xxx href=/zh/categories/python/ style=margin-right:.5rem>Python</a></div><div class="flex align-center" style=margin-right:1rem><img style=height:1rem;width:1rem;margin-inline-end:.5rem src=/svg/tag-alt.svg class=book-icon alt>
-<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
-<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=highlight><div style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">  9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 33
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 34
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 35
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 36
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 37
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 38
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 39
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 40
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 41
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 42
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 43
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 44
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 45
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 46
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 47
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 48
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 49
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 50
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 51
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 52
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 53
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 54
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 55
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 56
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 57
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 58
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 59
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 60
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 61
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 62
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 63
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 64
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 65
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 66
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 67
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 68
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 69
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 70
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 71
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 72
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 73
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 74
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 75
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 76
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 77
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 78
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 79
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 80
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 81
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 82
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 83
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 84
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 85
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 86
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 87
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 88
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 89
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 90
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 91
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 92
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 93
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 94
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 95
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 96
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 97
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 98
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868"> 99
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">100
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">101
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">102
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">103
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">104
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">105
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">106
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">107
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">108
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">109
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">110
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">111
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">112
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">113
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">114
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">115
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">116
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">117
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">118
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">119
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">120
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">121
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">122
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">123
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">124
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">125
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">126
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">127
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">128
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">129
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">130
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">131
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">132
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">133
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">134
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">135
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">136
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">137
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">138
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">139
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">140
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">141
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">142
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">143
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">144
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">145
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">146
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">147
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">148
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">149
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">150
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">151
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">152
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">153
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">154
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">155
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">156
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">157
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">158
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">159
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">160
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">161
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">162
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">163
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">164
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">165
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">166
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">167
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">168
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">169
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">170
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">171
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">172
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">173
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">174
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">175
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">176
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">177
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">178
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">179
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">180
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">181
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">182
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">183
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">184
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">185
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">186
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">187
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">188
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">189
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">190
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">191
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">192
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">193
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">194
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">195
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">196
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">197
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">198
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">199
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">200
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">201
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">202
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">203
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">204
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#686868">205
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#999;font-style:italic># author: wangy</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># date: 2024/7/9</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># description:</span>
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>python 函数的几个小🌰️
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>1. 定义函数的关键字 `def`
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>2. 函数的返回值 `None`和return语句 斐波那契数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>3. 解包赋值表达式
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>4. 函数的形参列表
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    - 位置参数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    - 关键字参数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    - 特殊参数（元组和字典）
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>5. 解包表达式作为实参
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>6. Lambda表达式作为实参
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;</span>
+<a class=xxx href=/zh/tags/snippet/ style=margin-right:.5rem>Snippet</a></div></div></div><hr><hr></article><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">205
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span><span style=color:#6272a4># author: wangy</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># date: 2024/7/9</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># description:</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>python 函数的几个小🌰️
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>1. 定义函数的关键字 `def`
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>2. 函数的返回值 `None`和return语句 斐波那契数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>3. 解包赋值表达式
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>4. 函数的形参列表
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    - 位置参数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    - 关键字参数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    - 特殊参数（元组和字典）
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>5. 解包表达式作为实参
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>6. Lambda表达式作为实参
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>func</span>(length, width):
-</span></span><span style=display:flex><span>    s = length * width
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;Square of rectangle is </span><span style=color:#ed9d13>{</span>s<span style=color:#ed9d13>}</span><span style=color:#ed9d13>.&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>func</span>(length, width):
+</span></span><span style=display:flex><span>    s <span style=color:#ff79c6>=</span> length <span style=color:#ff79c6>*</span> width
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;Square of rectangle is </span><span style=color:#f1fa8c>{</span>s<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>.&#39;</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 函数可以直接赋值给变量</span>
-</span></span><span style=display:flex><span>mf = func
-</span></span><span style=display:flex><span>mf(<span style=color:#3677a9>5</span>, <span style=color:#3677a9>3</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 函数可以直接赋值给变量</span>
+</span></span><span style=display:flex><span>mf <span style=color:#ff79c6>=</span> func
+</span></span><span style=display:flex><span>mf(<span style=color:#bd93f9>5</span>, <span style=color:#bd93f9>3</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__fib</span>(limit):
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    - fibonacci斐波那契数列
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    - 形参: limit: 最大数限制
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    a, b = <span style=color:#3677a9>0</span>, <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>while</span> a &lt; limit:
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(a, end=<span style=color:#ed9d13>&#39; &#39;</span>)
-</span></span><span style=display:flex><span>        <span style=color:#999;font-style:italic># python的解包赋值特性</span>
-</span></span><span style=display:flex><span>        a, b = b, a + b
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(end=<span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__fib</span>(limit):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    - fibonacci斐波那契数列
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    - 形参: limit: 最大数限制
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    a, b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>, <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> a <span style=color:#ff79c6>&lt;</span> limit:
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(a, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39; &#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#6272a4># python的解包赋值特性</span>
+</span></span><span style=display:flex><span>        a, b <span style=color:#ff79c6>=</span> b, a <span style=color:#ff79c6>+</span> b
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>__fib(<span style=color:#3677a9>100</span>)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 内置变量 &#34;__doc__&#34;, 可以查看文档</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(__fib.__doc__)
+</span></span><span style=display:flex><span>__fib(<span style=color:#bd93f9>100</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 内置变量 &#34;__doc__&#34;, 可以查看文档</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(__fib<span style=color:#ff79c6>.</span>__doc__)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__fib2</span>(limit):
-</span></span><span style=display:flex><span>    a, b = <span style=color:#3677a9>0</span>, <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>    res = []
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>while</span> a &lt; limit:
-</span></span><span style=display:flex><span>        res.append(a)
-</span></span><span style=display:flex><span>        a, b = b, a + b
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>return</span> res
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__fib2</span>(limit):
+</span></span><span style=display:flex><span>    a, b <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>, <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    res <span style=color:#ff79c6>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> a <span style=color:#ff79c6>&lt;</span> limit:
+</span></span><span style=display:flex><span>        res<span style=color:#ff79c6>.</span>append(a)
+</span></span><span style=display:flex><span>        a, b <span style=color:#ff79c6>=</span> b, a <span style=color:#ff79c6>+</span> b
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> res
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(__fib2(<span style=color:#3677a9>1000</span>))
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(__fib2(<span style=color:#bd93f9>1000</span>))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__quit</span>(retry, prompt=<span style=color:#ed9d13>&#39;ready to quit? y/n&#39;</span>, reminder=<span style=color:#ed9d13>&#39;Please try again!&#39;</span>):
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    形参列表，有多种形式的参数:
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    1. 不带默认值的参数，是必填参数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    2. 带默认值的参数是可选参数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>while</span> <span style=color:#6ab825;font-weight:700>True</span>:
-</span></span><span style=display:flex><span>        reply = <span style=color:#24909d>input</span>(prompt)
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> reply <span style=color:#6ab825;font-weight:700>in</span> (<span style=color:#ed9d13>&#39;y&#39;</span>, <span style=color:#ed9d13>&#39;yes&#39;</span>, <span style=color:#ed9d13>&#39;yep&#39;</span>, <span style=color:#ed9d13>&#39;ye&#39;</span>):
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>return</span> <span style=color:#6ab825;font-weight:700>True</span>
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>elif</span> reply <span style=color:#6ab825;font-weight:700>in</span> (<span style=color:#ed9d13>&#39;n&#39;</span>, <span style=color:#ed9d13>&#39;no&#39;</span>, <span style=color:#ed9d13>&#39;nope&#39;</span>):
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>return</span> <span style=color:#6ab825;font-weight:700>False</span>
-</span></span><span style=display:flex><span>        retry -= <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>        <span style=color:#6ab825;font-weight:700>if</span> retry &lt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>            <span style=color:#6ab825;font-weight:700>raise</span> <span style=color:#bbb>ValueError</span>(<span style=color:#ed9d13>&#39;invalid user response&#39;</span>)
-</span></span><span style=display:flex><span>        <span style=color:#24909d>print</span>(reminder)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__quit</span>(retry, prompt<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;ready to quit? y/n&#39;</span>, reminder<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;Please try again!&#39;</span>):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    形参列表，有多种形式的参数:
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    1. 不带默认值的参数，是必填参数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    2. 带默认值的参数是可选参数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> <span style=color:#ff79c6>True</span>:
+</span></span><span style=display:flex><span>        reply <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>input</span>(prompt)
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> reply <span style=color:#ff79c6>in</span> (<span style=color:#f1fa8c>&#39;y&#39;</span>, <span style=color:#f1fa8c>&#39;yes&#39;</span>, <span style=color:#f1fa8c>&#39;yep&#39;</span>, <span style=color:#f1fa8c>&#39;ye&#39;</span>):
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>True</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>elif</span> reply <span style=color:#ff79c6>in</span> (<span style=color:#f1fa8c>&#39;n&#39;</span>, <span style=color:#f1fa8c>&#39;no&#39;</span>, <span style=color:#f1fa8c>&#39;nope&#39;</span>):
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#ff79c6>False</span>
+</span></span><span style=display:flex><span>        retry <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> retry <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>raise</span> ValueError(<span style=color:#f1fa8c>&#39;invalid user response&#39;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>print</span>(reminder)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(<span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 仅仅使用必填参数</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># print(__quit(2))</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 使用必填和部分可选参数</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># print(__quit(2, &#39;Do you really want to quit(y/n)?&#39;))</span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 使用全部参数</span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(__quit(<span style=color:#3677a9>2</span>, <span style=color:#ed9d13>&#39;Ready to quit(y/n)?&#39;</span>, <span style=color:#ed9d13>&#39;Please input yes or no.&#39;</span>))
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>以上调用函数的方式全部是位置参数(posotional argument)
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>此外, 还可以使用关键字参数来调用函数
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>注意, 关键字参数必须在位置参数后面
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 仅仅使用必填参数</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># print(__quit(2))</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用必填和部分可选参数</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># print(__quit(2, &#39;Do you really want to quit(y/n)?&#39;))</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 使用全部参数</span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(__quit(<span style=color:#bd93f9>2</span>, <span style=color:#f1fa8c>&#39;Ready to quit(y/n)?&#39;</span>, <span style=color:#f1fa8c>&#39;Please input yes or no.&#39;</span>))
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>以上调用函数的方式全部是位置参数(posotional argument)
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>此外, 还可以使用关键字参数来调用函数
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>注意, 关键字参数必须在位置参数后面
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(__quit(<span style=color:#3677a9>2</span>, prompt=<span style=color:#ed9d13>&#39;quit(y/n)?&#39;</span>))
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 特殊参数</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__sfunc</span>(*args, **kwargs):
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    特殊参数 元组tuple 和字典dict
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(args, end=<span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(kwargs)
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(__quit(<span style=color:#bd93f9>2</span>, prompt<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;quit(y/n)?&#39;</span>))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>__sfunc((<span style=color:#3677a9>1</span>, <span style=color:#3677a9>2</span>), (<span style=color:#3677a9>3</span>, <span style=color:#3677a9>4</span>), name=<span style=color:#ed9d13>&#39;mask&#39;</span>, age=<span style=color:#ed9d13>&#39;53&#39;</span>, nation=<span style=color:#ed9d13>&#39;US&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#6272a4># 特殊参数</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__sfunc</span>(<span style=color:#ff79c6>*</span>args, <span style=color:#ff79c6>**</span>kwargs):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    特殊参数 元组tuple 和字典dict
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(args, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(kwargs)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 如果实参单独定义，调用函数时需要解包</span>
-</span></span><span style=display:flex><span>a_list = (<span style=color:#ed9d13>&#39;apple&#39;</span>, <span style=color:#ed9d13>&#39;orange&#39;</span>, <span style=color:#ed9d13>&#39;grape&#39;</span>, <span style=color:#ed9d13>&#39;watermelon&#39;</span>)
-</span></span><span style=display:flex><span>a_tuple = {
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#39;title&#39;</span>: <span style=color:#ed9d13>&#39;data structure and algorithm analysis&#39;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#39;sub-title&#39;</span>: <span style=color:#ed9d13>&#39;descripted by Java&#39;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#39;publish&#39;</span>: <span style=color:#ed9d13>&#39;machine press&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>__sfunc((<span style=color:#bd93f9>1</span>, <span style=color:#bd93f9>2</span>), (<span style=color:#bd93f9>3</span>, <span style=color:#bd93f9>4</span>), name<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;mask&#39;</span>, age<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;53&#39;</span>, nation<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;US&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># 如果实参单独定义，调用函数时需要解包</span>
+</span></span><span style=display:flex><span>a_list <span style=color:#ff79c6>=</span> (<span style=color:#f1fa8c>&#39;apple&#39;</span>, <span style=color:#f1fa8c>&#39;orange&#39;</span>, <span style=color:#f1fa8c>&#39;grape&#39;</span>, <span style=color:#f1fa8c>&#39;watermelon&#39;</span>)
+</span></span><span style=display:flex><span>a_tuple <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#39;title&#39;</span>: <span style=color:#f1fa8c>&#39;data structure and algorithm analysis&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#39;sub-title&#39;</span>: <span style=color:#f1fa8c>&#39;descripted by Java&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#39;publish&#39;</span>: <span style=color:#f1fa8c>&#39;machine press&#39;</span>
 </span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>这里如果直接使用 `__sfunc(a_list, a_tuple)`程序并不会出错.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>不过请看上一例, 这里的处理是将l和m作为元组的参数处理的. 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>(这意为着, 函数`__sfunc`的形参数是任意可变的)
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>所以必须要**解包**实参列表, 才能将`l`和`m`分别作为位置参数.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#39;&#39;&#39;</span>
-</span></span><span style=display:flex><span>__sfunc(*a_list, **a_tuple)
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>这里如果直接使用 `__sfunc(a_list, a_tuple)`程序并不会出错.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>不过请看上一例, 这里的处理是将l和m作为元组的参数处理的. 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>(这意为着, 函数`__sfunc`的形参数是任意可变的)
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>所以必须要**解包**实参列表, 才能将`l`和`m`分别作为位置参数.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#39;&#39;&#39;</span>
+</span></span><span style=display:flex><span>__sfunc(<span style=color:#ff79c6>*</span>a_list, <span style=color:#ff79c6>**</span>a_tuple)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 参数使用的标记  / 和 *</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__fargtag</span>(c=<span style=color:#3677a9>8</span>, /, prompt=<span style=color:#ed9d13>&#39;input a integer:&#39;</span>, *, remainder=<span style=color:#ed9d13>&#39;func done&#39;</span>):
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    计算c的阶乘
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    `c` before &#39;/&#39; means it&#39;s a positional argument
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    `prompt` after &#39;/&#39; means it&#39;s a positional or keyword argument
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    `remainder` after &#39;*&#39; means it&#39;s a keyword arguments
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    c = <span style=color:#24909d>int</span>(<span style=color:#24909d>input</span>(prompt))
-</span></span><span style=display:flex><span>    r = <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>while</span> c &gt; <span style=color:#3677a9>0</span>:
-</span></span><span style=display:flex><span>        r = r * c
-</span></span><span style=display:flex><span>        c = c - <span style=color:#3677a9>1</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(remainder, r, end=<span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>return</span> r
+</span></span><span style=display:flex><span><span style=color:#6272a4># 参数使用的标记  / 和 *</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__fargtag</span>(c<span style=color:#ff79c6>=</span><span style=color:#bd93f9>8</span>, <span style=color:#ff79c6>/</span>, prompt<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;input a integer:&#39;</span>, <span style=color:#ff79c6>*</span>, remainder<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;func done&#39;</span>):
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    计算c的阶乘
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    `c` before &#39;/&#39; means it&#39;s a positional argument
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    `prompt` after &#39;/&#39; means it&#39;s a positional or keyword argument
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    `remainder` after &#39;*&#39; means it&#39;s a keyword arguments
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    c <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>int</span>(<span style=color:#8be9fd;font-style:italic>input</span>(prompt))
+</span></span><span style=display:flex><span>    r <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> c <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span>:
+</span></span><span style=display:flex><span>        r <span style=color:#ff79c6>=</span> r <span style=color:#ff79c6>*</span> c
+</span></span><span style=display:flex><span>        c <span style=color:#ff79c6>=</span> c <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(remainder, r, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> r
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>__fargtag(remainder=<span style=color:#ed9d13>&#39;final result is &#39;</span>)
+</span></span><span style=display:flex><span>__fargtag(remainder<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;final result is &#39;</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__argfunc</span>(leng: <span style=color:#24909d>int</span>, wid: <span style=color:#24909d>int</span>):
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>return</span> leng * wid
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__argfunc</span>(leng: <span style=color:#8be9fd;font-style:italic>int</span>, wid: <span style=color:#8be9fd;font-style:italic>int</span>):
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> leng <span style=color:#ff79c6>*</span> wid
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>__cal</span>(f: __argfunc, prompt=<span style=color:#ed9d13>&#39;this func show a rectangle</span><span style=color:#ed9d13>\&#39;</span><span style=color:#ed9d13>s square&#39;</span>):
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(prompt)
-</span></span><span style=display:flex><span>    length = <span style=color:#24909d>input</span>(<span style=color:#ed9d13>&#39;pls input length of retangle:&#39;</span>)
-</span></span><span style=display:flex><span>    wid = <span style=color:#24909d>input</span>(<span style=color:#ed9d13>&#39;pls input width of rectangle:&#39;</span>)
-</span></span><span style=display:flex><span>    s = f(<span style=color:#24909d>int</span>(length), <span style=color:#24909d>int</span>(wid))
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(<span style=color:#ed9d13>f</span><span style=color:#ed9d13>&#39;Square is </span><span style=color:#ed9d13>{</span>s<span style=color:#ed9d13>}</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>__cal</span>(f: __argfunc, prompt<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;this func show a rectangle</span><span style=color:#f1fa8c>\&#39;</span><span style=color:#f1fa8c>s square&#39;</span>):
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(prompt)
+</span></span><span style=display:flex><span>    length <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>input</span>(<span style=color:#f1fa8c>&#39;pls input length of retangle:&#39;</span>)
+</span></span><span style=display:flex><span>    wid <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>input</span>(<span style=color:#f1fa8c>&#39;pls input width of rectangle:&#39;</span>)
+</span></span><span style=display:flex><span>    s <span style=color:#ff79c6>=</span> f(<span style=color:#8be9fd;font-style:italic>int</span>(length), <span style=color:#8be9fd;font-style:italic>int</span>(wid))
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(<span style=color:#f1fa8c>f</span><span style=color:#f1fa8c>&#39;Square is </span><span style=color:#f1fa8c>{</span>s<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>__cal(__argfunc)
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># or</span>
-</span></span><span style=display:flex><span>__cal(f=<span style=color:#6ab825;font-weight:700>lambda</span> x, y: __argfunc(x, y))
+</span></span><span style=display:flex><span><span style=color:#6272a4># or</span>
+</span></span><span style=display:flex><span>__cal(f<span style=color:#ff79c6>=</span><span style=color:#ff79c6>lambda</span> x, y: __argfunc(x, y))
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># Lambda表达式</span>
-</span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>lambda表达式是一种简洁的方式来定义匿名函数. 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>lambda表达式可以在需要函数对象的任何地方使用, 并且通常用于简单的函数功能.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>sort方法支持对paris列表的元组数据排序, 它的关键字参数key由一个Lambda表达式提供. 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>Lambda的内涵是: 按照参数p(可以推导出元组)的索引为1的元素排序. 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>已知索引为1的元素是字符串, 所以即按照字符串的字母表顺序排序. 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>故排序后的paries是
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>[(4, &#39;four&#39;), (1, &#39;one&#39;), (3, &#39;three&#39;), (2, &#39;two&#39;)]
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4># Lambda表达式</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>lambda表达式是一种简洁的方式来定义匿名函数. 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>lambda表达式可以在需要函数对象的任何地方使用, 并且通常用于简单的函数功能.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>sort方法支持对paris列表的元组数据排序, 它的关键字参数key由一个Lambda表达式提供. 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>Lambda的内涵是: 按照参数p(可以推导出元组)的索引为1的元素排序. 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>已知索引为1的元素是字符串, 所以即按照字符串的字母表顺序排序. 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>故排序后的paries是
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>[(4, &#39;four&#39;), (1, &#39;one&#39;), (3, &#39;three&#39;), (2, &#39;two&#39;)]
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>paris = [(<span style=color:#3677a9>1</span>, <span style=color:#ed9d13>&#39;one&#39;</span>), (<span style=color:#3677a9>2</span>, <span style=color:#ed9d13>&#39;two&#39;</span>), (<span style=color:#3677a9>3</span>, <span style=color:#ed9d13>&#39;three&#39;</span>), (<span style=color:#3677a9>4</span>, <span style=color:#ed9d13>&#39;four&#39;</span>)]
-</span></span><span style=display:flex><span>paris.sort(key=<span style=color:#6ab825;font-weight:700>lambda</span> p: p[<span style=color:#3677a9>1</span>])
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(paris)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#999;font-style:italic># 完整的函数声明,包括参数数据类型,返回值类型</span>
-</span></span><span style=display:flex><span><span style=color:#6ab825;font-weight:700>def</span> <span style=color:#447fcf>full_dunc_def</span>(arg: <span style=color:#24909d>int</span>,
-</span></span><span style=display:flex><span>                  arg2: <span style=color:#24909d>str</span> = <span style=color:#ed9d13>&#39;optional arg&#39;</span>,
-</span></span><span style=display:flex><span>                  arg3: <span style=color:#24909d>tuple</span> = (<span style=color:#3677a9>1</span>, <span style=color:#ed9d13>&#39;one&#39;</span>)) -&gt; <span style=color:#24909d>str</span>:
-</span></span><span style=display:flex><span>    <span style=color:#ed9d13>&#34;&#34;&#34;python函数的完整声明
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    Args:
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>        arg (int): 
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>        arg2 (str, optional): Defaults to &#39;optional arg&#39;.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>        arg3 (tuple, optional): Defaults to (1, &#39;one&#39;).
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    Returns:
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>        str: 声明为返回str, 但是python不强制返回值必须和声明一致.
-</span></span></span><span style=display:flex><span><span style=color:#ed9d13>    &#34;&#34;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(arg2)
-</span></span><span style=display:flex><span>    <span style=color:#24909d>print</span>(arg3, end=<span style=color:#ed9d13>&#39;</span><span style=color:#ed9d13>\n</span><span style=color:#ed9d13>&#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#999;font-style:italic># return 类型和函数声明类型不是强制一致</span>
-</span></span><span style=display:flex><span>    <span style=color:#6ab825;font-weight:700>return</span> arg3
+</span></span><span style=display:flex><span>paris <span style=color:#ff79c6>=</span> [(<span style=color:#bd93f9>1</span>, <span style=color:#f1fa8c>&#39;one&#39;</span>), (<span style=color:#bd93f9>2</span>, <span style=color:#f1fa8c>&#39;two&#39;</span>), (<span style=color:#bd93f9>3</span>, <span style=color:#f1fa8c>&#39;three&#39;</span>), (<span style=color:#bd93f9>4</span>, <span style=color:#f1fa8c>&#39;four&#39;</span>)]
+</span></span><span style=display:flex><span>paris<span style=color:#ff79c6>.</span>sort(key<span style=color:#ff79c6>=</span><span style=color:#ff79c6>lambda</span> p: p[<span style=color:#bd93f9>1</span>])
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(paris)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#24909d>print</span>(full_dunc_def(<span style=color:#3677a9>1</span>))
-</span></span></code></pre></td></tr></table></div></div><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
+</span></span><span style=display:flex><span><span style=color:#6272a4># 完整的函数声明,包括参数数据类型,返回值类型</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>full_dunc_def</span>(arg: <span style=color:#8be9fd;font-style:italic>int</span>,
+</span></span><span style=display:flex><span>                  arg2: <span style=color:#8be9fd;font-style:italic>str</span> <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;optional arg&#39;</span>,
+</span></span><span style=display:flex><span>                  arg3: <span style=color:#8be9fd;font-style:italic>tuple</span> <span style=color:#ff79c6>=</span> (<span style=color:#bd93f9>1</span>, <span style=color:#f1fa8c>&#39;one&#39;</span>)) <span style=color:#ff79c6>-&gt;</span> <span style=color:#8be9fd;font-style:italic>str</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;&#34;&#34;python函数的完整声明
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    Args:
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>        arg (int): 
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>        arg2 (str, optional): Defaults to &#39;optional arg&#39;.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>        arg3 (tuple, optional): Defaults to (1, &#39;one&#39;).
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    Returns:
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>        str: 声明为返回str, 但是python不强制返回值必须和声明一致.
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(arg2)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>print</span>(arg3, end<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#39;</span><span style=color:#f1fa8c>\n</span><span style=color:#f1fa8c>&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#6272a4># return 类型和函数声明类型不是强制一致</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> arg3
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>print</span>(full_dunc_def(<span style=color:#bd93f9>1</span>))
+</span></span></code></pre></td></tr></table></div></div><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/wangy325/endlessriver/commit/055c34d78c4bb65744fd57eeadb85bd15e68a2c7 title='最后修改者 wangy325 | 八月 15, 2024' target=_blank rel=noopener><img src=/svg/calendar.svg class=book-icon alt>
+<span>八月 15, 2024</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><div class=giscus-thread></div><script src=https://giscus.app/client.js data-repo=wangy325/wangy325.github.io data-repo-id=R_kgDOHhhDZg data-category=Announcements data-category-id=DIC_kwDOHhhDZs4ChbMn data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=noborder_light data-lang=zh-CN crossorigin=anonymous async></script></div><div style=text-align:center;font-size:.8rem;color:gray><p>Notes and Memos by wangy325
 <a href=https://creativecommons.org/licenses/by/4.0/deed.en title="Creative Commons Attribution" style=color:gray>&copy; CC BY 4.0</a></p><p><a href="https://github.com/alex-shpak/hugo-book?tab=readme-ov-file#features" style=color:gray>2019-2024. Powered by Hugo Book</a>
 Presented by Github.</p></div><label for=menu-control class="hidden book-menu-overlay"></label></div></main><div class=back-to-top><div id=back-to-top><img src=/svg/chevrons-up.svg srcset="/svg/chevrons-up.svg 500w" onclick=topFunction() class=black>
 <img title=回到顶部 src=/svg/chevrons-up-blue.svg srcset="/svg/chevrons-up-blue.svg 500w" onclick=topFunction() class=blue></div><script>let mybutton=document.getElementById("back-to-top");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>500||document.documentElement.scrollTop>500?mybutton.style.display="block":mybutton.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}</script></div><script src=/js/scroll-listening.js></script></body></html>
