@@ -486,7 +486,20 @@ public class PrioritizedTask implements Runnable, Comparable&amp;lt;PrioritizedT
 &lt;/h1>
 &lt;p>本文转自
  &lt;a href="http://www.cnblogs.com/dolphin0520/p/3920373.html">Matrix海子&lt;/a>，是描述&lt;code>volatile&lt;/code>关键字非常好的一篇文章，从Java的内存模型开始，归本溯源的阐述了&lt;code>volatile&lt;/code>关键字在并发中的作用与局限&lt;/p>
-&lt;p>此文部分内容参照了《深入理解Java虚拟机》&lt;/p></description></item><item><title>macOS12 Monterey更新</title><link>https://wangy325.github.io/zh/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</guid><description>&lt;p>原本计划MBP2018就在BigSur 11.7 养老算了，实际上已经苟了3年，并且计划一直苟下去的😂...但是有几个征兆，最终还是在7月份，更新了12。以下为主要原因:&lt;/p>
+&lt;p>此文部分内容参照了《深入理解Java虚拟机》&lt;/p></description></item><item><title>Hugo自定义TOC模板及其它</title><link>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</link><pubDate>Tue, 20 Aug 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</guid><description>&lt;blockquote class="book-hint warning">
+ 还挺麻烦的，主要是Hugo的模板语言语法，那是人看的吗？
+&lt;/blockquote>
+
+&lt;p>一个文章目录，有几个基本要素：&lt;/p>
+&lt;ol>
+&lt;li>目录锚点，可以点击跳转&lt;/li>
+&lt;li>目录层级，控制目录的展示&lt;/li>
+&lt;/ol>
+&lt;p>Hugo定义了默认的TOC模板，实现了上面的要素，比较简单：&lt;/p>
+&lt;pre>&lt;code>{{ .TableOfContents}}
+&lt;/code>&lt;/pre>
+&lt;p>这个模板仅仅能用而已。对于较长的目录，以及多层级的目录都有点无能为力。&lt;/p>
+&lt;p>如果想要让目录更加灵活，可以自定义TOC，并且实现滚动监听。&lt;/p></description></item><item><title>macOS12 Monterey更新</title><link>https://wangy325.github.io/zh/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</guid><description>&lt;p>原本计划MBP2018就在BigSur 11.7 养老算了，实际上已经苟了3年，并且计划一直苟下去的😂...但是有几个征兆，最终还是在7月份，更新了12。以下为主要原因:&lt;/p>
 &lt;ul>
 &lt;li>自带的应用商店出现了最低支持12的应用——削弱了老11用户的使用体验&lt;/li>
 &lt;li>oneDrive自动更新之后不支持老版本，但是旧版本又不好找。（最后只能删除plist阻止其自动更新）&lt;/li>
