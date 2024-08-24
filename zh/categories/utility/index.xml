@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Utility on Endless River</title><link>https://wangy325.github.io/zh/categories/utility/</link><description>Recent content in Utility on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Tue, 20 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/utility/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo自定义TOC模板及其它</title><link>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</link><pubDate>Tue, 20 Aug 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</guid><description>&lt;blockquote class="book-hint warning">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Utility on Endless River</title><link>https://wangy325.github.io/zh/categories/utility/</link><description>Recent content in Utility on Endless River</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://wangy325.github.io/zh/categories/utility/index.xml" rel="self" type="application/rss+xml"/><item><title>让Infuse从TMDB正确获取元数据</title><link>https://wangy325.github.io/zh/posts/20_infuse%E5%85%83%E6%95%B0%E6%8D%AE/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/20_infuse%E5%85%83%E6%95%B0%E6%8D%AE/</guid><description>&lt;blockquote class="book-hint info">
+ &lt;p>对于电影和剧集，早就不是“下完即删”了，对于高质量的电影和剧集，尤其是记录片，会收藏在硬盘里面。特别现在会优先考虑下载高清资源。&lt;/p>
+&lt;p>这可能会是，捣鼓NAS的一个开始...&lt;/p>
+
+&lt;/blockquote>
+
+&lt;p>找剧的时候，误打误撞下载了一份DV的4K视频文件，用尽各种软件，播放都是偏（绿）色的。尽管IINA可以通过调整色调让视频颜色看起来正常些（能看），但是始终不满意。由于迅雷下得辛苦，就留着。&lt;/p>
+&lt;blockquote>
+&lt;p>DV = Dolby Vision，即杜比视界，对于不支持杜比视界的设备，播放就会出现偏色。&lt;/p>
+&lt;p>
+ &lt;a href="https://www.demolandia.net/4k-video-test/dolby-vision.html">https://www.demolandia.net/4k-video-test/dolby-vision.html&lt;/a> 可以下载DV的4K视频demo，检查你电脑电视是否支持DV。&lt;/p>
+&lt;/blockquote></description></item><item><title>Hugo自定义TOC模板及其它</title><link>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</link><pubDate>Tue, 20 Aug 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh/posts/19_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E5%85%B6%E5%AE%83/</guid><description>&lt;blockquote class="book-hint warning">
  还挺麻烦的，主要是Hugo的模板语言语法，那是人看的吗？
 &lt;/blockquote>
 
