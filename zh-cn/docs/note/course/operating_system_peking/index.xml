@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>操作系统原理 on Endless River</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/</link><description>Recent content in 操作系统原理 on Endless River</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 07 Aug 2024 16:20:46 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/index.xml" rel="self" type="application/rss+xml"/><item><title>引论</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/1_intro/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/1_intro/</guid><description>&lt;h2 id="1-操作系统的定义和作用">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>操作系统原理 on Endless River</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/</link><description>Recent content in 操作系统原理 on Endless River</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 07 Aug 2024 16:20:46 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/index.xml" rel="self" type="application/rss+xml"/><item><title>引论</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/1_intro/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/1_intro/</guid><description>&lt;h2 id="1-操作系统的定义和作用">
  1 操作系统的定义和作用
  &lt;a class="anchor" href="#1-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%ae%9a%e4%b9%89%e5%92%8c%e4%bd%9c%e7%94%a8">#&lt;/a>
 &lt;/h2>
@@ -15,11 +15,9 @@
 &lt;blockquote>
 &lt;p>有效：指系统效率，资源利用率。如cpu利用率是否充足，I/O设备是否忙碌等。&lt;/p>
 &lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>
-&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
+&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
  
- &lt;a class="hint-start" style="font-size: 4rem;">“&lt;/a>
- 
-
+ &lt;a class="hint-start">“&lt;/a>
  &lt;p>📖 回顾：操作系统的主要工作&lt;/p>
 &lt;ul>
 &lt;li>程序的执行
@@ -34,7 +32,7 @@
 &lt;p>———————— 物理机器界面 ---&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
 
 &lt;/blockquote>
-&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/3_processes_and_threads/</guid><description>进程模型 # 多道程序设计 # MultiProgramming：多个程序同时进入内存并运行，提高操作系统效率。并发环境。
+&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/course/operating_system_peking/3_processes_and_threads/</guid><description>进程模型 # 多道程序设计 # MultiProgramming：多个程序同时进入内存并运行，提高操作系统效率。并发环境。
 多个虚拟（逻辑）程序计数器 ---&amp;gt; 物理计数器
 进程的概念以及进程控制块 # 进程 # Process：进程是具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位。
 是程序的一次执行过程 是正在运行的程序的抽象 将一个CPU变幻成多个虚拟的CPU （是CPU的抽象） 系统资源以进程为单位分配，如内存、文件、独立的地址空间...... 进程控制块(PCB) # PCB: Process Control Block
