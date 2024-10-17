@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>软件 on Endless River</title><link>https://wangy325.github.io/zh-cn/tags/%E8%BD%AF%E4%BB%B6/</link><description>Recent content in 软件 on Endless River</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 14 Sep 2024 01:37:09 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/tags/%E8%BD%AF%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>让Infuse从TMDB正确获取元数据</title><link>https://wangy325.github.io/zh-cn/posts/20_infuse%E5%85%83%E6%95%B0%E6%8D%AE/</link><pubDate>Fri, 23 Aug 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/20_infuse%E5%85%83%E6%95%B0%E6%8D%AE/</guid><description>&lt;blockquote class="book-hint info">
+ 
+ &lt;a class="hint-start">“&lt;/a>
+ &lt;p>对于电影和剧集，早就不是“下完即删”了，对于高质量的电影和剧集，尤其是记录片，会收藏在硬盘里面。特别现在会优先考虑下载高清资源。&lt;/p>
+&lt;p>这可能会是，捣鼓NAS的一个开始...&lt;/p>
+
+&lt;/blockquote>
+&lt;p>找剧的时候，误打误撞下载了一份DV的4K视频文件，用尽各种软件，播放都是偏（绿）色的。尽管IINA可以通过调整色调让视频颜色看起来正常些（能看），但是始终不满意。由于迅雷下得辛苦，就留着。&lt;/p>
+&lt;blockquote>
+&lt;p>DV = Dolby Vision，即杜比视界，对于不支持杜比视界的设备，播放就会出现偏色。&lt;/p>
+&lt;p>
+ &lt;a href="https://www.demolandia.net/4k-video-test/dolby-vision.html">https://www.demolandia.net/4k-video-test/dolby-vision.html&lt;/a> 可以下载DV的4K视频demo，检查你电脑电视是否支持DV。&lt;/p>
+&lt;/blockquote></description></item><item><title>macOS12 Monterey更新</title><link>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</guid><description>&lt;p>原本计划MBP2018就在BigSur 11.7 养老算了，实际上已经苟了3年，并且计划一直苟下去的😂...但是有几个征兆，最终还是在7月份，更新了12。以下为主要原因:&lt;/p>
+&lt;ul>
+&lt;li>自带的应用商店出现了最低支持12的应用——削弱了老11用户的使用体验&lt;/li>
+&lt;li>oneDrive自动更新之后不支持老版本，但是旧版本又不好找。（最后只能删除plist阻止其自动更新）&lt;/li>
+&lt;li>部分破解软件的旧版本也不好找了&lt;/li>
+&lt;li>docker竟然也...😅&lt;/li>
+&lt;li>brew也...太慢了(升级之后好多了)&lt;/li>
+&lt;/ul></description></item><item><title> 获取JetBrains IDE的永久回退授权</title><link>https://wangy325.github.io/zh-cn/posts/14_get-perpetual-fallback-license-for-jetbrains-ides/</link><pubDate>Mon, 01 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/14_get-perpetual-fallback-license-for-jetbrains-ides/</guid><description>&lt;p>⚠️本人并不鼓励使用破解软件！&lt;/p>
+&lt;p>⚠️如果经济允许，请购买正版软件，以支持开发者并体验最新的功能。&lt;/p>
+&lt;p>⚠️此文仅作记录，请勿转载。&lt;/p>
+&lt;hr></description></item><item><title>Rime中州韻輸入引擎安裝與輸入方案定製指北</title><link>https://wangy325.github.io/zh-cn/posts/10_Rime%E4%B8%AD%E5%B7%9E%E9%9F%BB%E8%BC%B8%E5%85%A5%E5%BC%95%E6%93%8E%E5%AE%89%E8%A3%9D%E8%88%87%E7%B0%A1%E5%96%AE%E8%AA%BF%E6%95%99/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/10_Rime%E4%B8%AD%E5%B7%9E%E9%9F%BB%E8%BC%B8%E5%85%A5%E5%BC%95%E6%93%8E%E5%AE%89%E8%A3%9D%E8%88%87%E7%B0%A1%E5%96%AE%E8%AA%BF%E6%95%99/</guid><description>&lt;p>&lt;del>由于未知的原因&lt;/del>&lt;sup>很有可能是配置文件错误&lt;/sup>，使用几年多的Rime（squirrel）输入法发生异常。主要表现为小鹤双拼的键位映射异常（如键入‘budv’的候选词是‘病毒’而不是‘不对’。），检查了许久的配置文件，并没有发现明显异常。距离上次配置Rime已许久，很多细节都已经丢失。一番纠结后，决定再重新调试一下Rime，并作此记录。&lt;/p></description></item></channel></rss>
