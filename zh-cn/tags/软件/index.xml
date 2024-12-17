@@ -20,7 +20,7 @@
 &lt;p>DV = Dolby Vision，即杜比视界，对于不支持杜比视界的设备，播放就会出现偏色。&lt;/p>
 &lt;p>
  &lt;a href="https://www.demolandia.net/4k-video-test/dolby-vision.html">https://www.demolandia.net/4k-video-test/dolby-vision.html&lt;/a> 可以下载DV的4K视频demo，检查你电脑电视是否支持DV。&lt;/p>
-&lt;/blockquote></description></item><item><title>macOS12 Monterey更新</title><link>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</guid><description>&lt;p>原本计划MBP2018就在BigSur 11.7 养老算了，实际上已经苟了3年，并且计划一直苟下去的😂...但是有几个征兆，最终还是在7月份，更新了12。以下为主要原因:&lt;/p>
+&lt;/blockquote></description></item><item><title>将MBP2018升级到macOS12 Monterey</title><link>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 29 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/18_macOS12%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95/</guid><description>&lt;p>原本计划MBP2018就在BigSur 11.7 养老算了，实际上已经苟了3年，并且计划一直苟下去的😂...但是有几个征兆，最终还是在7月份，更新了12。以下为主要原因:&lt;/p>
 &lt;ul>
 &lt;li>自带的应用商店出现了最低支持12的应用——削弱了老11用户的使用体验&lt;/li>
 &lt;li>oneDrive自动更新之后不支持老版本，但是旧版本又不好找。（最后只能删除plist阻止其自动更新）&lt;/li>
