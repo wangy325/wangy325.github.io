@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent content in 设计模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Wed, 07 Aug 2024 16:20:46 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/1_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/1_command/</guid><description>&lt;h2 id="命令模式">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent content in 设计模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2025 18:38:02 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;h2 id="命令模式">
  命令模式
  &lt;a class="anchor" href="#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -7,7 +7,7 @@
 &lt;blockquote>
 &lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。
 该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>
-&lt;/blockquote></description></item><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/1_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/1_singleton/</guid><description>&lt;h2 id="单例模式">
+&lt;/blockquote></description></item><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</guid><description>&lt;h2 id="单例模式">
  单例模式
  &lt;a class="anchor" href="#%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -26,7 +26,7 @@ that a class has only one instance, while providing a global
 access point to this instance.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/2_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/2_factory/</guid><description>&lt;h3 id="工厂模式">
+&lt;/ul></description></item><item><title>工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</guid><description>&lt;h3 id="工厂模式">
  工厂模式
  &lt;a class="anchor" href="#%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h3>
@@ -49,7 +49,7 @@ created.&lt;/p>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>工厂模式指定工厂仅仅能创建特定类型的产品。&lt;/p>
-&lt;/blockquote></description></item><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/3_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/3_decorator/</guid><description>&lt;h2 id="装饰者模式">
+&lt;/blockquote></description></item><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;h2 id="装饰者模式">
  装饰者模式
  &lt;a class="anchor" href="#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -69,7 +69,7 @@ to objects by placing these objects inside special wrapper objects that
 contain the behaviors.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/2_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/2_observer/</guid><description>&lt;h2 id="观察者模式">
+&lt;/ul></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;h2 id="观察者模式">
  观察者模式
  &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -86,7 +86,7 @@ contain the behaviors.&lt;/p>
 to notify multiple objects about any events that happen to the object they’re observing.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/3_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/3_strategy/</guid><description>&lt;h2 id="策略模式">
+&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;h2 id="策略模式">
  策略模式
  &lt;a class="anchor" href="#%e7%ad%96%e7%95%a5%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -104,12 +104,12 @@ to notify multiple objects about any events that happen to the object they’re 
 put each of them into a separate class, and make their objects interchangeable.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/2_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/2_adaptor/</guid><description>&lt;h2 id="适配器模式">
+&lt;/ul></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</guid><description>&lt;h2 id="适配器模式">
  适配器模式
  &lt;a class="anchor" href="#%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
 &lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
-适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/3_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/3_abstract_factory/</guid><description>&lt;h2 id="抽象工厂模式">
+适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</guid><description>&lt;h2 id="抽象工厂模式">
  抽象工厂模式
  &lt;a class="anchor" href="#%e6%8a%bd%e8%b1%a1%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -129,23 +129,23 @@ produce families of related objects without specifying their
 concrete classes.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/4_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/behaviour/4_template_method/</guid><description>&lt;h2 id="模板方法模式">
+&lt;/ul></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;h2 id="模板方法模式">
  模板方法模式
  &lt;a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e6%96%b9%e6%b3%95%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
 &lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
 延迟到子类中。模板方法可以使得子类在不改变算法结构的前提
-下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/4_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="外观模式facade">
+下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="外观模式facade">
  外观模式（Facade）
  &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
 &lt;/h2>
 &lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
 系统中的一群接口。外观定义了一个高层接口，让系统更
-容易使用。&lt;/p></description></item><item><title>建造者模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/4_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/creation/4_builder/</guid><description>&lt;blockquote>
+容易使用。&lt;/p></description></item><item><title>建造者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</guid><description>&lt;blockquote>
 &lt;p>本文由Gemini AI生成。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="建造模式">
  建造模式
  &lt;a class="anchor" href="#%e5%bb%ba%e9%80%a0%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
-&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item><item><title>代理模式</title><link>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/proxy/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/craft/design_pattern/structure/proxy/</guid><description>&lt;p>代理可以简单理解为，B类托管A类的功能，并根据需求，对A类的访问作&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>，这里的&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>可以理解为对A类方法执行的流程的影响，包括但不限于：&lt;/p></description></item></channel></rss>
+&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item><item><title>代理模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</guid><description>&lt;p>代理可以简单理解为，B类托管A类的功能，并根据需求，对A类的访问作&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>，这里的&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>可以理解为对A类方法执行的流程的影响，包括但不限于：&lt;/p></description></item></channel></rss>

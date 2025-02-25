@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/docker/</link><description>Recent content in Docker on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Feb 2025 18:53:53 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>使用docker镜像快速搭建redis集群开发环境</title><link>https://wangy325.github.io/zh-cn/posts/2022/20220825_deploy-redis-cluster-with-docker/</link><pubDate>Thu, 25 Aug 2022 16:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2022/20220825_deploy-redis-cluster-with-docker/</guid><description>&lt;h2 id="准备镜像">
+ 准备镜像
+ &lt;a class="anchor" href="#%e5%87%86%e5%a4%87%e9%95%9c%e5%83%8f">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;code>docker&lt;/code>以及&lt;code>docker-compose&lt;/code>的安装以及加速镜像的配置不在此处说明。windows系统上直接安装客户端即可完成docker及docker-compose的安装。在centOS 8中安装docker服务以及docker-compose可以参考下面的文章：&lt;/p>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://zhuanlan.zhihu.com/p/286845061">在centOS 8中安装docker&lt;/a>&lt;/li>
+&lt;li>
+ &lt;a href="https://www.cnblogs.com/51ma/p/15641138.html">在contOS 8中安装docker-compose&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>运行如下命令检查docker和docker-compose的安装情况：&lt;/p></description></item></channel></rss>
