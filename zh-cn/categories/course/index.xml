@@ -14,8 +14,7 @@
 &lt;/ul>
 &lt;blockquote>
 &lt;p>有效：指系统效率，资源利用率。如cpu利用率是否充足，I/O设备是否忙碌等。&lt;/p>
-&lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>
-&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
+&lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
  
  &lt;a class="hint-start">“&lt;/a>
  &lt;p>📖 回顾：操作系统的主要工作&lt;/p>
@@ -32,19 +31,107 @@
 &lt;p>———————— 物理机器界面 ---&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
 
 &lt;/blockquote>
-&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</guid><description>进程模型 # 多道程序设计 # MultiProgramming：多个程序同时进入内存并运行，提高操作系统效率。并发环境。
-多个虚拟（逻辑）程序计数器 ---&amp;gt; 物理计数器
-进程的概念以及进程控制块 # 进程 # Process：进程是具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位。
-是程序的一次执行过程 是正在运行的程序的抽象 将一个CPU变幻成多个虚拟的CPU （是CPU的抽象） 系统资源以进程为单位分配，如内存、文件、独立的地址空间...... 进程控制块(PCB) # PCB: Process Control Block
-又称进程描述符、进程属性 操作系统用于管理控制进程的一一个专门数据结构 不同操作系统，对PCB的实现可能不同，但是其功能相同。
-Linux中叫task_sturct
-Windows中叫EPROCESS，KPROCESS，PEB
-记录进程的各种属性，描述进程的动态变化过程 PCB是系统感知进程存在的唯一标志 &amp;gt;进程与PCB是一一 对应
-进程表: 所有进程的PCB集合。在内存的固定区域，大小固定，所以存储的PCB信息也是有限的，这就是操作系统的并发度。
-PCB存储了哪些信息？
-1） 进程描述信息
-进程标识符(process ID)，唯一，通常是一个整数 进程名，通常基于可执行文件名，不唯一 用户标识符(user ID) 进程组关系 2）进程控制信息
-当前状态 优先级(priority) 代码执行入口地址 程序的磁盘地址 运行统计信息(执行时间、页面调度)进程间同步和通信 进程的队列指针 进程的消息队列指针 3）所拥有的资源和使用情况
-虚拟地址空间的状况 打开文件列表 4）CPU现场信息
-寄存器值（通用寄存器、程序计数器PC、程序状态字PSW、栈指针） 指向该进程页表的指针 还可以从下面三个维度来看看PCB存储的信息
-进程管理 存储管理 文件管理 进程的状态及转换、进程队列 # 进程的三种基本状态 # 运行态（Running）：占有CPU，并在CPU上运行 就绪态（Ready）：已经具备运行的条件，但没有空闲CPU，故暂时不能运行 等待态（Waiting/Blocked）：因等待某一事件而暂时不能运行（如等待磁盘结果）。也叫做阻塞态、封锁态或睡眠态 进程的状态转换 # 进程3状态转换示意图 其他线程状态 # 1）创建（New）：</description></item></channel></rss>
+&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</guid><description>&lt;h2 id="进程模型">
+ 进程模型
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e6%a8%a1%e5%9e%8b">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="多道程序设计">
+ 多道程序设计
+ &lt;a class="anchor" href="#%e5%a4%9a%e9%81%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1">#&lt;/a>
+&lt;/h3>
+&lt;p>&lt;strong>MultiProgramming&lt;/strong>：多个程序同时进入内存并运行，提高操作系统效率。并发环境。&lt;/p>
+&lt;p>多个虚拟（逻辑）程序计数器 ---&amp;gt; 物理计数器&lt;/p>
+&lt;h3 id="进程的概念以及进程控制块">
+ 进程的概念以及进程控制块
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e7%9a%84%e6%a6%82%e5%bf%b5%e4%bb%a5%e5%8f%8a%e8%bf%9b%e7%a8%8b%e6%8e%a7%e5%88%b6%e5%9d%97">#&lt;/a>
+&lt;/h3>
+&lt;h4 id="进程">
+ 进程
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b">#&lt;/a>
+&lt;/h4>
+&lt;p>&lt;em>&lt;strong>Process&lt;/strong>&lt;/em>：进程是具有独立功能的程序关于&lt;strong>某个数据集合&lt;/strong>上的&lt;strong>一次&lt;/strong>运行活动，是系统进行&lt;em>资源分配&lt;/em>和&lt;em>调度&lt;/em>的独立单位。&lt;/p>
+&lt;ul>
+&lt;li>是程序的一次执行过程&lt;/li>
+&lt;li>是正在运行的程序的&lt;strong>抽象&lt;/strong>&lt;/li>
+&lt;li>将一个CPU变幻成多个虚拟的CPU （是CPU的抽象）&lt;/li>
+&lt;li>系统资源以进程为单位分配，如内存、文件、&lt;strong>独立的地址空间&lt;/strong>......&lt;/li>
+&lt;/ul>
+&lt;h4 id="进程控制块pcb">
+ 进程控制块(PCB)
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e6%8e%a7%e5%88%b6%e5%9d%97pcb">#&lt;/a>
+&lt;/h4>
+&lt;p>PCB: Process Control Block&lt;/p>
+&lt;ul>
+&lt;li>又称&lt;strong>进程描述符&lt;/strong>、&lt;strong>进程属性&lt;/strong>&lt;/li>
+&lt;li>操作系统用于管理控制进程的一一个专门&lt;strong>数据结构&lt;/strong>
+&lt;blockquote>
+&lt;p>不同操作系统，对PCB的实现可能不同，但是其功能相同。&lt;/p>
+&lt;p>Linux中叫&lt;code>task_sturct&lt;/code>&lt;/p>
+&lt;p>Windows中叫&lt;code>EPROCESS&lt;/code>，&lt;code>KPROCESS&lt;/code>，&lt;code>PEB&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;/li>
+&lt;li>记录进程的各种属性，描述进程的动态变化过程&lt;/li>
+&lt;/ul>
+&lt;p>PCB是系统感知进程存在的唯一标志
+&amp;gt;进程与PCB是一一 对应&lt;/p>
+&lt;p>进程表: 所有进程的&lt;strong>PCB集合&lt;/strong>。在内存的固定区域，大小固定，所以存储的PCB信息也是有限的，这就是操作系统的并发度。&lt;/p>
+&lt;p>PCB存储了哪些信息？&lt;/p>
+&lt;p>1） 进程描述信息&lt;/p>
+&lt;ul>
+&lt;li>进程标识符(process ID)，唯一，通常是一个整数&lt;/li>
+&lt;li>进程名，通常基于可执行文件名，不唯一&lt;/li>
+&lt;li>用户标识符(user ID)&lt;/li>
+&lt;li>进程组关系&lt;/li>
+&lt;/ul>
+&lt;p>2）进程控制信息&lt;/p>
+&lt;ul>
+&lt;li>当前状态&lt;/li>
+&lt;li>优先级(priority)&lt;/li>
+&lt;li>代码执行入口地址&lt;/li>
+&lt;li>程序的磁盘地址&lt;/li>
+&lt;li>运行统计信息(执行时间、页面调度)进程间同步和通信&lt;/li>
+&lt;li>进程的队列指针&lt;/li>
+&lt;li>进程的消息队列指针&lt;/li>
+&lt;/ul>
+&lt;p>3）所拥有的资源和使用情况&lt;/p>
+&lt;ul>
+&lt;li>虚拟地址空间的状况&lt;/li>
+&lt;li>打开文件列表&lt;/li>
+&lt;/ul>
+&lt;p>4）CPU现场信息&lt;/p>
+&lt;ul>
+&lt;li>寄存器值（通用寄存器、程序计数器PC、程序状态字PSW、栈指针）&lt;/li>
+&lt;li>指向该进程页表的指针&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>还可以从下面三个维度来看看PCB存储的信息&lt;/p>
+&lt;ul>
+&lt;li>进程管理&lt;/li>
+&lt;li>存储管理&lt;/li>
+&lt;li>文件管理&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;h3 id="进程的状态及转换进程队列">
+ 进程的状态及转换、进程队列
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81%e5%8f%8a%e8%bd%ac%e6%8d%a2%e8%bf%9b%e7%a8%8b%e9%98%9f%e5%88%97">#&lt;/a>
+&lt;/h3>
+&lt;h4 id="进程的三种基本状态">
+ 进程的三种基本状态
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e7%9a%84%e4%b8%89%e7%a7%8d%e5%9f%ba%e6%9c%ac%e7%8a%b6%e6%80%81">#&lt;/a>
+&lt;/h4>
+&lt;ul>
+&lt;li>运行态（Running）：占有CPU，并在CPU上运行&lt;/li>
+&lt;li>就绪态（Ready）：已经具备运行的条件，但没有空闲CPU，故暂时不能运行&lt;/li>
+&lt;li>等待态（Waiting/Blocked）：因等待某一事件而暂时不能运行（如等待磁盘结果）。也叫做&lt;strong>阻塞态、封锁态或睡眠态&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h4 id="进程的状态转换">
+ 进程的状态转换
+ &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e7%9a%84%e7%8a%b6%e6%80%81%e8%bd%ac%e6%8d%a2">#&lt;/a>
+&lt;/h4>
+&lt;center style= "font-size:0.8rem;font-style:italic;color:gray">
+&lt;img alt="" src="https://wangy325.github.io/img/course/os/3/process_state_shift.png"/>
+&lt;p>
+进程3状态转换示意图&lt;/center>
+&lt;h4 id="其他线程状态">
+ 其他线程状态
+ &lt;a class="anchor" href="#%e5%85%b6%e4%bb%96%e7%ba%bf%e7%a8%8b%e7%8a%b6%e6%80%81">#&lt;/a>
+&lt;/h4>
+&lt;p>1）创建（New）：&lt;/p></description></item></channel></rss>

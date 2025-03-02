@@ -23,5 +23,4 @@
  &lt;a href="https://raw.githubusercontent.com/antirez/redis/3.0/00-RELEASENOTES">v3.0&lt;/a> 之后提供了分布式实现&lt;code>Redis Cluster&lt;/code>。&lt;/p>
 &lt;p>本文讨论的是使用Sentinel搭建Redis高可用服务。&lt;/p>
 &lt;blockquote>
-&lt;p>If all redis and sentinel instances were deployed in same host, you just build a fake redis-sentinel &lt;em>High-Availability&lt;/em> environment&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>.&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;p>If all redis and sentinel instances were deployed in same host, you just build a fake redis-sentinel &lt;em>High-Availability&lt;/em> environment&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>.&lt;/p>&lt;/blockquote></description></item></channel></rss>

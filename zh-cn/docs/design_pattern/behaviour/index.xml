@@ -6,23 +6,20 @@
 命令模式也支持&lt;strong>撤销&lt;/strong>的操作。&lt;/p>
 &lt;blockquote>
 &lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。
-该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>
-&lt;/blockquote></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;h2 id="观察者模式">
+该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>&lt;/blockquote></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;h2 id="观察者模式">
  观察者模式
  &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
 &lt;ul>
 &lt;li>by Head First 设计模式
 &lt;blockquote>
-&lt;p>在对象之间建立一对多的依赖，这样一来，当一个对象的状态改变，依赖它的对象都会收到通知，并且自动更新。&lt;/p>
-&lt;/blockquote>
+&lt;p>在对象之间建立一对多的依赖，这样一来，当一个对象的状态改变，依赖它的对象都会收到通知，并且自动更新。&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;li>by Dive into Design Patterns:
 &lt;blockquote>
 &lt;p>&lt;em>Also Known as: Event-Subscriber, Listener&lt;/em>&lt;/p>
 &lt;p>Observer is a behavioral design pattern that lets you define a &lt;em>subscription mechanism&lt;/em>
-to notify multiple objects about any events that happen to the object they’re observing.&lt;/p>
-&lt;/blockquote>
+to notify multiple objects about any events that happen to the object they’re observing.&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;h2 id="策略模式">
  策略模式
@@ -32,15 +29,13 @@ to notify multiple objects about any events that happen to the object they’re 
 &lt;li>
 &lt;p>by Head First 设计模式:&lt;/p>
 &lt;blockquote>
-&lt;p>策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的&lt;strong>变化&lt;/strong>独立于使用算法的&amp;quot;客户&amp;quot;。&lt;/p>
-&lt;/blockquote>
+&lt;p>策略模式定义了算法族，分别封装起来，让他们之间可以互相替换。此模式让算法的&lt;strong>变化&lt;/strong>独立于使用算法的&amp;quot;客户&amp;quot;。&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;li>
 &lt;p>by Dive into Design Patterns:&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;strong>Strategy&lt;/strong> is a behavioral design pattern that lets you define a family of algorithms,
-put each of them into a separate class, and make their objects interchangeable.&lt;/p>
-&lt;/blockquote>
+put each of them into a separate class, and make their objects interchangeable.&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;h2 id="模板方法模式">
  模板方法模式

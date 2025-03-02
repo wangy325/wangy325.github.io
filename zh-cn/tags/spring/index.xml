@@ -5,8 +5,7 @@
  &lt;a href="https://docs.spring.io/spring-framework/reference/web/webflux-webclient.html">Spring WebFlux&lt;/a>项目下的HTTP工具，基于Reactor的非阻塞流式API，是&lt;code>RestTemplate&lt;/code>的有效替代。&lt;/p></description></item><item><title>为Spring-Boot应用程序设置参数的几种方式</title><link>https://wangy325.github.io/zh-cn/posts/2024/20241130_4_ways_to_setting_spring_boot_applications/</link><pubDate>Sat, 30 Nov 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2024/20241130_4_ways_to_setting_spring_boot_applications/</guid><description>&lt;p>除了在&lt;code>application.yml&lt;/code>或&lt;code>application.properties&lt;/code>中配置Spring-Boot应用程序的参数外，还可以通过运行&lt;code>java -jar&lt;/code>命令行的方式来配置参数。&lt;/p>
 &lt;p>比如&lt;code>java -jar -Dspring.profiles.active=dev app.jar&lt;/code>就是常使用的命令之一。&lt;/p>
 &lt;blockquote>
-&lt;p>当然，&lt;code>java -jar&lt;/code>命令不止配置Spring参数，还可以配置JVM参数。本文只以Spring-Boot应用程序为例。&lt;/p>
-&lt;/blockquote>
+&lt;p>当然，&lt;code>java -jar&lt;/code>命令不止配置Spring参数，还可以配置JVM参数。本文只以Spring-Boot应用程序为例。&lt;/p>&lt;/blockquote>
 &lt;p>有时候，可能会看见这样的应用启动方式：&lt;code>java -jar --spring.profiles.active=dev app.jar&lt;/code>，它也是可行的。这两个分别是什么呢？&lt;/p></description></item><item><title>在RESTful API设计中应用HATEOAS</title><link>https://wangy325.github.io/zh-cn/posts/2024/20241126_HATEOAS%E5%9C%A8RESTful-API%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</link><pubDate>Tue, 26 Nov 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2024/20241126_HATEOAS%E5%9C%A8RESTful-API%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/</guid><description>&lt;p>HATEOAS 是 REST(Representational state transfer) 的约束之一。&lt;/p>
 &lt;p>HATEOAS 是 Hypermedia As The Engine Of Application State 的缩写，从字面上理解是 “&lt;strong>超媒体即是应用状态引擎&lt;/strong>” 。其原则就是客户端与服务器的交互完全由超媒体动态提供，客户端无需事先了解如何与数据或者服务器交互。相反的，在一些RPC服务或者Redis，Mysql等软件，需要事先了解接口定义或者特定的交互语法。&lt;/p></description></item><item><title>Spring声明式事务的使用</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210604_spring-transaction-propagation/</link><pubDate>Fri, 04 Jun 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210604_spring-transaction-propagation/</guid><description>&lt;h2 id="1-从transactional注解开始">
  1 从&lt;code>@Transactional&lt;/code>注解开始
@@ -22,8 +21,7 @@
 &lt;li>在配置&lt;code>LocalValidatorFactoryBean&lt;/code>之后，才可以在&lt;code>javax.validation.constraints&lt;/code>包下的注解（&lt;code>@Size&lt;/code>，&lt;code>@NotNull&lt;/code>...）下的&lt;em>&lt;strong>message&lt;/strong>&lt;/em>属性中使用&lt;code>&amp;quot;{code}&amp;quot;&lt;/code>的形式声明校验提示信息。如
 &lt;code>@NotNull(message = &amp;quot;{leftTime.not.null}&amp;quot;)&lt;/code>；&lt;/li>
 &lt;li>springMVC的locale配置和JVM的locale配置不一样，在application.properties中配置的&lt;code>spring.mvc.locale=zh_CN&lt;/code>实际上配置的是&lt;code>WebMvcProperties&lt;/code>，在获取消息时，locale信息应该使用&lt;code>webMvcProperties.getLocale()&lt;/code>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>获取&lt;strong>而不是&lt;/strong>使用&lt;code>Locale.getDefault()&lt;/code>获取。&lt;/li>
-&lt;/ol>
-&lt;/blockquote>
+&lt;/ol>&lt;/blockquote>
 &lt;hr>
 &lt;p>MessageSource is a powerful feature available in Spring applications. This helps application developers handle various complex scenarios with writing much extra code, such as environment-specific configuration, internationalization or configurable values.&lt;/p>
 &lt;p>One more scenario could be modifying the default validation messages to more user-friendly/custom messages.&lt;/p>

@@ -12,5 +12,4 @@
 &lt;li>Year（年）&lt;/li>
 &lt;/ol>
 &lt;blockquote>
-&lt;p>例：表达式&lt;code>0 0 12 ? \* WED&lt;/code> 意思是：每个星期三的中午12点执行。&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;p>例：表达式&lt;code>0 0 12 ? \* WED&lt;/code> 意思是：每个星期三的中午12点执行。&lt;/p>&lt;/blockquote></description></item></channel></rss>

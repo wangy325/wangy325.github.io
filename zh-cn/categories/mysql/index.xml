@@ -4,8 +4,7 @@
  &lt;a href="https://wangy325.github.io/zh-cn/posts/2020/20201127_MySQL%E4%BA%8B%E5%8A%A1%E4%B8%8E%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">事务的隔离级别&lt;/a>在不同程度上保证了数据一致性。&lt;/p>
 &lt;p>我们知道，&lt;strong>事务&lt;/strong>的四大特性：原子性、一致性、隔离性、持久性，其中&lt;strong>隔离性&lt;/strong>就是通过&lt;strong>锁机制&lt;/strong>来保证的。&lt;/p>
 &lt;blockquote>
-&lt;p>另外3个性质，通过MySQL的&lt;code>redo log&lt;/code> 和&lt;code>undo log&lt;/code>来保证。&lt;/p>
-&lt;/blockquote>
+&lt;p>另外3个性质，通过MySQL的&lt;code>redo log&lt;/code> 和&lt;code>undo log&lt;/code>来保证。&lt;/p>&lt;/blockquote>
 &lt;p>MySQL对每条SQL语句的执行，都添加了一个隐式事务，言外之意，就是添加了隐式锁。&lt;/p>
 &lt;p>除了隐式锁之外，MySQL还可以使用显式锁。&lt;/p>
 &lt;p>这是从锁的可见性（或者使用方式）上来区分锁。本文不讨论MySQL的粒度锁（表锁，行锁，页锁）。&lt;/p>
