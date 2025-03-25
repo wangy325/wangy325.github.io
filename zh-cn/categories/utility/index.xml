@@ -25,7 +25,7 @@
  &lt;a href="https://www.demolandia.net/4k-video-test/dolby-vision.html">https://www.demolandia.net/4k-video-test/dolby-vision.html&lt;/a> 可以下载DV的4K视频demo，检查你电脑电视是否支持DV。&lt;/p>&lt;/blockquote></description></item><item><title>Hugo自定义TOC模板及滚动监听</title><link>https://wangy325.github.io/zh-cn/posts/2024/20240820_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E6%BB%9A%E5%8A%A8%E7%9B%91%E5%90%AC/</link><pubDate>Tue, 20 Aug 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2024/20240820_hugo%E6%96%87%E6%A1%A3%E8%87%AA%E5%AE%9A%E4%B9%89toc%E5%8F%8A%E6%BB%9A%E5%8A%A8%E7%9B%91%E5%90%AC/</guid><description>&lt;blockquote class="book-hint warning">
  
  &lt;a class="hint-start">“&lt;/a>
- &lt;p>还挺麻烦的，主要是Hugo的模板语言语法，那是人看的吗？&lt;/p>
+ &lt;p>要自定义Hugo的TOC模板，还挺麻烦的，主要是Hugo的模板语言语法，&lt;del>那是人看的吗&lt;/del>？&lt;/p>
 
 &lt;/blockquote>
 &lt;p>一个文章目录，有几个基本要素：&lt;/p>
@@ -33,7 +33,7 @@
 &lt;li>目录锚点，可以点击跳转&lt;/li>
 &lt;li>目录层级，控制目录的展示&lt;/li>
 &lt;/ol>
-&lt;p>Hugo定义了默认的TOC模板，实现了上面的要素，比较简单：&lt;/p>
+&lt;p>Hugo内建默认的TOC模板，实现了上面的要素，比较简单：&lt;/p>
 &lt;pre>&lt;code>{{ .TableOfContents}}
 &lt;/code>&lt;/pre>
 &lt;p>这个模板仅仅能用而已。对于较长的目录，以及多层级的目录都有点无能为力。&lt;/p>
