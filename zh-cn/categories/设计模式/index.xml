@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent content in 设计模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 24 Mar 2025 23:43:08 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;h2 id="命令模式">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>设计模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link><description>Recent content in 设计模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 27 Mar 2025 00:39:02 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;h2 id="命令模式">
  命令模式
  &lt;a class="anchor" href="#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -121,7 +121,7 @@ concrete classes.&lt;/p>&lt;/blockquote>
 &lt;/h2>
 &lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
 延迟到子类中。模板方法可以使得子类在不改变算法结构的前提
-下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="外观模式facade">
+下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;h2 id="外观模式facade">
  外观模式（Facade）
  &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
 &lt;/h2>

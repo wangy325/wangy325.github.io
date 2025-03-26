@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Structural on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/</link><description>Recent content in Structural on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/structure/index.xml" rel="self" type="application/rss+xml"/><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;h2 id="装饰者模式">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>结构型 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/</link><description>Recent content in 结构型 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/structure/index.xml" rel="self" type="application/rss+xml"/><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;h2 id="装饰者模式">
  装饰者模式
  &lt;a class="anchor" href="#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
@@ -21,7 +21,7 @@ contain the behaviors.&lt;/p>&lt;/blockquote>
  &lt;a class="anchor" href="#%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#&lt;/a>
 &lt;/h2>
 &lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
-适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="外观模式facade">
+适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;h2 id="外观模式facade">
  外观模式（Facade）
  &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
 &lt;/h2>
