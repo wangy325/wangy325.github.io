@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>结构型 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/</link><description>Recent content in 结构型 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/structure/index.xml" rel="self" type="application/rss+xml"/><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;h2 id="装饰者模式">
- 装饰者模式
- &lt;a class="anchor" href="#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>结构型 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/</link><description>Recent content in 结构型 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/structure/index.xml" rel="self" type="application/rss+xml"/><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式:&lt;/p>
 &lt;blockquote>
@@ -16,15 +12,146 @@
 to objects by placing these objects inside special wrapper objects that
 contain the behaviors.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</guid><description>&lt;h2 id="适配器模式">
- 适配器模式
- &lt;a class="anchor" href="#%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
-适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;h2 id="外观模式facade">
- 外观模式（Facade）
- &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
-&lt;/h2>
-&lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
+&lt;/ul></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</guid><description>&lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
+适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>针对接口编程，而不是针对实现编程&lt;/li>
+&lt;li>多用组合，少用继承&lt;/li>
+&lt;li>为交互对象之间的松耦合而努力&lt;/li>
+&lt;li>类应该对拓展开放，而对修改关闭 （开放-关闭原则）&lt;/li>
+&lt;li>依赖抽象，而不依赖具体类 （依赖倒置原则）&lt;/li>
+&lt;/ul>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+class Client{
+ +Adaptor adaptor
+ +otherOperations()
+}
+class Target {
+ &lt;&lt; Interface >>
+ operationA()
+}
+Client *--> Adaptor
+Adaptor ..|> Target
+Adaptor *..> Adaptee
+class Adaptor {
+ +Adaptee adaptee
+ operationA()
+}
+class Adaptee {
+ &lt;&lt; Interface >>
+ operationB()
+}
+&lt;/pre>
+
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>适配器模式，通过创建&amp;quot;适配器&amp;quot;进行接口转换，可以让不兼容的接口变得兼容。&lt;/li>
+&lt;li>适配器模式让客户从接口的实现解耦。&lt;/li>
+&lt;li>注意适配器和装饰模式的区别，适配器改变接口以让其对不兼容的对象可用，
+装饰模式是通过继承，赋予类新的行为和&amp;quot;职责&amp;quot;。&lt;/li>
+&lt;li>当需要使用一个现有的类而可用的接口并不适配时，考虑使用适配器模式。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>对象适配器和类适配器&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
 系统中的一群接口。外观定义了一个高层接口，让系统更
-容易使用。&lt;/p></description></item><item><title>代理模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</guid><description>&lt;p>代理可以简单理解为，B类托管A类的功能，并根据需求，对A类的访问作&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>，这里的&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>可以理解为对A类方法执行的流程的影响，包括但不限于：&lt;/p></description></item></channel></rss>
+容易使用。&lt;/p>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>针对接口编程，而不是针对实现编程&lt;/li>
+&lt;li>多用组合，少用继承&lt;/li>
+&lt;li>为交互对象之间的松耦合而努力&lt;/li>
+&lt;li>类应该对拓展开放，而对修改关闭 （开放-关闭原则）&lt;/li>
+&lt;li>依赖抽象，而不依赖具体类 （依赖倒置原则）&lt;/li>
+&lt;li>&amp;quot;最少知识原则&amp;quot;——只和你的朋友交谈，不要让太多的类耦合在一起。&lt;/li>
+&lt;/ul>
+&lt;h4 id="最少知识原则定义">
+ 最少知识原则：定义
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e5%ae%9a%e4%b9%89">#&lt;/a>
+&lt;/h4>
+&lt;p>在设计系统中，不管是任何对象，都需要注意它所交互的类有哪些，并注意这些类是怎么交互的。&lt;/p>
+&lt;p>最少知识原则希望，在设计系统的过程中，不要让太多的类交杂在一起，免得修改系统中的一部分，
+需要修改其他的部分。如果许多部分相互耦合，系统将会变得复杂、脆弱且不易于维护。&lt;/p>
+&lt;h4 id="最少知识原则如何遵循">
+ 最少知识原则：如何遵循？
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e5%a6%82%e4%bd%95%e9%81%b5%e5%be%aa">#&lt;/a>
+&lt;/h4>
+&lt;p>设计系统的过程中，就任何对象而言，在对象的方法内，应该只调用属于一下范畴的方法：&lt;/p>
+&lt;ol>
+&lt;li>对象本身的方法&lt;/li>
+&lt;li>被当作方法参数而传递进来的对象的方法&lt;/li>
+&lt;li>方法内创建或实例化的对象的方法&lt;/li>
+&lt;li>对象的任何组件（域、field）的方法&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>不要调用从上述方法中返回的对象支持的方法。&lt;/p>&lt;/blockquote>
+&lt;p>请看如下例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">float&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">getTemp&lt;/span>&lt;span class="p">(){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Thermometer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">thermometer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">station&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getThermometer&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">thermometer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getTemperature&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该优化为：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">float&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">getTemp&lt;/span>&lt;span class="p">(){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">station&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getTemperature&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而&lt;code>getTemperature&lt;/code>方法由&lt;code>station&lt;/code>域提供。这样做的好处是，我们
+不需要认识&lt;code>Thermometer&lt;/code>对象了。让我们始终保持最小的朋友圈！&lt;/p>
+&lt;h4 id="最少知识原则缺点">
+ 最少知识原则：缺点
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e7%bc%ba%e7%82%b9">#&lt;/a>
+&lt;/h4>
+&lt;p>是的，任何事情都是两面。最少知识原则使得系统耦合度降低，减轻了维护成本，
+但同时禁止调用中间对象的方法，这不得不让我们制造更多的&amp;quot;包装&amp;quot;类来处理和
+其他组件之间的沟通，这可能会导致开发难度增加。&lt;/p>
+&lt;p>让我们接着回到『外观模式』吧。&lt;/p>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+&lt;img alt="外观模式" height="303" src="https://wangy325.github.io/img/dp/fecade.webp" width="512"/>
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>外观模式中的&lt;code>Facade&lt;/code>就是那个&amp;quot;密友&amp;quot;，它封装了其他要用到的方法，满足了最少知识原则。&lt;/li>
+&lt;li>当要简化并统一一堆接口时，可以使用外观模式。&lt;/li>
+&lt;li>外观将客户从一个复杂的系统中解耦。&lt;/li>
+&lt;li>实现外观，需要将子系统组合进外观中，然后将具体的工作委托给子系统执行。&lt;/li>
+&lt;li>一个复杂的子系统，可以有多个外观。&lt;/li>
+&lt;/ol>
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>外观模式（Facade Pattern）是一种结构型设计模式，它提供了一个统一的接口来访问子系统中的一群接口。外观模式定义了一个高层接口，让子系统更容易使用。&lt;/p></description></item><item><title>代理模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20181205_proxy/</guid><description>&lt;p>代理可以简单理解为，B类托管A类的功能，并根据需求，对A类的访问作&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>，这里的&lt;font color=red>&lt;strong>控制&lt;/strong>&lt;/font>可以理解为对A类方法执行的流程的影响，包括但不限于：&lt;/p></description></item></channel></rss>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/</link><description>Recent content in Home on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/index.xml" rel="self" type="application/rss+xml"/><item><title>Clash Pro代理手动配置示例</title><link>https://wangy325.github.io/zh-cn/docs/snippets/misc/clash_pro/</link><pubDate>Tue, 26 Nov 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/misc/clash_pro/</guid><description>&lt;blockquote>
 &lt;p>关于自定义配置各项参数的含义，可以参考
  &lt;a href="https://wangy325.github.io/zh-cn/posts/2024/20240615_%E4%B8%BB%E5%8A%A8%E6%89%98%E7%AE%A1Clash%E9%85%8D%E7%BD%AE/">主动托管Clash配置&lt;/a>。&lt;/p>&lt;/blockquote>
-&lt;hr></description></item><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/Gfunction/</guid><description>&lt;hr></description></item><item><title>引论</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/1_intro/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/1_intro/</guid><description>&lt;h2 id="1-操作系统的定义和作用">
+&lt;hr></description></item><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</guid><description>&lt;hr></description></item><item><title>引论</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/1_intro/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/1_intro/</guid><description>&lt;h2 id="1-操作系统的定义和作用">
  1 操作系统的定义和作用
  &lt;a class="anchor" href="#1-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%ae%9a%e4%b9%89%e5%92%8c%e4%bd%9c%e7%94%a8">#&lt;/a>
 &lt;/h2>
@@ -17,19 +17,80 @@
 &lt;/ul>
 &lt;blockquote>
 &lt;p>有效：指系统效率，资源利用率。如cpu利用率是否充足，I/O设备是否忙碌等。&lt;/p>
-&lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>&lt;/blockquote></description></item><item><title>流程控制语句</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/1_flow_control/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/1_flow_control/</guid><description>&lt;hr></description></item><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;h2 id="命令模式">
- 命令模式
- &lt;a class="anchor" href="#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>命令模式将&amp;quot;请求&amp;quot;封装成（命令）对象，&lt;em>以便使用不同的请求、队列或者日志来参数化其他对象&lt;/em>。
+&lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>&lt;/blockquote></description></item><item><title>流程控制语句</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/1_flow_control/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/1_flow_control/</guid><description>&lt;hr></description></item><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;p>命令模式将&amp;quot;请求&amp;quot;封装成（命令）对象，&lt;em>以便使用不同的请求、队列或者日志来参数化其他对象&lt;/em>。
 命令模式也支持&lt;strong>撤销&lt;/strong>的操作。&lt;/p>
 &lt;blockquote>
-&lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。
-该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>&lt;/blockquote></description></item><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</guid><description>&lt;h2 id="单例模式">
- 单例模式
- &lt;a class="anchor" href="#%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>&lt;/blockquote>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>解耦：命令模式使&lt;em>发起者和接收者解耦&lt;/em>。发起者不关心具体的接收者，只需要根据已知的命令对象
+执行&lt;code>execute()&lt;/code>方法即可。&lt;/li>
+&lt;/ol>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+class Invoker {
+ +Command command
+ +invoke()
+}
+Invoker *..> Command
+class Command {
+ &lt;&lt; interface >>
+ +execute()
+ +undo()
+}
+ConcreteCommand ..|> Command
+class ConcreteCommand {
+ Receiver receiver
+ +execute()
+ +undo()
+}
+Receiver &lt;--* ConcreteCommand
+class Receiver {
+ +someOperation()
+}
+&lt;/pre>
+
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>命令模式将发出请求的对象（调用者）和接收请求的对象（接收者）解耦。&lt;/li>
+&lt;li>被解耦的对象之间通过命令对象沟通，命令对象封装了接收者和一个或者一组动作。&lt;/li>
+&lt;li>调用者通过执行命令对象的&lt;code>execute()&lt;/code>方法发出请求，这会使得接收者的动作被调用。&lt;/li>
+&lt;li>调用者接收命令作为参数。甚至可以在运行时动态地进行。&lt;/li>
+&lt;li>命令支持撤销。&lt;/li>
+&lt;li>宏命令是命令的简单延伸，允许一次调用多个命令。宏命令也支持撤销。&lt;/li>
+&lt;li>命令也可以用来实现日志和事务系统。&lt;sup>How to?&lt;/sup>&lt;/li>
+&lt;/ol>
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>在本次示例中，假如你有一个家庭影院，你想通过一个“开关”来一键开启家庭影院，按下这个开关后，系统会执行打开空调，调暗灯光，打开CD播放影片等等一系列操作，我们使用命令模式来完成对应的操作。&lt;/p></description></item><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
@@ -38,11 +99,11 @@
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Singleton&lt;/strong> is a &lt;em>creational design pattern&lt;/em> that lets you ensure
+&lt;p>&lt;strong>Singleton&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that lets you ensure
 that a class has only one instance, while providing a global
 access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
+&lt;/ul></description></item><item><title>实现一个自定义数组</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/algo/CustomArray/</link><pubDate>Mon, 21 Jun 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/algo/CustomArray/</guid><description>&lt;hr></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
 &lt;p>如果没有特殊说明，都是针对的是 HotSpot 虚拟机。&lt;/p>&lt;/blockquote>
 &lt;hr>
 &lt;h2 id="1-概述">
@@ -53,7 +114,7 @@ access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;p>在Java中，必须明白一点：线程由Thread类启动，但Thread类并不执行任何操作，&lt;strong>它只是驱动赋予它的任务&lt;/strong>。因此将&lt;strong>线程与任务&lt;/strong>的概念区分开，有利于理解并发。&lt;/p>
 &lt;p>实际上，开发过程中线程与任务（的联系）被隔离的更加明显，往往不需要显式地声明(创建)线程，然后将任务（声明任务是必须的）分配给线程，并由线程负责驱动（ &lt;em>allocate task to thread to execute&lt;/em> ），这一过程通常由&lt;strong>线程池&lt;/strong>完成 。&lt;/p></description></item><item><title>ArrayList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_arraylist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_arraylist/</guid><description>&lt;p>&lt;code>ArrayList&lt;/code>是Java集合框架中使用最为频繁的实现，其本质是一个&lt;strong>有序的&lt;/strong>可自由扩容的&lt;strong>对象数组&lt;/strong>。它实现了&lt;code>RandomAccess&lt;/code>这个&lt;strong>标记接口&lt;/strong>，意味着其在随机访问性能上有一定优势。&lt;/p></description></item><item><title>访问权限修饰符</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid><description>&lt;blockquote>
 &lt;p>本系列内容主要来自TIJ，Java核心技术卷以及Java SE 8 API&lt;/p>&lt;/blockquote>
-&lt;p>介绍了Java的public、default、protected、private四种访问权限修饰符。&lt;/p></description></item><item><title>Java中使用goto语句？</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/Goto/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/Goto/</guid><description>&lt;hr></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
+&lt;p>介绍了Java的public、default、protected、private四种访问权限修饰符。&lt;/p></description></item><item><title>Java中使用goto语句？</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</guid><description>&lt;hr></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
  
  &lt;a class="hint-start">“&lt;/a>
  &lt;p>📖 回顾：操作系统的主要工作&lt;/p>
@@ -70,11 +131,7 @@ access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;p>———————— 物理机器界面 ---&amp;gt; 操作系统运行环境（CPU状态、中断/异常机制）&lt;/p>
 
 &lt;/blockquote>
-&lt;hr></description></item><item><title>列表（list）</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/2_data_list/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/2_data_list/</guid><description>&lt;hr></description></item><item><title>工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</guid><description>&lt;h3 id="工厂模式">
- 工厂模式
- &lt;a class="anchor" href="#%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h3>
-&lt;ul>
+&lt;hr></description></item><item><title>列表（list）</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/2_data_list/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/2_data_list/</guid><description>&lt;hr></description></item><item><title>工厂方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
@@ -84,17 +141,13 @@ access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Factory Method&lt;/strong> is a creational design pattern that provides an interface for creating
+&lt;p>&lt;strong>Factory Method&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that provides an interface for creating
 objects in a superclass, but allows subclasses to alter the type of objects that will be
 created.&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>工厂模式指定工厂仅仅能创建特定类型的产品。&lt;/p>&lt;/blockquote></description></item><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;h2 id="装饰者模式">
- 装饰者模式
- &lt;a class="anchor" href="#%e8%a3%85%e9%a5%b0%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;p>工厂模式指定工厂仅仅能创建特定类型的产品。&lt;/p>&lt;/blockquote></description></item><item><title>装饰者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</link><pubDate>Thu, 21 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240321_decorator/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式:&lt;/p>
 &lt;blockquote>
@@ -108,11 +161,7 @@ created.&lt;/p>&lt;/blockquote>
 to objects by placing these objects inside special wrapper objects that
 contain the behaviors.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;h2 id="观察者模式">
- 观察者模式
- &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;/ul></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;ul>
 &lt;li>by Head First 设计模式
 &lt;blockquote>
 &lt;p>在对象之间建立一对多的依赖，这样一来，当一个对象的状态改变，依赖它的对象都会收到通知，并且自动更新。&lt;/p>&lt;/blockquote>
@@ -123,11 +172,7 @@ contain the behaviors.&lt;/p>&lt;/blockquote>
 &lt;p>Observer is a behavioral design pattern that lets you define a &lt;em>subscription mechanism&lt;/em>
 to notify multiple objects about any events that happen to the object they’re observing.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;h2 id="策略模式">
- 策略模式
- &lt;a class="anchor" href="#%e7%ad%96%e7%95%a5%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式:&lt;/p>
 &lt;blockquote>
@@ -164,7 +209,7 @@ put each of them into a separate class, and make their objects interchangeable.&
 &lt;li>等待线程加入&lt;/li>
 &lt;li>自管理线程&lt;/li>
 &lt;li>处理线程的异常&lt;/li>
-&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>Java字符串的不可变</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/ImmutableStr/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/ImmutableStr/</guid><description>&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</guid><description>&lt;h2 id="进程模型">
+&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>Java字符串的不可变</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</guid><description>&lt;hr></description></item><item><title>进程和线程模型</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</link><pubDate>Tue, 09 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/3_processes_and_threads/</guid><description>&lt;h2 id="进程模型">
  进程模型
  &lt;a class="anchor" href="#%e8%bf%9b%e7%a8%8b%e6%a8%a1%e5%9e%8b">#&lt;/a>
 &lt;/h2>
@@ -267,26 +312,85 @@ put each of them into a separate class, and make their objects interchangeable.&
  其他线程状态
  &lt;a class="anchor" href="#%e5%85%b6%e4%bb%96%e7%ba%bf%e7%a8%8b%e7%8a%b6%e6%80%81">#&lt;/a>
 &lt;/h4>
-&lt;p>1）创建（New）：&lt;/p></description></item><item><title>字符串，元组和字典</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/3_data_str/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/3_data_str/</guid><description>&lt;hr></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</guid><description>&lt;h2 id="适配器模式">
- 适配器模式
- &lt;a class="anchor" href="#%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
-适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</guid><description>&lt;h2 id="抽象工厂模式">
- 抽象工厂模式
- &lt;a class="anchor" href="#%e6%8a%bd%e8%b1%a1%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
+&lt;p>1）创建（New）：&lt;/p></description></item><item><title>字符串，元组和字典</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/3_data_str/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/3_data_str/</guid><description>&lt;hr></description></item><item><title>适配器模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_adaptor/</guid><description>&lt;p>适配器模式将一个类的接口，转换成客户期望的另一个接口。
+适配器模式可以让原本接口不兼容的类可以合作无间。&lt;/p>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
 &lt;ul>
+&lt;li>针对接口编程，而不是针对实现编程&lt;/li>
+&lt;li>多用组合，少用继承&lt;/li>
+&lt;li>为交互对象之间的松耦合而努力&lt;/li>
+&lt;li>类应该对拓展开放，而对修改关闭 （开放-关闭原则）&lt;/li>
+&lt;li>依赖抽象，而不依赖具体类 （依赖倒置原则）&lt;/li>
+&lt;/ul>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+class Client{
+ +Adaptor adaptor
+ +otherOperations()
+}
+class Target {
+ &lt;&lt; Interface >>
+ operationA()
+}
+Client *--> Adaptor
+Adaptor ..|> Target
+Adaptor *..> Adaptee
+class Adaptor {
+ +Adaptee adaptee
+ operationA()
+}
+class Adaptee {
+ &lt;&lt; Interface >>
+ operationB()
+}
+&lt;/pre>
+
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>适配器模式，通过创建&amp;quot;适配器&amp;quot;进行接口转换，可以让不兼容的接口变得兼容。&lt;/li>
+&lt;li>适配器模式让客户从接口的实现解耦。&lt;/li>
+&lt;li>注意适配器和装饰模式的区别，适配器改变接口以让其对不兼容的对象可用，
+装饰模式是通过继承，赋予类新的行为和&amp;quot;职责&amp;quot;。&lt;/li>
+&lt;li>当需要使用一个现有的类而可用的接口并不适配时，考虑使用适配器模式。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>对象适配器和类适配器&lt;/p></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
 &lt;p>抽象工厂模式提供了一个接口，用于创建相关或依赖对象的家族，而不需要指定具体类。
-简而言之，抽象工厂可以创建一群对象，而不单单只创建一种对象。&lt;/p>&lt;/blockquote>
+简而言之，抽象工厂可以创建&lt;strong>一群对象&lt;/strong>，而不单单只创建一种对象。这是抽象工厂和工厂方法的区别。&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Abstract Factory&lt;/strong> is a creational design pattern that lets you
+&lt;p>&lt;strong>Abstract Factory&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that lets you
 produce families of related objects without specifying their
 concrete classes.&lt;/p>&lt;/blockquote>
 &lt;/li>
@@ -310,25 +414,163 @@ concrete classes.&lt;/p>&lt;/blockquote>
 &lt;blockquote>
 &lt;p>按值调用：方法接收的是调用者提供的值&lt;/p>
 &lt;p>按引用调用：方法接收的是调用者提供的变量地址&lt;/p>&lt;/blockquote>
-&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>子类不能调用父类中定义的构造器来实例化</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/MainClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/MainClass/</guid><description>&lt;hr></description></item><item><title>函数式编程</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_func/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_func/</guid><description>&lt;hr></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;h2 id="模板方法模式">
- 模板方法模式
- &lt;a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e6%96%b9%e6%b3%95%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
+&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>子类不能调用父类中定义的构造器来实例化</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/MainClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/MainClass/</guid><description>&lt;hr></description></item><item><title>函数式编程</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_func/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_func/</guid><description>&lt;hr></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
 延迟到子类中。模板方法可以使得子类在不改变算法结构的前提
-下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;h2 id="外观模式facade">
- 外观模式（Facade）
- &lt;a class="anchor" href="#%e5%a4%96%e8%a7%82%e6%a8%a1%e5%bc%8ffacade">#&lt;/a>
-&lt;/h2>
-&lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
+下，重新 定义算法的某些步骤。&lt;/p></description></item><item><title>外观模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</link><pubDate>Mon, 01 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/structure/20240401_facade/</guid><description>&lt;p>外观模式提供了一个统一的（简单）接口，用来访问子
 系统中的一群接口。外观定义了一个高层接口，让系统更
-容易使用。&lt;/p></description></item><item><title>建造者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</guid><description>&lt;blockquote>
-&lt;p>本文由Gemini AI生成。&lt;/p>&lt;/blockquote>
-&lt;h2 id="建造模式">
- 建造模式
- &lt;a class="anchor" href="#%e5%bb%ba%e9%80%a0%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
+容易使用。&lt;/p>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>针对接口编程，而不是针对实现编程&lt;/li>
+&lt;li>多用组合，少用继承&lt;/li>
+&lt;li>为交互对象之间的松耦合而努力&lt;/li>
+&lt;li>类应该对拓展开放，而对修改关闭 （开放-关闭原则）&lt;/li>
+&lt;li>依赖抽象，而不依赖具体类 （依赖倒置原则）&lt;/li>
+&lt;li>&amp;quot;最少知识原则&amp;quot;——只和你的朋友交谈，不要让太多的类耦合在一起。&lt;/li>
+&lt;/ul>
+&lt;h4 id="最少知识原则定义">
+ 最少知识原则：定义
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e5%ae%9a%e4%b9%89">#&lt;/a>
+&lt;/h4>
+&lt;p>在设计系统中，不管是任何对象，都需要注意它所交互的类有哪些，并注意这些类是怎么交互的。&lt;/p>
+&lt;p>最少知识原则希望，在设计系统的过程中，不要让太多的类交杂在一起，免得修改系统中的一部分，
+需要修改其他的部分。如果许多部分相互耦合，系统将会变得复杂、脆弱且不易于维护。&lt;/p>
+&lt;h4 id="最少知识原则如何遵循">
+ 最少知识原则：如何遵循？
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e5%a6%82%e4%bd%95%e9%81%b5%e5%be%aa">#&lt;/a>
+&lt;/h4>
+&lt;p>设计系统的过程中，就任何对象而言，在对象的方法内，应该只调用属于一下范畴的方法：&lt;/p>
+&lt;ol>
+&lt;li>对象本身的方法&lt;/li>
+&lt;li>被当作方法参数而传递进来的对象的方法&lt;/li>
+&lt;li>方法内创建或实例化的对象的方法&lt;/li>
+&lt;li>对象的任何组件（域、field）的方法&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>不要调用从上述方法中返回的对象支持的方法。&lt;/p>&lt;/blockquote>
+&lt;p>请看如下例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">float&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">getTemp&lt;/span>&lt;span class="p">(){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">Thermometer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">thermometer&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">station&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getThermometer&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">thermometer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getTemperature&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该优化为：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">float&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">getTemp&lt;/span>&lt;span class="p">(){&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">return&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">station&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">getTemperature&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而&lt;code>getTemperature&lt;/code>方法由&lt;code>station&lt;/code>域提供。这样做的好处是，我们
+不需要认识&lt;code>Thermometer&lt;/code>对象了。让我们始终保持最小的朋友圈！&lt;/p>
+&lt;h4 id="最少知识原则缺点">
+ 最少知识原则：缺点
+ &lt;a class="anchor" href="#%e6%9c%80%e5%b0%91%e7%9f%a5%e8%af%86%e5%8e%9f%e5%88%99%e7%bc%ba%e7%82%b9">#&lt;/a>
+&lt;/h4>
+&lt;p>是的，任何事情都是两面。最少知识原则使得系统耦合度降低，减轻了维护成本，
+但同时禁止调用中间对象的方法，这不得不让我们制造更多的&amp;quot;包装&amp;quot;类来处理和
+其他组件之间的沟通，这可能会导致开发难度增加。&lt;/p>
+&lt;p>让我们接着回到『外观模式』吧。&lt;/p>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+&lt;img alt="外观模式" height="303" src="https://wangy325.github.io/img/dp/fecade.webp" width="512"/>
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>外观模式中的&lt;code>Facade&lt;/code>就是那个&amp;quot;密友&amp;quot;，它封装了其他要用到的方法，满足了最少知识原则。&lt;/li>
+&lt;li>当要简化并统一一堆接口时，可以使用外观模式。&lt;/li>
+&lt;li>外观将客户从一个复杂的系统中解耦。&lt;/li>
+&lt;li>实现外观，需要将子系统组合进外观中，然后将具体的工作委托给子系统执行。&lt;/li>
+&lt;li>一个复杂的子系统，可以有多个外观。&lt;/li>
+&lt;/ol>
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>外观模式（Facade Pattern）是一种结构型设计模式，它提供了一个统一的接口来访问子系统中的一群接口。外观模式定义了一个高层接口，让子系统更容易使用。&lt;/p></description></item><item><title>建造模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</guid><description>&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。它通常用于创建复杂的对象。&lt;/p>
+&lt;p>建造模式有如下优点：&lt;/p>
+&lt;ul>
+&lt;li>将复杂对象的构建与表示分离。&lt;/li>
+&lt;li>可以更容易地创建不同的表示。&lt;/li>
+&lt;li>可以方便地扩展新类型。&lt;/li>
+&lt;/ul>
+&lt;h3 id="结构">
+ 结构
+ &lt;a class="anchor" href="#%e7%bb%93%e6%9e%84">#&lt;/a>
+&lt;/h3>
+&lt;p>建造模式包含以下角色：&lt;/p>
+&lt;ul>
+&lt;li>抽象建造者（&lt;em>Builder&lt;/em>）: 定义一个接口，指定构建复杂对象各个部分的步骤。&lt;/li>
+&lt;li>具体建造者（&lt;em>ConcreteBuilder&lt;/em>）: 实现抽象建造者接口，具体实现构建复杂对象的步骤。&lt;/li>
+&lt;li>指挥者（&lt;em>Director&lt;/em>）: 负责调用具体建造者的方法，构建复杂对象。&lt;/li>
+&lt;li>产品（&lt;em>Product&lt;/em>）: 最终构建出来的复杂对象。&lt;/li>
+&lt;/ul>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+ class Builder {
+ &lt;&lt; interface >>
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class ConcreteBuilder1 {
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class ConcreteBuilder2 {
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class Director {
+ +construct()
+ }
+ class Product {
+ +partA
+ +partB
+ +partC
+ }
+
+ Builder &lt;|.. ConcreteBuilder1
+ Builder &lt;|.. ConcreteBuilder2
+ Director --> Builder
+ Director --> Product
+ Product ..> ConcreteBuilder1
+ Product ..> ConcreteBuilder2
+&lt;/pre>
+
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>本示例中我们使用建造模式来创建一部车，一部车显然是一个“复杂”的对象，可以将它的创建分成不同的部分，比如座椅，引擎，行车电脑等等不同的模块。我们使用建造模式来创建一个“车”对象。&lt;/p></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
  可重入锁
  &lt;a class="anchor" href="#%e5%8f%af%e9%87%8d%e5%85%a5%e9%94%81">#&lt;/a>
 &lt;/h2>
@@ -341,7 +583,7 @@ concrete classes.&lt;/p>&lt;/blockquote>
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">myLock&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">unlock&lt;/span>&lt;span class="p">();&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">6&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这个结构可以确保同一时间只有&lt;strong>一个线程&lt;/strong>进入临界区( &lt;em>critical section&lt;/em> )，其他线程调用&lt;code>lock()&lt;/code>时会被阻塞，直到第一个线程释放锁。&lt;/p></description></item><item><title>Set</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/3_Set/</link><pubDate>Wed, 06 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/3_Set/</guid><description>&lt;p>&lt;code>Set&lt;/code>是&lt;strong>不含重复元素的集&lt;/strong>，严格来讲，&lt;code>Set&lt;/code>不允许当&lt;code>e1.equals(e2)&lt;/code>为真时， &lt;em>e1&lt;/em> 和 &lt;em>e2&lt;/em> 同时出现在集合中。&lt;code>Set&lt;/code>最多允许一个&lt;code>null&lt;/code>元素。&lt;/p>
-&lt;p>将&lt;strong>可变对象&lt;/strong>置入&lt;code>Set&lt;/code>时需要特别小心，当对象的改动影响到了元素之间的&lt;code>equals()&lt;/code>比较的结果，那么&lt;code>Set&lt;/code>的行为就变得不确定了。因此，&lt;strong>不能将Set本身作为Set的元素&lt;/strong>。&lt;/p></description></item><item><title>final关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>不同的使用环境下，&lt;code>final&lt;/code>关键字的含义有细微差别，但通常它指“这是无法改变的”。&lt;/p></description></item><item><title>静态代码块的行为</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/StaticBlock/</link><pubDate>Fri, 12 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/StaticBlock/</guid><description>&lt;hr></description></item><item><title>4个重要的内置函数</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_important_funcs/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_important_funcs/</guid><description>&lt;hr></description></item><item><title>synchronized关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/</guid><description>&lt;p>自Java 1.0开始，每一个对象都有一个隐式&lt;strong>内部锁&lt;/strong>（ &lt;em>intrinsic lock&lt;/em> ），在Java API Specification中通常被称为&lt;strong>监视器&lt;/strong>（ &lt;em>monitor&lt;/em> ）。这个内部锁由&lt;code>synchronized&lt;/code>关键字提供支持。&lt;code>synchronized&lt;/code>关键字的语义就是“同步的”，这意味着使用这个关键字可以处理共享资源的冲突。&lt;/p>
+&lt;p>将&lt;strong>可变对象&lt;/strong>置入&lt;code>Set&lt;/code>时需要特别小心，当对象的改动影响到了元素之间的&lt;code>equals()&lt;/code>比较的结果，那么&lt;code>Set&lt;/code>的行为就变得不确定了。因此，&lt;strong>不能将Set本身作为Set的元素&lt;/strong>。&lt;/p></description></item><item><title>final关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/4_final%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>不同的使用环境下，&lt;code>final&lt;/code>关键字的含义有细微差别，但通常它指“这是无法改变的”。&lt;/p></description></item><item><title>静态代码块的行为</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StaticBlock/</link><pubDate>Fri, 12 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StaticBlock/</guid><description>&lt;hr></description></item><item><title>4个重要的内置函数</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_important_funcs/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/4_important_funcs/</guid><description>&lt;hr></description></item><item><title>synchronized关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_3_synchronized/</guid><description>&lt;p>自Java 1.0开始，每一个对象都有一个隐式&lt;strong>内部锁&lt;/strong>（ &lt;em>intrinsic lock&lt;/em> ），在Java API Specification中通常被称为&lt;strong>监视器&lt;/strong>（ &lt;em>monitor&lt;/em> ）。这个内部锁由&lt;code>synchronized&lt;/code>关键字提供支持。&lt;code>synchronized&lt;/code>关键字的语义就是“同步的”，这意味着使用这个关键字可以处理共享资源的冲突。&lt;/p>
 &lt;p>当访问被&lt;code>synchronized&lt;/code>关键字保护的方法或代码块时，它将检查锁能否获得——&lt;strong>这个锁可以是当前类对象的锁，也可以是一个临时锁&lt;/strong>( &lt;em>ad-hoc lock&lt;/em> )，取决你如何使用，任务执行完成之后会释放锁。&lt;/p>
 &lt;p>和&lt;code>ReentrantLock&lt;/code>一样，&lt;code>synchronized&lt;/code>关键字获取的锁也是&lt;strong>独占锁&lt;/strong>，并且也是“可重入”的，某个任务可以多次获得对象的锁，并由计数器维护获得锁的次数，当退出一个方法时，计数器-1，完全退出时，才释放锁，这和可重入锁的机制是一样的。&lt;/p></description></item><item><title>HashMap和TreeMap</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/4_Map_hash_tree_map/</link><pubDate>Sun, 10 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/4_Map_hash_tree_map/</guid><description>&lt;p>由于&lt;code>Map&lt;/code>的键是&lt;code>Set&lt;/code>，因此使用可变对象作为&lt;code>Map&lt;/code>的key时，&lt;strong>需要覆盖 &lt;em>equals&lt;/em> 和 &lt;em>hashCode&lt;/em> 方法&lt;/strong>，&lt;strong>Map不能使用自身作为key&lt;/strong>。&lt;/p>
 &lt;p>Java 8对&lt;code>Map&lt;/code>接口进行了优化，新增了主要是针对&lt;strong>函数式接口&lt;/strong>的 &lt;em>默认&lt;/em> 方法（方法体被省略）：&lt;/p>
@@ -361,7 +603,7 @@ default void replaceAll (
  BiFunction&amp;lt;? super K, ? super V, ? extends V&amp;gt; function) {...}
 default V getOrDefault (Object key, V defaultValue) {...}
 &lt;/code>&lt;/pre>
-&lt;p>上述方法使用的不多，主要用来对Map键值进行更新，按需查阅API文档。&lt;/p></description></item><item><title>Object超类</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/</link><pubDate>Sun, 19 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/</guid><description>&lt;p>在Java中，如果一个类没有明确地指出超类，那么Object就是这个类的超类。实际上，Object类是所有类超类，这个类定义了一些重要的方法。&lt;/p></description></item><item><title>动态绑定与静态绑定</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/</guid><description>&lt;p>这是Java方法调用的2个术语，用来描述Java虚拟机方法调用的2种机制。&lt;/p></description></item><item><title>线程竞争</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/Threading/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/Threading/</guid><description>&lt;hr></description></item><item><title>格式化输出与文件I/O</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/5_file_io/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/5_file_io/</guid><description>&lt;hr></description></item><item><title>原子性和可见性</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/</guid><description>&lt;p>原子性一般指&lt;strong>原子操作&lt;/strong>，原子操作不能&lt;strong>被线程调度机制中断&lt;/strong>，一旦操作开始，那么它一定可以在可能发生的上下文切换之前完成。Java语言规范规定了对基本对象(long和double除外)的读写操作是原子的。&lt;/p>
+&lt;p>上述方法使用的不多，主要用来对Map键值进行更新，按需查阅API文档。&lt;/p></description></item><item><title>Object超类</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/</link><pubDate>Sun, 19 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/5_Object%E8%B6%85%E7%B1%BB/</guid><description>&lt;p>在Java中，如果一个类没有明确地指出超类，那么Object就是这个类的超类。实际上，Object类是所有类超类，这个类定义了一些重要的方法。&lt;/p></description></item><item><title>动态绑定与静态绑定</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/5_%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A%E4%B8%8E%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A/</guid><description>&lt;p>这是Java方法调用的2个术语，用来描述Java虚拟机方法调用的2种机制。&lt;/p></description></item><item><title>线程竞争</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Threading/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Threading/</guid><description>&lt;hr></description></item><item><title>格式化输出与文件I/O</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/5_file_io/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/5_file_io/</guid><description>&lt;hr></description></item><item><title>原子性和可见性</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_4_%E5%8E%9F%E5%AD%90%E6%80%A7%E4%B8%8E%E5%8E%9F%E5%AD%90%E7%B1%BB/</guid><description>&lt;p>原子性一般指&lt;strong>原子操作&lt;/strong>，原子操作不能&lt;strong>被线程调度机制中断&lt;/strong>，一旦操作开始，那么它一定可以在可能发生的上下文切换之前完成。Java语言规范规定了对基本对象(long和double除外)的读写操作是原子的。&lt;/p>
 &lt;p>&lt;strong>不能将原子性和同步划等号&lt;/strong>！更不能使用原子性来代替同步，当你想使用原子性代替同步写出无锁代码时，思考 
  &lt;a href="https://inside.java/u/BrianGoetz/">&lt;em>Brain Goetz&lt;/em>&lt;/a> 的建议：&lt;/p>
 &lt;blockquote>
@@ -387,7 +629,7 @@ default V getOrDefault (Object key, V defaultValue) {...}
  &lt;/tr>
  &lt;/tbody>
 &lt;/table></description></item><item><title>抽象类与接口</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/6_%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3/</guid><description>&lt;p>抽象类是由&lt;code>abstract&lt;/code>关键字修饰的类。将一个普通类用&lt;code>abstract&lt;/code>修饰，它就是抽象类。&lt;/p>
-&lt;p>若使用&lt;code>abstract&lt;/code>修饰方法，那么称该方法为&lt;strong>抽象方法&lt;/strong>，抽象方法没有方法体。&lt;/p></description></item><item><title>不要在finally块中返回值</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/TryF/</link><pubDate>Thu, 18 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/TryF/</guid><description>&lt;hr></description></item><item><title>异常处理</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/6_try_excep/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/6_try_excep/</guid><description>&lt;hr></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;p>&lt;code>HashMap&lt;/code>基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
+&lt;p>若使用&lt;code>abstract&lt;/code>修饰方法，那么称该方法为&lt;strong>抽象方法&lt;/strong>，抽象方法没有方法体。&lt;/p></description></item><item><title>不要在finally块中返回值</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/TryF/</link><pubDate>Thu, 18 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/TryF/</guid><description>&lt;hr></description></item><item><title>异常处理</title><link>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/6_try_excep/</link><pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/pys/intro/6_try_excep/</guid><description>&lt;hr></description></item><item><title>HashMap的源码分析</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Thu, 24 Sep 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/5_HashMap%E7%9A%84%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description>&lt;p>&lt;code>HashMap&lt;/code>基于散列表，散列表中每一个Node节点（桶）是链表，当两个条目（entry）的key的hash值对桶数（capacity）取模的值相等时，这两个entry会存储在同一个链表中。但当链表中元素达到一定数目时，链表结构会转变为&lt;strong>树结构&lt;/strong>。&lt;/p>
 &lt;p>本文从初始化，扩容，插入，获取，删除这几个方面深入讨论了&lt;code>HashMap&lt;/code>的实现细节。&lt;/p>
 &lt;blockquote>
 &lt;p>此文中没有讨论&lt;code>HashMap&lt;/code>中涉及到树结构的源码。&lt;/p>&lt;/blockquote></description></item><item><title>线程本地存储</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_5_%E7%BA%BF%E7%A8%8B%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</guid><description>&lt;p>使用&lt;code>synchronized&lt;/code>关键字对整个方法加锁（防止其他线程访问整个方法）往往会带来更大的性能开销，如果你只想保护某些代码块，可以使用&lt;strong>同步代码块&lt;/strong>，这一段被锁保护的代码块就称为&lt;strong>临界区&lt;/strong>（ &lt;em>critical section&lt;/em> ），前面的&lt;strong>显式锁&lt;/strong>所保护的区域以及使用&lt;strong>synchronized&lt;/strong>保护的代码块都是临界区。&lt;/p></description></item><item><title>Lambda与函数式接口</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/7_lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>&lt;blockquote>

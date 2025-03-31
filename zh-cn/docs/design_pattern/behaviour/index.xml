@@ -1,16 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>行为模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/</link><description>Recent content in 行为模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;h2 id="命令模式">
- 命令模式
- &lt;a class="anchor" href="#%e5%91%bd%e4%bb%a4%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>命令模式将&amp;quot;请求&amp;quot;封装成（命令）对象，&lt;em>以便使用不同的请求、队列或者日志来参数化其他对象&lt;/em>。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>行为模式 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/</link><description>Recent content in 行为模式 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/index.xml" rel="self" type="application/rss+xml"/><item><title>命令模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</link><pubDate>Fri, 29 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240329_command/</guid><description>&lt;p>命令模式将&amp;quot;请求&amp;quot;封装成（命令）对象，&lt;em>以便使用不同的请求、队列或者日志来参数化其他对象&lt;/em>。
 命令模式也支持&lt;strong>撤销&lt;/strong>的操作。&lt;/p>
 &lt;blockquote>
-&lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。
-该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>&lt;/blockquote></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;h2 id="观察者模式">
- 观察者模式
- &lt;a class="anchor" href="#%e8%a7%82%e5%af%9f%e8%80%85%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作。&lt;/p>&lt;/blockquote>
+&lt;h3 id="设计原则">
+ 设计原则
+ &lt;a class="anchor" href="#%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>解耦：命令模式使&lt;em>发起者和接收者解耦&lt;/em>。发起者不关心具体的接收者，只需要根据已知的命令对象
+执行&lt;code>execute()&lt;/code>方法即可。&lt;/li>
+&lt;/ol>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+class Invoker {
+ +Command command
+ +invoke()
+}
+Invoker *..> Command
+class Command {
+ &lt;&lt; interface >>
+ +execute()
+ +undo()
+}
+ConcreteCommand ..|> Command
+class ConcreteCommand {
+ Receiver receiver
+ +execute()
+ +undo()
+}
+Receiver &lt;--* ConcreteCommand
+class Receiver {
+ +someOperation()
+}
+&lt;/pre>
+
+&lt;h3 id="要点">
+ 要点
+ &lt;a class="anchor" href="#%e8%a6%81%e7%82%b9">#&lt;/a>
+&lt;/h3>
+&lt;ol>
+&lt;li>命令模式将发出请求的对象（调用者）和接收请求的对象（接收者）解耦。&lt;/li>
+&lt;li>被解耦的对象之间通过命令对象沟通，命令对象封装了接收者和一个或者一组动作。&lt;/li>
+&lt;li>调用者通过执行命令对象的&lt;code>execute()&lt;/code>方法发出请求，这会使得接收者的动作被调用。&lt;/li>
+&lt;li>调用者接收命令作为参数。甚至可以在运行时动态地进行。&lt;/li>
+&lt;li>命令支持撤销。&lt;/li>
+&lt;li>宏命令是命令的简单延伸，允许一次调用多个命令。宏命令也支持撤销。&lt;/li>
+&lt;li>命令也可以用来实现日志和事务系统。&lt;sup>How to?&lt;/sup>&lt;/li>
+&lt;/ol>
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>在本次示例中，假如你有一个家庭影院，你想通过一个“开关”来一键开启家庭影院，按下这个开关后，系统会执行打开空调，调暗灯光，打开CD播放影片等等一系列操作，我们使用命令模式来完成对应的操作。&lt;/p></description></item><item><title>观察者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</link><pubDate>Fri, 08 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240308_observer/</guid><description>&lt;ul>
 &lt;li>by Head First 设计模式
 &lt;blockquote>
 &lt;p>在对象之间建立一对多的依赖，这样一来，当一个对象的状态改变，依赖它的对象都会收到通知，并且自动更新。&lt;/p>&lt;/blockquote>
@@ -21,11 +82,7 @@
 &lt;p>Observer is a behavioral design pattern that lets you define a &lt;em>subscription mechanism&lt;/em>
 to notify multiple objects about any events that happen to the object they’re observing.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;h2 id="策略模式">
- 策略模式
- &lt;a class="anchor" href="#%e7%ad%96%e7%95%a5%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;/ul></description></item><item><title>策略模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</link><pubDate>Thu, 07 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240307_strategy/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式:&lt;/p>
 &lt;blockquote>
@@ -37,10 +94,6 @@ to notify multiple objects about any events that happen to the object they’re 
 &lt;p>&lt;strong>Strategy&lt;/strong> is a behavioral design pattern that lets you define a family of algorithms,
 put each of them into a separate class, and make their objects interchangeable.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;h2 id="模板方法模式">
- 模板方法模式
- &lt;a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e6%96%b9%e6%b3%95%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
+&lt;/ul></description></item><item><title>模板方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</link><pubDate>Tue, 02 Apr 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/behaviour/20240402_template_method/</guid><description>&lt;p>模板方法模式在一个方法中定义一个算法的骨架，而将一些步骤
 延迟到子类中。模板方法可以使得子类在不改变算法结构的前提
 下，重新 定义算法的某些步骤。&lt;/p></description></item></channel></rss>

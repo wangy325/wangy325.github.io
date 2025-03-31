@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>创建型 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/</link><description>Recent content in 创建型 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/creation/index.xml" rel="self" type="application/rss+xml"/><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</guid><description>&lt;h2 id="单例模式">
- 单例模式
- &lt;a class="anchor" href="#%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>创建型 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/</link><description>Recent content in 创建型 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/design_pattern/creation/index.xml" rel="self" type="application/rss+xml"/><item><title>单例模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</link><pubDate>Thu, 28 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240328_singleton/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
@@ -11,15 +7,11 @@
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Singleton&lt;/strong> is a &lt;em>creational design pattern&lt;/em> that lets you ensure
+&lt;p>&lt;strong>Singleton&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that lets you ensure
 that a class has only one instance, while providing a global
 access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</guid><description>&lt;h3 id="工厂模式">
- 工厂模式
- &lt;a class="anchor" href="#%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h3>
-&lt;ul>
+&lt;/ul></description></item><item><title>工厂方法模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_factory/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
@@ -29,34 +21,104 @@ access point to this instance.&lt;/p>&lt;/blockquote>
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Factory Method&lt;/strong> is a creational design pattern that provides an interface for creating
+&lt;p>&lt;strong>Factory Method&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that provides an interface for creating
 objects in a superclass, but allows subclasses to alter the type of objects that will be
 created.&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>工厂模式指定工厂仅仅能创建特定类型的产品。&lt;/p>&lt;/blockquote></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</guid><description>&lt;h2 id="抽象工厂模式">
- 抽象工厂模式
- &lt;a class="anchor" href="#%e6%8a%bd%e8%b1%a1%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;ul>
+&lt;p>工厂模式指定工厂仅仅能创建特定类型的产品。&lt;/p>&lt;/blockquote></description></item><item><title>抽象工厂模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</link><pubDate>Tue, 26 Mar 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240326_abstract_factory/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>by Head First 设计模式&lt;/p>
 &lt;blockquote>
 &lt;p>抽象工厂模式提供了一个接口，用于创建相关或依赖对象的家族，而不需要指定具体类。
-简而言之，抽象工厂可以创建一群对象，而不单单只创建一种对象。&lt;/p>&lt;/blockquote>
+简而言之，抽象工厂可以创建&lt;strong>一群对象&lt;/strong>，而不单单只创建一种对象。这是抽象工厂和工厂方法的区别。&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;li>
 &lt;p>by Dive into Design Patterns&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;strong>Abstract Factory&lt;/strong> is a creational design pattern that lets you
+&lt;p>&lt;strong>Abstract Factory&lt;/strong> is a &lt;em>creation(al)&lt;/em> design pattern that lets you
 produce families of related objects without specifying their
 concrete classes.&lt;/p>&lt;/blockquote>
 &lt;/li>
-&lt;/ul></description></item><item><title>建造者模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</guid><description>&lt;blockquote>
-&lt;p>本文由Gemini AI生成。&lt;/p>&lt;/blockquote>
-&lt;h2 id="建造模式">
- 建造模式
- &lt;a class="anchor" href="#%e5%bb%ba%e9%80%a0%e6%a8%a1%e5%bc%8f">#&lt;/a>
-&lt;/h2>
-&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。&lt;/p></description></item></channel></rss>
+&lt;/ul></description></item><item><title>建造模式</title><link>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</link><pubDate>Sun, 13 Mar 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/design_pattern/creation/20240313_builder/</guid><description>&lt;p>建造模式是一种创建型设计模式，它将一个复杂对象的构建与其表示分离。它允许你通过一步一步地构建对象来创建不同的表示。它通常用于创建复杂的对象。&lt;/p>
+&lt;p>建造模式有如下优点：&lt;/p>
+&lt;ul>
+&lt;li>将复杂对象的构建与表示分离。&lt;/li>
+&lt;li>可以更容易地创建不同的表示。&lt;/li>
+&lt;li>可以方便地扩展新类型。&lt;/li>
+&lt;/ul>
+&lt;h3 id="结构">
+ 结构
+ &lt;a class="anchor" href="#%e7%bb%93%e6%9e%84">#&lt;/a>
+&lt;/h3>
+&lt;p>建造模式包含以下角色：&lt;/p>
+&lt;ul>
+&lt;li>抽象建造者（&lt;em>Builder&lt;/em>）: 定义一个接口，指定构建复杂对象各个部分的步骤。&lt;/li>
+&lt;li>具体建造者（&lt;em>ConcreteBuilder&lt;/em>）: 实现抽象建造者接口，具体实现构建复杂对象的步骤。&lt;/li>
+&lt;li>指挥者（&lt;em>Director&lt;/em>）: 负责调用具体建造者的方法，构建复杂对象。&lt;/li>
+&lt;li>产品（&lt;em>Product&lt;/em>）: 最终构建出来的复杂对象。&lt;/li>
+&lt;/ul>
+&lt;h3 id="uml简图">
+ UML简图
+ &lt;a class="anchor" href="#uml%e7%ae%80%e5%9b%be">#&lt;/a>
+&lt;/h3>
+
+
+&lt;script src="https://wangy325.github.io/mermaid.min.js">&lt;/script>
+
+ &lt;script>mermaid.initialize({
+ "flowchart": {
+ "useMaxWidth":true
+ },
+ "theme": "light"
+ }
+ )&lt;/script>
+
+
+
+
+&lt;pre class="mermaid">
+classDiagram
+direction LR
+ class Builder {
+ &lt;&lt; interface >>
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class ConcreteBuilder1 {
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class ConcreteBuilder2 {
+ +buildPartA()
+ +buildPartB()
+ +buildPartC()
+ +getResult()
+ }
+ class Director {
+ +construct()
+ }
+ class Product {
+ +partA
+ +partB
+ +partC
+ }
+
+ Builder &lt;|.. ConcreteBuilder1
+ Builder &lt;|.. ConcreteBuilder2
+ Director --> Builder
+ Director --> Product
+ Product ..> ConcreteBuilder1
+ Product ..> ConcreteBuilder2
+&lt;/pre>
+
+&lt;h3 id="示例代码">
+ 示例代码
+ &lt;a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#&lt;/a>
+&lt;/h3>
+&lt;p>本示例中我们使用建造模式来创建一部车，一部车显然是一个“复杂”的对象，可以将它的创建分成不同的部分，比如座椅，引擎，行车电脑等等不同的模块。我们使用建造模式来创建一个“车”对象。&lt;/p></description></item></channel></rss>
