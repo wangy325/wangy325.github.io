@@ -16,7 +16,6 @@
 &lt;p>有效：指系统效率，资源利用率。如cpu利用率是否充足，I/O设备是否忙碌等。&lt;/p>
 &lt;p>合理：软硬件资源的管理是否公平合理。&lt;/p>&lt;/blockquote></description></item><item><title>操作系统运行环境与机制</title><link>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</link><pubDate>Wed, 03 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/note/operating_system_peking/2_env_and_logic/</guid><description>&lt;blockquote class="book-hint info">
  
- &lt;a class="hint-start">“&lt;/a>
  &lt;p>📖 回顾：操作系统的主要工作&lt;/p>
 &lt;ul>
 &lt;li>程序的执行
