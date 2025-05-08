@@ -12,5 +12,13 @@
  &lt;a class="anchor" href="#lambda%e8%a1%a8%e8%be%be%e5%bc%8f">#&lt;/a>
 &lt;/h2>
 &lt;p>Lambda表达式是一个&lt;strong>可传递的代码块&lt;/strong>，可以在以后执行&lt;strong>一次或多次&lt;/strong>。&lt;/p></description></item><item><title>内部类</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</guid><description>&lt;p>将一个类定义在另一个类的内部，这就是内部类。&lt;/p>
-&lt;blockquote>
-&lt;p>定义言简意赅 ，内涵丰富多彩。&lt;/p>&lt;/blockquote></description></item></channel></rss>
+
+
+
+ 
+
+&lt;blockquote class="book-hint info">
+ 
+ &lt;p>定义言简意赅 ，内涵丰富多彩。&lt;/p>
+
+&lt;/blockquote></description></item></channel></rss>

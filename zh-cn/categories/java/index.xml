@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/java/</link><description>Recent content in Java on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 28 Apr 2025 00:45:36 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</guid><description>&lt;hr></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/java/</link><description>Recent content in Java on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 08 May 2025 15:57:56 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</guid><description>&lt;hr></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
 &lt;p>如果没有特殊说明，都是针对的是 HotSpot 虚拟机。&lt;/p>&lt;/blockquote>
 &lt;hr>
 &lt;h2 id="1-概述">
@@ -34,7 +34,7 @@
 &lt;li>等待线程加入&lt;/li>
 &lt;li>自管理线程&lt;/li>
 &lt;li>处理线程的异常&lt;/li>
-&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>Java字符串的不可变</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</guid><description>&lt;hr></description></item><item><title>资源访问受限--引论</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</guid><description>&lt;p>在
+&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>资源访问受限--引论</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</guid><description>&lt;p>在
  &lt;a href="https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/">线程与任务&lt;/a>文中，虽然创建了多线程，并且线程之间出现了一些&lt;strong>不可预测&lt;/strong>的CPU调度，但是由于线程之间是&lt;strong>相互隔离&lt;/strong>的——&lt;strong>线程没有访问共同的资源&lt;/strong>，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。&lt;/p>
 &lt;blockquote>
 &lt;p>实际上，上篇文章通过&lt;code>join()&lt;/code>方法演示了
@@ -54,7 +54,7 @@
 &lt;blockquote>
 &lt;p>按值调用：方法接收的是调用者提供的值&lt;/p>
 &lt;p>按引用调用：方法接收的是调用者提供的变量地址&lt;/p>&lt;/blockquote>
-&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>子类不能调用父类中定义的构造器来实例化</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/MainClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/MainClass/</guid><description>&lt;hr></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
+&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>子类不能调用父类构造器</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</guid><description>&lt;hr></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
  可重入锁
  &lt;a class="anchor" href="#%e5%8f%af%e9%87%8d%e5%85%a5%e9%94%81">#&lt;/a>
 &lt;/h2>
@@ -130,8 +130,16 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;p>考虑一个经典的问题：用多线程分段计算0-100的加和，我们需要把每个线程计算的值汇总，然后再求和，那么应该怎样获取每个任务返回值呢？&lt;/p>
 &lt;p>Java提供了&lt;code>Callable&lt;/code>和&lt;code>Future&lt;/code>接口，使任务有提供返回值的能力。&lt;/p></description></item><item><title>Collections工具类</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/6_Collections/</link><pubDate>Tue, 12 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/6_Collections/</guid><description>&lt;p>集合框架中一个重要的类，其实是Collection接口的&lt;strong>伴随类&lt;/strong>，其中定义了许多实用方法，用来获取&lt;strong>集合视图&lt;/strong>，或提供一些方便的操作集合元素的&lt;strong>算法&lt;/strong>。&lt;/p>
 &lt;p>由于视图是直接封装的Collection接口，&lt;strong>因此其方法有些局限&lt;/strong>，并且由于特殊的设计，部分操作是不允许的（会抛出 &lt;em>UnsupportedOperationExceptin&lt;/em> ）。&lt;/p></description></item><item><title>内部类</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/8_%E5%86%85%E9%83%A8%E7%B1%BB/</guid><description>&lt;p>将一个类定义在另一个类的内部，这就是内部类。&lt;/p>
-&lt;blockquote>
-&lt;p>定义言简意赅 ，内涵丰富多彩。&lt;/p>&lt;/blockquote></description></item><item><title>死锁问题2例</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/4%E6%AD%BB%E9%94%81/</link><pubDate>Sat, 30 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/4%E6%AD%BB%E9%94%81/</guid><description>&lt;p>Java有能力使任务为等待某些条件成立而进入阻塞状态，所以就有可能出现这样一种情况：某个任务在等待另一个任务，而后者又在等待其他的任务，这样一直等待下去，直到等待链上的最后一个任务又在等待第一个任务释放锁，这样就出现了任务之间相互等待的连续循环现象，这种情况出现之后，没有哪个任务能够执行，于是 &lt;strong>死锁&lt;/strong> 出现。&lt;/p>
+
+
+
+ 
+
+&lt;blockquote class="book-hint info">
+ 
+ &lt;p>定义言简意赅 ，内涵丰富多彩。&lt;/p>
+
+&lt;/blockquote></description></item><item><title>死锁问题2例</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/4%E6%AD%BB%E9%94%81/</link><pubDate>Sat, 30 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/4%E6%AD%BB%E9%94%81/</guid><description>&lt;p>Java有能力使任务为等待某些条件成立而进入阻塞状态，所以就有可能出现这样一种情况：某个任务在等待另一个任务，而后者又在等待其他的任务，这样一直等待下去，直到等待链上的最后一个任务又在等待第一个任务释放锁，这样就出现了任务之间相互等待的连续循环现象，这种情况出现之后，没有哪个任务能够执行，于是 &lt;strong>死锁&lt;/strong> 出现。&lt;/p>
 &lt;p>死锁之所以难以规避，其重要的原因就在于其不确定性，可能程序运行良好，但是有潜在的死锁风险，这个风险在&lt;strong>某些域的初始条件&lt;/strong>变化时，变得特别大，导致程序很快死锁。同时，死锁难以复现，当程序出现死锁时，往往只能通过jvm的堆栈日志来探究原因。&lt;/p></description></item><item><title>终结任务</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/</link><pubDate>Fri, 23 Oct 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/5%E7%BB%88%E7%BB%93%E4%BB%BB%E5%8A%A1/</guid><description>&lt;h2 id="终结任务">
  终结任务
  &lt;a class="anchor" href="#%e7%bb%88%e7%bb%93%e4%bb%bb%e5%8a%a1">#&lt;/a>
@@ -440,7 +448,20 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;/h1>
 &lt;p>本文转自
  &lt;a href="http://www.cnblogs.com/dolphin0520/p/3920373.html">Matrix海子&lt;/a>，是描述&lt;code>volatile&lt;/code>关键字非常好的一篇文章，从Java的内存模型开始，归本溯源的阐述了&lt;code>volatile&lt;/code>关键字在并发中的作用与局限&lt;/p>
-&lt;p>此文部分内容参照了《深入理解Java虚拟机》&lt;/p></description></item><item><title>线程竞争</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/Threading/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/Threading/</guid><description>&lt;hr></description></item><item><title>二分查找树</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</link><pubDate>Wed, 07 Dec 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</guid><description>&lt;hr></description></item><item><title>归并排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/MergeSort/</link><pubDate>Tue, 06 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/MergeSort/</guid><description>&lt;hr></description></item><item><title>插入排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/InsertSort/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/InsertSort/</guid><description>&lt;hr></description></item><item><title>选择排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/SelectSort/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/SelectSort/</guid><description>&lt;hr></description></item><item><title>递归问题：走台阶</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/Steps/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/Steps/</guid><description>&lt;hr>
+&lt;p>此文部分内容参照了《深入理解Java虚拟机》&lt;/p></description></item><item><title>线程竞争</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/Threading/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/Threading/</guid><description>&lt;hr></description></item><item><title>Java字符串的不可变</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ImmutableStr/</guid><description>&lt;fieldset class="update_by">
+ &lt;legend class="update_title">
+ 更新于 2025-04-28
+ &lt;/legend>
+ 
+ &lt;p>&lt;code>openjdk 11&lt;/code>和&lt;code>openjdk17&lt;/code>运行代码的结果会有不同。&lt;/p>
+&lt;p>出于安全策略，&lt;code>setAccessible(true)&lt;/code>方法会抛出异常：&lt;/p>
+
+ 
+&lt;/fieldset>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">java.lang.reflect.InaccessibleObjectException:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">Unable to make field private final byte[] java.lang.String.value accessible:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">module java.base does not &lt;span class="s2">&amp;#34;opens java.lang&amp;#34;&lt;/span> to unnamed module @1a2a0702
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr></description></item><item><title>二分查找树</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</link><pubDate>Wed, 07 Dec 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</guid><description>&lt;hr></description></item><item><title>归并排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/MergeSort/</link><pubDate>Tue, 06 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/MergeSort/</guid><description>&lt;hr></description></item><item><title>插入排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/InsertSort/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/InsertSort/</guid><description>&lt;hr></description></item><item><title>选择排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/SelectSort/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/SelectSort/</guid><description>&lt;hr></description></item><item><title>递归问题：走台阶</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/Steps/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/Steps/</guid><description>&lt;hr>
 &lt;blockquote>
 &lt;p>所有的递归问题，其实都可以用非递归的方式实现。&lt;/p>&lt;/blockquote></description></item><item><title>冒泡排序</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/BubbleSort/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/sort/BubbleSort/</guid><description>&lt;hr></description></item><item><title>循环数组的另一种实现</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/CircularBufferVariety/</link><pubDate>Thu, 01 Jul 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/array/CircularBufferVariety/</guid><description>&lt;p>已经介绍过一个
  &lt;a href="https://wangy325.github.io/zh-cn/docs/snippets/algo/array/CircularBuffer/">循环数组&lt;/a>，这里介绍另一种实现方法。&lt;/p>
@@ -482,7 +503,7 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;p>In this tutorial, we'll see how to configure and manage custom validation MessageSource in the application using Spring Boot.&lt;/p></description></item><item><title>使用Logback记录日志</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210210_guide-to-logback-cn/</link><pubDate>Wed, 10 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210210_guide-to-logback-cn/</guid><description>&lt;p>
  &lt;a href="https://logback.qos.ch/">Logback&lt;/a>是Java应用中使用最广的日志框架之一，它是
  &lt;a href="https://logback.qos.ch/reasonsToSwitch.html">其前辈框架Log4j的替代者&lt;/a>。相比Log4j，Logback在日志处理速度、配置多样性、对旧日志文件的处理灵活性上均要优于Log4j。&lt;/p>
-&lt;p>这篇文章将介绍Logback的主要组成结构并指导你使用Logback构建更好的程序。&lt;/p></description></item><item><title>Java正则匹配字符串小例</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StringReg/</link><pubDate>Sun, 07 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StringReg/</guid><description>&lt;hr></description></item><item><title>在SpringBoot项目中使用MockMvc进行接口测试</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210207_%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</link><pubDate>Sun, 07 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210207_%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</guid><description>&lt;p>现在流行在项目中使用
+&lt;p>这篇文章将介绍Logback的主要组成结构并指导你使用Logback构建更好的程序。&lt;/p></description></item><item><title>Java正则匹配一例</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StringReg/</link><pubDate>Sun, 07 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/StringReg/</guid><description>&lt;hr></description></item><item><title>在SpringBoot项目中使用MockMvc进行接口测试</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210207_%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</link><pubDate>Sun, 07 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210207_%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8MockMvc%E8%BF%9B%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</guid><description>&lt;p>现在流行在项目中使用
  &lt;a href="https://swagger.io">swagger&lt;/a>对接口进行测试，这确实很方便、直观。&lt;/p>
 &lt;p>但是MockMvc作为spring-test包中指定的测试框架，在没有使用swagger的项目中，使用其进行测试是很好的选择。&lt;/p></description></item><item><title>Java8日期和时间API</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210202_java-new-time-api/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210202_java-new-time-api/</guid><description>&lt;blockquote>
 &lt;p>mybatis自 3.4.5 开始，已经支持使用&lt;code>LocaldateTime&lt;/code>作为时间查询入参，映射类型为&lt;code>TimeStamp&lt;/code>，参考地址: 
@@ -502,15 +523,778 @@ default V getOrDefault (Object key, V defaultValue) {...}
 &lt;ul>
 &lt;li>&lt;code>java.text.DateFormat&lt;/code>：格式化日期时间和解析日期时间的工具抽象类&lt;/li>
 &lt;li>&lt;code>java.text.SimpleDateFormat&lt;/code>：DateDateFormat的实现&lt;/li>
-&lt;/ul></description></item><item><title>在xxl-job中使用分片任务</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210125_xxl-sharding-job/</link><pubDate>Mon, 25 Jan 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210125_xxl-sharding-job/</guid><description>&lt;p>本文介绍在如何在
+&lt;/ul></description></item><item><title>Java新日期时间包的使用</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/JTCommonUsage/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/JTCommonUsage/</guid><description>&lt;p>参考: 
+ &lt;a href="https://stackoverflow.com/questions/27454025/unable-to-obtain-localdatetime-from-temporalaccessor-when-parsing-localdatetime">unable-to-obtain-localdatetime-from-temporalaccessor-when-parsing-localdatetime&lt;/a>&lt;/p>
+&lt;hr>
+&lt;p>快速开始:&lt;/p>
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="nd">@SuppressWarnings&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;all&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">class&lt;/span> &lt;span class="nc">JTSimpleIntro&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">DATE_TIME_FORM&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s">&amp;#34;yyyy-MM-dd HH:mm:ss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">parseDateTimeString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">yyyyMMdd_HHmmss&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">LocalDateTime&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">yyyyMMdd_HHmmss&lt;/span>&lt;span class="p">));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">parseDateTimeStringWithFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">yyyyMMdd_HHmmss&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">LocalDateTime&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">yyyyMMdd_HHmmss&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">12&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">DateTimeFormatter&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">ofPattern&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">DATE_TIME_FORM&lt;/span>&lt;span class="p">)));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">13&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">14&lt;/span>&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">15&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">parseDateString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">yyyyMMdd&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">16&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">LocalDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">yyyyMMdd&lt;/span>&lt;span class="p">));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">17&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">18&lt;/span>&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">19&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">parseTimeString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">HHmmss&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">20&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">println&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">LocalTime&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="na">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HHmmss&lt;/span>&lt;span class="p">));&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">21&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">22&lt;/span>&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">23&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="kd">public&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kd">static&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="o">[]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">24&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">parseDateTimeString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;2012-06-09T13:12:11&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">25&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">parseDateTimeStringWithFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;2012-06-09 13:12:11&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">26&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">parseDateString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;2012-06-06&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">27&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="n">parseTimeString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;13:12:11&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">28&lt;/span>&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">29&lt;/span>&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+
+&lt;hr>
+&lt;p>以下是API示例:&lt;/p></description></item><item><title>处理集合中的null</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/SuckNull/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/SuckNull/</guid><description>&lt;p>使用&lt;code>Optional&lt;/code>或Stream API来处理集合中的&lt;code>null&lt;/code>&lt;/p>
+&lt;hr></description></item><item><title>优雅地比较对象</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/CompareChain/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/CompareChain/</guid><description>&lt;hr></description></item><item><title>在xxl-job中使用分片任务</title><link>https://wangy325.github.io/zh-cn/posts/2021/20210125_xxl-sharding-job/</link><pubDate>Mon, 25 Jan 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2021/20210125_xxl-sharding-job/</guid><description>&lt;p>本文介绍在如何在
  &lt;a href="https://www.xuxueli.com/xxl-job/#%E3%80%8A%E5%88%86%E5%B8%83%E5%BC%8F%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%B9%B3%E5%8F%B0XXL-JOB%E3%80%8B">xxl-job&lt;/a>中使用创建并使用分片任务。&lt;/p>
 &lt;p>&lt;code>xxl-job&lt;/code>是国内开源的一款轻量级分布式任务调度平台，开发者是大众点评的工程师，其目前维护一个
- &lt;a href="https://www.xuxueli.com/">开源社区&lt;/a>，里面还有很多已经发布或尚在孵化的开源项目。&lt;/p></description></item><item><title>使用printf格式化输出</title><link>https://wangy325.github.io/zh-cn/posts/2020/20201210_how2use-printf/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2020/20201210_how2use-printf/</guid><description>&lt;p>这篇文章介绍了几种常见的使用&lt;code>printf()&lt;/code>方法进行格式化输出的方法。&lt;/p>
+ &lt;a href="https://www.xuxueli.com/">开源社区&lt;/a>，里面还有很多已经发布或尚在孵化的开源项目。&lt;/p></description></item><item><title>创建流的方式</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/CreateStream/</link><pubDate>Tue, 12 Jan 2021 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/CreateStream/</guid><description>&lt;hr></description></item><item><title>使用printf格式化输出</title><link>https://wangy325.github.io/zh-cn/posts/2020/20201210_how2use-printf/</link><pubDate>Thu, 10 Dec 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2020/20201210_how2use-printf/</guid><description>&lt;p>这篇文章介绍了几种常见的使用&lt;code>printf()&lt;/code>方法进行格式化输出的方法。&lt;/p>
 &lt;p>&lt;code>printf()&lt;/code>方法隶属于&lt;code>java.io.PrintStream&lt;/code>类，提供了和C语言中相似的格式化字符串输出的方法。&lt;/p></description></item><item><title>背包问题2例</title><link>https://wangy325.github.io/zh-cn/posts/2020/20201204_01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%982%E4%BE%8B/</link><pubDate>Fri, 04 Dec 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2020/20201204_01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%982%E4%BE%8B/</guid><description>&lt;p>背包问题其实属于
  &lt;a href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划&lt;/a>（ &lt;em>Dynamic Programming&lt;/em> ）问题的一种。动态规划的手段是将大问题拆解为多个小问题，小问题解决之后，大问题也就随之而解。&lt;/p>
 &lt;p>背包问题的典型描述是：&lt;/p>
 &lt;blockquote>
 &lt;p>给定&lt;code>n&lt;/code>种物品和一背包。物品&lt;code>i&lt;/code>的重量为&lt;code>wi&lt;/code>，其价值为&lt;code>vi&lt;/code>，背包的容量为&lt;code>c&lt;/code>。&lt;/p>
-&lt;p>问应该如何选择装入背包中的物品，使得装入背包中物品的总价值最大？&lt;/p>&lt;/blockquote></description></item><item><title>二分查找</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinSearch/</link><pubDate>Fri, 05 Jun 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinSearch/</guid><description>&lt;hr></description></item><item><title>ThreadLocal用例</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/ThreadLocalVariableHolder/</link><pubDate>Sun, 17 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/ThreadLocalVariableHolder/</guid><description>&lt;hr></description></item><item><title>SpringBoot使用AOP的简单示例</title><link>https://wangy325.github.io/zh-cn/posts/2020/20200314_SpringBoot-aop-demo/</link><pubDate>Sat, 14 Mar 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2020/20200314_SpringBoot-aop-demo/</guid><description>&lt;p>有一个cd接口，其实体类用于播放歌曲，同时我们想在播放歌曲的时候记录每个曲目的播放次数。看起来，记录次数这个事和播放曲目是不相干的事情，当然，我们可以在每首歌曲播放完成之后记录，但是更好的办法是使用一个切面，切入到播放方法中，来完成这件事，这样可以减少无关逻辑对代码的侵入。&lt;/p></description></item><item><title>比较器的「退化」</title><link>https://wangy325.github.io/zh-cn/posts/2019/20190827_%E6%AF%94%E8%BE%83%E5%99%A8%E7%9A%84%E9%80%80%E5%8C%96/</link><pubDate>Tue, 27 Aug 2019 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2019/20190827_%E6%AF%94%E8%BE%83%E5%99%A8%E7%9A%84%E9%80%80%E5%8C%96/</guid><description>&lt;hr>
+&lt;p>问应该如何选择装入背包中的物品，使得装入背包中物品的总价值最大？&lt;/p>&lt;/blockquote></description></item><item><title>二分查找</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinSearch/</link><pubDate>Fri, 05 Jun 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinSearch/</guid><description>&lt;hr></description></item><item><title>ThreadLocal用例</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/ThreadLocalVariableHolder/</link><pubDate>Sun, 17 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/threading/ThreadLocalVariableHolder/</guid><description>&lt;hr></description></item><item><title>使用Java反射获取类的信息</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ReflectionTest/</link><pubDate>Tue, 28 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ReflectionTest/</guid><description>&lt;hr></description></item><item><title>浅拷贝</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ShallowCopy/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/ShallowCopy/</guid><description>&lt;hr></description></item><item><title>深拷贝</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/DeepCopy/</link><pubDate>Thu, 23 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/DeepCopy/</guid><description>&lt;hr></description></item><item><title>SpringBoot使用AOP的简单示例</title><link>https://wangy325.github.io/zh-cn/posts/2020/20200314_SpringBoot-aop-demo/</link><pubDate>Sat, 14 Mar 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2020/20200314_SpringBoot-aop-demo/</guid><description>&lt;p>有一个cd接口，其实体类用于播放歌曲，同时我们想在播放歌曲的时候记录每个曲目的播放次数。看起来，记录次数这个事和播放曲目是不相干的事情，当然，我们可以在每首歌曲播放完成之后记录，但是更好的办法是使用一个切面，切入到播放方法中，来完成这件事，这样可以减少无关逻辑对代码的侵入。&lt;/p></description></item><item><title>比较器的「退化」</title><link>https://wangy325.github.io/zh-cn/posts/2019/20190827_%E6%AF%94%E8%BE%83%E5%99%A8%E7%9A%84%E9%80%80%E5%8C%96/</link><pubDate>Tue, 27 Aug 2019 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2019/20190827_%E6%AF%94%E8%BE%83%E5%99%A8%E7%9A%84%E9%80%80%E5%8C%96/</guid><description>&lt;hr>
 &lt;p>Java「语法糖」越来越牛逼了哈。&lt;/p>
 &lt;p>在使用匿名内部类比较器的时候，idea提供了几个层次的比较器代码优化，给👴整懵逼了。&lt;/p></description></item><item><title>Java接口回调</title><link>https://wangy325.github.io/zh-cn/posts/2018/20181016_Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/</link><pubDate>Tue, 16 Oct 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2018/20181016_Java%E6%8E%A5%E5%8F%A3%E5%9B%9E%E8%B0%83/</guid><description>&lt;p>回调模式在web开发中用的较多，本文简单介绍了Java的回调机制，理解此文可以在生产中写出适应业务的回调模型。&lt;/p></description></item><item><title>MyBatis的trim标签</title><link>https://wangy325.github.io/zh-cn/posts/2018/20180921_mybatis%E4%B8%ADtrim%E6%A0%87%E7%AD%BE%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5SQL/</link><pubDate>Fri, 21 Sep 2018 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2018/20180921_mybatis%E4%B8%ADtrim%E6%A0%87%E7%AD%BE%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5SQL/</guid><description>&lt;p>&lt;code>trim&lt;/code>标记是一个格式化的标记，可以完成&lt;code>set&lt;/code>或者是&lt;code>where&lt;/code>标记的功能。&lt;/p></description></item></channel></rss>
