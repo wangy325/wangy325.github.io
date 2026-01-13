@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VLLM on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/tags/vLLM/</link><description>Recent content in VLLM on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 13 Jan 2026 23:12:19 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/tags/vLLM/index.xml" rel="self" type="application/rss+xml"/><item><title>在RTX4060上运行并调试pdf-craft</title><link>https://wangy325.github.io/zh-cn/posts/2026/20260111_pdf_craft_optiise_on_rtx4060/</link><pubDate>Sun, 11 Jan 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2026/20260111_pdf_craft_optiise_on_rtx4060/</guid><description>&lt;p>扫描版的PDF文档在进行阅读标记时存在局限，若不幸扫描PDF是一本没有目录的书籍，那阅读体验就更加糟糕了，就算使用acrobat手动创建书签，那也将会是一项复杂而繁琐的工作。&lt;/p>
+&lt;blockquote>
+&lt;p>
+ &lt;a href="https://github.com/wmjordan/PDFPatcher">PDF补丁丁&lt;/a>可以一键创建目录书签，不过针对的是非扫描版PDF。&lt;/p>&lt;/blockquote>
+&lt;p>幸好，随着文档数字化和 AI 技术的发展，将扫描PDF 文档精准地转化为结构化EPUB/Markdown成为可能。
+ &lt;a href="https://github.com/oomol-lab/pdf-craft">pdf-craft&lt;/a> 就提供了这种能力。&lt;/p></description></item></channel></rss>
