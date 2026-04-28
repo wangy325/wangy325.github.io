@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动态连通性 on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/</link><description>Recent content in 动态连通性 on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><atom:link href="https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick-Find</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</guid><description>&lt;!-- 
+## Data Structure
+
+- Integer array `id[]` of length `N`.
+- Interpretation: `p` and `q` are connected if and only if they have the same `id`.
+
+## Find
+
+- Check if `p` and `q` have the
+
+&lt;p class="line_hl">same id&lt;/p>.
+
+## Union
+
+- To merge components containing `p` and `q`, change all entries whose id equals `id[p]` to `id[q]`.
+-->
+&lt;hr></description></item><item><title>Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</guid><description>&lt;!--
+## Data Structure
+
+- Integer array `id[]` of length ***N***.
+- Interpretation: `id[i]` is parent of `i`. (树结构，索引为i的值指向其“父节点”的索引。)
+- Root of `i` is `id[id[id[…id[i]…]]]`. (一直向上查找，直到`id[i] == i`，算法保证不会出现环。)
+
+## Find
+
+- Check if `p` and `q` have the same **root**.
+
+## Union
+
+- To merge components containing p and q, 
+
+&lt;p class="line_hl">set the id of p’s root to the id of q’s root&lt;/p>.
+-->
+&lt;hr></description></item><item><title>Weighted Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</guid><description>&lt;hr></description></item><item><title>Weighted Quick-Union with Path Compression</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</guid><description>&lt;hr></description></item></channel></rss>

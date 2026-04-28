@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Algo on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/algo/</link><description>Recent content in Algo on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Mon, 28 Apr 2025 00:45:36 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/algo/index.xml" rel="self" type="application/rss+xml"/><item><title>二分查找树</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</link><pubDate>Wed, 07 Dec 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</guid><description>&lt;hr></description></item><item><title>位运算的小技巧</title><link>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</link><pubDate>Sun, 16 Oct 2022 09:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid><description>&lt;p>在
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Algo on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/algo/</link><description>Recent content in Algo on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 28 Apr 2026 16:40:50 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/algo/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick-Find</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</guid><description>&lt;!-- 
+## Data Structure
+
+- Integer array `id[]` of length `N`.
+- Interpretation: `p` and `q` are connected if and only if they have the same `id`.
+
+## Find
+
+- Check if `p` and `q` have the
+
+&lt;p class="line_hl">same id&lt;/p>.
+
+## Union
+
+- To merge components containing `p` and `q`, change all entries whose id equals `id[p]` to `id[q]`.
+-->
+&lt;hr></description></item><item><title>Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</guid><description>&lt;!--
+## Data Structure
+
+- Integer array `id[]` of length ***N***.
+- Interpretation: `id[i]` is parent of `i`. (树结构，索引为i的值指向其“父节点”的索引。)
+- Root of `i` is `id[id[id[…id[i]…]]]`. (一直向上查找，直到`id[i] == i`，算法保证不会出现环。)
+
+## Find
+
+- Check if `p` and `q` have the same **root**.
+
+## Union
+
+- To merge components containing p and q, 
+
+&lt;p class="line_hl">set the id of p’s root to the id of q’s root&lt;/p>.
+-->
+&lt;hr></description></item><item><title>Weighted Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</guid><description>&lt;hr></description></item><item><title>Weighted Quick-Union with Path Compression</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</guid><description>&lt;hr></description></item><item><title>二分查找树</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</link><pubDate>Wed, 07 Dec 2022 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/search/BinarySearchTree/</guid><description>&lt;hr></description></item><item><title>位运算的小技巧</title><link>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</link><pubDate>Sun, 16 Oct 2022 09:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid><description>&lt;p>在
  &lt;a href="https://wangy325.github.io/zh-cn/posts/2022/20221015_%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/">移位运算&lt;/a>和
  &lt;a href="https://wangy325.github.io/zh-cn/posts/2022/20221014_%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/">异或运算&lt;/a>中讨论了这两种位运算。计算机中还有一些其他的位运算，它们比较简单，但也还有一些巧妙的作用，本文将逐一介绍它们。&lt;/p></description></item><item><title>移位运算</title><link>https://wangy325.github.io/zh-cn/posts/2022/20221015_%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/</link><pubDate>Sat, 15 Oct 2022 09:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2022/20221015_%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/</guid><description>&lt;p>位运算是直接操作内存中的二进制数据。因此运算效率比常规的四则运算高出不少。&lt;/p></description></item><item><title>异或运算</title><link>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/</link><pubDate>Fri, 14 Oct 2022 12:01:23 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/posts/2022/20221014_%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/</guid><description>&lt;p>异或运算(&lt;em>exclusive or&lt;/em>)又记作&lt;em>XOR&lt;/em>，一般用插入符号(&lt;em>caret&lt;/em>)&lt;code>^&lt;/code>表示，其可以看到是更加单纯的或运算(|)。我们知道，或运算的规则是：&lt;/p>
 &lt;ul>

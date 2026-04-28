@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/java/</link><description>Recent content in Java on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Thu, 08 May 2025 15:57:56 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</guid><description>&lt;hr></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on xf&amp;pl</title><link>https://wangy325.github.io/zh-cn/categories/java/</link><description>Recent content in Java on xf&amp;pl</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Tue, 28 Apr 2026 16:40:50 +0800</lastBuildDate><atom:link href="https://wangy325.github.io/zh-cn/categories/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick-Find</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickFind/</guid><description>&lt;!-- 
+## Data Structure
+
+- Integer array `id[]` of length `N`.
+- Interpretation: `p` and `q` are connected if and only if they have the same `id`.
+
+## Find
+
+- Check if `p` and `q` have the
+
+&lt;p class="line_hl">same id&lt;/p>.
+
+## Union
+
+- To merge components containing `p` and `q`, change all entries whose id equals `id[p]` to `id[q]`.
+-->
+&lt;hr></description></item><item><title>Java接口作为方法入参</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Gfunction/</guid><description>&lt;hr></description></item><item><title>Java8内存区域详解(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</link><pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E8%AF%A6%E8%A7%A3/</guid><description>&lt;blockquote>
 &lt;p>如果没有特殊说明，都是针对的是 HotSpot 虚拟机。&lt;/p>&lt;/blockquote>
 &lt;hr>
 &lt;h2 id="1-概述">
@@ -9,7 +25,24 @@
 &lt;p>在Java中，必须明白一点：线程由Thread类启动，但Thread类并不执行任何操作，&lt;strong>它只是驱动赋予它的任务&lt;/strong>。因此将&lt;strong>线程与任务&lt;/strong>的概念区分开，有利于理解并发。&lt;/p>
 &lt;p>实际上，开发过程中线程与任务（的联系）被隔离的更加明显，往往不需要显式地声明(创建)线程，然后将任务（声明任务是必须的）分配给线程，并由线程负责驱动（ &lt;em>allocate task to thread to execute&lt;/em> ），这一过程通常由&lt;strong>线程池&lt;/strong>完成 。&lt;/p></description></item><item><title>ArrayList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_arraylist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_arraylist/</guid><description>&lt;p>&lt;code>ArrayList&lt;/code>是Java集合框架中使用最为频繁的实现，其本质是一个&lt;strong>有序的&lt;/strong>可自由扩容的&lt;strong>对象数组&lt;/strong>。它实现了&lt;code>RandomAccess&lt;/code>这个&lt;strong>标记接口&lt;/strong>，意味着其在随机访问性能上有一定优势。&lt;/p></description></item><item><title>访问权限修饰符</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/1_%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid><description>&lt;blockquote>
 &lt;p>本系列内容主要来自TIJ，Java核心技术卷以及Java SE 8 API&lt;/p>&lt;/blockquote>
-&lt;p>介绍了Java的public、default、protected、private四种访问权限修饰符。&lt;/p></description></item><item><title>Java中使用goto语句？</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</guid><description>&lt;hr></description></item><item><title>JVM垃圾回收概要(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/java-gc/</link><pubDate>Wed, 25 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/java-gc/</guid><description>&lt;h2 id="本节常见面试题">
+&lt;p>介绍了Java的public、default、protected、private四种访问权限修饰符。&lt;/p></description></item><item><title>Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/QuickUnion/</guid><description>&lt;!--
+## Data Structure
+
+- Integer array `id[]` of length ***N***.
+- Interpretation: `id[i]` is parent of `i`. (树结构，索引为i的值指向其“父节点”的索引。)
+- Root of `i` is `id[id[id[…id[i]…]]]`. (一直向上查找，直到`id[i] == i`，算法保证不会出现环。)
+
+## Find
+
+- Check if `p` and `q` have the same **root**.
+
+## Union
+
+- To merge components containing p and q, 
+
+&lt;p class="line_hl">set the id of p’s root to the id of q’s root&lt;/p>.
+-->
+&lt;hr></description></item><item><title>Java中使用goto语句？</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</link><pubDate>Wed, 10 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/Goto/</guid><description>&lt;hr></description></item><item><title>JVM垃圾回收概要(转)</title><link>https://wangy325.github.io/zh-cn/docs/java/jvm/java-gc/</link><pubDate>Wed, 25 Nov 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/jvm/java-gc/</guid><description>&lt;h2 id="本节常见面试题">
  本节常见面试题
  &lt;a class="anchor" href="#%e6%9c%ac%e8%8a%82%e5%b8%b8%e8%a7%81%e9%9d%a2%e8%af%95%e9%a2%98">#&lt;/a>
 &lt;/h2>
@@ -34,7 +67,7 @@
 &lt;li>等待线程加入&lt;/li>
 &lt;li>自管理线程&lt;/li>
 &lt;li>处理线程的异常&lt;/li>
-&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>资源访问受限--引论</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</guid><description>&lt;p>在
+&lt;/ul></description></item><item><title>LinkedList</title><link>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</link><pubDate>Wed, 29 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/collections/1_List_linkedlist/</guid><description>&lt;p>&lt;code>LinkedList&lt;/code>是基于&lt;strong>双向链表&lt;/strong>实现的有序集合，&lt;del>其不能像ArrayList一样通过索引(&lt;em>index&lt;/em>)访问元素&lt;/del>，同时&lt;code>LinkedList&lt;/code>还实现了&lt;code>Deque&lt;/code>接口，意味着&lt;code>LinkedList&lt;/code>可以&lt;strong>实现双端队列的操作&lt;/strong>。&lt;/p></description></item><item><title>static关键字</title><link>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</link><pubDate>Tue, 14 Apr 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/basic/2_static%E5%85%B3%E9%94%AE%E5%AD%97/</guid><description>&lt;p>static关键字意为“静态的”，其语义可以理解为“类的对象”(不要理解为Class对象)，即不需要对象实例，可以直接通过&lt;code>类名.字段名&lt;/code>的形式直接访问。&lt;/p></description></item><item><title>Weighted Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</guid><description>&lt;hr></description></item><item><title>资源访问受限--引论</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_1/</guid><description>&lt;p>在
  &lt;a href="https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/1%E7%BA%BF%E7%A8%8B%E4%B8%8E%E4%BB%BB%E5%8A%A1_1/">线程与任务&lt;/a>文中，虽然创建了多线程，并且线程之间出现了一些&lt;strong>不可预测&lt;/strong>的CPU调度，但是由于线程之间是&lt;strong>相互隔离&lt;/strong>的——&lt;strong>线程没有访问共同的资源&lt;/strong>，尽管在执行任务的过程可能被CPU剥夺运行权，但是当它们再次获得运行权时对运行结果并没有影响，它们是安全的。&lt;/p>
 &lt;blockquote>
 &lt;p>实际上，上篇文章通过&lt;code>join()&lt;/code>方法演示了
@@ -54,7 +87,7 @@
 &lt;blockquote>
 &lt;p>按值调用：方法接收的是调用者提供的值&lt;/p>
 &lt;p>按引用调用：方法接收的是调用者提供的变量地址&lt;/p>&lt;/blockquote>
-&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>子类不能调用父类构造器</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</guid><description>&lt;hr></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
+&lt;p>一个方法可以修改传递引用所对应的变量值，但是不能修改传递值所对应的变量值。&lt;/p></description></item><item><title>Weighted Quick-Union with Path Compression</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</guid><description>&lt;hr></description></item><item><title>子类不能调用父类构造器</title><link>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</link><pubDate>Sun, 21 Jul 2024 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/java/oo/InitSubClass/</guid><description>&lt;hr></description></item><item><title>资源访问受限-锁和条件</title><link>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</link><pubDate>Wed, 20 May 2020 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/java/concurrency/conecptes/2%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E5%8F%97%E9%99%90_2_%E9%94%81%E5%92%8C%E6%9D%A1%E4%BB%B6/</guid><description>&lt;h2 id="可重入锁">
  可重入锁
  &lt;a class="anchor" href="#%e5%8f%af%e9%87%8d%e5%85%a5%e9%94%81">#&lt;/a>
 &lt;/h2>
