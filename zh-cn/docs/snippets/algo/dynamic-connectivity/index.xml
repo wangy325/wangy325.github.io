@@ -31,4 +31,18 @@
 
 &lt;p class="line_hl">set the id of p’s root to the id of q’s root&lt;/p>.
 -->
-&lt;hr></description></item><item><title>Weighted Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</guid><description>&lt;hr></description></item><item><title>Weighted Quick-Union with Path Compression</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</guid><description>&lt;hr></description></item><item><title>Percolation(渗滤)</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/Percolation/</link><pubDate>Wed, 29 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/Percolation/</guid><description>&lt;hr></description></item><item><title>PercolationStats</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/PercolationStats/</link><pubDate>Wed, 29 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/PercolationStats/</guid><description>&lt;hr></description></item></channel></rss>
+&lt;hr></description></item><item><title>Weighted Quick-Union</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnion/</guid><description>&lt;hr></description></item><item><title>Weighted Quick-Union with Path Compression</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</link><pubDate>Mon, 27 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/WeightedQuickUnionWithPathCompression/</guid><description>&lt;hr></description></item><item><title>Percolation(渗滤)</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/Percolation/</link><pubDate>Wed, 29 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/Percolation/</guid><description>&lt;hr>
+&lt;p>这是Algorithms Part I第一章的练习部分。设计一个
+&lt;link rel="stylesheet" href="https://wangy325.github.io/katex/katex.min.css" />
+&lt;script defer src="https://wangy325.github.io/katex/katex.min.js">&lt;/script>
+&lt;script defer src="https://wangy325.github.io/katex/auto-render.min.js" onload="renderMathInElement(document.body);">&lt;/script>&lt;span>
+ \(N*N \)
+&lt;/span>
+渗滤系统，每个格子初始化为封闭状态。每次打开一个格子，直到系统渗滤为止。计算渗滤所需的平均打开格子数占总格子数的比例。&lt;/p>
+&lt;p>提示：&lt;/p>
+&lt;ol>
+&lt;li>渗滤：意味系统第一行任意节点和最后一行任意节点连通。&lt;/li>
+&lt;li>使用&lt;code>WeightedQuickUnionUF&lt;/code>数据结构来建模系统，并使用两个虚拟节点来判断系统是否渗滤。&lt;/li>
+&lt;/ol>
+&lt;p>原文地址：
+ &lt;a href="https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php">Percolation&lt;/a>&lt;/p></description></item><item><title>PercolationStats</title><link>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/PercolationStats/</link><pubDate>Wed, 29 Apr 2026 00:00:00 +0800</pubDate><guid>https://wangy325.github.io/zh-cn/docs/snippets/algo/dynamic-connectivity/PercolationStats/</guid><description>&lt;hr></description></item></channel></rss>
